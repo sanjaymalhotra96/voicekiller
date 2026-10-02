@@ -1,0 +1,631 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "Close",
+    "back": "Back",
+    "copied": "Copied",
+    "cancel": "Cancel",
+    "change": "Change",
+    "save": "Save",
+    "beta": "Beta",
+    "delete": "Delete",
+    "showMore": "Show more",
+    "showLess": "Show less"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "Email",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithEmail": "Continue with Email",
+    "haveAccount": "Already have an account? <link>Sign In</link>"
+  },
+  "welcome": {
+    "title": "Welcome to <brand>{{appName}}</brand>",
+    "subtitle": "It's the first AI voice tool built around Acting Instructions, you tell it the emotion, and it acts."
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "subtitle": "Just a few quick things to get started.",
+    "fullName": "Your Full Name",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "agree": "I agree with <link>Terms & Conditions</link>",
+    "submit": "Sign Up",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "signIn": {
+    "title": "Sign In",
+    "subtitle": "Welcome back! You have been missed.",
+    "email": "Email Address",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "submit": "Sign In"
+  },
+  "verify": {
+    "title": "Code Verification",
+    "subtitle": "We sent an OTP to <bold>{{email}}</bold>",
+    "resendIn": "Resend available in {{time}} seconds.",
+    "resendReady": "Resend available. <link>Resend OTP</link>",
+    "submit": "Verify",
+    "digit": "Digit {{index}}"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password?",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password.",
+    "email": "Email Address",
+    "submit": "Send Reset Link",
+    "backToLogin": "Back to login",
+    "sent": "Reset link sent to <bold>{{email}}</bold>. Check your inbox."
+  },
+  "validation": {
+    "nameRequired": "Please enter your name.",
+    "emailInvalid": "Please enter a valid email address.",
+    "passwordRequired": "Please enter your password.",
+    "passwordShort": "Password must be at least {{min}} characters.",
+    "passwordMismatch": "Passwords do not match.",
+    "termsRequired": "Please accept the Terms & Conditions.",
+    "otpIncomplete": "Please enter the full code.",
+    "titleRequired": "Please enter a name.",
+    "dobInvalid": "Use the format dd/mm/yy.",
+    "currentPasswordRequired": "Please enter your current password.",
+    "samePassword": "New password must be different.",
+    "promptRequired": "Please describe the voice you want.",
+    "voiceNameRequired": "Please enter a voice name.",
+    "sampleRequired": "Please upload or record a voice sample.",
+    "descriptionRequired": "Please describe the voice."
+  },
+  "errors": {
+    "network": "No internet connection. Please try again.",
+    "invalidCredentials": "Incorrect email or password.",
+    "emailNotConfirmed": "Please verify your email before signing in.",
+    "emailTaken": "An account with this email already exists.",
+    "weakPassword": "Please choose a stronger password.",
+    "otpInvalid": "Invalid OTP. Please try again.",
+    "rateLimited": "Too many attempts. Please wait a moment.",
+    "unknown": "Something went wrong. Please try again.",
+    "currentPasswordWrong": "Current password is incorrect.",
+    "uploadFailed": "Could not upload the photo. Please try again.",
+    "quotaExceeded": "You are out of minutes. Upgrade your plan to keep creating.",
+    "serviceUnavailable": "This feature is not available right now. Please try again later.",
+    "campaignExists": "You already have a campaign with that name.",
+    "fileType": "Use an mp3, wav, m4a, mp4, mov, webm or ogg file.",
+    "fileTooLarge": "This file is larger than 4 MB. Please pick a shorter clip.",
+    "micPermission": "Allow microphone access in Settings to record your voice.",
+    "shareUnavailable": "Sharing is not available on this device."
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "library": "Library",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "greeting": "Hi, {{name}}",
+    "hero": {
+      "title": "Text to Speech",
+      "action": "Create Speech"
+    },
+    "sections": {
+      "create": "Create",
+      "transform": "Transform"
+    }
+  },
+  "library": {
+    "title": "Library",
+    "search": "Search files...",
+    "all": "All",
+    "empty": {
+      "title": "You don't have any files!",
+      "message": "Create new file from the dashboard."
+    },
+    "noResults": "No files match your search.",
+    "groups": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "thisWeek": "This Week",
+      "earlier": "Earlier"
+    },
+    "actions": {
+      "title": "Details",
+      "rename": "Rename",
+      "download": "Download",
+      "delete": "Delete",
+      "more": "More options for {{title}}",
+      "play": "Play {{title}}",
+      "pause": "Pause {{title}}"
+    },
+    "rename": {
+      "title": "Rename",
+      "placeholder": "File name"
+    },
+    "delete": {
+      "title": "Delete file?",
+      "message": "\"{{title}}\" will be removed permanently.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "retry": "Try Again"
+  },
+  "settings": {
+    "title": "Settings",
+    "sections": {
+      "general": "General",
+      "others": "Others"
+    },
+    "items": {
+      "personalInfo": "Personal Information",
+      "changePassword": "Change Password",
+      "subscription": "Manage Subscription",
+      "share": "Share with friends",
+      "contact": "Contact Us",
+      "privacy": "Privacy Policy"
+    },
+    "signOut": "Log out",
+    "shareMessage": "I am using {{appName}} to create AI voices. Try it: {{url}}"
+  },
+  "crash": {
+    "title": "Something went wrong",
+    "message": "The app hit an unexpected error. Please try again.",
+    "retry": "Try Again"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "Text to Speech",
+      "subtitle": "Type it, hear it",
+      "tag": "AI Speech"
+    },
+    "voiceClone": {
+      "title": "Voice Clone",
+      "subtitle": "Copy any voice",
+      "tag": "Voice Clone"
+    },
+    "voiceDesign": {
+      "title": "Voice Design",
+      "subtitle": "Describe a voice",
+      "tag": "Voice Design"
+    },
+    "voiceChanger": {
+      "title": "Voice Changer",
+      "subtitle": "Swap your voice",
+      "tag": "Voice Changer"
+    },
+    "audioClean": {
+      "title": "Audio Clean",
+      "subtitle": "Remove noise",
+      "tag": "Voice Cleaner"
+    },
+    "speechEditor": {
+      "title": "Speech Editor",
+      "subtitle": "Fix the words",
+      "tag": "Speech Editor"
+    },
+    "speechToText": {
+      "title": "Speech to Text",
+      "subtitle": "Transcribe audio",
+      "tag": "Speech to Text"
+    }
+  },
+  "plan": {
+    "basic": "Basic Plan",
+    "studio": "Studio",
+    "buyStudio": "Buy Studio",
+    "usage": "Usage",
+    "usageOf": "/ {{limit}} minutes",
+    "usageThisMonth": "Usage this month",
+    "usageMinutes": "{{used}} / {{limit}} min",
+    "remaining": "{{count}} minutes remaining"
+  },
+  "profile": {
+    "title": "Personal Information",
+    "userId": "User ID",
+    "fullName": "Your Full Name",
+    "email": "Your Email",
+    "dob": "Date of birth",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "Change profile photo",
+    "copyId": "Copy user ID",
+    "deleteAccount": "Delete Account",
+    "save": "Save Changes",
+    "saved": "Your changes have been saved.",
+    "changeEmail": {
+      "title": "Change Email",
+      "subtitle": "We will send a confirmation link to the new address.",
+      "placeholder": "New email address",
+      "submit": "Send Link",
+      "sent": "Check {{email}} to confirm the change."
+    },
+    "unsaved": {
+      "title": "Save changes?",
+      "message": "Your unsaved changes will be lost. Save changes before closing?",
+      "discard": "Discard",
+      "confirm": "Confirm"
+    },
+    "delete": {
+      "title": "Deleting account",
+      "message": "Deleting your account will remove all of your information from our database. This cannot be undone.",
+      "prompt": "To confirm this, type \"{{word}}\"",
+      "word": "DELETE",
+      "submit": "Delete account"
+    }
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "newPlaceholder": "Enter new password (min {{min}} characters)",
+    "confirm": "Confirm Password",
+    "confirmPlaceholder": "Confirm new password",
+    "submit": "Change password",
+    "done": "Your password has been changed."
+  },
+  "notFound": {
+    "title": "This page doesn't exist.",
+    "action": "Go home"
+  },
+  "speech": {
+    "title": "Text to Speech",
+    "fileName": "File name (optional)",
+    "campaign": "Campaign",
+    "scriptPlaceholder": "Type or paste your script here...",
+    "scriptLabel": "Script",
+    "chooseVoice": "Choose voice",
+    "voiceLabel": "Voice: {{name}}",
+    "emotions": "Emotions",
+    "addPause": "Add Pause",
+    "settings": "Settings",
+    "preview": "Preview",
+    "stopPreview": "Stop",
+    "generate": "Generate",
+    "minutesLeft": "{{count}} min",
+    "minutesLeftLabel": "{{count}} minutes remaining",
+    "campaignSheet": {
+      "title": "Campaign",
+      "placeholder": "New campaign name here...",
+      "create": "Create campaign",
+      "default": "Default"
+    },
+    "pauseSheet": {
+      "title": "Add pause",
+      "seconds_one": "{{count}} second",
+      "seconds_other": "{{count}} seconds"
+    },
+    "settingsSheet": {
+      "title": "Settings",
+      "audioFormat": "Audio format",
+      "voiceTuning": "Voice tuning",
+      "speed": "Speed",
+      "delivery": "Delivery Mode",
+      "actingInstructions": "Action instructions",
+      "instruction": "Instruction",
+      "chooseInstruction": "Choose an instruction",
+      "ownInstructions": "Type your own instructions",
+      "ownPlaceholder": "Describe how the script should be performed..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "More Stable",
+      "balanced": "Balanced",
+      "creative": "More Creative"
+    }
+  },
+  "emotions": {
+    "auto": "Auto",
+    "happy": "Happy",
+    "sad": "Sad",
+    "angry": "Angry",
+    "fearful": "Fearful",
+    "disgusted": "Disgusted",
+    "surprised": "Surprised",
+    "calm": "Calm",
+    "fluent": "Fluent"
+  },
+  "voices": {
+    "title": "Select Voice",
+    "search": "Search voices...",
+    "sources": {
+      "library": "Library",
+      "cloned": "Cloned",
+      "design": "Design",
+      "favorites": "Favorites"
+    },
+    "openFilters": "Filters",
+    "openFiltersCount": "Filters, {{count}} active",
+    "favorite": "Add {{name}} to favorites",
+    "unfavorite": "Remove {{name}} from favorites",
+    "select": "Select {{name}}",
+    "play": "Play {{name}} sample",
+    "pause": "Pause {{name}} sample",
+    "empty": "No voices match your search.",
+    "emptyFavorites": "No favorite voices yet. Tap the heart on a voice to keep it here.",
+    "filters": {
+      "title": "Filters",
+      "provider": "Provider",
+      "gender": "Gender",
+      "accent": "Accent",
+      "language": "Language",
+      "apply": "Apply Filters"
+    },
+    "providers": {
+      "all": "All providers",
+      "expressive": "Expressive",
+      "directable": "Directable",
+      "directablePro": "Directable Pro",
+      "qwenTts": "Qwen-tts"
+    },
+    "genders": {
+      "female": "Female",
+      "male": "Male",
+      "neutral": "Neutral"
+    }
+  },
+  "accents": {
+    "auto": "Auto",
+    "ar-SA": "AR - Saudi Arabian",
+    "zh-north": "CN - Northern",
+    "zh-south": "CN - Southern",
+    "de-DE": "DE - German",
+    "en-US": "EN - American",
+    "en-AU": "EN - Australian",
+    "en-GB": "EN - British",
+    "en-IN": "EN - Indian",
+    "en-US-south": "EN - Southern American",
+    "en-WA": "EN - West African",
+    "es-ES": "ES - Spanish",
+    "fr-FR": "FR - French",
+    "it-IT": "IT - Italian",
+    "ja-JP": "JA - Japanese",
+    "ko-KR": "KO - Korean",
+    "pt-BR": "PT - Brazilian",
+    "ru-RU": "RU - Russian"
+  },
+  "languages": {
+    "auto": "Auto",
+    "ar": "Arabic",
+    "yue": "Cantonese",
+    "zh": "Chinese",
+    "cs": "Czech",
+    "nl": "Dutch",
+    "en": "English",
+    "fi": "Finnish",
+    "fr": "French",
+    "de": "German",
+    "el": "Greek",
+    "he": "Hebrew",
+    "hi": "Hindi",
+    "hu": "Hungarian",
+    "id": "Indonesian",
+    "it": "Italian",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "pl": "Polish",
+    "pt": "Portuguese",
+    "ru": "Russian",
+    "es": "Spanish",
+    "sv": "Swedish",
+    "tr": "Turkish",
+    "uk": "Ukrainian"
+  },
+  "instructions": {
+    "title": "Acting Instruction",
+    "tabs": {
+      "library": "Library",
+      "mine": "My Instructions"
+    },
+    "all": "All ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "Emotions",
+      "characters": "Characters",
+      "situations": "Situations",
+      "accents": "Accents"
+    },
+    "search": "Search instructions...",
+    "noResults": "No instructions match your search.",
+    "details": "Details for {{name}}",
+    "select": "Use {{name}}",
+    "play": "Play {{name}} sample",
+    "pause": "Pause {{name}} sample",
+    "notFound": "This instruction no longer exists.",
+    "detail": {
+      "script": "Script",
+      "instructions": "Acting Instructions",
+      "sample": "Audio Sample",
+      "playSample": "Click to play the audio sample",
+      "noSample": "No audio sample yet",
+      "use": "Use this instruction"
+    },
+    "mine": {
+      "title": "My Custom Instructions",
+      "add": "New instruction",
+      "emptyTitle": "No Custom Instructions",
+      "emptyMessage": "Create and save your own custom acting instructions to use across your projects.",
+      "generate": "Generate Instructions With AI",
+      "created": "Created: {{date}}",
+      "remove": "Delete {{name}}",
+      "removeTitle": "Delete instruction?",
+      "removeMessage": "\"{{name}}\" will be removed permanently."
+    },
+    "create": {
+      "title": "New Acting Instruction",
+      "name": "Instruction Name",
+      "namePlaceholder": "e.g., ‘Warm & Friendly’, ‘Professional News’",
+      "prompt": "Acting Instructions Input",
+      "promptPlaceholder": "Create instructions for ...",
+      "hint": "E.g. Create instructions for robotic voice and AI would automatically generate",
+      "submit": "Generate Instructions"
+    }
+  },
+  "clone": {
+    "title": "Voice Clone",
+    "guide": "Guide",
+    "language": "Language",
+    "voiceName": "Voice Name",
+    "voiceNamePlaceholder": "e.g. Calm narrator",
+    "sources": {
+      "upload": "Upload Audio",
+      "record": "Record Audio"
+    },
+    "upload": {
+      "title": "Upload Source Audio",
+      "hint": ".mp3, .wav, .m4a, .mp4, .mov, .webm, .ogg (Max {{max}}MB)",
+      "action": "Upload"
+    },
+    "record": {
+      "title": "Record your voice",
+      "hint": "Select your microphone and press Record.",
+      "action": "Record",
+      "stop": "Stop",
+      "again": "Record Again",
+      "recording": "Recording {{time}}",
+      "microphone": "Microphone",
+      "defaultMicrophone": "Default microphone",
+      "fileName": "Recording.m4a"
+    },
+    "clip": {
+      "play": "Play {{name}}",
+      "pause": "Pause {{name}}"
+    },
+    "submit": "Create Voice",
+    "guideSheet": {
+      "title": "Recording guide",
+      "tips": [
+        "Use 30 seconds to 2 minutes of clear speech from one speaker.",
+        "Record in a quiet room, without music or background noise.",
+        "Speak naturally, in the tone you want the clone to have.",
+        "Keep the microphone at a steady distance from your mouth."
+      ]
+    }
+  },
+  "results": {
+    "play": "Play {{name}}",
+    "pause": "Pause {{name}}",
+    "created": "Created: {{date}}",
+    "rename": "Rename {{name}}",
+    "renameTitle": "Rename",
+    "renameLabel": "Edit your name",
+    "renamePlaceholder": "Name",
+    "download": "Download {{name}}",
+    "remove": "Delete {{name}}",
+    "removeTitle": "Delete file?",
+    "removeMessage": "\"{{name}}\" will be removed permanently.",
+    "viewAll": "View all",
+    "empty": "Nothing here yet.",
+    "enhanced": "Enhanced",
+    "recent": {
+      "voiceClone": "Recent Clones",
+      "voiceDesign": "Recent Designs",
+      "voiceChanger": "Recent Changers",
+      "audioClean": "Recent Cleans",
+      "speechEditor": "Recent Speech",
+      "speechToText": "Recent Transcriptions"
+    },
+    "titles": {
+      "voiceClone": "My Clones",
+      "voiceDesign": "My Designs",
+      "voiceChanger": "My Voice Changer",
+      "audioClean": "My Cleans",
+      "speechEditor": "My Speech",
+      "speechToText": "My Transcriptions"
+    }
+  },
+  "upload": {
+    "source": "Upload Source Audio",
+    "target": "Upload Target Audio",
+    "action": "Upload",
+    "change": "Change",
+    "remove": "Remove {{name}}",
+    "uploading": "Uploading {{percent}}%",
+    "formats": "{{formats}} (Max {{max}}MB)"
+  },
+  "player": {
+    "play": "Play",
+    "pause": "Pause"
+  },
+  "changer": {
+    "title": "Voice Changer",
+    "source": "Source Audio",
+    "target": "Target Voice",
+    "submit": "Start conversion"
+  },
+  "design": {
+    "title": "Voice Design",
+    "guide": "Guide",
+    "language": "Language",
+    "name": "Voice Name",
+    "namePlaceholder": "e.g. Calm narrator",
+    "description": "Voice Description",
+    "descriptionPlaceholder": "\"Warm, deep male voice with a slight British accent, measured pace, and authoritative tone.\"",
+    "descriptionHint": "Write the description in English.",
+    "enhance": "Improve the description with AI",
+    "submit": "Create Voice",
+    "variations": {
+      "title": "Select Voice",
+      "subtitle": "Listen to the {{count}} generated variations and pick the one you like",
+      "item": "Voice Variation {{number}}",
+      "play": "Play variation {{number}}",
+      "pause": "Pause variation {{number}}",
+      "save": "Save Voice"
+    },
+    "guideSheet": {
+      "title": "Describing a voice",
+      "tips": [
+        "Say who is speaking: age, gender and character.",
+        "Describe the sound: warm, raspy, bright, deep.",
+        "Add accent and pace, e.g. slight British accent, measured pace.",
+        "Mention the mood or use, e.g. calm narrator for audiobooks."
+      ]
+    }
+  },
+  "editor": {
+    "title": "Speech Editor",
+    "submit": "Start",
+    "sheet": {
+      "title": "Speech Editor",
+      "audio": "Audio",
+      "transcription": "Transcription",
+      "revert": "Revert to original",
+      "generate": "Generate Audio",
+      "save": "Export & Save"
+    }
+  },
+  "clean": {
+    "title": "Audio Clean",
+    "description": "Enhancer makes it sound like it is coming from a professional microphone.",
+    "enhance": "Denoise & Enhance",
+    "submit": "Start conversion"
+  },
+  "stt": {
+    "title": "Speech to Text",
+    "language": "Language",
+    "translation": "Translation Subtitles",
+    "noTranslation": "None",
+    "submit": "Start transcription",
+    "sheet": {
+      "title": "Results",
+      "audio": "Audio",
+      "content": "Content",
+      "segment": "#{{number}}",
+      "edit": "Edit line {{number}}",
+      "done": "Done editing line {{number}}",
+      "download": "Download",
+      "save": "Save",
+      "formats": {
+        "srt": "Subtitles (.srt)",
+        "vtt": "Web subtitles (.vtt)",
+        "txt": "Plain text (.txt)"
+      }
+    }
+  },
+  "offline": {
+    "title": "No Internet Connection",
+    "message": "Check your Wi-Fi or mobile data. The app will continue as soon as you are back online.",
+    "stillOffline": "Still no connection. Check your Wi-Fi or mobile data and try again.",
+    "retry": "Retry"
+  }
+}

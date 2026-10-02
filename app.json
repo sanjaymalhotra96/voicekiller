@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "Voice Killer",
+    "slug": "voicekiller",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "com.voicekiller",
+      "icon": "./src/assets/app/icon.png"
+    },
+    "android": {
+      "package": "com.voicekiller",
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/app/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "plugins": [
+      "expo-localization",
+      "expo-font",
+      "expo-asset",
+      "expo-secure-store",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Voice Killer uses the microphone to record a sample of your voice for cloning."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Voice Killer uses your photos to set your profile picture.",
+          "cameraPermission": false,
+          "microphonePermission": "Voice Killer uses the microphone to record a sample of your voice for cloning."
+        }
+      ],
+      "expo-router",
+      "expo-image",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./src/assets/app/splash-logo.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#FFF9F6"
+        }
+      ],
+      "expo-sharing",
+      "./plugins/withKotlinInProcess"
+    ],
+    "scheme": "voicekiller",
+    "userInterfaceStyle": "light",
+    "icon": "./src/assets/app/icon.png",
+    "backgroundColor": "#FFF9F6"
+  }
+}

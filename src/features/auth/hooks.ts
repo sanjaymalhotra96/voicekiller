@@ -1,0 +1,24 @@
+import { useMutation } from '@tanstack/react-query';
+import { authService } from '@/services/auth';
+
+// TanStack Query wrappers for every auth action. Screens get
+// { mutate, isPending, error } and never call the service directly.
+
+export const useSignUp = () => useMutation({ mutationFn: authService.signUp });
+
+export const useSignIn = () => useMutation({ mutationFn: authService.signIn });
+
+export const useSignOut = () =>
+  useMutation({ mutationFn: authService.signOut });
+
+export const useVerifyOtp = () =>
+  useMutation({
+    mutationFn: ({ email, token }: { email: string; token: string }) =>
+      authService.verifyOtp(email, token),
+  });
+
+export const useResendOtp = () =>
+  useMutation({ mutationFn: authService.resendOtp });
+
+export const useSendPasswordReset = () =>
+  useMutation({ mutationFn: authService.sendPasswordReset });
