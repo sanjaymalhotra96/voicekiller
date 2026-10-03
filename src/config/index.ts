@@ -24,6 +24,8 @@ export const config = {
   },
   library: {
     pageSize: 30,
+    // All tab: files shown per date group (Today, Yesterday...).
+    allTabPerGroup: 3,
     // Wait this long after typing before searching.
     searchDebounceMs: 300,
     // FlatList virtualisation: rows kept mounted around the viewport.

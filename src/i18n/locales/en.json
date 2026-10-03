@@ -147,7 +147,8 @@
       "confirm": "Delete",
       "cancel": "Cancel"
     },
-    "retry": "Try Again"
+    "retry": "Try Again",
+    "untitled": "Untitled"
   },
   "settings": {
     "title": "Settings",
@@ -196,7 +197,7 @@
     "audioClean": {
       "title": "Audio Clean",
       "subtitle": "Remove noise",
-      "tag": "Voice Cleaner"
+      "tag": "Audio Clean"
     },
     "speechEditor": {
       "title": "Speech Editor",

@@ -41,7 +41,17 @@ export default function LibraryScreen() {
     () => library.data?.pages.flatMap(page => page.items) ?? [],
     [library.data],
   );
-  const rows = useMemo(() => toLibraryRows(items), [items]);
+  // All tab (not searching): an overview, the newest few per date group.
+  // A feature chip or a search shows every file and loads more on scroll.
+  const isOverview = filters.query.filter === 'all' && !filters.query.search;
+  const rows = useMemo(
+    () =>
+      toLibraryRows(
+        items,
+        isOverview ? config.library.allTabPerGroup : Infinity,
+      ),
+    [items, isOverview],
+  );
   // Nothing to show: an empty library (not just an empty search result),
   // or files that could not be loaded. Both show the same friendly dog.
   const isEmptyLibrary =
@@ -125,6 +135,7 @@ export default function LibraryScreen() {
         // Load the next page shortly before reaching the end.
         onEndReachedThreshold={0.5}
         onEndReached={() =>
+          !isOverview &&
           library.hasNextPage &&
           !library.isFetchingNextPage &&
           library.fetchNextPage()
@@ -137,8 +148,18 @@ export default function LibraryScreen() {
             />
           ) : null
         }
+        // A search with no matches says so; a feature chip with no files
+        // shows the same dog and message as an empty library.
         ListEmptyComponent={
-          <EmptyState icon="search" title={t('library.noResults')} />
+          filters.query.search ? (
+            <EmptyState icon="search" title={t('library.noResults')} />
+          ) : (
+            <EmptyState
+              illustration={images.libraryEmpty}
+              title={t('library.empty.title')}
+              message={t('library.empty.message')}
+            />
+          )
         }
       />
     );

@@ -8,8 +8,8 @@ import type { LibraryCursor, LibraryFilter, LibraryItem } from '@/domain';
 import { queryKeys } from '@/lib/queryKeys';
 import { libraryService, LibraryPage } from '@/services/library';
 
-// Pages of files, newest first; filter and search run in the database.
-// Each page starts after the last row of the previous one (keyset).
+// Pages of files, newest first, from the selected tool's table (or all
+// of them merged); search runs in the database.
 export const useLibraryItems = (params: {
   filter: LibraryFilter;
   search: string;
@@ -63,14 +63,14 @@ function useOptimisticLibraryUpdate<Vars>(
 
 export const useRenameLibraryItem = () =>
   useOptimisticLibraryUpdate(
-    ({ id, title }: { id: string; title: string }) =>
-      libraryService.rename(id, title),
-    (items, { id, title }) =>
-      items.map(item => (item.id === id ? { ...item, title } : item)),
+    ({ item, title }: { item: LibraryItem; title: string }) =>
+      libraryService.rename(item, title),
+    (items, { item: renamed, title }) =>
+      items.map(item => (item.id === renamed.id ? { ...item, title } : item)),
   );
 
 export const useDeleteLibraryItem = () =>
   useOptimisticLibraryUpdate(
-    (id: string) => libraryService.remove(id),
-    (items, id) => items.filter(item => item.id !== id),
+    (item: LibraryItem) => libraryService.remove(item),
+    (items, removed) => items.filter(item => item.id !== removed.id),
   );

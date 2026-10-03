@@ -31,7 +31,7 @@ export function useLibraryItemActions({ onBeforeDelete }: Options = {}) {
       cancelLabel: t('library.delete.cancel'),
       onConfirm: () => {
         onBeforeDelete?.(item);
-        remove.mutate(item.id);
+        remove.mutate(item);
       },
     });
 
@@ -76,7 +76,7 @@ export function useLibraryItemActions({ onBeforeDelete }: Options = {}) {
       onClose: () => setRenameItem(null),
       onSave: (title: string) => {
         if (renameItem) {
-          rename.mutate({ id: renameItem.id, title });
+          rename.mutate({ item: renameItem, title });
         }
         setRenameItem(null);
       },

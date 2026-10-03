@@ -16,12 +16,10 @@ export function fromLibraryItem(item: LibraryItem, t: TFunction): ResultItem {
   let tag: ResultItem['tag'];
   if (item.tool === 'audioClean' && item.metadata.enhanced) {
     tag = { label: t('results.enhanced') };
-  } else if (item.tool === 'speechToText') {
-    tag = languageTag(item.metadata.language, t);
   }
   return {
     id: item.id,
-    title: item.title,
+    title: item.title || t('library.untitled'),
     audioUrl: item.audioUrl,
     createdAt: item.createdAt,
     tag,

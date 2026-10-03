@@ -2,8 +2,7 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ChipItem } from '@/components';
 import { config } from '@/config';
-import type { LibraryFilter } from '@/features/library/types';
-import { toolIds } from '@/features/tools/tools';
+import { LibraryFilter, librarySources } from '@/domain';
 import { useDebouncedValue } from '@/hooks';
 
 // Filter chips + search box state. `query` is what the server receives
@@ -20,7 +19,7 @@ export function useLibraryFilters() {
   const chips = useMemo<ChipItem<LibraryFilter>[]>(
     () => [
       { key: 'all', label: t('library.all') },
-      ...toolIds.map(id => ({ key: id, label: t(`tools.${id}.tag`) })),
+      ...librarySources.map(id => ({ key: id, label: t(`tools.${id}.tag`) })),
     ],
     [t],
   );

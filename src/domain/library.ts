@@ -1,29 +1,47 @@
 import type { ToolId } from '@/domain/tools';
 
-// One generated audio file (row of public.library_items).
+// Tools whose results are files in Library. Each one is stored in its own
+// table (see services/library.ts); these are also the Library filter chips.
+export const librarySources = [
+  'textToSpeech',
+  'voiceChanger',
+  'audioClean',
+  'speechToText',
+  'speechEditor',
+] as const satisfies readonly ToolId[];
+export type LibrarySource = (typeof librarySources)[number];
+
+export const isLibrarySource = (value: string): value is LibrarySource =>
+  (librarySources as readonly string[]).includes(value);
+
+// One file in Library, whatever table it came from.
 export type LibraryItem = {
+  // `<source>:<row id>`: unique across tables (each has its own ids).
   id: string;
+  // The row's id in its own table, for rename and delete.
+  rowId: string;
+  tool: LibrarySource;
+  // Empty when the file has no name; the UI shows "Untitled".
   title: string;
-  tool: ToolId;
   voiceName: string | null;
+  // 0 when the table does not store a duration.
   durationSeconds: number;
   audioUrl: string;
   createdAt: Date;
   metadata: LibraryItemMetadata;
 };
 
-// Tool-specific details stored with a file (library_items.metadata).
+// Tool-specific details.
 export type LibraryItemMetadata = {
   // Audio Clean: "Denoise & Enhance" was on.
   enhanced?: boolean;
-  // Speech to Text: spoken and subtitle languages.
-  language?: string;
-  translateTo?: string | null;
 };
 
 // Library list filter: one tool, or everything.
-export type LibraryFilter = ToolId | 'all';
+export type LibraryFilter = LibrarySource | 'all';
 
-// Keyset cursor: the last row of a page. `createdAt` is the raw database
-// timestamp (microseconds), not a JS Date, so no rows are skipped.
-export type LibraryCursor = { createdAt: string; id: string };
+// Where the next page starts: the creation time of the last file shown
+// (raw database value, microseconds kept) and the ids already shown at
+// exactly that time, so rows sharing a timestamp are neither repeated nor
+// skipped.
+export type LibraryCursor = { createdAt: string; seen: string[] };

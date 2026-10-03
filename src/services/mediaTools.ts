@@ -1,44 +1,36 @@
 import { config } from '@/config';
-import type { LibraryItem, TranscriptSegment } from '@/domain';
-import type { TableRow } from '@/lib/database.types';
-import { AppError } from '@/lib/errors';
+import type { TranscriptSegment } from '@/domain';
 import { invokeFunction } from '@/lib/functions';
-import { toLibraryItem } from '@/services/library';
 
 // The audio tools. Each runs in a Supabase Edge Function that reads the
 // uploaded source from the media-sources bucket (paths come from
-// useUploadSlot), calls the provider, stores the result and inserts a
-// library_items row for the user. Results are listed with libraryService.
+// useUploadSlot), calls the provider, stores the result and inserts a row
+// in the tool's own table, which Library then reads (services/library.ts).
 //
 // Contracts (implement in supabase/functions):
 //   voice-changer-convert      { sourcePath, targetPath }
-//                              -> { item }
+//                              -> { id }   row in voice_conversion
 //   audio-clean                { sourcePath, enhance }
-//                              -> { item }   metadata.enhanced = enhance
+//                              -> { id }   row in denoise_results
+//                                          (operation: denoised[_enhanced])
 //   speech-editor-transcribe   { sourcePath }
 //                              -> { sessionId, audioUrl, transcript }
 //   speech-editor-synthesize   { sessionId, transcript }
 //                              -> { audioUrl }   (edited preview, not saved)
 //   speech-editor-save         { sessionId, transcript }
-//                              -> { item }
+//                              -> { id }   row in transcription
 //   speech-to-text-transcribe  { sourcePath, language, translateTo }
 //                              -> { sessionId, audioUrl, segments }
 //   speech-to-text-save        { sessionId, segments }
-//                              -> { item }   (+ public.transcripts row)
-// `item` is a library_items row. Errors: see lib/errors (402, 404, 5xx).
+//                              -> { id }   row in speech_text
+// Errors: see lib/errors (402, 404, 5xx).
 
-type ItemResponse = { item: TableRow<'library_items'> };
-
+// Runs a job whose result is saved by the server; resolves when it is.
 async function invokeForItem(
   name: string,
   body: Record<string, unknown>,
-): Promise<LibraryItem> {
-  const { item } = await invokeFunction<ItemResponse>(name, body);
-  const mapped = toLibraryItem(item);
-  if (!mapped) {
-    throw new AppError('unknown', item);
-  }
-  return mapped;
+): Promise<void> {
+  await invokeFunction<{ id: string }>(name, body);
 }
 
 const fn = config.functions;

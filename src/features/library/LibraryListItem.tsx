@@ -30,7 +30,7 @@ export const LibraryListItem = memo(function LibraryListItemInner({
 
   return (
     <MediaRow
-      title={item.title}
+      title={item.title || t('library.untitled')}
       active={active}
       playing={playing}
       progress={
@@ -58,11 +58,13 @@ export const LibraryListItem = memo(function LibraryListItemInner({
           {item.voiceName ? (
             <Tag label={item.voiceName} tone="purple" icon="mic" />
           ) : null}
-          <Tag
-            label={formatDuration(item.durationSeconds)}
-            tone="blue"
-            icon="clock"
-          />
+          {item.durationSeconds > 0 ? (
+            <Tag
+              label={formatDuration(item.durationSeconds)}
+              tone="blue"
+              icon="clock"
+            />
+          ) : null}
         </>
       }
     />

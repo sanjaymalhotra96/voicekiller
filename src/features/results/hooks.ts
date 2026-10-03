@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { Voice } from '@/domain';
+import { isLibrarySource, Voice } from '@/domain';
 import {
   useDeleteLibraryItem,
   useLibraryItems,
@@ -97,18 +97,21 @@ export function useVoiceResults(source: OwnVoiceSource): ResultsQuery {
 export function useLibraryResults(tool: ResultTool): ResultsQuery {
   const { t } = useTranslation();
   // Shares the cache with the Library tab's filter for this tool.
+  const source = isLibrarySource(tool) ? tool : 'textToSpeech';
   const query = useLibraryItems(
-    useMemo(() => ({ filter: tool, search: '' }), [tool]),
+    useMemo(() => ({ filter: source, search: '' }), [source]),
   );
   const rename = useRenameLibraryItem();
   const remove = useDeleteLibraryItem();
-  const items = useMemo(
-    () =>
-      (query.data?.pages ?? []).flatMap(page =>
-        page.items.map(item => fromLibraryItem(item, t)),
-      ),
-    [query.data, t],
+  const files = useMemo(
+    () => (query.data?.pages ?? []).flatMap(page => page.items),
+    [query.data],
   );
+  const items = useMemo(
+    () => files.map(item => fromLibraryItem(item, t)),
+    [files, t],
+  );
+  const find = (id: string) => files.find(item => item.id === id);
 
   return {
     items,
@@ -122,8 +125,18 @@ export function useLibraryResults(tool: ResultTool): ResultsQuery {
         query.fetchNextPage();
       }
     },
-    rename: (id, title) => rename.mutate({ id, title }),
-    remove: remove.mutate,
+    rename: (id, title) => {
+      const item = find(id);
+      if (item) {
+        rename.mutate({ item, title });
+      }
+    },
+    remove: id => {
+      const item = find(id);
+      if (item) {
+        remove.mutate(item);
+      }
+    },
     mutationError: rename.error ?? remove.error,
   };
 }

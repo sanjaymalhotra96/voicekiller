@@ -2,7 +2,6 @@ import type { IconName } from '@/components';
 import type { ToolId } from '@/domain';
 import type { ToneName } from '@/theme';
 
-export { toolIds } from '@/domain';
 export type { ToolId } from '@/domain';
 
 // Icon and tone per tool. Dashboard cards, Library filters and Library

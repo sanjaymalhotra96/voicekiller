@@ -88,45 +88,6 @@ export type Database = {
         };
         Relationships: [];
       };
-      library_items: {
-        Row: {
-          id: string;
-          user_id: string;
-          title: string;
-          tool: string;
-          voice_name: string | null;
-          duration_seconds: number;
-          audio_url: string;
-          campaign_id: string | null;
-          metadata: Json;
-          created_at: string;
-        };
-        Insert: {
-          id?: string;
-          user_id?: string;
-          title: string;
-          tool: string;
-          voice_name?: string | null;
-          duration_seconds?: number;
-          audio_url: string;
-          campaign_id?: string | null;
-          metadata?: Json;
-          created_at?: string;
-        };
-        Update: {
-          id?: string;
-          user_id?: string;
-          title?: string;
-          tool?: string;
-          voice_name?: string | null;
-          duration_seconds?: number;
-          audio_url?: string;
-          campaign_id?: string | null;
-          metadata?: Json;
-          created_at?: string;
-        };
-        Relationships: [];
-      };
       profiles: {
         Row: {
           id: string;

@@ -3,7 +3,7 @@
 export const textLimits = {
   // public.voices.name (clones, designs, renames).
   voiceName: 80,
-  // public.library_items.title (Library files, tool results).
+  // File names in Library (all tools).
   fileTitle: 200,
   // public.campaigns.name
   campaignName: 60,
