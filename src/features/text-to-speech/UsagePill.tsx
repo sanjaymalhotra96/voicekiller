@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StatusPill } from '@/components';
-import { plans, useAccount } from '@/features/account';
+import { useAccount } from '@/features/account/hooks';
+import { plans } from '@/features/account/plans';
 
 // Minutes left this month ("180 min"), green pill on the dark header.
 export function UsagePill() {
@@ -18,8 +19,8 @@ export function UsagePill() {
   return (
     <StatusPill
       icon="clock"
-      label={t('speech.minutesLeft', { count: remaining })}
-      accessibilityLabel={t('speech.minutesLeftLabel', { count: remaining })}
+      label={t('textToSpeech.minutesLeft', { count: remaining })}
+      accessibilityLabel={t('textToSpeech.minutesLeftLabel', { count: remaining })}
     />
   );
 }

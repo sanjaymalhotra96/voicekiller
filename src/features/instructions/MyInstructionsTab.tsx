@@ -88,7 +88,7 @@ export function MyInstructionsTab() {
   if (custom.data.length === 0) {
     return (
       <EmptyState
-        illustration={images.emptyInstructions}
+        illustration={images.instructionsEmpty}
         title={t('instructions.mine.emptyTitle')}
         message={t('instructions.mine.emptyMessage')}
         action={

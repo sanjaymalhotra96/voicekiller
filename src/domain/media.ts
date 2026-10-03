@@ -73,9 +73,5 @@ export function validateFile(
   return null;
 }
 
-// ".mp3, .wav" for hints.
-export const formatExtensions = (rules: FileRules) =>
-  rules.extensions.map(ext => `.${ext}`).join(', ');
-
 // Megabytes for "(Max 50MB)".
 export const maxMegabytes = (rules: FileRules) => Math.round(rules.maxBytes / MB);

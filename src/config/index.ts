@@ -1,5 +1,11 @@
 // App-wide settings. Environment values come from EXPO_PUBLIC_* variables
-// in .env (see .env.example); everything else is tuned here, not in screens.
+// in .env (not committed to git); everything else is tuned here, not in
+// screens. .env needs:
+//   EXPO_PUBLIC_SUPABASE_URL       Supabase > Project Settings > API
+//   EXPO_PUBLIC_SUPABASE_ANON_KEY  Supabase > Project Settings > API
+//   EXPO_PUBLIC_PRIVACY_URL        Settings > Privacy Policy (optional)
+//   EXPO_PUBLIC_SUPPORT_EMAIL      Settings > Contact Us (optional)
+//   EXPO_PUBLIC_SHARE_URL          Settings > Share with friends (optional)
 
 export const config = {
   // Language preselected in voice and transcription forms.
@@ -27,7 +33,8 @@ export const config = {
       windowSize: 7,
     },
   },
-  // Settings links, set in .env. A row whose link is empty is hidden.
+  // Settings links, set in .env. Empty: Share sends a message without a
+  // link; Contact Us and Privacy Policy do nothing.
   links: {
     privacyPolicy: process.env.EXPO_PUBLIC_PRIVACY_URL ?? '',
     supportEmail: process.env.EXPO_PUBLIC_SUPPORT_EMAIL ?? '',
@@ -35,7 +42,7 @@ export const config = {
   },
   storage: {
     avatar: {
-      // Supabase Storage bucket for profile photos (see supabase/migrations).
+      // Supabase Storage bucket for profile photos.
       bucket: 'avatars',
       // Photos are downscaled to this square (px) before upload.
       size: 512,
@@ -63,11 +70,11 @@ export const config = {
   clone: {
     // Recording stops by itself after this long.
     maxRecordSeconds: 120,
-    // Private Storage bucket for samples (see supabase/migrations).
+    // Private Supabase Storage bucket for voice samples.
     sampleBucket: 'voice-samples',
   },
   media: {
-    // Private Storage bucket for tool inputs (see supabase/migrations).
+    // Private Supabase Storage bucket for tool inputs.
     sourceBucket: 'media-sources',
     // Cards shown under "Recent ..." on each tool screen.
     recentCount: 4,

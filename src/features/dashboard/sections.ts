@@ -1,4 +1,4 @@
-import type { ToolId } from '@/features/tools';
+import type { ToolId } from '@/features/tools/tools';
 
 // Dashboard layout: which tools appear in which section. Tool icons,
 // colours and text come from features/tools.

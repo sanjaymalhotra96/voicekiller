@@ -35,8 +35,8 @@ export function VariationsSheet({
     <BottomSheet
       visible={!!variations}
       onClose={onClose}
-      title={t('design.variations.title')}
-      subtitle={t('design.variations.subtitle', {
+      title={t('voiceDesign.variations.title')}
+      subtitle={t('voiceDesign.variations.subtitle', {
         count: variations?.length ?? 0,
       })}
     >
@@ -76,7 +76,7 @@ function VariationList({
               key={variation.id}
               accessibilityRole="radio"
               accessibilityState={{ selected: isSelected }}
-              accessibilityLabel={t('design.variations.item', { number })}
+              accessibilityLabel={t('voiceDesign.variations.item', { number })}
               onPress={() => setSelectedId(variation.id)}
               className={cn(
                 'flex-row items-center gap-3 border-b border-line-neutral px-4 py-4',
@@ -96,14 +96,14 @@ function VariationList({
                 }
                 accessibilityLabel={t(
                   active && playback.playing
-                    ? 'design.variations.pause'
-                    : 'design.variations.play',
+                    ? 'voiceDesign.variations.pause'
+                    : 'voiceDesign.variations.play',
                   { number },
                 )}
               />
               <View className="flex-1 gap-1">
                 <AppText variant="cardTitle">
-                  {t('design.variations.item', { number })}
+                  {t('voiceDesign.variations.item', { number })}
                 </AppText>
                 <AppText variant="caption" numberOfLines={4}>
                   {variation.text}
@@ -119,7 +119,7 @@ function VariationList({
 
       <Button
         className="mt-4"
-        label={t('design.variations.save')}
+        label={t('voiceDesign.variations.save')}
         loading={saving}
         disabled={!selected}
         onPress={() => selected && onSave(selected)}

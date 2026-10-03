@@ -5,7 +5,7 @@ import { AppText, Avatar, Ribbon } from '@/components';
 import { useAccount } from '@/features/account/hooks';
 import { plans } from '@/features/account/plans';
 import { UsageMeter } from '@/features/account/UsageMeter';
-import { useCurrentUser } from '@/features/auth';
+import { useCurrentUser } from '@/features/auth/useCurrentUser';
 
 type Props = {
   onUpgrade: () => void;
@@ -22,15 +22,19 @@ export function ProfileCard({ onUpgrade }: Props) {
       <View className="flex-row items-center gap-3 p-4">
         <Avatar name={user.fullName} uri={user.avatarUrl} />
         <View className="flex-1 pr-10">
-          <AppText variant="label" numberOfLines={1}>
+          <AppText
+            variant="label"
+            numberOfLines={1}
+            className="font-sans-semibold"
+          >
             {user.fullName}
           </AppText>
-          <AppText variant="caption" numberOfLines={1}>
+          <AppText variant="caption" numberOfLines={1} className="text-small">
             {user.email}
           </AppText>
         </View>
       </View>
-      <View className="mx-4 border-t border-line-neutral py-3">
+      <View className="mx-4 border-t border-line-subtle py-3">
         <UsageMeter
           plan={account.plan}
           usedMinutes={account.usageMinutes}

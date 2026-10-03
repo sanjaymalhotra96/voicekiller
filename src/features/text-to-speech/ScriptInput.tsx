@@ -19,8 +19,8 @@ export function ScriptInput({ selectionRef }: Props) {
   return (
     <TextArea
       tone="night"
-      accessibilityLabel={t('speech.scriptLabel')}
-      placeholder={t('speech.scriptPlaceholder')}
+      accessibilityLabel={t('textToSpeech.scriptLabel')}
+      placeholder={t('textToSpeech.scriptPlaceholder')}
       value={script}
       onChangeText={setScript}
       onSelectionChange={event => {

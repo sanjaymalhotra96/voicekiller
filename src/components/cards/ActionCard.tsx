@@ -18,7 +18,7 @@ type Props = {
 };
 
 // Highlighted card with a title, one action and optional artwork.
-export function HeroCard({
+export function ActionCard({
   title,
   actionLabel,
   actionIcon,
@@ -29,10 +29,10 @@ export function HeroCard({
   return (
     <View
       className={cn(
-        'h-hero flex-row items-center overflow-hidden rounded-2xl border border-line px-5',
+        'h-action-card flex-row items-center overflow-hidden rounded-2xl border border-line px-5',
         className,
       )}
-      style={gradientStyle('hero')}
+      style={gradientStyle('actionCard')}
     >
       <View className="flex-1 items-start gap-3">
         <AppText variant="cardTitle" className="text-xl">
@@ -46,7 +46,7 @@ export function HeroCard({
         />
       </View>
       {illustration ? (
-        <Artwork source={illustration} {...layout.heroArt} />
+        <Artwork source={illustration} {...layout.actionCardArt} />
       ) : null}
     </View>
   );

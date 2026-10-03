@@ -36,7 +36,7 @@ export const SegmentRow = memo(function SegmentRowInner({
         </View>
         <View className="rounded bg-tone-blue-tile px-2 py-1">
           <AppText variant="caption" className="text-tone-blue">
-            {t('stt.sheet.segment', { number })}
+            {t('speechToText.sheet.segment', { number })}
           </AppText>
         </View>
       </View>
@@ -47,7 +47,7 @@ export const SegmentRow = memo(function SegmentRowInner({
             autoFocus
             value={segment.text}
             onChangeText={text => onChange(index, text)}
-            accessibilityLabel={t('stt.sheet.edit', { number })}
+            accessibilityLabel={t('speechToText.sheet.edit', { number })}
             selectionColor={palette.primary.DEFAULT}
             className={cn(
               'flex-1 rounded-lg border border-primary bg-surface px-3 py-2',
@@ -71,8 +71,8 @@ export const SegmentRow = memo(function SegmentRowInner({
           color={palette.ink.muted}
           accessibilityLabel={
             editing
-              ? t('stt.sheet.done', { number })
-              : t('stt.sheet.edit', { number })
+              ? t('speechToText.sheet.done', { number })
+              : t('speechToText.sheet.edit', { number })
           }
           onPress={() => setEditing(value => !value)}
         />

@@ -11,7 +11,7 @@ export const throwIfError = <T extends { error: unknown }>(result: T): T => {
 };
 
 // Postgres / PostgREST codes for a table that doesn't exist yet
-// (before supabase/migrations has been run).
+// (the backend has not created it yet).
 const MISSING_TABLE_CODES = new Set(['42P01', 'PGRST205']);
 
 export const isMissingTable = (error: { code?: string } | null) =>

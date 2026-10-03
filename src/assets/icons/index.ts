@@ -38,12 +38,12 @@ import StatusHeart from '@/assets/icons/status/heart.svg';
 import StatusHelp from '@/assets/icons/status/help.svg';
 import StatusInfo from '@/assets/icons/status/info.svg';
 import StatusWifiOff from '@/assets/icons/status/wifi-off.svg';
-import AccountAward from '@/assets/icons/account/award.svg';
-import AccountGem from '@/assets/icons/account/gem.svg';
+import AccountCrown from '@/assets/icons/account/crown.svg';
+import AccountDiamond from '@/assets/icons/account/diamond.svg';
 import AccountKey from '@/assets/icons/account/key.svg';
 import AccountLock from '@/assets/icons/account/lock.svg';
 import AccountMail from '@/assets/icons/account/mail.svg';
-import AccountShieldCheck from '@/assets/icons/account/shield-check.svg';
+import AccountShieldQuestion from '@/assets/icons/account/shield-question.svg';
 import AccountShield from '@/assets/icons/account/shield.svg';
 import AccountUser from '@/assets/icons/account/user.svg';
 import FilesClipboard from '@/assets/icons/files/clipboard.svg';
@@ -112,12 +112,12 @@ export const glyphs = {
   info: StatusInfo,
   wifiOff: StatusWifiOff,
   // account/
-  award: AccountAward,
-  gem: AccountGem,
+  crown: AccountCrown,
+  diamond: AccountDiamond,
   key: AccountKey,
   lock: AccountLock,
   mail: AccountMail,
-  shieldCheck: AccountShieldCheck,
+  shieldQuestion: AccountShieldQuestion,
   shield: AccountShield,
   user: AccountUser,
   // files/

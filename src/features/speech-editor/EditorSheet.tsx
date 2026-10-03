@@ -11,7 +11,7 @@ import {
   TextArea,
 } from '@/components';
 import { textLimits } from '@/domain';
-import { useLibraryJob } from '@/features/results';
+import { useLibraryJob } from '@/features/results/hooks';
 import { layout } from '@/theme';
 import { EditorSession, speechEditorService } from '@/services/mediaTools';
 
@@ -30,7 +30,7 @@ export function EditorSheet({ session, onClose, onSaved }: Props) {
     <BottomSheet
       visible={!!session}
       onClose={onClose}
-      title={t('editor.sheet.title')}
+      title={t('speechEditor.sheet.title')}
       height={layout.sheetHeight}
     >
       {/* Keyed by session so each new upload starts from a clean editor. */}
@@ -80,15 +80,15 @@ function EditorContent({
   return (
     <View className="gap-5">
       <View className="gap-3">
-        <AppText variant="label">{t('editor.sheet.audio')}</AppText>
+        <AppText variant="label">{t('speechEditor.sheet.audio')}</AppText>
         <AudioPlayerCard key={audioUrl} uri={audioUrl} />
       </View>
 
       <View className="gap-3">
-        <AppText variant="label">{t('editor.sheet.transcription')}</AppText>
+        <AppText variant="label">{t('speechEditor.sheet.transcription')}</AppText>
         <TextArea
           tone="muted"
-          accessibilityLabel={t('editor.sheet.transcription')}
+          accessibilityLabel={t('speechEditor.sheet.transcription')}
           value={transcript}
           onChangeText={setTranscript}
           maxLength={textLimits.script}
@@ -99,14 +99,14 @@ function EditorContent({
       <View className="flex-row gap-5">
         <Button
           variant="neutral"
-          label={t('editor.sheet.revert')}
+          label={t('speechEditor.sheet.revert')}
           disabled={!edited}
           onPress={revert}
           className="flex-1"
         />
         <Button
           variant="outline"
-          label={t('editor.sheet.generate')}
+          label={t('speechEditor.sheet.generate')}
           loading={synthesize.isPending}
           disabled={!needsAudio || !transcript.trim()}
           onPress={generate}
@@ -118,7 +118,7 @@ function EditorContent({
 
       <Button
         className="mt-6"
-        label={t('editor.sheet.save')}
+        label={t('speechEditor.sheet.save')}
         loading={save.isPending}
         // Save what you hear: regenerate first if the text changed.
         disabled={needsAudio || synthesize.isPending}

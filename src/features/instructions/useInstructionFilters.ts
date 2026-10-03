@@ -11,7 +11,7 @@ import type { InstructionFilter } from '@/features/instructions/categories';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 
 // Pure: the items matching a category and a search term.
-export function filterInstructions(
+function filterInstructions(
   items: readonly ActingInstruction[],
   filter: InstructionFilter,
   search: string,

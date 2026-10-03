@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import type { ChipItem } from '@/components';
 import { config } from '@/config';
 import type { LibraryFilter } from '@/features/library/types';
-import { toolIds } from '@/features/tools';
+import { toolIds } from '@/features/tools/tools';
 import { useDebouncedValue } from '@/hooks';
 
 // Filter chips + search box state. `query` is what the server receives

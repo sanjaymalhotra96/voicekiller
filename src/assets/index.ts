@@ -14,14 +14,17 @@ import AppleIcon from '@/assets/icons/auth/apple.svg';
 import GoogleIcon from '@/assets/icons/auth/google.svg';
 import MailIcon from '@/assets/icons/auth/mail.svg';
 import LogoMark from '@/assets/icons/brand/logo-mark.svg';
-import EmptyInstructions from '@/assets/images/instructions/empty-instructions.svg';
-import OrbitFlagSE from '@/assets/images/welcome/orbit-flag-se.svg';
-import OrbitFlagUS from '@/assets/images/welcome/orbit-flag-us.svg';
-import OrbitMan from '@/assets/images/welcome/orbit-man.svg';
-import OrbitMic from '@/assets/images/welcome/orbit-mic.svg';
-import OrbitPumpkin from '@/assets/images/welcome/orbit-pumpkin.svg';
-import OrbitShocked from '@/assets/images/welcome/orbit-shocked.svg';
-import OrbitSkull from '@/assets/images/welcome/orbit-skull.svg';
+import DashboardTextToSpeech from '@/assets/images/dashboard/dashboard-text-to-speech.svg';
+import InstructionsEmpty from '@/assets/images/instructions/instructions-empty.svg';
+import LibraryEmpty from '@/assets/images/library/library-empty.svg';
+import SettingsUsageClock from '@/assets/images/settings/settings-usage-clock.svg';
+import WelcomeFlagSe from '@/assets/images/welcome/welcome-flag-se.svg';
+import WelcomeFlagUs from '@/assets/images/welcome/welcome-flag-us.svg';
+import WelcomeMan from '@/assets/images/welcome/welcome-man.svg';
+import WelcomeMic from '@/assets/images/welcome/welcome-mic.svg';
+import WelcomePumpkin from '@/assets/images/welcome/welcome-pumpkin.svg';
+import WelcomeShocked from '@/assets/images/welcome/welcome-shocked.svg';
+import WelcomeSkull from '@/assets/images/welcome/welcome-skull.svg';
 
 export type SvgIcon = FC<SvgProps>;
 
@@ -39,23 +42,20 @@ export const icons = {
 
 // SVG illustrations, grouped by the feature that shows them.
 export const images = {
-  orbitPumpkin: OrbitPumpkin,
-  orbitSkull: OrbitSkull,
-  orbitFlagUS: OrbitFlagUS,
-  orbitMic: OrbitMic,
-  orbitMan: OrbitMan,
-  orbitFlagSE: OrbitFlagSE,
-  orbitShocked: OrbitShocked,
-  emptyInstructions: EmptyInstructions,
+  welcomePumpkin: WelcomePumpkin,
+  welcomeSkull: WelcomeSkull,
+  welcomeFlagUs: WelcomeFlagUs,
+  welcomeMic: WelcomeMic,
+  welcomeMan: WelcomeMan,
+  welcomeFlagSe: WelcomeFlagSe,
+  welcomeShocked: WelcomeShocked,
+  instructionsEmpty: InstructionsEmpty,
+  // Library with no files.
+  libraryEmpty: LibraryEmpty,
+  // Dashboard Text to Speech card.
+  dashboardTextToSpeech: DashboardTextToSpeech,
+  // Usage badge on the Settings profile card.
+  settingsUsageClock: SettingsUsageClock,
 } satisfies Record<string, SvgIcon>;
-
-// Bitmap illustrations. Replace a file with the final artwork (same name,
-// transparent PNG exported at 3x) and it updates everywhere:
-//   library/empty-library.png  Library with no files      ~420x345
-//   dashboard/hero-tts.png     Dashboard Text to Speech   ~360x336
-export const illustrations = {
-  emptyLibrary: require('@/assets/images/library/empty-library.png'),
-  heroTts: require('@/assets/images/dashboard/hero-tts.png'),
-};
 
 export { fontAssets } from '@/assets/fonts';

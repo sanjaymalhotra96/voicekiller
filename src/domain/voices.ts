@@ -29,7 +29,7 @@ const providerCapabilities: Record<
 };
 
 // Before a voice is chosen: only the basic settings.
-export const noVoiceCapabilities: ProviderCapabilities = {
+const noVoiceCapabilities: ProviderCapabilities = {
   emotions: false,
   actingInstructions: false,
   tuning: true,

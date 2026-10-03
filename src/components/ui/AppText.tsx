@@ -27,7 +27,7 @@ export const textVariants = {
   timestamp: 'font-sans text-tiny text-ink-muted',
   chip: 'font-sans text-sm',
   rowTitle: 'font-sans-medium text-body text-ink',
-  overline: 'font-sans-medium text-xs uppercase tracking-wide text-ink-subtle',
+  overline: 'font-sans text-xs uppercase tracking-wide text-ink-faint',
   tab: 'font-sans text-small',
   micro: 'font-sans-bold text-micro uppercase text-surface',
   button: 'font-sans-semibold text-base text-surface',

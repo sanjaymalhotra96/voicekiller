@@ -16,7 +16,7 @@ export function PauseSheet({ visible, onClose, onInsert }: Props) {
     () =>
       pauseDurations.map(seconds => ({
         key: String(seconds),
-        label: t('speech.pauseSheet.seconds', { count: seconds }),
+        label: t('textToSpeech.pauseSheet.seconds', { count: seconds }),
       })),
     [t],
   );
@@ -25,7 +25,7 @@ export function PauseSheet({ visible, onClose, onInsert }: Props) {
     <BottomSheet
       visible={visible}
       onClose={onClose}
-      title={t('speech.pauseSheet.title')}
+      title={t('textToSpeech.pauseSheet.title')}
     >
       <OptionList
         options={options}

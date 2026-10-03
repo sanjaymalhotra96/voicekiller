@@ -104,13 +104,13 @@
   "dashboard": {
     "title": "Dashboard",
     "greeting": "Hi, {{name}}",
-    "hero": {
-      "title": "Text to Speech",
-      "action": "Create Speech"
-    },
     "sections": {
       "create": "Create",
       "transform": "Transform"
+    },
+    "actionCard": {
+      "title": "Text to Speech",
+      "action": "Create Speech"
     }
   },
   "library": {
@@ -164,7 +164,8 @@
       "privacy": "Privacy Policy"
     },
     "signOut": "Log out",
-    "shareMessage": "I am using {{appName}} to create AI voices. Try it: {{url}}"
+    "shareMessage": "I am using {{appName}} to create AI voices. Try it: {{url}}",
+    "shareMessageNoLink": "I am using {{appName}} to create AI voices."
   },
   "crash": {
     "title": "Something went wrong",
@@ -265,7 +266,7 @@
     "title": "This page doesn't exist.",
     "action": "Go home"
   },
-  "speech": {
+  "textToSpeech": {
     "title": "Text to Speech",
     "fileName": "File name (optional)",
     "campaign": "Campaign",
@@ -461,7 +462,7 @@
       "submit": "Generate Instructions"
     }
   },
-  "clone": {
+  "voiceClone": {
     "title": "Voice Clone",
     "guide": "Guide",
     "language": "Language",
@@ -473,7 +474,7 @@
     },
     "upload": {
       "title": "Upload Source Audio",
-      "hint": ".mp3, .wav, .m4a, .mp4, .mov, .webm, .ogg (Max {{max}}MB)",
+      "hint": "Max {{max}}MB",
       "action": "Upload"
     },
     "record": {
@@ -541,19 +542,19 @@
     "change": "Change",
     "remove": "Remove {{name}}",
     "uploading": "Uploading {{percent}}%",
-    "formats": "{{formats}} (Max {{max}}MB)"
+    "maxSize": "Max {{max}}MB"
   },
   "player": {
     "play": "Play",
     "pause": "Pause"
   },
-  "changer": {
+  "voiceChanger": {
     "title": "Voice Changer",
     "source": "Source Audio",
     "target": "Target Voice",
     "submit": "Start conversion"
   },
-  "design": {
+  "voiceDesign": {
     "title": "Voice Design",
     "guide": "Guide",
     "language": "Language",
@@ -582,7 +583,7 @@
       ]
     }
   },
-  "editor": {
+  "speechEditor": {
     "title": "Speech Editor",
     "submit": "Start",
     "sheet": {
@@ -594,13 +595,13 @@
       "save": "Export & Save"
     }
   },
-  "clean": {
+  "audioClean": {
     "title": "Audio Clean",
     "description": "Enhancer makes it sound like it is coming from a professional microphone.",
     "enhance": "Denoise & Enhance",
     "submit": "Start conversion"
   },
-  "stt": {
+  "speechToText": {
     "title": "Speech to Text",
     "language": "Language",
     "translation": "Translation Subtitles",

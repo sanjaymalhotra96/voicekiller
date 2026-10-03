@@ -1,21 +1,35 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import {
-  Animated,
-  Easing,
-  KeyboardAvoidingView,
+  Keyboard,
   Modal,
   Platform,
   Pressable,
   ScrollView,
+  StyleSheet,
   useWindowDimensions,
   View,
 } from 'react-native';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 import { AppText } from '@/components/ui/AppText';
-import { config } from '@/config';
 import { IconButton } from '@/components/ui/IconButton';
+import { config } from '@/config';
+import { useKeyboardHeight } from '@/hooks/useKeyboardHeight';
 import { layout, palette } from '@/theme';
+import { dismissKeyboardOnBlankTouch } from '@/utils';
 
 type Props = {
   visible: boolean;
@@ -34,10 +48,18 @@ type Props = {
   children: ReactNode;
 };
 
+const SPRING = { damping: 20, stiffness: 220 };
+
 // Reusable sheet: pass any content as children. Usage:
 // <BottomSheet visible={open} onClose={close} title="..." subtitle="...">
 //   ...
 // </BottomSheet>
+//
+// - Drag the handle / header down to close; a short drag springs back.
+// - Tapping outside closes the keyboard first, then the sheet.
+// - iOS keyboard: the sheet rises only as far as it fits under the status
+//   bar; any part the keyboard still covers scrolls, and the focused field
+//   is scrolled into view (automaticallyAdjustKeyboardInsets).
 export function BottomSheet({
   visible,
   onClose,
@@ -52,35 +74,84 @@ export function BottomSheet({
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { height: screenHeight } = useWindowDimensions();
-  const progress = useRef(new Animated.Value(0)).current;
+  const keyboardHeight = useKeyboardHeight();
   // Keep the Modal mounted until the close animation finishes.
   const [mounted, setMounted] = useState(visible);
+  const [sheetHeight, setSheetHeight] = useState(0);
+
+  // 0 = off screen, 1 = open. `drag` is the finger offset (down = +).
+  const progress = useSharedValue(0);
+  const drag = useSharedValue(0);
 
   useEffect(() => {
     if (visible) {
       setMounted(true);
+      drag.value = 0;
     }
-    Animated.timing(progress, {
-      toValue: visible ? 1 : 0,
-      duration: config.animation.sheetMs,
-      easing: visible ? Easing.out(Easing.cubic) : Easing.in(Easing.cubic),
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished && !visible) {
-        setMounted(false);
-      }
-    });
-  }, [visible, progress]);
+    progress.value = withTiming(
+      visible ? 1 : 0,
+      {
+        duration: config.animation.sheetMs,
+        easing: visible ? Easing.out(Easing.cubic) : Easing.in(Easing.cubic),
+      },
+      finished => {
+        if (finished && !visible) {
+          scheduleOnRN(setMounted, false);
+        }
+      },
+    );
+  }, [visible, progress, drag]);
 
-  const translateY = progress.interpolate({
-    inputRange: [0, 1],
-    outputRange: [screenHeight, 0],
-  });
+  // Drag down to close; upward pulls stretch a little and spring back.
+  const pan = useMemo(
+    () =>
+      Gesture.Pan()
+        .onUpdate(event => {
+          drag.value =
+            event.translationY > 0 ? event.translationY : event.translationY / 4;
+        })
+        .onEnd(event => {
+          const dismiss =
+            event.translationY > layout.sheetDismissDistance ||
+            event.velocityY > layout.sheetDismissVelocity;
+          if (dismiss) {
+            scheduleOnRN(onClose);
+          }
+          // Closing: the sheet still slides out with `progress`.
+          drag.value = withSpring(0, SPRING);
+        }),
+    [drag, onClose],
+  );
+
+  const sheetStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: (1 - progress.value) * screenHeight + drag.value },
+    ],
+  }));
+  const backdropStyle = useAnimatedStyle(() => ({
+    opacity: progress.value,
+  }));
+
+  // Tap outside: first put the keyboard away, then close.
+  const onBackdropPress = () => {
+    if (Keyboard.isVisible()) {
+      Keyboard.dismiss();
+    } else {
+      onClose();
+    }
+  };
 
   const maxHeight = screenHeight - insets.top - layout.sheetTopGap;
-  const sheetHeight = height
+  const fixedHeight = height
     ? Math.min(screenHeight * height, maxHeight)
     : undefined;
+  // How far the sheet may rise above the keyboard without its top leaving
+  // the screen. The rest of the keyboard overlaps the content, which the
+  // ScrollView insets and scrolls.
+  const lift = Math.max(
+    0,
+    Math.min(keyboardHeight, maxHeight - (fixedHeight ?? sheetHeight)),
+  );
 
   return (
     <Modal
@@ -91,79 +162,103 @@ export function BottomSheet({
       navigationBarTranslucent
       onRequestClose={onClose}
     >
-      <Animated.View
-        className="absolute inset-0"
-        style={{ backgroundColor: palette.overlay, opacity: progress }}
-      >
-        <Pressable
-          className="flex-1"
-          accessibilityRole="button"
-          accessibilityLabel={t('common.close')}
-          onPress={onClose}
-        />
-      </Animated.View>
-
-      <KeyboardAvoidingView
-        className="flex-1 justify-end"
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        pointerEvents="box-none"
-      >
+      {/* Gestures inside an Android Modal need their own root view. */}
+      <GestureHandlerRootView style={styles.fill}>
         <Animated.View
-          className="rounded-t-3xl bg-surface"
-          style={{
-            height: sheetHeight,
-            maxHeight,
-            transform: [{ translateY }],
-          }}
+          style={[StyleSheet.absoluteFill, styles.backdrop, backdropStyle]}
         >
-          {(title || !hideClose) && (
-            <View className="flex-row items-start gap-3 px-4 pt-5">
-              <View className="flex-1">
-                {title ? (
-                  <View className="flex-row items-center gap-2">
-                    <AppText variant="title">{title}</AppText>
-                    {titleAccessory}
+          <Pressable
+            style={styles.fill}
+            accessibilityRole="button"
+            accessibilityLabel={t('common.close')}
+            onPress={onBackdropPress}
+          />
+        </Animated.View>
+
+        <View
+          pointerEvents="box-none"
+          style={[styles.fill, styles.bottom, { paddingBottom: lift }]}
+        >
+          <Animated.View
+            onLayout={event => setSheetHeight(event.nativeEvent.layout.height)}
+            // Blank space anywhere in the sheet closes the keyboard.
+            onStartShouldSetResponder={dismissKeyboardOnBlankTouch}
+            style={[styles.sheet, { height: fixedHeight, maxHeight }, sheetStyle]}
+          >
+            <GestureDetector gesture={pan}>
+              {/* Handle + header: drag here; a tap closes the keyboard. */}
+              <Pressable accessible={false} onPress={Keyboard.dismiss}>
+                <View className="items-center pt-2.5">
+                  <View className="h-1 w-10 rounded-full bg-line-neutral" />
+                </View>
+                {title || !hideClose ? (
+                  <View className="flex-row items-start gap-3 px-4 pt-3">
+                    <View className="flex-1">
+                      {title ? (
+                        <View className="flex-row items-center gap-2">
+                          <AppText variant="title">{title}</AppText>
+                          {titleAccessory}
+                        </View>
+                      ) : null}
+                      {subtitle ? (
+                        <AppText variant="subtitle" className="mt-1">
+                          {subtitle}
+                        </AppText>
+                      ) : null}
+                    </View>
+                    {!hideClose ? (
+                      <IconButton
+                        shape="circle"
+                        icon="close"
+                        accessibilityLabel={t('common.close')}
+                        onPress={onClose}
+                      />
+                    ) : null}
                   </View>
                 ) : null}
-                {subtitle ? (
-                  <AppText variant="subtitle" className="mt-1">
-                    {subtitle}
-                  </AppText>
-                ) : null}
-              </View>
-              {!hideClose && (
-                <IconButton
-                  shape="circle"
-                  icon="close"
-                  accessibilityLabel={t('common.close')}
-                  onPress={onClose}
-                />
-              )}
-            </View>
-          )}
+              </Pressable>
+            </GestureDetector>
 
-          {scrollable ? (
-            <ScrollView
-              className="flex-grow-0"
-              contentContainerClassName="px-4 pt-6"
-              contentContainerStyle={{
-                paddingBottom: insets.bottom + layout.sheetBottomPadding,
-              }}
-              keyboardShouldPersistTaps="handled"
-              showsVerticalScrollIndicator={false}
-            >
-              {children}
-            </ScrollView>
-          ) : (
-            <View
-              className="flex-1 px-4 pt-6"
-              style={{ paddingBottom: insets.bottom }}
-            >
-              {children}
-            </View>
-          )}
-        </Animated.View>
-      </KeyboardAvoidingView>
+            {scrollable ? (
+              <ScrollView
+                className="flex-grow-0"
+                contentContainerClassName="px-4 pt-6"
+                contentContainerStyle={{
+                  paddingBottom: insets.bottom + layout.sheetBottomPadding,
+                }}
+                // Taps on empty space close the keyboard.
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode={
+                  Platform.OS === 'ios' ? 'interactive' : 'on-drag'
+                }
+                automaticallyAdjustKeyboardInsets
+                showsVerticalScrollIndicator={false}
+              >
+                {children}
+              </ScrollView>
+            ) : (
+              <View
+                className="flex-1 px-4 pt-6"
+                style={{ paddingBottom: insets.bottom }}
+              >
+                {children}
+              </View>
+            )}
+          </Animated.View>
+        </View>
+      </GestureHandlerRootView>
     </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  fill: { flex: 1 },
+  bottom: { justifyContent: 'flex-end' },
+  backdrop: { backgroundColor: palette.overlay },
+  sheet: {
+    backgroundColor: palette.surface,
+    borderTopLeftRadius: layout.sheetRadius,
+    borderTopRightRadius: layout.sheetRadius,
+    overflow: 'hidden',
+  },
+});

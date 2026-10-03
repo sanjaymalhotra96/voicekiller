@@ -12,7 +12,7 @@ import { afterKeyset, escapeLike } from '@/lib/postgrest';
 import { supabase } from '@/lib/supabase';
 import { isMissingTable, throwIfError } from '@/lib/supabaseResult';
 
-// Library API (Supabase table public.library_items, see supabase/migrations).
+// Library API (Supabase table public.library_items).
 // Screens use the hooks in features/library/hooks.ts, not this directly.
 
 const TABLE = 'library_items';
@@ -46,7 +46,7 @@ export const toLibraryItem = (row: Row): LibraryItem | null =>
     : null;
 
 // Rows strictly after the cursor in (created_at desc, id desc) order.
-export const afterCursor = ({ createdAt, id }: LibraryCursor) =>
+const afterCursor = ({ createdAt, id }: LibraryCursor) =>
   afterKeyset('created_at', createdAt, id, 'desc');
 
 export const libraryService = {
@@ -73,7 +73,7 @@ export const libraryService = {
 
     const { data, error } = await query;
     if (isMissingTable(error)) {
-      log('storage', 'library_items table missing; run supabase/migrations');
+      log('storage', 'library_items table missing on the backend');
       return { items: [], nextCursor: null };
     }
     const rows = throwIfError({ data, error }).data ?? [];

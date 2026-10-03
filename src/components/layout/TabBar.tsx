@@ -16,7 +16,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
   return (
     <View
-      className="flex-row border-t border-line-neutral bg-surface"
+      className="flex-row border-t border-line bg-surface"
       style={{ paddingBottom: insets.bottom }}
     >
       {state.routes.map((route, index) => {
@@ -24,7 +24,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
         const focused = state.index === index;
         const label = String(options.tabBarLabel ?? route.name);
         const icon = (options as typeof options & Partial<TabIcon>).tabIcon;
-        const color = focused ? palette.primary.DEFAULT : palette.ink.subtle;
+        const color = focused ? palette.primary.DEFAULT : palette.ink.inactive;
 
         const onPress = () => {
           const event = navigation.emit({
@@ -53,13 +53,13 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
               )}
             />
             {icon ? (
-              <Icon name={icon} size={iconSize.sm} color={color} />
+              <Icon name={icon} size={iconSize.md} color={color} />
             ) : null}
             <AppText
               variant="tab"
               className={cn(
                 'mt-1',
-                focused ? 'text-primary' : 'text-ink-subtle',
+                focused ? 'text-primary' : 'text-ink-inactive',
               )}
             >
               {label}

@@ -53,11 +53,11 @@ export function SpeechSettingsSheet({
   const can = capabilitiesOf(voice);
 
   const formats = useMemo(
-    () => audioFormats.map(key => ({ key, label: t(`speech.formats.${key}`) })),
+    () => audioFormats.map(key => ({ key, label: t(`textToSpeech.formats.${key}`) })),
     [t],
   );
   const deliverySteps = useMemo(
-    () => deliveryModes.map(key => ({ key, label: t(`speech.delivery.${key}`) })),
+    () => deliveryModes.map(key => ({ key, label: t(`textToSpeech.delivery.${key}`) })),
     [t],
   );
 
@@ -65,11 +65,11 @@ export function SpeechSettingsSheet({
     <BottomSheet
       visible={visible}
       onClose={onClose}
-      title={t('speech.settingsSheet.title')}
+      title={t('textToSpeech.settingsSheet.title')}
     >
       <View className="gap-6">
         <View className="gap-3">
-          <Heading>{t('speech.settingsSheet.audioFormat')}</Heading>
+          <Heading>{t('textToSpeech.settingsSheet.audioFormat')}</Heading>
           <SegmentedControl
             variant="cards"
             segments={formats}
@@ -80,8 +80,8 @@ export function SpeechSettingsSheet({
 
         {can.tuning ? (
           <View className="gap-4">
-            <Heading>{t('speech.settingsSheet.voiceTuning')}</Heading>
-            <AppText variant="label">{t('speech.settingsSheet.speed')}</AppText>
+            <Heading>{t('textToSpeech.settingsSheet.voiceTuning')}</Heading>
+            <AppText variant="label">{t('textToSpeech.settingsSheet.speed')}</AppText>
             <RulerSlider
               {...speedRange}
               value={settings.speed}
@@ -89,10 +89,10 @@ export function SpeechSettingsSheet({
               snap={snapSpeed}
               format={formatSpeed}
               presets={speedPresets}
-              accessibilityLabel={t('speech.settingsSheet.speed')}
+              accessibilityLabel={t('textToSpeech.settingsSheet.speed')}
             />
             <AppText variant="label" className="mt-2">
-              {t('speech.settingsSheet.delivery')}
+              {t('textToSpeech.settingsSheet.delivery')}
             </AppText>
             <StepSlider
               steps={deliverySteps}
@@ -104,21 +104,21 @@ export function SpeechSettingsSheet({
 
         {can.actingInstructions ? (
           <View className="gap-3">
-            <Heading>{t('speech.settingsSheet.actingInstructions')}</Heading>
+            <Heading>{t('textToSpeech.settingsSheet.actingInstructions')}</Heading>
             <AppText variant="label">
-              {t('speech.settingsSheet.instruction')}
+              {t('textToSpeech.settingsSheet.instruction')}
             </AppText>
             <SelectField
               tone="outline"
               value={instruction?.name}
-              placeholder={t('speech.settingsSheet.chooseInstruction')}
-              accessibilityLabel={t('speech.settingsSheet.instruction')}
+              placeholder={t('textToSpeech.settingsSheet.chooseInstruction')}
+              accessibilityLabel={t('textToSpeech.settingsSheet.instruction')}
               onPress={onBrowseInstructions}
             />
             <TextArea
               tone="muted"
-              label={t('speech.settingsSheet.ownInstructions')}
-              placeholder={t('speech.settingsSheet.ownPlaceholder')}
+              label={t('textToSpeech.settingsSheet.ownInstructions')}
+              placeholder={t('textToSpeech.settingsSheet.ownPlaceholder')}
               value={instructionText}
               onChangeText={setInstructionText}
               maxLength={textLimits.instructionPrompt}

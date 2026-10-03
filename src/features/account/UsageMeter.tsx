@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import { AppText, Button, Icon, ProgressTrack } from '@/components';
+import { images } from '@/assets';
+import { AppText, Button, ProgressTrack } from '@/components';
 import { PlanId, plans } from '@/features/account/plans';
-import { iconSize, palette } from '@/theme';
+import { layout } from '@/theme';
 
 type Props = {
   plan: PlanId;
@@ -18,14 +19,9 @@ export function UsageMeter({ plan, usedMinutes, onUpgrade }: Props) {
   const limit = plans[plan].limitMinutes;
   const used = Math.min(usedMinutes, limit);
 
+  const UsageClock = images.settingsUsageClock;
   const clock = (
-    <View className="size-tile items-center justify-center rounded-full bg-tone-purple-tile">
-      <Icon
-        name="clock"
-        size={iconSize.md}
-        color={palette.tone.purple.DEFAULT}
-      />
-    </View>
+    <UsageClock width={layout.usageBadge} height={layout.usageBadge} />
   );
 
   if (plan === 'basic') {
@@ -33,7 +29,9 @@ export function UsageMeter({ plan, usedMinutes, onUpgrade }: Props) {
       <View className="flex-row items-center gap-3">
         {clock}
         <View className="flex-1">
-          <AppText variant="caption">{t('plan.usage')}</AppText>
+          <AppText variant="caption" className="text-tiny text-ink">
+            {t('plan.usage')}
+          </AppText>
           <AppText variant="stat">
             {used.toFixed(2)}{' '}
             <AppText variant="caption">{t('plan.usageOf', { limit })}</AppText>
@@ -42,7 +40,7 @@ export function UsageMeter({ plan, usedMinutes, onUpgrade }: Props) {
         <Button
           size="sm"
           variant="dark"
-          icon="gem"
+          icon="diamond"
           label={t('plan.buyStudio')}
           onPress={onUpgrade}
         />

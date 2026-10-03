@@ -44,7 +44,7 @@ type Actions = {
   reset: () => void;
 };
 
-export const initialDraft: SpeechDraft = {
+const initialDraft: SpeechDraft = {
   title: '',
   script: '',
   campaignId: null,

@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MediaRow, PlaybackProgress, Tag } from '@/components';
 import type { LibraryItem } from '@/features/library/types';
-import { tools } from '@/features/tools';
+import { tools } from '@/features/tools/tools';
 import { formatDuration } from '@/utils';
 
 type Props = {

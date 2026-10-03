@@ -36,15 +36,21 @@ const palette = {
     to: '#7146EA',
   },
   ink: {
-    DEFAULT: '#2B2B2B',
+    DEFAULT: '#333333',
     muted: '#3D3D3D',
     subtle: '#7A7A7A',
+    // Section headings ("GENERAL").
+    faint: '#989898',
+    // Inactive tab icon and label.
+    inactive: '#AAAAAA',
   },
   surface: '#FFFFFF',
   canvas: '#FFF9F6',
   line: {
-    DEFAULT: '#FBDCCF',
+    DEFAULT: '#FFD9CB',
     neutral: '#E6E6E6',
+    // Dividers between list rows and inside cards.
+    subtle: '#F2F0EE',
   },
   ring: 'rgba(255, 255, 255, 0.9)',
 
@@ -53,8 +59,8 @@ const palette = {
   // Read-only cards and segmented control tracks.
   muted: '#F5F5F5',
   danger: {
-    DEFAULT: '#E5383B',
-    soft: '#FFF1F1',
+    DEFAULT: '#FF1B1B',
+    soft: '#FFE3E3',
     line: '#F9C9CA',
   },
   link: '#1E9BD7',

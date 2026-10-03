@@ -18,7 +18,7 @@ import {
   transcriptMimeTypes,
   TranscriptSegment,
 } from '@/domain';
-import { useLibraryJob } from '@/features/results';
+import { useLibraryJob } from '@/features/results/hooks';
 import { SegmentRow } from '@/features/speech-to-text/SegmentRow';
 import { shareTextFile } from '@/lib/shareFile';
 import { layout } from '@/theme';
@@ -51,7 +51,7 @@ export function TranscriptSheet({
     <BottomSheet
       visible={!!session}
       onClose={onClose}
-      title={t('stt.sheet.title')}
+      title={t('speechToText.sheet.title')}
       height={layout.sheetHeight}
     >
       {session ? (
@@ -105,7 +105,7 @@ function TranscriptContent({
     () =>
       transcriptFormats.map(key => ({
         key,
-        label: t(`stt.sheet.formats.${key}`),
+        label: t(`speechToText.sheet.formats.${key}`),
       })),
     [t],
   );
@@ -113,12 +113,12 @@ function TranscriptContent({
   return (
     <View className="gap-5">
       <View className="gap-3">
-        <AppText variant="label">{t('stt.sheet.audio')}</AppText>
+        <AppText variant="label">{t('speechToText.sheet.audio')}</AppText>
         <AudioPlayerCard uri={session.audioUrl} />
       </View>
 
       <View className="gap-3">
-        <AppText variant="label">{t('stt.sheet.content')}</AppText>
+        <AppText variant="label">{t('speechToText.sheet.content')}</AppText>
         <View className="gap-5 rounded-xl border border-line-neutral bg-muted p-4">
           {segments.map((segment, index) => (
             <SegmentRow
@@ -148,13 +148,13 @@ function TranscriptContent({
         <Button
           variant="neutral"
           icon={menuOpen ? 'chevronUp' : 'chevronDown'}
-          label={t('stt.sheet.download')}
+          label={t('speechToText.sheet.download')}
           loading={share.isPending}
           onPress={() => setMenuOpen(open => !open)}
           className="flex-1 flex-row-reverse"
         />
         <Button
-          label={t('stt.sheet.save')}
+          label={t('speechToText.sheet.save')}
           loading={save.isPending}
           onPress={() =>
             save.mutate(

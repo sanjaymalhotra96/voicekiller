@@ -6,11 +6,11 @@ import { gradientStyle, palette, shadows } from '@/theme';
 // Positions are measured from the 440pt-wide design, relative to the logo
 // centre, and scaled to the device width.
 const DESIGN_WIDTH = 440;
-const HERO_HEIGHT = 520;
+const ILLUSTRATION_HEIGHT = 520;
 const LOGO_SIZE = 100;
 const RINGS = [92, 163, 235];
 
-type OrbitItem = {
+type IllustrationItem = {
   Icon: SvgIcon;
   x: number;
   y: number;
@@ -18,14 +18,14 @@ type OrbitItem = {
   size: number;
 };
 
-const ITEMS: OrbitItem[] = [
-  { Icon: images.orbitPumpkin, x: -148, y: -182, size: 72 },
-  { Icon: images.orbitSkull, x: 19, y: -164, size: 48 },
-  { Icon: images.orbitFlagUS, x: 170, y: -163, size: 40 },
-  { Icon: images.orbitMic, x: -159, y: 27, size: 48 },
-  { Icon: images.orbitMan, x: 157, y: 28, size: 56 },
-  { Icon: images.orbitFlagSE, x: -147, y: 182, size: 48 },
-  { Icon: images.orbitShocked, x: 110, y: 207, size: 56 },
+const ITEMS: IllustrationItem[] = [
+  { Icon: images.welcomePumpkin, x: -148, y: -182, size: 72 },
+  { Icon: images.welcomeSkull, x: 19, y: -164, size: 48 },
+  { Icon: images.welcomeFlagUs, x: 170, y: -163, size: 40 },
+  { Icon: images.welcomeMic, x: -159, y: 27, size: 48 },
+  { Icon: images.welcomeMan, x: 157, y: 28, size: 56 },
+  { Icon: images.welcomeFlagSe, x: -147, y: 182, size: 48 },
+  { Icon: images.welcomeShocked, x: 110, y: 207, size: 56 },
 ];
 
 // Square box of `size` centred on (x, y).
@@ -36,20 +36,20 @@ const centred = (x: number, y: number, size: number) => ({
   top: y - size / 2,
 });
 
-export function OrbitHero() {
+export function WelcomeIllustration() {
   const { width } = useWindowDimensions();
   const scale = width / DESIGN_WIDTH;
   const cx = width / 2;
-  const cy = (HERO_HEIGHT * scale) / 2;
+  const cy = (ILLUSTRATION_HEIGHT * scale) / 2;
   const logoSize = LOGO_SIZE * scale;
   const LogoMark = icons.logoMark;
 
   return (
-    <View style={{ width, height: HERO_HEIGHT * scale }}>
+    <View style={{ width, height: ILLUSTRATION_HEIGHT * scale }}>
       {RINGS.map(r => (
         <View
           key={r}
-          className="absolute rounded-full border-orbit border-ring"
+          className="absolute rounded-full border-welcome-ring border-ring"
           style={centred(cx, cy, r * 2 * scale)}
         />
       ))}

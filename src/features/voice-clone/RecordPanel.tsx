@@ -16,31 +16,31 @@ export function RecordPanel({ recorder, onPickMicrophone }: Props) {
   const { t } = useTranslation();
   const { uri, isRecording, elapsedSeconds, inputs, inputId } = recorder;
   const microphone = inputs.find(input => input.uid === inputId)?.name;
-  const clipName = t('clone.record.fileName');
+  const clipName = t('voiceClone.record.fileName');
 
   return (
     <MediaPanel>
       <MediaPanelHeader
         icon="mic"
-        title={t('clone.record.title')}
+        title={t('voiceClone.record.title')}
         hint={
           isRecording
-            ? t('clone.record.recording', { time: formatDuration(elapsedSeconds) })
-            : t('clone.record.hint')
+            ? t('voiceClone.record.recording', { time: formatDuration(elapsedSeconds) })
+            : t('voiceClone.record.hint')
         }
         action={
           isRecording ? (
             <Button
               size="sm"
               variant="danger"
-              label={t('clone.record.stop')}
+              label={t('voiceClone.record.stop')}
               onPress={recorder.stop}
             />
           ) : uri ? null : (
             <Button
               size="sm"
               variant="light"
-              label={t('clone.record.action')}
+              label={t('voiceClone.record.action')}
               onPress={recorder.start}
             />
           )
@@ -53,29 +53,29 @@ export function RecordPanel({ recorder, onPickMicrophone }: Props) {
             <AudioClip
               uri={uri}
               name={clipName}
-              playLabel={t('clone.clip.play', { name: clipName })}
-              pauseLabel={t('clone.clip.pause', { name: clipName })}
+              playLabel={t('voiceClone.clip.play', { name: clipName })}
+              pauseLabel={t('voiceClone.clip.pause', { name: clipName })}
             />
           </View>
           <Button
             size="sm"
             variant="nightOutline"
-            label={t('clone.record.again')}
+            label={t('voiceClone.record.again')}
             onPress={recorder.discard}
           />
         </>
       ) : (
         <View className="gap-2 border-t border-night-line pt-4">
           <AppText variant="caption" className="text-night-subtle">
-            {t('clone.record.microphone')}
+            {t('voiceClone.record.microphone')}
           </AppText>
           <SelectField
             tone="night"
             size="sm"
             chevron="down"
-            value={microphone ?? t('clone.record.defaultMicrophone')}
-            placeholder={t('clone.record.defaultMicrophone')}
-            accessibilityLabel={t('clone.record.microphone')}
+            value={microphone ?? t('voiceClone.record.defaultMicrophone')}
+            placeholder={t('voiceClone.record.defaultMicrophone')}
+            accessibilityLabel={t('voiceClone.record.microphone')}
             onPress={onPickMicrophone}
           />
         </View>

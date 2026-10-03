@@ -1,2 +1,2 @@
 export * from '@/components/cards/FeatureCard';
-export * from '@/components/cards/HeroCard';
+export * from '@/components/cards/ActionCard';

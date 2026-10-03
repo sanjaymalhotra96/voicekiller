@@ -1,5 +1,5 @@
 // Database types in the shape `supabase gen types` produces.
-// Keep in sync with supabase/migrations, or regenerate with:
+// Keep in sync with the database schema, or regenerate with:
 //   npx supabase gen types typescript --project-id dldaotgunhqhpyhukpkd > src/lib/database.types.ts
 
 export type Json =

@@ -2,7 +2,7 @@ import { useAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Anything with audio: a Library file, a voice sample, a preview.
-export type Playable = { id: string; audioUrl: string | null };
+type Playable = { id: string; audioUrl: string | null };
 
 // One shared player for a list (one native player, however many rows): tapping another item switches tracks,
 // tapping the active item toggles play/pause.

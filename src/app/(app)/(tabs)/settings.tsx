@@ -1,2 +1,84 @@
 // Route: /settings
-export { SettingsScreen as default } from '@/screens';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Share, View } from 'react-native';
+import { AppText, Button, FormError, ListGroup, Section } from '@/components';
+import { config } from '@/config';
+import { ProfileCard } from '@/features/account/ProfileCard';
+import { SettingsAction, settingsMenu } from '@/features/account/settingsMenu';
+import { useSignOut } from '@/features/auth/hooks';
+import { openLink } from '@/utils';
+
+export default function SettingsScreen() {
+  const router = useRouter();
+  const { t } = useTranslation();
+  const signOut = useSignOut();
+  const { links } = config;
+
+  // TODO: open the subscription / paywall screen once it is designed.
+  const openSubscription = () => {};
+
+  const handlers: Record<SettingsAction, () => void> = {
+    personalInfo: () => router.push('/personal-info'),
+    changePassword: () => router.push('/change-password'),
+    subscription: openSubscription,
+    // Links come from .env. Share works without one; Contact and Privacy
+    // do nothing until EXPO_PUBLIC_SUPPORT_EMAIL / _PRIVACY_URL are set.
+    share: () =>
+      Share.share({
+        message: links.appStore
+          ? t('settings.shareMessage', {
+              appName: t('common.appName'),
+              url: links.appStore,
+            })
+          : t('settings.shareMessageNoLink', { appName: t('common.appName') }),
+      }).catch(() => {}),
+    contact: () => {
+      if (links.supportEmail) {
+        openLink(`mailto:${links.supportEmail}`);
+      }
+    },
+    privacy: () => {
+      if (links.privacyPolicy) {
+        openLink(links.privacyPolicy);
+      }
+    },
+  };
+
+  return (
+    <View className="gap-5 pb-6 pt-4">
+      <AppText variant="heading" accessibilityRole="header">
+        {t('settings.title')}
+      </AppText>
+
+      <ProfileCard onUpgrade={openSubscription} />
+
+      {settingsMenu.map(section => {
+        const items = section.items.map(({ action, icon }) => ({
+          key: action,
+          icon,
+          label: t(`settings.items.${action}`),
+          onPress: handlers[action],
+        }));
+        return (
+          <Section
+            key={section.id}
+            title={t(`settings.sections.${section.id}`)}
+          >
+            <ListGroup items={items} />
+          </Section>
+        );
+      })}
+
+      <FormError error={signOut.error} />
+      {/* Signing out flips RootNavigator back to Welcome. */}
+      <Button
+        variant="dangerSoft"
+        label={t('settings.signOut')}
+        loading={signOut.isPending}
+        onPress={() => signOut.mutate()}
+      />
+    </View>
+  );
+}

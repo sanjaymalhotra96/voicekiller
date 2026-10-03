@@ -1,7 +1,7 @@
 // Size tokens shared by tailwind.config.js and components.
 // Tailwind: h-control, h-button, h-button-sm, size-otp, size-checkbox,
-// size-icon-btn, size-tile, size-avatar, h-indicator, h-hero,
-// border-orbit.
+// size-icon-btn, size-tile, size-avatar, h-indicator, h-action-card,
+// border-welcome-ring.
 
 const control = {
   control: '60px', // text fields, auth buttons
@@ -18,7 +18,7 @@ const control = {
   'avatar-lg': '120px', // profile screen
   'avatar-badge': '40px', // camera button on the large avatar
   indicator: '3px', // active tab bar line
-  hero: '112px', // dashboard hero card
+  'action-card': '112px', // dashboard action card
   chip: '34px', // filter chips
   play: '40px', // round play/pause button
   track: '3px', // progress bar track
@@ -27,6 +27,7 @@ const control = {
   segment: '44px', // segmented control (Library / My Instructions)
   option: '56px', // option cards (MP3 / WAV)
   ruler: '40px', // speed ruler ticks area
+  'ruler-label': '64px', // value label above the speed ruler marker
   'stop-dot': '12px', // delivery mode stop
   'stop-active': '26px', // selected delivery mode stop
   'count-badge': '18px', // red count bubble on the filter button
@@ -34,7 +35,7 @@ const control = {
 };
 
 const borderWidth = {
-  orbit: '1.5px', // hero orbit rings
+  'welcome-ring': '1.5px', // rings around the welcome logo
 };
 
 // Icon glyph sizes in dp: <Icon size={iconSize.md} />
@@ -52,13 +53,20 @@ const iconSize = {
 const layout = {
   // Extra touch area around small tappables.
   hitSlop: 8,
+  // Usage badge on the Settings profile card, in dp.
+  usageBadge: 40,
   // Auth bottom sheets, as a fraction of the screen height.
   sheetHeight: 0.86,
   // Gap kept above any bottom sheet, and padding under its content.
   sheetTopGap: 24,
   sheetBottomPadding: 24,
+  // Top corner radius of bottom sheets.
+  sheetRadius: 24,
+  // Drag a sheet down this far (or flick it) to close it.
+  sheetDismissDistance: 140,
+  sheetDismissVelocity: 900,
   headerLogo: 56,
-  heroArt: { width: 120, height: 112 },
+  actionCardArt: { width: 120, height: 112 },
   emptyArt: { width: 140, height: 120 },
   // Dialogs never stretch past this on tablets.
   dialogMaxWidth: 340,

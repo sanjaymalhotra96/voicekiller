@@ -3,8 +3,11 @@ import { GestureResponderEvent, LayoutChangeEvent, View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Chip } from '@/components/ui/Chip';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { control, iconSize, palette } from '@/theme';
 import { cn } from '@/utils';
+
+// The value label is centred over the marker.
+const LABEL_HALF_WIDTH = parseFloat(control['ruler-label']) / 2;
 
 type Props = {
   value: number;
@@ -74,8 +77,8 @@ export function RulerSlider({
         {width > 0 ? (
           <View
             pointerEvents="none"
-            className="absolute top-0 w-16 items-center"
-            style={{ left: ratio * width - 32 }}
+            className="absolute top-0 w-ruler-label items-center"
+            style={{ left: ratio * width - LABEL_HALF_WIDTH }}
           >
             <AppText variant="label" className="font-sans-bold text-primary">
               {format(value)}

@@ -55,7 +55,7 @@ export const profileService = {
       .select('plan, usage_minutes')
       .eq('id', userId)
       .maybeSingle();
-    // Before the migration runs (or for a missing row), use the default.
+    // No table yet, or no row for this user: use the default.
     if (isMissingTable(error)) {
       return DEFAULT_ACCOUNT;
     }
@@ -131,7 +131,7 @@ export const profileService = {
     }
   },
 
-  // Runs public.delete_user() (see supabase/migrations), then signs out.
+  // Runs the public.delete_user() database function, then signs out.
   async deleteAccount() {
     throwIfError(await supabase.rpc('delete_user'));
     await supabase.auth.signOut({ scope: 'local' });

@@ -19,7 +19,7 @@ export function EmotionSheet({ visible, onClose }: EditorSheetProps) {
     <BottomSheet
       visible={visible}
       onClose={onClose}
-      title={t('speech.emotions')}
+      title={t('textToSpeech.emotions')}
       titleAccessory={<Badge label={t('common.beta')} />}
     >
       <OptionList

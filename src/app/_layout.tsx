@@ -10,7 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { fontAssets } from '@/assets';
 import { ErrorBoundary, OfflineSheet } from '@/components';
-import { AuthProvider, useSession } from '@/features/auth';
+import { AuthProvider, useSession } from '@/features/auth/AuthProvider';
 import { queryClient } from '@/lib/queryClient';
 import { stackScreenOptions } from '@/theme';
 

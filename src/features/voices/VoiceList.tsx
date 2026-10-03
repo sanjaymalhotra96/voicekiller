@@ -100,6 +100,8 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
         removeClippedSubviews
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
+        // iOS: rows under the keyboard stay reachable.
+        automaticallyAdjustKeyboardInsets
         showsVerticalScrollIndicator={false}
         onEndReachedThreshold={0.5}
         onEndReached={() =>

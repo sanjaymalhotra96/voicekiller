@@ -18,7 +18,7 @@ export function UploadPanel({ sample, onPick }: Props) {
     <Button
       size="sm"
       variant="light"
-      label={t('clone.upload.action')}
+      label={t('voiceClone.upload.action')}
       onPress={onPick}
     />
   );
@@ -31,8 +31,8 @@ export function UploadPanel({ sample, onPick }: Props) {
             <AudioClip
               uri={sample.uri}
               name={sample.name}
-              playLabel={t('clone.clip.play', { name: sample.name })}
-              pauseLabel={t('clone.clip.pause', { name: sample.name })}
+              playLabel={t('voiceClone.clip.play', { name: sample.name })}
+              pauseLabel={t('voiceClone.clip.pause', { name: sample.name })}
             />
           </View>
           {uploadButton}
@@ -40,8 +40,8 @@ export function UploadPanel({ sample, onPick }: Props) {
       ) : (
         <MediaPanelHeader
           icon="upload"
-          title={t('clone.upload.title')}
-          hint={t('clone.upload.hint', { max: MAX_MB })}
+          title={t('voiceClone.upload.title')}
+          hint={t('voiceClone.upload.hint', { max: MAX_MB })}
           action={uploadButton}
         />
       )}

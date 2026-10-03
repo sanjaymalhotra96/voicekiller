@@ -23,7 +23,7 @@ const variants = {
   // Log out: pink background, red text.
   dangerSoft: {
     box: 'bg-danger-soft active:opacity-70',
-    text: 'text-danger',
+    text: 'font-sans text-danger',
     color: palette.danger.DEFAULT,
   },
   // Destructive confirm (Delete account).

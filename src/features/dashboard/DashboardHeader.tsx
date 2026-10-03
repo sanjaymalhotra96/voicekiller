@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { icons } from '@/assets';
 import { AppText, Avatar } from '@/components';
-import { useAccount } from '@/features/account';
-import { useCurrentUser } from '@/features/auth';
+import { useAccount } from '@/features/account/hooks';
+import { useCurrentUser } from '@/features/auth/useCurrentUser';
 import { layout, palette } from '@/theme';
 
 // Logo, "Dashboard" + greeting, and the user's avatar.

@@ -21,33 +21,33 @@ export function EditorToolbar({ onOpen }: Props) {
       <ToolbarChip
         tone="accent"
         icon="voice"
-        label={voice?.name ?? t('speech.chooseVoice')}
+        label={voice?.name ?? t('textToSpeech.chooseVoice')}
         chevron
         accessibilityLabel={
           voice
-            ? t('speech.voiceLabel', { name: voice.name })
-            : t('speech.chooseVoice')
+            ? t('textToSpeech.voiceLabel', { name: voice.name })
+            : t('textToSpeech.chooseVoice')
         }
         onPress={() => onOpen('voice')}
       />
       {can.emotions ? (
         <ToolbarChip
           icon="emotion"
-          label={t('speech.emotions')}
+          label={t('textToSpeech.emotions')}
           badge={t('common.beta')}
-          accessibilityLabel={t('speech.emotions')}
+          accessibilityLabel={t('textToSpeech.emotions')}
           onPress={() => onOpen('emotion')}
         />
       ) : null}
       <ToolbarChip
         icon="pause"
-        label={t('speech.addPause')}
-        accessibilityLabel={t('speech.addPause')}
+        label={t('textToSpeech.addPause')}
+        accessibilityLabel={t('textToSpeech.addPause')}
         onPress={() => onOpen('pause')}
       />
       <ToolbarChip
         icon="settings"
-        accessibilityLabel={t('speech.settings')}
+        accessibilityLabel={t('textToSpeech.settings')}
         onPress={() => onOpen('settings')}
       />
     </View>

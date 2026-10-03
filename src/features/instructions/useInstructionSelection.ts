@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import type { ActingInstruction, CustomInstruction } from '@/domain';
-import { useSpeechDraft } from '@/features/text-to-speech';
+import { useSpeechDraft } from '@/features/text-to-speech/store';
 
 // Reads and sets the editor's acting instruction. Picking one copies its
 // text into "Type your own instructions", where the user can edit it.

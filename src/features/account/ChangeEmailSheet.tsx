@@ -30,14 +30,14 @@ export function ChangeEmailSheet({ visible, onClose }: Props) {
     defaultValues: { email: '' },
   });
 
+  // Start clean each time the sheet opens.
+  const resetRequest = changeEmail.reset;
   useEffect(() => {
     if (visible) {
       reset({ email: '' });
-      changeEmail.reset();
+      resetRequest();
     }
-    // Only when the sheet opens.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible]);
+  }, [visible, reset, resetRequest]);
 
   const submit = handleSubmit(({ email }) => changeEmail.mutate(email));
 

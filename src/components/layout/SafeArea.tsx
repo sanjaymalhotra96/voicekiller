@@ -3,7 +3,7 @@ import { Platform, ScrollView, View, ViewProps } from 'react-native';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GradientBackground } from '@/components/layout/GradientBackground';
 import { GradientName } from '@/theme';
-import { cn } from '@/utils';
+import { cn, dismissKeyboardOnBlankTouch } from '@/utils';
 
 type SafeAreaProps = ViewProps & {
   // Gradient from theme/gradients.ts, or a plain colour (see plainBackgrounds).
@@ -60,13 +60,21 @@ export function SafeArea({
       className="flex-1"
       contentContainerClassName="grow"
       contentContainerStyle={padding}
+      // Tapping blank space or dragging closes the keyboard; on iOS the
+      // focused field scrolls above the keyboard.
       keyboardShouldPersistTaps="handled"
+      keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+      automaticallyAdjustKeyboardInsets
       showsVerticalScrollIndicator={false}
     >
       {body}
     </ScrollView>
   ) : (
-    <View className="flex-1" style={padding}>
+    <View
+      className="flex-1"
+      style={padding}
+      onStartShouldSetResponder={dismissKeyboardOnBlankTouch}
+    >
       {body}
     </View>
   );

@@ -31,7 +31,7 @@ function ListItem({
       <View
         className={cn(
           'flex-1 flex-row items-center justify-between py-4',
-          divider && 'border-b border-line-neutral',
+          divider && 'border-b border-line-subtle',
         )}
       >
         <AppText variant="listItem">{label}</AppText>

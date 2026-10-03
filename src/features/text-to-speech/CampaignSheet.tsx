@@ -29,7 +29,7 @@ export function CampaignSheet({ visible, onClose }: EditorSheetProps) {
 
   const options = useMemo(
     () => [
-      { key: DEFAULT_KEY, label: t('speech.campaignSheet.default') },
+      { key: DEFAULT_KEY, label: t('textToSpeech.campaignSheet.default') },
       ...(campaigns.data ?? []).map(c => ({ key: c.id, label: c.name })),
     ],
     [campaigns.data, t],
@@ -57,12 +57,12 @@ export function CampaignSheet({ visible, onClose }: EditorSheetProps) {
     <BottomSheet
       visible={visible}
       onClose={onClose}
-      title={t('speech.campaignSheet.title')}
+      title={t('textToSpeech.campaignSheet.title')}
     >
       <View className="gap-4">
         <TextField
           tone="outline"
-          placeholder={t('speech.campaignSheet.placeholder')}
+          placeholder={t('textToSpeech.campaignSheet.placeholder')}
           value={name}
           onChangeText={text => {
             setName(text);
@@ -74,7 +74,7 @@ export function CampaignSheet({ visible, onClose }: EditorSheetProps) {
           trailing={
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel={t('speech.campaignSheet.create')}
+              accessibilityLabel={t('textToSpeech.campaignSheet.create')}
               accessibilityState={{ disabled: !trimmed, busy: create.isPending }}
               hitSlop={layout.hitSlop}
               disabled={!trimmed || create.isPending}

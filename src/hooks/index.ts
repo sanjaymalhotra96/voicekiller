@@ -7,3 +7,4 @@ export * from '@/hooks/useStatusBarStyle';
 export * from '@/hooks/useFilePicker';
 export * from '@/hooks/useUploadSlot';
 export * from '@/hooks/useIsOffline';
+export * from '@/hooks/useKeyboardHeight';

@@ -21,7 +21,7 @@ export const settingsMenu: SettingsSection[] = [
     items: [
       { action: 'personalInfo', icon: 'user' },
       { action: 'changePassword', icon: 'key' },
-      { action: 'subscription', icon: 'award' },
+      { action: 'subscription', icon: 'crown' },
     ],
   },
   {
@@ -29,7 +29,7 @@ export const settingsMenu: SettingsSection[] = [
     items: [
       { action: 'share', icon: 'share' },
       { action: 'contact', icon: 'mail' },
-      { action: 'privacy', icon: 'shieldCheck' },
+      { action: 'privacy', icon: 'shieldQuestion' },
     ],
   },
 ];

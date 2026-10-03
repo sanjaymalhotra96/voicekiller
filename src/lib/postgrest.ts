@@ -1,6 +1,6 @@
 // Quote a value for PostgREST logic filters (`or=(...)`), so commas,
 // dots and parentheses in it are read as data. Escapes `\` and `"`.
-export const pgQuote = (value: string) =>
+const pgQuote = (value: string) =>
   `"${value.replace(/["\\]/g, char => `\\${char}`)}"`;
 
 // `%` and `_` are wildcards in ILIKE; treat them as plain text.

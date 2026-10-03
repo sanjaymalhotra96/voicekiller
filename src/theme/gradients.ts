@@ -12,7 +12,7 @@ const glowAt = (at: string, hex: string, opacity: number, stop: string) =>
 // Shared CSS background gradients (RN New Architecture `backgroundImage`).
 // Add a new key here to give another screen its own variant.
 export const gradients = {
-  // Warm peach glow at the corners + soft lavender halo behind the hero.
+  // Warm peach glow at the corners + soft lavender halo behind the logo.
   brand: [
     glowAt('50% 30%', glow.lavender, 0.85, '45%'),
     glowAt('100% 0%', glow.peach, 0.75, '55%'),
@@ -22,8 +22,8 @@ export const gradients = {
 
   logo: `linear-gradient(135deg, ${primary.dark} 0%, ${primary.light} 100%)`,
 
-  // Hero card: white fading into peach on the right.
-  hero: `linear-gradient(90deg, ${glow.top} 0%, ${glow.top} 40%, ${glow.peach} 100%)`,
+  // Action card: white fading into peach on the right.
+  actionCard: `linear-gradient(90deg, ${glow.top} 0%, ${glow.top} 40%, ${glow.peach} 100%)`,
 
   // AI actions and round play buttons: orange into purple.
   ai: `linear-gradient(90deg, ${ai.from} 0%, ${ai.to} 100%)`,
