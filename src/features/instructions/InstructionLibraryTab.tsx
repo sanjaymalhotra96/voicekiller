@@ -1,7 +1,12 @@
 import { useRouter } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, ListRenderItem, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  View,
+} from 'react-native';
 import { Button, ChipTabs, EmptyState, TextField } from '@/components';
 import type { ActingInstruction } from '@/domain';
 import { useActingInstructions } from '@/features/instructions/hooks';
@@ -11,6 +16,7 @@ import { useInstructionSelection } from '@/features/instructions/useInstructionS
 import { usePlayback } from '@/hooks';
 import { errorMessageKey } from '@/lib/errors';
 import { palette } from '@/theme';
+import { clipOffscreenRows } from '@/utils';
 
 const EMPTY: ActingInstruction[] = [];
 
@@ -110,13 +116,17 @@ export function InstructionLibraryTab() {
         keyExtractor={item => item.id}
         renderItem={renderItem}
         extraData={playback.activeId}
-        removeClippedSubviews
+        removeClippedSubviews={clipOffscreenRows}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}
         className="flex-1"
         ListEmptyComponent={
-          <EmptyState icon="search" title={t('instructions.noResults')} className="py-12" />
+          <EmptyState
+            icon="search"
+            title={t('instructions.noResults')}
+            className="py-12"
+          />
         }
       />
     </View>

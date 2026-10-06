@@ -1,6 +1,12 @@
 import { File } from 'expo-file-system';
 import { cleanFiles, extractAudio, isValidFile, trim } from 'react-native-video-trim';
-import { AudioSample, fileExtension, uploadAudioExtensions } from '@/domain';
+import {
+  AudioSample,
+  fileExtension,
+  FileRules,
+  uploadAudioExtensions,
+  validateFile,
+} from '@/domain';
 import { AppError } from '@/lib/errors';
 import { log } from '@/lib/logger';
 
@@ -26,7 +32,7 @@ const baseName = (name: string) => name.replace(/\.[^.]+$/, '') || 'audio';
 // Files made in earlier sessions are removed before the first conversion.
 let cleaned = false;
 
-export async function toUploadAudio(
+async function toUploadAudio(
   file: AudioSample,
   { maxSeconds, minSeconds }: Options = {},
 ): Promise<AudioSample> {
@@ -85,4 +91,20 @@ export async function toUploadAudio(
     log('api', 'audio conversion failed', error);
     throw new AppError('conversionFailed', error);
   }
+}
+
+// What a tool's service sends when the user starts the job: the picked
+// file turned into upload-ready audio, then checked against the API's
+// size limit in `rules`. Nothing is converted before the user starts.
+export async function prepareUpload(
+  file: AudioSample,
+  rules: FileRules,
+  options: Options = {},
+): Promise<AudioSample> {
+  const audio = await toUploadAudio(file, options);
+  const tooLarge = validateFile(audio, rules);
+  if (tooLarge) {
+    throw new AppError(tooLarge);
+  }
+  return audio;
 }

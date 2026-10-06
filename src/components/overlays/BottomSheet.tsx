@@ -58,9 +58,7 @@ const SPRING = { damping: 20, stiffness: 220 };
 // - Drag the handle / header down to close; a short drag springs back.
 // - Tapping outside closes the keyboard first, then the sheet.
 // - Keyboard (iOS and Android): the sheet rises only as far as it fits
-//   under the status bar; any part the keyboard still covers scrolls. On
-//   iOS the focused field is also scrolled into view
-//   (automaticallyAdjustKeyboardInsets).
+//   under the status bar; any part the keyboard still covers scrolls.
 export function BottomSheet({
   visible,
   onClose,
@@ -112,16 +110,27 @@ export function BottomSheet({
             event.translationY > 0 ? event.translationY : event.translationY / 4;
         })
         .onEnd(event => {
+          // A sheet without a close button is not closed by a swipe either.
           const dismiss =
-            event.translationY > layout.sheetDismissDistance ||
-            event.velocityY > layout.sheetDismissVelocity;
+            !hideClose &&
+            (event.translationY > layout.sheetDismissDistance ||
+              event.velocityY > layout.sheetDismissVelocity);
           if (dismiss) {
+            // Keep the swipe's momentum: slide straight off from where the
+            // finger let go, fast at first (the close animation alone eases
+            // in, which looked like a pause after a swipe). Runs on the UI
+            // thread at once; onClose then hides the sheet as the X does.
+            drag.value = withTiming(screenHeight, {
+              duration: config.animation.sheetMs,
+              easing: Easing.out(Easing.cubic),
+            });
             scheduleOnRN(onClose);
+            return;
           }
-          // Closing: the sheet still slides out with `progress`.
+          // Not far or fast enough: spring back open.
           drag.value = withSpring(0, SPRING);
         }),
-    [drag, onClose],
+    [drag, onClose, hideClose, screenHeight],
   );
 
   const sheetStyle = useAnimatedStyle(() => ({
@@ -153,9 +162,14 @@ export function BottomSheet({
     0,
     Math.min(keyboardHeight, maxHeight - (fixedHeight ?? sheetHeight)),
   );
-  // Android has no automatic keyboard inset: pad the content by the part
-  // of the keyboard the lift could not clear, so it can scroll above it.
-  const covered = Platform.OS === 'android' ? keyboardHeight - lift : 0;
+  // The part of the keyboard the lift could not clear: the content is
+  // padded by it, so it can still be scrolled into view. Done the same
+  // way on both platforms. (iOS automaticallyAdjustKeyboardInsets is not
+  // used: it measured the sheet before it rose, then scrolled the content
+  // away and left the raised sheet looking empty.)
+  const covered = keyboardHeight - lift;
+  // The keyboard covers the home indicator: no safe-area gap above it.
+  const bottomInset = keyboardHeight > 0 ? 0 : insets.bottom;
 
   return (
     <Modal
@@ -228,15 +242,13 @@ export function BottomSheet({
                 className="flex-grow-0"
                 contentContainerClassName="px-4 pt-6"
                 contentContainerStyle={{
-                  paddingBottom:
-                    insets.bottom + layout.sheetBottomPadding + covered,
+                  paddingBottom: bottomInset + layout.sheetBottomPadding + covered,
                 }}
                 // Taps on empty space close the keyboard.
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode={
                   Platform.OS === 'ios' ? 'interactive' : 'on-drag'
                 }
-                automaticallyAdjustKeyboardInsets
                 showsVerticalScrollIndicator={false}
               >
                 {children}

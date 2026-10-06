@@ -4,24 +4,15 @@ import { useFilePicker } from '@/hooks/useFilePicker';
 
 export type UploadSlotState =
   | { status: 'idle' }
-  // The picked file is being turned into audio (lib/audioConvert).
-  | { status: 'preparing' }
   | { status: 'uploading'; file: AudioSample; percent: number }
   | { status: 'ready'; file: AudioSample };
 
-// What the slot itself tracks; `preparing` comes from the picker.
-type SlotState = Exclude<UploadSlotState, { status: 'preparing' }>;
-
-// One "Upload Source Audio" slot: pick an audio or video file (turned into
-// upload-ready audio by the picker), then hand the file to the job, which
-// uploads it to the API and reports progress through `showProgress`.
-export function useUploadSlot(
-  rules: FileRules,
-  // Keep only the first this-many seconds of audio (Speech Editor).
-  { maxSeconds }: { maxSeconds?: number } = {},
-) {
-  const picker = useFilePicker(rules, { maxSeconds });
-  const [state, setState] = useState<SlotState>({ status: 'idle' });
+// One "Upload Source Audio" slot: pick an audio or video file, then hand
+// the file to the job, which converts it (when needed), uploads it to the
+// API and reports upload progress through `showProgress`.
+export function useUploadSlot(rules: FileRules) {
+  const picker = useFilePicker(rules);
+  const [state, setState] = useState<UploadSlotState>({ status: 'idle' });
 
   const pick = useCallback(async () => {
     const file = await picker.pick();
@@ -54,7 +45,7 @@ export function useUploadSlot(
   }, []);
 
   return {
-    state: picker.preparing ? ({ status: 'preparing' } as const) : state,
+    state,
     // The picked file, once it can be sent.
     file: state.status === 'ready' ? state.file : null,
     showProgress,

@@ -15,7 +15,7 @@
     },
     "android": {
       "package": "com.voicekiller",
-      "versionCode": 6,
+      "versionCode": 8,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/app/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -54,7 +54,8 @@
       "expo-sharing",
       "./plugins/withAndroidBuildProperties",
       "./plugins/withReleaseSigning",
-      "./plugins/withAudioConversion"
+      "./plugins/withAudioConversion",
+      "expo-web-browser"
     ],
     "scheme": "voicekiller",
     "userInterfaceStyle": "light",

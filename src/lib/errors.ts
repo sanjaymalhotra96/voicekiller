@@ -37,6 +37,9 @@ export type AppErrorCode =
   | 'purchaseFailed'
   | 'conversionFailed'
   | 'scriptTooLong'
+  | 'samePassword'
+  | 'passwordNotSet'
+  | 'googleSignInFailed'
   | 'unknown';
 
 export class AppError extends Error {
@@ -56,6 +59,7 @@ const supabaseCodes: Record<string, AppErrorCode> = {
   email_exists: 'emailTaken',
   user_already_exists: 'emailTaken',
   weak_password: 'weakPassword',
+  same_password: 'samePassword',
   otp_expired: 'otpInvalid',
   over_email_send_rate_limit: 'rateLimited',
   over_request_rate_limit: 'rateLimited',

@@ -84,7 +84,7 @@ export default function PersonalInfoScreen() {
       <TextField
         tone="outline"
         label={t('profile.userId')}
-        value={user.publicId}
+        value={user.id ?? ''}
         editable={false}
         trailing={
           <IconButton
@@ -93,7 +93,7 @@ export default function PersonalInfoScreen() {
             accessibilityLabel={
               clipboard.copied ? t('common.copied') : t('profile.copyId')
             }
-            onPress={() => clipboard.copy(user.publicId)}
+            onPress={() => user.id && clipboard.copy(user.id)}
           />
         }
       />

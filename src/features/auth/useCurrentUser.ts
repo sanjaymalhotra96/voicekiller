@@ -8,10 +8,6 @@ type UserMetadata = {
   dob?: string; // dd/mm/yy
 };
 
-// Short, readable account number shown in Settings ("VK01A2B3").
-const publicId = (id: string) =>
-  `VK${id.replace(/-/g, '').slice(0, 6).toUpperCase()}`;
-
 // Display data for the signed-in user, from Supabase user metadata.
 export function useCurrentUser() {
   const { session } = useSession();
@@ -21,7 +17,6 @@ export function useCurrentUser() {
 
   return {
     id: user?.id,
-    publicId: user ? publicId(user.id) : '',
     email: user?.email ?? '',
     fullName,
     firstName: fullName.split(/\s+/)[0] ?? '',

@@ -1,5 +1,4 @@
 // Route: /voice-clone
-import { useRouter } from 'expo-router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -28,13 +27,12 @@ import { useCreateClone } from '@/features/voice-clone/hooks';
 import { RecordPanel } from '@/features/voice-clone/RecordPanel';
 import { UploadPanel } from '@/features/voice-clone/UploadPanel';
 import { useVoiceRecorder } from '@/features/voice-clone/useVoiceRecorder';
-import { resultsRoute } from '@/features/results/types';
+import { ResultsView } from '@/features/results/ResultsView';
 import { useFilePicker, useStatusBarStyle } from '@/hooks';
 
 export default function VoiceCloneScreen() {
   useStatusBarStyle('light-content');
   const { t } = useTranslation();
-  const router = useRouter();
   const [language, setLanguage] = useState<LanguageId>(
     config.defaultLanguage as LanguageId,
   );
@@ -42,10 +40,7 @@ export default function VoiceCloneScreen() {
   const [source, setSource] = useState<CloneSource>('upload');
   const [sheet, setSheet] = useState<'microphone' | 'guide' | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const picker = useFilePicker(fileRules.clone, {
-    maxSeconds: config.clone.sampleSeconds,
-    minSeconds: config.clone.minSampleSeconds,
-  });
+  const picker = useFilePicker(fileRules.clone);
   const recorder = useVoiceRecorder(config.clone.sampleSeconds);
   const create = useCreateClone();
   const closeSheet = () => setSheet(null);
@@ -91,7 +86,15 @@ export default function VoiceCloneScreen() {
     }
     create.mutate(
       { name: trimmedName, language, sample },
-      { onSuccess: () => router.replace(resultsRoute('voiceClone')) },
+      {
+        // The new clone shows in Recent Clones below; clear the form.
+        onSuccess: () => {
+          setName('');
+          setSubmitted(false);
+          picker.clear();
+          recorder.discard();
+        },
+      },
     );
   };
 
@@ -139,7 +142,6 @@ export default function VoiceCloneScreen() {
       {source === 'upload' ? (
         <UploadPanel
           sample={picker.sample}
-          preparing={picker.preparing}
           onPick={picker.pick}
         />
       ) : (
@@ -160,9 +162,11 @@ export default function VoiceCloneScreen() {
         icon="micSparkle"
         label={t('voiceClone.submit')}
         loading={create.isPending}
-        disabled={recorder.isRecording || picker.preparing}
+        disabled={recorder.isRecording}
         onPress={submit}
       />
+
+      <ResultsView tool="voiceClone" mode="recent" />
 
       <OptionSheet
         visible={sheet === 'microphone'}

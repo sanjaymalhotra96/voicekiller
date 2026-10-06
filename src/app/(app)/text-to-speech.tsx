@@ -20,14 +20,17 @@ import {
 import { CampaignSheet } from '@/features/text-to-speech/CampaignSheet';
 import { EditorToolbar } from '@/features/text-to-speech/EditorToolbar';
 import { EmotionSheet } from '@/features/text-to-speech/EmotionSheet';
-import { useGenerateSpeech, usePreviewSpeech } from '@/features/text-to-speech/hooks';
+import {
+  useDefaultVoice,
+  useGenerateSpeech,
+  usePreviewSpeech,
+} from '@/features/text-to-speech/hooks';
 import { PauseSheet } from '@/features/text-to-speech/PauseSheet';
 import { defaultFileName, toGenerateRequest, toSpeechRequest } from '@/features/text-to-speech/request';
 import { ScriptInput } from '@/features/text-to-speech/ScriptInput';
 import { SpeechSettingsSheet } from '@/features/text-to-speech/SpeechSettingsSheet';
 import { useSpeechDraft } from '@/features/text-to-speech/store';
 import { EditorSheet } from '@/features/text-to-speech/types';
-import { UsagePill } from '@/features/text-to-speech/UsagePill';
 import { VoicePickerSheet } from '@/features/voices/VoicePickerSheet';
 import { usePlayback, useStatusBarStyle, useUnmountSignal } from '@/hooks';
 
@@ -49,6 +52,8 @@ export default function TextToSpeechScreen() {
   const setVoice = useSpeechDraft(state => state.setVoice);
   const campaignName = useSpeechDraft(state => state.campaignName);
 
+  // First visit: preselect a voice; later visits keep the last used one.
+  useDefaultVoice();
   const preview = usePreviewSpeech();
   const generate = useGenerateSpeech();
   // Leaving the screen stops waiting for the file (the server still
@@ -137,7 +142,7 @@ export default function TextToSpeechScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <View className="flex-1 gap-4 pb-2">
-        <ScreenHeader tone="night" title={t('textToSpeech.title')} trailing={<UsagePill />} />
+        <ScreenHeader tone="night" title={t('textToSpeech.title')} />
 
         <View className="flex-row gap-3">
           <TextField

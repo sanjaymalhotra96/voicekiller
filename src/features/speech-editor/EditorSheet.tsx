@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import {
@@ -15,8 +15,11 @@ import { layout } from '@/theme';
 import { EditorSession, speechEditorService } from '@/services/speechEditor';
 
 type Props = {
-  // Null hides the sheet.
+  // Null hides the sheet, unless `visible` is set.
   session: EditorSession | null;
+  // Open even before `session` (shows `placeholder` until then).
+  visible?: boolean;
+  placeholder?: ReactNode;
   onClose: () => void;
   onSaved: () => void;
 };
@@ -24,19 +27,31 @@ type Props = {
 // Edit the transcription of an uploaded recording and regenerate the
 // audio from the edited text. Each regenerated audio is saved on the
 // Library file by the server.
-export function EditorSheet({ session, onClose, onSaved }: Props) {
+export function EditorSheet({
+  session,
+  visible = !!session,
+  placeholder = null,
+  onClose,
+  onSaved,
+}: Props) {
   const { t } = useTranslation();
   return (
     <BottomSheet
-      visible={!!session}
+      visible={visible}
       onClose={onClose}
       title={t('speechEditor.sheet.title')}
       height={layout.sheetHeight}
     >
       {/* Keyed by session so each new upload starts from a clean editor. */}
       {session ? (
-        <EditorContent key={session.fileId} session={session} onSaved={onSaved} />
-      ) : null}
+        <EditorContent
+          key={session.fileId}
+          session={session}
+          onSaved={onSaved}
+        />
+      ) : (
+        placeholder
+      )}
     </BottomSheet>
   );
 }
@@ -93,7 +108,9 @@ function EditorContent({
       </View>
 
       <View className="gap-3">
-        <AppText variant="label">{t('speechEditor.sheet.transcription')}</AppText>
+        <AppText variant="label">
+          {t('speechEditor.sheet.transcription')}
+        </AppText>
         <TextArea
           tone="muted"
           accessibilityLabel={t('speechEditor.sheet.transcription')}

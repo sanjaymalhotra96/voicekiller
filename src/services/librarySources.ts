@@ -133,7 +133,7 @@ export const sources: Record<LibrarySource, SourceTable> = {
         voiceName: null,
         durationSeconds: seconds(row.duration),
         audioUrl: text(row.file_url),
-        metadata: {},
+        metadata: { transcriptUrl: text(row.transcription) || undefined },
       }),
   },
   // Plays the edited audio when there is one, otherwise the original.

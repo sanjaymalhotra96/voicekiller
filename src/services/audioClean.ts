@@ -1,5 +1,6 @@
-import type { AudioSample } from '@/domain';
+import { AudioSample, fileRules } from '@/domain';
 import { apiUpload, JobControls } from '@/lib/api';
+import { prepareUpload } from '@/lib/audioConvert';
 import { AppError } from '@/lib/errors';
 import { supabase } from '@/lib/supabase';
 
@@ -34,7 +35,7 @@ export const audioCleanService = {
       response = await apiUpload(
         '/api/denoise',
         {
-          file,
+          file: await prepareUpload(file, fileRules.media),
           denoiseOnly: enhance ? 'false' : 'true',
         },
         { onProgress, signal },

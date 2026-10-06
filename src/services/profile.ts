@@ -1,6 +1,6 @@
 import { ImageManipulator, SaveFormat } from 'expo-image-manipulator';
 import { config } from '@/config';
-import { defaultPlan, isPlanId, PlanId } from '@/domain';
+import { PlanId, planFromAccountType } from '@/domain';
 import { AppError, toAppError } from '@/lib/errors';
 import { supabase } from '@/lib/supabase';
 import { isMissingTable, throwIfError } from '@/lib/supabaseResult';
@@ -11,10 +11,19 @@ import { isMissingTable, throwIfError } from '@/lib/supabaseResult';
 
 type ProfileInput = { fullName: string; dob: string };
 
-// Server-controlled account data (public.profiles, read-only for users).
-export type Account = { plan: PlanId; usageMinutes: number };
+// Server-controlled account data, read only for users:
+// public.users (account_type) and public.billing
+// (monthly_seconds, used_seconds).
+export type Account = {
+  plan: PlanId;
+  usageMinutes: number;
+  // The account's monthly allowance; null when unknown (the plan's
+  // default from features/account/plans.ts is shown then).
+  limitMinutes: number | null;
+};
 
-const DEFAULT_ACCOUNT: Account = { plan: defaultPlan, usageMinutes: 0 };
+const toMinutes = (seconds: number | null | undefined) =>
+  Math.max(0, Number(seconds) || 0) / 60;
 // Every user has exactly one photo at this name inside their folder.
 const AVATAR_FILE = 'avatar.jpg';
 
@@ -50,22 +59,30 @@ async function resizeAvatar(localUri: string) {
 
 export const profileService = {
   async getAccount(userId: string): Promise<Account> {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('plan, usage_minutes')
-      .eq('id', userId)
-      .maybeSingle();
-    // No table yet, or no row for this user: use the default.
-    if (isMissingTable(error)) {
-      return DEFAULT_ACCOUNT;
+    const [user, billing] = await Promise.all([
+      supabase
+        .from('users')
+        .select('account_type')
+        .eq('id', userId)
+        .maybeSingle(),
+      supabase
+        .from('billing')
+        .select('monthly_seconds, used_seconds')
+        .eq('user_id', userId)
+        .maybeSingle(),
+    ]);
+    // A missing table or row: show the defaults rather than fail.
+    for (const result of [user, billing]) {
+      if (!isMissingTable(result.error)) {
+        throwIfError(result);
+      }
     }
-    throwIfError({ error });
-    return data
-      ? {
-          plan: isPlanId(data.plan) ? data.plan : defaultPlan,
-          usageMinutes: Number(data.usage_minutes),
-        }
-      : DEFAULT_ACCOUNT;
+    const monthly = billing.data?.monthly_seconds;
+    return {
+      plan: planFromAccountType(user.data?.account_type),
+      usageMinutes: toMinutes(billing.data?.used_seconds),
+      limitMinutes: monthly ? toMinutes(monthly) : null,
+    };
   },
 
   async update({ fullName, dob }: ProfileInput) {
@@ -82,6 +99,10 @@ export const profileService = {
   // Re-checks the current password first, since updateUser doesn't.
   async changePassword(current: string, next: string) {
     const user = await currentUser();
+    // Accounts made with Google have no password to change.
+    if (!user.identities?.some(identity => identity.provider === 'email')) {
+      throw new AppError('passwordNotSet');
+    }
     const check = await supabase.auth.signInWithPassword({
       email: user.email ?? '',
       password: current,

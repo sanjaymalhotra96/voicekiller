@@ -1,5 +1,6 @@
 import { config } from '@/config';
 import {
+  defaultVoiceFilters,
   FavoriteVoice,
   modelOf,
   modelProviders,
@@ -150,6 +151,18 @@ export const voicesService = {
           nextCursor: null,
         };
     }
+  },
+
+  // The voice Text to Speech starts with before the user picks one: the
+  // first voice of the catalog. Null when the catalog is empty.
+  async firstVoice(): Promise<Voice | null> {
+    const { items } = await listCatalog({
+      source: 'library',
+      search: '',
+      filters: defaultVoiceFilters,
+      cursor: null,
+    });
+    return items[0] ?? null;
   },
 
   async getFavorites(): Promise<FavoriteVoice[]> {

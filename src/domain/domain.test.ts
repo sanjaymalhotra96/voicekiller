@@ -8,6 +8,7 @@ import {
   highestTier,
   insertAtSelection,
   planForTier,
+  planFromAccountType,
   keptWordTimes,
   modelOf,
   snapSpeed,
@@ -154,6 +155,17 @@ describe('file rules', () => {
     expect(validateFile({ name: 'a.mp3', size: fourMb + 1 }, fileRules.clone)).toBe(
       'fileTooLarge',
     );
+  });
+});
+
+describe('account plan', () => {
+  it('shows every Studio account type as Studio, the rest as Basic', () => {
+    for (const type of ['studio', 'studio_max', 'studio_lifetime']) {
+      expect(planFromAccountType(type)).toBe('studio');
+    }
+    for (const type of ['free', 'pro', 'pro_max', null, undefined, 42]) {
+      expect(planFromAccountType(type)).toBe('basic');
+    }
   });
 });
 

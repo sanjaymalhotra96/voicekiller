@@ -1,6 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, ListRenderItem, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  View,
+} from 'react-native';
 import { Button, EmptyState, FormError } from '@/components';
 import { config } from '@/config';
 import type { Voice, VoiceQuery } from '@/domain';
@@ -13,6 +18,7 @@ import { VoiceRow } from '@/features/voices/VoiceRow';
 import { usePlayback } from '@/hooks';
 import { errorMessageKey } from '@/lib/errors';
 import { palette } from '@/theme';
+import { clipOffscreenRows } from '@/utils';
 
 type Props = {
   query: VoiceQuery;
@@ -105,7 +111,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
         renderItem={renderItem}
         extraData={playback.activeId}
         {...config.voices.list}
-        removeClippedSubviews
+        removeClippedSubviews={clipOffscreenRows}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         // iOS: rows under the keyboard stay reachable.
@@ -113,11 +119,16 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
         showsVerticalScrollIndicator={false}
         onEndReachedThreshold={0.5}
         onEndReached={() =>
-          voices.hasNextPage && !voices.isFetchingNextPage && voices.fetchNextPage()
+          voices.hasNextPage &&
+          !voices.isFetchingNextPage &&
+          voices.fetchNextPage()
         }
         ListFooterComponent={
           voices.isFetchingNextPage ? (
-            <ActivityIndicator className="py-4" color={palette.primary.DEFAULT} />
+            <ActivityIndicator
+              className="py-4"
+              color={palette.primary.DEFAULT}
+            />
           ) : null
         }
         ListEmptyComponent={

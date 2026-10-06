@@ -21,6 +21,8 @@ const screenLayout = safeAreaLayout({
   'acting-instructions': null, // nested stack wraps its own screens
   'personal-info': safeAreaPresets.form,
   'change-password': safeAreaPresets.form,
+  // Full-width chat: the screen pads only its header.
+  support: {},
   'text-to-speech': safeAreaPresets.night,
   'results/[tool]': safeAreaPresets.night,
   ...Object.fromEntries(

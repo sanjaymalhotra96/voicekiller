@@ -7,20 +7,17 @@ import type { AudioSample } from '@/domain';
 
 type Props = {
   sample: AudioSample | null;
-  // The picked file is being turned into audio.
-  preparing: boolean;
   onPick: () => void;
 };
 
 // "Upload Source Audio": pick a file; once picked, preview it in place.
-export function UploadPanel({ sample, preparing, onPick }: Props) {
+export function UploadPanel({ sample, onPick }: Props) {
   const { t } = useTranslation();
   const uploadButton = (
     <Button
       size="sm"
       variant="light"
       label={t('voiceClone.upload.action')}
-      loading={preparing}
       onPress={onPick}
     />
   );
@@ -43,11 +40,7 @@ export function UploadPanel({ sample, preparing, onPick }: Props) {
         <MediaPanelHeader
           icon="upload"
           title={t('voiceClone.upload.title')}
-          hint={
-            preparing
-              ? t('upload.preparing')
-              : t('voiceClone.upload.hint', { seconds: config.clone.sampleSeconds })
-          }
+          hint={t('voiceClone.upload.hint', { seconds: config.clone.sampleSeconds })}
           action={uploadButton}
         />
       )}

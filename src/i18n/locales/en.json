@@ -107,7 +107,10 @@
     "purchasesUnavailable": "Subscriptions are not available yet. Please try again later.",
     "purchaseFailed": "The purchase could not be completed. You have not been charged.",
     "conversionFailed": "This file couldn't be turned into audio. Please try another file.",
-    "scriptTooLong": "Free plans can generate up to 1,000 characters at a time. Shorten the script or upgrade."
+    "scriptTooLong": "Free plans can generate up to 1,000 characters at a time. Shorten the script or upgrade.",
+    "samePassword": "Your new password must be different from your current one.",
+    "passwordNotSet": "You signed up with Google, so this account has no password to change.",
+    "googleSignInFailed": "Google sign-in didn't finish. Please try again."
   },
   "tabs": {
     "dashboard": "Dashboard",
@@ -294,8 +297,6 @@
     "preview": "Preview",
     "stopPreview": "Stop",
     "generate": "Generate",
-    "minutesLeft": "{{count}} min",
-    "minutesLeftLabel": "{{count}} minutes remaining",
     "campaignSheet": {
       "title": "Campaign",
       "placeholder": "New campaign name here...",
@@ -560,7 +561,8 @@
       "audioClean": "My Cleans",
       "speechEditor": "My Speech",
       "speechToText": "My Transcriptions"
-    }
+    },
+    "view": "View {{name}}"
   },
   "upload": {
     "source": "Upload Source Audio",
@@ -569,8 +571,7 @@
     "change": "Change",
     "remove": "Remove {{name}}",
     "uploading": "Uploading {{percent}}%",
-    "maxSize": "Max {{max}}MB",
-    "preparing": "Preparing audio…"
+    "maxSize": "Max {{max}}MB"
   },
   "player": {
     "play": "Play",
@@ -628,7 +629,7 @@
     "title": "Audio Clean",
     "description": "Enhancer makes it sound like it is coming from a professional microphone.",
     "enhance": "Denoise & Enhance",
-    "submit": "Start conversion"
+    "submit": "Audio Clean"
   },
   "speechToText": {
     "title": "Speech to Text",
@@ -657,5 +658,9 @@
     "message": "Check your Wi-Fi or mobile data. The app will continue as soon as you are back online.",
     "stillOffline": "Still no connection. Check your Wi-Fi or mobile data and try again.",
     "retry": "Retry"
+  },
+  "support": {
+    "title": "Contact Us",
+    "error": "Chat couldn't load. Check your connection and try again."
   }
 }

@@ -1,14 +1,19 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { isLibrarySource, Voice } from '@/domain';
+import { isLibrarySource, LibraryItem, Voice } from '@/domain';
 import {
   useDeleteLibraryItem,
   useLibraryItems,
   useRenameLibraryItem,
 } from '@/features/library/hooks';
 import { fromLibraryItem, fromVoice } from '@/features/results/adapters';
-import type { ResultItem, ResultTool } from '@/features/results/types';
+import {
+  ResultItem,
+  ResultTool,
+  unrenamableTools,
+  viewableTools,
+} from '@/features/results/types';
 import { queryKeys } from '@/lib/queryKeys';
 import { OwnVoiceSource, ownVoicesService } from '@/services/ownVoices';
 
@@ -25,6 +30,8 @@ export type ResultsQuery = {
   // those buttons).
   rename?: (id: string, title: string) => void;
   remove?: (id: string) => void;
+  // The Library file behind a card (Library sources only), for "View".
+  file?: (id: string) => LibraryItem | undefined;
   mutationError: unknown;
 };
 
@@ -45,7 +52,8 @@ export function useVoiceResults(source: OwnVoiceSource): ResultsQuery {
   // The picker's Cloned / Design tabs list these too.
   const remove = useMutation({
     mutationFn: (voice: Voice) => ownVoicesService.remove(source, voice),
-    onSettled: () => client.invalidateQueries({ queryKey: queryKeys.voices.all }),
+    onSettled: () =>
+      client.invalidateQueries({ queryKey: queryKeys.voices.all }),
   });
   const items = useMemo(
     () => (query.data ?? []).map(voice => fromVoice(voice, source, t)),
@@ -104,12 +112,17 @@ export function useLibraryResults(tool: ResultTool): ResultsQuery {
         query.fetchNextPage();
       }
     },
-    rename: (id, title) => {
-      const item = find(id);
-      if (item) {
-        rename.mutate({ item, title });
-      }
-    },
+    // No Rename on cards that use "View", or that are never renamed.
+    rename:
+      viewableTools.includes(tool) || unrenamableTools.includes(tool)
+        ? undefined
+        : (id, title) => {
+            const item = find(id);
+            if (item) {
+              rename.mutate({ item, title });
+            }
+          },
+    file: find,
     remove: id => {
       const item = find(id);
       if (item) {

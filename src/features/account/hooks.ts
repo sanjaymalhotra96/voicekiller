@@ -19,6 +19,7 @@ export function useAccount(): Account & { isLoading: boolean } {
   return {
     plan: subscribed ?? query.data?.plan ?? defaultPlan,
     usageMinutes: query.data?.usageMinutes ?? 0,
+    limitMinutes: query.data?.limitMinutes ?? null,
     isLoading: query.isPending,
   };
 }

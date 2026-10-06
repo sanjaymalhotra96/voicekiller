@@ -17,10 +17,9 @@ const rules = fileRules.editor;
 export default function SpeechEditorScreen() {
   useStatusBarStyle('light-content');
   const { t } = useTranslation();
-  // The server takes up to 2 minutes: longer clips are cut to that.
-  const source = useUploadSlot(rules, {
-    maxSeconds: config.speechEditor.maxSeconds,
-  });
+  // The server takes up to 2 minutes: longer clips are cut to that
+  // when the user starts (services/speechEditor).
+  const source = useUploadSlot(rules);
   // Leaving the screen cancels an upload still in progress.
   const unmountSignal = useUnmountSignal();
   // The uploaded recording is saved as a Library file straight away.

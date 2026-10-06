@@ -1,7 +1,13 @@
-import { cloneProvider, CreateCloneInput, Voice, voiceKey } from '@/domain';
+import {
+  cloneProvider,
+  CreateCloneInput,
+  fileRules,
+  Voice,
+  voiceKey,
+} from '@/domain';
 import { config } from '@/config';
 import { apiRequest, apiUpload } from '@/lib/api';
-import { toUploadAudio } from '@/lib/audioConvert';
+import { prepareUpload } from '@/lib/audioConvert';
 import { AppError } from '@/lib/errors';
 
 // Voice Clone.
@@ -57,8 +63,8 @@ export const clonesService = {
         name,
         language,
         provider: 'V3',
-        // A recording is m4a: mp3 it, and keep the first 30 seconds.
-        audio: await toUploadAudio(sample, {
+        // A video or recording (m4a) becomes mp3, cut to 30 seconds.
+        audio: await prepareUpload(sample, fileRules.clone, {
           maxSeconds: config.clone.sampleSeconds,
           minSeconds: config.clone.minSampleSeconds,
         }),

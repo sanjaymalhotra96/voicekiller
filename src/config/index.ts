@@ -7,7 +7,6 @@
 //   EXPO_PUBLIC_REVENUECAT_ANDROID_KEY  RevenueCat > API keys (goog_...)
 //   EXPO_PUBLIC_REVENUECAT_IOS_KEY      RevenueCat > API keys (appl_...)
 //   EXPO_PUBLIC_PRIVACY_URL        Settings > Privacy Policy (optional)
-//   EXPO_PUBLIC_SUPPORT_EMAIL      Settings > Contact Us (optional)
 //   EXPO_PUBLIC_SHARE_URL          Settings > Share with friends (optional)
 
 export const config = {
@@ -39,6 +38,9 @@ export const config = {
     otpResendSeconds: 60,
     // Deep link opened from the reset-password email.
     resetPasswordRedirect: 'voicekiller://reset-password',
+    // Google sign-in returns here. Must be listed in Supabase: Authentication
+    // > URL Configuration > Redirect URLs.
+    oauthRedirect: 'voicekiller://auth-callback',
   },
   library: {
     pageSize: 30,
@@ -53,11 +55,18 @@ export const config = {
       windowSize: 7,
     },
   },
+  // Contact Us: the Chatwoot website widget (app/(app)/support.tsx). The
+  // website token is public: it is in every page that shows the widget.
+  support: {
+    chatwoot: {
+      baseUrl: 'https://app.chatwoot.com',
+      websiteToken: 'YvFNYYDJXTdXEp6kcFtDcJS2',
+    },
+  },
   // Settings links, set in .env. Empty: Share sends a message without a
-  // link; Contact Us and Privacy Policy do nothing.
+  // link, and Privacy Policy does nothing.
   links: {
     privacyPolicy: process.env.EXPO_PUBLIC_PRIVACY_URL ?? '',
-    supportEmail: process.env.EXPO_PUBLIC_SUPPORT_EMAIL ?? '',
     appStore: process.env.EXPO_PUBLIC_SHARE_URL ?? '',
   },
   storage: {

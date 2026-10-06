@@ -1,5 +1,5 @@
 import type { LibraryCursor, LibraryItem, LibrarySource } from '@/domain';
-import { asText } from '@/utils';
+import { asText, fileNameFromUrl } from '@/utils';
 
 // Paging for Library: pure functions, no I/O (see libraryPaging.test.ts).
 // Every source is read newest first at or before a cursor time; the pages
@@ -9,29 +9,40 @@ type Row = Record<string, unknown>;
 
 export type Fetched = { item: LibraryItem; createdAtRaw: string };
 
-type PageQuery = { cursor: LibraryCursor | null; search: string; limit: number };
+type PageQuery = {
+  cursor: LibraryCursor | null;
+  search: string;
+  limit: number;
+};
 
 // The rows a table query would return, from a list an API gave whole:
 // newest first, at or before the cursor time, matching the search.
-export function pageOf(rows: Row[], titleColumn: string, { cursor, search, limit }: PageQuery) {
+export function pageOf(
+  rows: Row[],
+  titleColumn: string,
+  { cursor, search, limit }: PageQuery,
+) {
   const term = search.trim().toLowerCase();
   // As times, not text: the API writes "...Z", the database "...+00:00".
   const time = (row: Row) => Date.parse(asText(row.created_at)) || 0;
   const before = cursor ? Date.parse(cursor.createdAt) : Infinity;
   const matching = rows
     .filter(row => time(row) <= before)
-    .filter(row => !term || asText(row[titleColumn]).toLowerCase().includes(term))
+    .filter(
+      row => !term || asText(row[titleColumn]).toLowerCase().includes(term),
+    )
     .sort((a, b) => time(b) - time(a));
   return { rows: matching.slice(0, limit), full: matching.length > limit };
 }
 
 // Rows -> Library files. Rows without audio (still processing) or without
 // a date are left out.
-export function toFetched<T extends Omit<LibraryItem, 'id' | 'rowId' | 'tool' | 'createdAt' | 'fileUrl'> & { fileUrl?: string }>(
-  tool: LibrarySource,
-  rows: Row[],
-  toItem: (row: Row) => T | null,
-): Fetched[] {
+export function toFetched<
+  T extends Omit<
+    LibraryItem,
+    'id' | 'rowId' | 'tool' | 'createdAt' | 'fileUrl'
+  > & { fileUrl?: string },
+>(tool: LibrarySource, rows: Row[], toItem: (row: Row) => T | null): Fetched[] {
   const fetched: Fetched[] = [];
   for (const row of rows) {
     const base = toItem(row);
@@ -42,6 +53,8 @@ export function toFetched<T extends Omit<LibraryItem, 'id' | 'rowId' | 'tool' | 
         createdAtRaw,
         item: {
           ...base,
+          // No saved name (e.g. Voice Changer results): use the file's.
+          title: base.title || fileNameFromUrl(base.fileUrl ?? base.audioUrl),
           fileUrl: base.fileUrl ?? base.audioUrl,
           id: `${tool}:${rowId}`,
           rowId,
@@ -77,7 +90,11 @@ export function mergePage(
     .flatMap(result => result.rows)
     .filter(
       row =>
-        !(cursor && row.createdAtRaw === cursor.createdAt && seen.has(row.item.id)),
+        !(
+          cursor &&
+          row.createdAtRaw === cursor.createdAt &&
+          seen.has(row.item.id)
+        ),
     )
     .sort(newestFirst);
 
@@ -93,7 +110,10 @@ export function mergePage(
     nextCursor = {
       createdAt: last.createdAtRaw,
       // Still at the same timestamp as before: remember earlier ones too.
-      seen: cursor?.createdAt === last.createdAtRaw ? [...cursor.seen, ...atLast] : atLast,
+      seen:
+        cursor?.createdAt === last.createdAtRaw
+          ? [...cursor.seen, ...atLast]
+          : atLast,
     };
   }
   return { items: page.map(row => row.item), nextCursor };

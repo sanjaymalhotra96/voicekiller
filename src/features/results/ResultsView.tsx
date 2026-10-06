@@ -1,7 +1,12 @@
 import { useRouter } from 'expo-router';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, ListRenderItem, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  View,
+} from 'react-native';
 import {
   AppText,
   Button,
@@ -11,23 +16,27 @@ import {
   TextLink,
 } from '@/components';
 import { config } from '@/config';
-import { textLimits } from '@/domain';
+import { LibraryItem, textLimits } from '@/domain';
 import {
   ResultsQuery,
   useLibraryResults,
   useVoiceResults,
 } from '@/features/results/hooks';
 import { ResultCard } from '@/features/results/ResultCard';
+import { ResultViewer } from '@/features/results/ResultViewer';
 import {
   ResultItem,
   resultSources,
   ResultTool,
   resultsRoute,
+  undownloadableTools,
+  viewableTools,
 } from '@/features/results/types';
 import { useResultActions } from '@/features/results/useResultActions';
 import { errorMessageKey } from '@/lib/errors';
 import { palette } from '@/theme';
 import type { OwnVoiceSource } from '@/services/ownVoices';
+import { clipOffscreenRows } from '@/utils';
 
 // `recent`: section on a tool screen (title, "View all", first few cards,
 // no scrolling of its own). `all`: the full, virtualised "My ..." grid.
@@ -61,10 +70,20 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
   const { t } = useTranslation();
   const router = useRouter();
   const actions = useResultActions(query);
-  const { playback, togglePlay, download, confirmDelete, startRename } = actions;
+  const { playback, togglePlay, download, confirmDelete, startRename } =
+    actions;
   // Only offered when the source supports them (see ResultsQuery).
   const onRename = query.rename ? startRename : undefined;
   const onDelete = query.remove ? confirmDelete : undefined;
+  // "View" for tools whose files have text to show.
+  const [viewing, setViewing] = useState<LibraryItem | null>(null);
+  const { file } = query;
+  const onView = useCallback(
+    (item: ResultItem) => setViewing(file?.(item.id) ?? null),
+    [file],
+  );
+  const canView = viewableTools.includes(tool) && !!file;
+  const onDownload = undownloadableTools.includes(tool) ? undefined : download;
 
   const renderCard = useCallback(
     (item: ResultItem) => {
@@ -77,7 +96,8 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
           player={playback.player}
           onTogglePlay={togglePlay}
           onRename={onRename}
-          onDownload={download}
+          onView={canView ? onView : undefined}
+          onDownload={onDownload}
           onDelete={onDelete}
         />
       );
@@ -88,7 +108,9 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
       playback.player,
       togglePlay,
       onRename,
-      download,
+      canView,
+      onView,
+      onDownload,
       onDelete,
     ],
   );
@@ -96,6 +118,10 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
   const renderItem = useCallback<ListRenderItem<ResultItem>>(
     ({ item }) => <View className="w-1/2 p-1.5">{renderCard(item)}</View>,
     [renderCard],
+  );
+
+  const viewer = (
+    <ResultViewer tool={tool} file={viewing} onClose={() => setViewing(null)} />
   );
 
   const renameSheet = (
@@ -127,7 +153,7 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
         </View>
         {query.isPending ? (
           <ActivityIndicator color={palette.primary.DEFAULT} />
-        ) : (
+        ) : recent.length > 0 ? (
           <View className="-mx-1.5 flex-row flex-wrap">
             {recent.map(item => (
               <View key={item.id} className="w-1/2 p-1.5">
@@ -135,9 +161,25 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
               </View>
             ))}
           </View>
+        ) : query.error ? (
+          // Could not load: say why, with a retry.
+          <View className="flex-row items-center gap-3">
+            <FormError error={query.error} className="flex-1" />
+            <TextLink
+              label={t('library.retry')}
+              tone="accent"
+              variant="caption"
+              onPress={query.refetch}
+            />
+          </View>
+        ) : (
+          <AppText variant="caption" className="text-night-subtle">
+            {t('results.empty')}
+          </AppText>
         )}
         <FormError error={query.mutationError} />
         {renameSheet}
+        {viewer}
       </View>
     );
   }
@@ -178,22 +220,30 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
         numColumns={2}
         initialNumToRender={8}
         windowSize={7}
-        removeClippedSubviews
+        removeClippedSubviews={clipOffscreenRows}
         onEndReachedThreshold={0.5}
         onEndReached={query.fetchNextPage}
         ListFooterComponent={
           query.isFetchingNextPage ? (
-            <ActivityIndicator className="py-4" color={palette.primary.DEFAULT} />
+            <ActivityIndicator
+              className="py-4"
+              color={palette.primary.DEFAULT}
+            />
           ) : null
         }
         ListEmptyComponent={
-          <EmptyState tone="night" icon="folderOpen" title={t('results.empty')} />
+          <EmptyState
+            tone="night"
+            icon="folderOpen"
+            title={t('results.empty')}
+          />
         }
         contentContainerClassName="grow pb-6"
         showsVerticalScrollIndicator={false}
         className="-mx-1.5 flex-1"
       />
       {renameSheet}
+      {viewer}
     </View>
   );
 }

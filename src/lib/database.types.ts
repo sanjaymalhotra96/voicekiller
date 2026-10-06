@@ -67,27 +67,47 @@ export type Database = {
         };
         Relationships: [];
       };
-      profiles: {
+      // One row per account (read only in the app).
+      users: {
         Row: {
           id: string;
-          plan: string;
-          usage_minutes: number;
+          email: string | null;
+          account_type: string | null;
           created_at: string;
-          updated_at: string;
         };
         Insert: {
           id: string;
-          plan?: string;
-          usage_minutes?: number;
+          email?: string | null;
+          account_type?: string | null;
           created_at?: string;
-          updated_at?: string;
         };
         Update: {
           id?: string;
-          plan?: string;
-          usage_minutes?: number;
+          email?: string | null;
+          account_type?: string | null;
           created_at?: string;
-          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      // Allowance and usage in seconds (read only in the app).
+      billing: {
+        Row: {
+          user_id: string;
+          monthly_seconds: number | null;
+          used_seconds: number | null;
+          reserved_seconds: number | null;
+        };
+        Insert: {
+          user_id: string;
+          monthly_seconds?: number | null;
+          used_seconds?: number | null;
+          reserved_seconds?: number | null;
+        };
+        Update: {
+          user_id?: string;
+          monthly_seconds?: number | null;
+          used_seconds?: number | null;
+          reserved_seconds?: number | null;
         };
         Relationships: [];
       };

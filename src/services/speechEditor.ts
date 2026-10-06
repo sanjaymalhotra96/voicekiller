@@ -1,6 +1,7 @@
 import { config } from '@/config';
-import type { AudioSample, WordTiming } from '@/domain';
+import { AudioSample, fileRules, WordTiming } from '@/domain';
 import { apiRequest, apiUpload, JobControls, studioOnly } from '@/lib/api';
+import { prepareUpload } from '@/lib/audioConvert';
 import { AppError } from '@/lib/errors';
 import { pollJob } from '@/lib/poll';
 import { untypedSupabase } from '@/lib/supabase';
@@ -59,6 +60,18 @@ const editorRow = async (fileId: number) =>
   ).data as { transcription: unknown; updated_speech: string | null };
 
 export const speechEditorService = {
+  // A saved editor file (Library / "My Speech"), to view or edit again.
+  async open(file: { rowId: string; fileUrl: string }): Promise<EditorSession> {
+    const fileId = Number(file.rowId);
+    const words = parseWords((await editorRow(fileId)).transcription);
+    return {
+      fileId,
+      mediaUrl: file.fileUrl,
+      words,
+      transcript: words.map(item => item.word).join(' '),
+    };
+  },
+
   // Uploads and transcribes a recording; the new file is in Library.
   async transcribe({
     file,
@@ -67,7 +80,12 @@ export const speechEditorService = {
   }: { file: AudioSample } & JobControls): Promise<EditorSession> {
     const { fileUrl } = await apiUpload<{ fileUrl: string }>(
       '/api/transcribe',
-      { mediaFile: file },
+      {
+        // Video or other formats become mp3, cut to the first 2 minutes.
+        mediaFile: await prepareUpload(file, fileRules.editor, {
+          maxSeconds: config.speechEditor.maxSeconds,
+        }),
+      },
       { codes: studioOnly, onProgress, signal },
     );
     // The upload answer has no id: find the file by its URL.

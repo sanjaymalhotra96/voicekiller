@@ -38,6 +38,7 @@ export function ProfileCard({ onUpgrade }: Props) {
         <UsageMeter
           plan={account.plan}
           usedMinutes={account.usageMinutes}
+          limitMinutes={account.limitMinutes}
           onUpgrade={onUpgrade}
         />
       </View>

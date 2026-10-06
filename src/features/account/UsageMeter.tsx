@@ -9,14 +9,16 @@ import { layout } from '@/theme';
 type Props = {
   plan: PlanId;
   usedMinutes: number;
+  // From billing; null: the plan's default.
+  limitMinutes: number | null;
   onUpgrade: () => void;
 };
 
 // Minutes used this period. Basic: total + upgrade button.
 // Studio: progress bar with minutes remaining.
-export function UsageMeter({ plan, usedMinutes, onUpgrade }: Props) {
+export function UsageMeter({ plan, usedMinutes, limitMinutes, onUpgrade }: Props) {
   const { t } = useTranslation();
-  const limit = plans[plan].limitMinutes;
+  const limit = Math.round(limitMinutes ?? plans[plan].limitMinutes);
   const used = Math.min(usedMinutes, limit);
 
   const UsageClock = images.settingsUsageClock;

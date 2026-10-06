@@ -1,12 +1,14 @@
 import { config } from '@/config';
 import {
   AudioSample,
+  fileRules,
   LanguageId,
   TranscriptSegment,
   TranslationLanguageId,
   translationLanguages,
 } from '@/domain';
 import { apiRequest, apiUpload, JobControls } from '@/lib/api';
+import { prepareUpload } from '@/lib/audioConvert';
 import { AppError } from '@/lib/errors';
 import { pollJob } from '@/lib/poll';
 import { toSegments } from '@/services/transcriptFile';
@@ -55,6 +57,18 @@ async function downloadTranscript(url: string, signal?: AbortSignal) {
 const listEvery = 6;
 
 export const speechToTextService = {
+  // A saved transcription (Library / "My Transcriptions"), for viewing.
+  async open(file: {
+    rowId: string;
+    audioUrl: string;
+    transcriptUrl?: string;
+  }): Promise<TranscriptionSession> {
+    const segments = file.transcriptUrl
+      ? toSegments(await downloadTranscript(file.transcriptUrl), null)
+      : [];
+    return { sessionId: file.rowId, audioUrl: file.audioUrl, segments };
+  },
+
   // Uploads, waits for the transcript, and returns it.
   async transcribe({
     file,
@@ -71,7 +85,8 @@ export const speechToTextService = {
     const started = await apiUpload<{ job_id?: string; audio_url: string }>(
       '/api/speech-to-text',
       {
-        file,
+        // The whole file: a video becomes mp3, never cut.
+        file: await prepareUpload(file, fileRules.transcription),
         ...(language !== 'auto' ? { language_code: language } : null),
         ...(translation ? { translation } : null),
       },

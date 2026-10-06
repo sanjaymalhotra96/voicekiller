@@ -1,6 +1,7 @@
 import { config } from '@/config';
-import type { AudioSample } from '@/domain';
+import { AudioSample, fileRules } from '@/domain';
 import { apiRequest, apiUpload, JobControls, studioOnly } from '@/lib/api';
+import { prepareUpload } from '@/lib/audioConvert';
 import { AppError } from '@/lib/errors';
 import { pollJob } from '@/lib/poll';
 
@@ -24,7 +25,10 @@ export const voiceChangerService = {
   }: { source: AudioSample; target: AudioSample } & Pick<JobControls, 'onProgress'>) {
     const { data } = await apiUpload<{ data: { id: string } }>(
       '/api/conversion',
-      { audioFile1: source, audioFile2: target },
+      {
+        audioFile1: await prepareUpload(source, fileRules.changer),
+        audioFile2: await prepareUpload(target, fileRules.changer),
+      },
       { codes: studioOnly, onProgress },
     );
     await pollJob(async () => {

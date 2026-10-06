@@ -8,6 +8,10 @@ export const useSignUp = () => useMutation({ mutationFn: authService.signUp });
 
 export const useSignIn = () => useMutation({ mutationFn: authService.signIn });
 
+// Google: the session arrives through AuthProvider, which opens the app.
+export const useGoogleSignIn = () =>
+  useMutation({ mutationFn: authService.signInWithGoogle });
+
 export const useSignOut = () =>
   useMutation({ mutationFn: authService.signOut });
 

@@ -1,5 +1,5 @@
 // Route: /library
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
@@ -26,7 +26,7 @@ import { usePlayback } from '@/hooks';
 import { config } from '@/config';
 import { textLimits } from '@/domain';
 import { palette } from '@/theme';
-import { cn } from '@/utils';
+import { clipOffscreenRows, cn } from '@/utils';
 
 export default function LibraryScreen() {
   const { t } = useTranslation();
@@ -54,6 +54,18 @@ export default function LibraryScreen() {
   );
   // Nothing to show: an empty library (not just an empty search result),
   // or files that could not be loaded. Both show the same friendly dog.
+  // Pull to refresh only. A background refetch (switching back to a chip)
+  // must not drive the spinner: on iOS that locks the list in place.
+  const [pulling, setPulling] = useState(false);
+  const refresh = useCallback(async () => {
+    setPulling(true);
+    try {
+      await library.refetch();
+    } finally {
+      setPulling(false);
+    }
+  }, [library]);
+
   const isEmptyLibrary =
     library.isError ||
     (library.isSuccess && items.length === 0 && !filters.isFiltering);
@@ -124,14 +136,14 @@ export default function LibraryScreen() {
         renderItem={renderRow}
         extraData={extraData}
         {...config.library.list}
-        removeClippedSubviews
+        removeClippedSubviews={clipOffscreenRows}
         className="flex-1"
         contentContainerClassName={cn('pb-6', rows.length === 0 && 'flex-1')}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}
-        refreshing={library.isRefetching && !library.isFetchingNextPage}
-        onRefresh={() => library.refetch()}
+        refreshing={pulling}
+        onRefresh={refresh}
         // Load the next page shortly before reaching the end.
         onEndReachedThreshold={0.5}
         onEndReached={() =>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Pressable } from 'react-native';
+import { ActivityIndicator, Pressable } from 'react-native';
 import type { SvgIcon } from '@/assets';
 import { AppText } from '@/components';
-import { iconSize } from '@/theme';
+import { iconSize, palette } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -11,6 +11,8 @@ type Props = {
   onPress: () => void;
   // `tile`: square icon-over-label (iOS). `full`: wide icon-beside-label (Android).
   variant?: 'tile' | 'full';
+  // Spinner instead of the icon; presses ignored.
+  loading?: boolean;
 };
 
 export function AuthButton({
@@ -18,6 +20,7 @@ export function AuthButton({
   icon: Icon,
   onPress,
   variant = 'full',
+  loading = false,
 }: Props) {
   const isTile = variant === 'tile';
   const size = isTile ? iconSize.xl : iconSize.lg;
@@ -26,13 +29,22 @@ export function AuthButton({
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={label}
+      accessibilityState={{ busy: loading, disabled: loading }}
+      disabled={loading}
       onPress={onPress}
       className={cn(
         'items-center justify-center rounded-xl border border-line bg-surface active:opacity-70',
         isTile ? 'aspect-tile flex-1 gap-2' : 'h-control flex-row gap-3',
       )}
     >
-      <Icon width={size} height={size} />
+      {loading ? (
+        <ActivityIndicator
+          color={palette.primary.DEFAULT}
+          style={{ width: size, height: size }}
+        />
+      ) : (
+        <Icon width={size} height={size} />
+      )}
       <AppText variant={isTile ? 'labelSm' : 'label'}>{label}</AppText>
     </Pressable>
   );

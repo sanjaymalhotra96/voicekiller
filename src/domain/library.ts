@@ -38,6 +38,8 @@ export type LibraryItem = {
 type LibraryItemMetadata = {
   // Audio Clean: "Denoise & Enhance" was on.
   enhanced?: boolean;
+  // Speech to Text: URL of the saved transcript JSON file.
+  transcriptUrl?: string;
 };
 
 // Library list filter: one tool, or everything.

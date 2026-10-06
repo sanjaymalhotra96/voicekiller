@@ -19,6 +19,7 @@ export const queryKeys = {
     mine: (source: 'cloned' | 'design') =>
       [...queryKeys.voices.all, 'mine', source] as const,
     favorites: () => [...queryKeys.voices.all, 'favorites'] as const,
+    first: () => [...queryKeys.voices.all, 'first'] as const,
   },
   instructions: {
     all: ['instructions'] as const,
@@ -30,5 +31,9 @@ export const queryKeys = {
   },
   subscription: {
     all: ['subscription'] as const,
+  },
+  results: {
+    // A saved file opened with "View" (transcript or editor file).
+    view: (fileId: string | undefined) => ['results', 'view', fileId] as const,
   },
 };

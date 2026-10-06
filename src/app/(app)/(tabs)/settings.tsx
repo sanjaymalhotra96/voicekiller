@@ -29,8 +29,8 @@ export default function SettingsScreen() {
     personalInfo: () => router.push('/personal-info'),
     changePassword: () => router.push('/change-password'),
     subscription: openSubscription,
-    // Links come from .env. Share works without one; Contact and Privacy
-    // do nothing until EXPO_PUBLIC_SUPPORT_EMAIL / _PRIVACY_URL are set.
+    // Links come from .env. Share works without one; Privacy does
+    // nothing until EXPO_PUBLIC_PRIVACY_URL is set.
     share: () =>
       Share.share({
         message: links.appStore
@@ -40,11 +40,8 @@ export default function SettingsScreen() {
             })
           : t('settings.shareMessageNoLink', { appName: t('common.appName') }),
       }).catch(() => {}),
-    contact: () => {
-      if (links.supportEmail) {
-        openLink(`mailto:${links.supportEmail}`);
-      }
-    },
+    // Live chat with support (Chatwoot).
+    contact: () => router.push('/support'),
     privacy: () => {
       if (links.privacyPolicy) {
         openLink(links.privacyPolicy);

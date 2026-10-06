@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { ReactNode, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, ListRenderItem, View } from 'react-native';
 import {
@@ -26,8 +26,11 @@ import { cn } from '@/utils';
 import type { TranscriptionSession } from '@/services/speechToText';
 
 type Props = {
-  // Null hides the sheet.
+  // Null hides the sheet, unless `visible` is set.
   session: TranscriptionSession | null;
+  // Open even before `session` (shows `placeholder` until then).
+  visible?: boolean;
+  placeholder?: ReactNode;
   // Language the segments are written in (translation if any).
   textLanguage: string | null;
   // Base name for exported files ("harvard" -> harvard.srt).
@@ -40,6 +43,8 @@ type Props = {
 // saved the transcript in Library.
 export function TranscriptSheet({
   session,
+  visible = !!session,
+  placeholder = null,
   textLanguage,
   fileName,
   onClose,
@@ -48,7 +53,7 @@ export function TranscriptSheet({
   const { t } = useTranslation();
   return (
     <BottomSheet
-      visible={!!session}
+      visible={visible}
       onClose={onClose}
       title={t('speechToText.sheet.title')}
       height={layout.sheetHeight}
@@ -63,7 +68,9 @@ export function TranscriptSheet({
           fileName={fileName}
           onSaved={onSaved}
         />
-      ) : null}
+      ) : (
+        placeholder
+      )}
     </BottomSheet>
   );
 }
@@ -96,7 +103,9 @@ function TranscriptContent({
   const updateSegment = useCallback(
     (index: number, text: string) =>
       setSegments(list =>
-        list.map((segment, i) => (i === index ? { ...segment, text } : segment)),
+        list.map((segment, i) =>
+          i === index ? { ...segment, text } : segment,
+        ),
       ),
     [],
   );

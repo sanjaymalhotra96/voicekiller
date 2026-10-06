@@ -22,12 +22,15 @@ type Props = {
   onTogglePlay: (item: ResultItem) => void;
   // Omitted when the item cannot be renamed / deleted.
   onRename?: (item: ResultItem) => void;
-  onDownload: (item: ResultItem) => void;
+  // Opens the file's text (Speech Editor, Speech to Text); replaces Rename.
+  onView?: (item: ResultItem) => void;
+  // Omitted when the result is not offered as a download.
+  onDownload?: (item: ResultItem) => void;
   onDelete?: (item: ResultItem) => void;
 };
 
 // One result in a "Recent ..." / "My ..." grid: play, title, date or tag,
-// and rename / download / delete. Memoised for long grids.
+// and view or rename / download / delete. Memoised for long grids.
 export const ResultCard = memo(function ResultCardInner({
   item,
   active,
@@ -35,6 +38,7 @@ export const ResultCard = memo(function ResultCardInner({
   player,
   onTogglePlay,
   onRename,
+  onView,
   onDownload,
   onDelete,
 }: Props) {
@@ -91,7 +95,15 @@ export const ResultCard = memo(function ResultCardInner({
         </>
       )}
       <View className="mt-2 w-full flex-row justify-around border-t border-night-line pt-1">
-        {onRename ? (
+        {onView ? (
+          <IconButton
+            variant="ghost"
+            icon="eye"
+            color={palette.night.muted}
+            accessibilityLabel={t('results.view', { name })}
+            onPress={() => onView(item)}
+          />
+        ) : onRename ? (
           <IconButton
             variant="ghost"
             icon="edit"
@@ -100,14 +112,16 @@ export const ResultCard = memo(function ResultCardInner({
             onPress={() => onRename(item)}
           />
         ) : null}
-        <IconButton
-          variant="ghost"
-          icon="download"
-          color={palette.night.muted}
-          disabled={!item.audioUrl}
-          accessibilityLabel={t('results.download', { name })}
-          onPress={() => onDownload(item)}
-        />
+        {onDownload ? (
+          <IconButton
+            variant="ghost"
+            icon="download"
+            color={palette.night.muted}
+            disabled={!item.audioUrl}
+            accessibilityLabel={t('results.download', { name })}
+            onPress={() => onDownload(item)}
+          />
+        ) : null}
         {onDelete ? (
           <IconButton
             variant="ghost"

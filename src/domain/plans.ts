@@ -1,10 +1,12 @@
-// Subscription plan IDs. Must match the check constraint on
-// public.profiles.plan. Display data lives in features/account/plans.ts.
-const planIds = ['basic', 'studio'] as const;
-
-export type PlanId = (typeof planIds)[number];
+// Plans the app shows. Display data lives in features/account/plans.ts.
+export type PlanId = 'basic' | 'studio';
 
 export const defaultPlan: PlanId = 'basic';
 
-export const isPlanId = (value: unknown): value is PlanId =>
-  typeof value === 'string' && (planIds as readonly string[]).includes(value);
+// public.users.account_type (free, pro, pro_max, studio, studio_max,
+// studio_lifetime) -> the plan shown. Only Studio is sold in the app, so
+// every Studio type shows as Studio and everything else as Basic.
+export const planFromAccountType = (accountType: unknown): PlanId =>
+  typeof accountType === 'string' && accountType.startsWith('studio')
+    ? 'studio'
+    : defaultPlan;
