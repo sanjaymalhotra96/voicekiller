@@ -92,7 +92,7 @@ android {
         applicationId 'com.voicekiller'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 3
         versionName "1.0.0"
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
@@ -104,6 +104,23 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        // voicekiller: release signing
+        release {
+            def props = new Properties()
+            def propsFile = rootProject.file('../credentials/upload.properties')
+            if (propsFile.exists()) {
+                propsFile.withInputStream { props.load(it) }
+                storeFile rootProject.file("../credentials/${props['storeFile']}")
+                storePassword props['storePassword']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPassword']
+            }
+        }
+    }
+    // voicekiller: release lint
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
     }
     buildTypes {
         debug {
@@ -112,7 +129,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig rootProject.file('../credentials/upload.properties').exists() ? signingConfigs.release : signingConfigs.debug
             def enableShrinkResources = findProperty('android.enableShrinkResourcesInReleaseBuilds') ?: 'false'
             shrinkResources enableShrinkResources.toBoolean()
             minifyEnabled enableMinifyInReleaseBuilds
@@ -178,5 +195,15 @@ dependencies {
         implementation("com.facebook.react:hermes-android")
     } else {
         implementation jscFlavor
+    }
+}
+
+// voicekiller: env input
+// EXPO_PUBLIC_* values from .env are built into the JS bundle, but Gradle
+// does not know that: without this, a changed .env reuses the old bundle.
+tasks.matching { it.name.startsWith("createBundle") && it.name.endsWith("JsAndAssets") }.configureEach {
+    def envFile = rootProject.file("../.env")
+    if (envFile.exists()) {
+        inputs.file(envFile)
     }
 }

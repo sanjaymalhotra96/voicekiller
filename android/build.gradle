@@ -1,6 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+  // voicekiller: ffmpeg package
+  ext {
+    VideoTrim_ffmpeg_package = 'audio'
+  }
   repositories {
     google()
     mavenCentral()
