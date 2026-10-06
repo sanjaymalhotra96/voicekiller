@@ -49,4 +49,9 @@ export type LibraryFilter = LibrarySource | 'all';
 // (raw database value, microseconds kept) and the ids already shown at
 // exactly that time, so rows sharing a timestamp are neither repeated nor
 // skipped.
-export type LibraryCursor = { createdAt: string; seen: string[] };
+export type LibraryCursor = {
+  createdAt: string;
+  seen: string[];
+  // Tools whose files have all been shown: later pages skip their table.
+  done?: LibrarySource[];
+};

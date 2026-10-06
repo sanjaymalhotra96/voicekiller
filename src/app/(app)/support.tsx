@@ -16,7 +16,7 @@ function chatPage(user: { id?: string; email: string; fullName: string }) {
   const identity = JSON.stringify({ email: user.email, name: user.fullName });
   return `<!doctype html>
 <html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<style>html,body{margin:0;height:100%;background:#fff}</style></head>
+<style>html,body{margin:0;height:100%;background:${palette.surface}}</style></head>
 <body><script>
   var post = function (m) { window.ReactNativeWebView.postMessage(m); };
   window.chatwootSettings = { position: "right", type: "standard", launcherTitle: "", hideMessageBubble: true };

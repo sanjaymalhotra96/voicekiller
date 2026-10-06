@@ -80,8 +80,10 @@ export type LibraryPage = {
 // Merges what each source returned into one page of `size`, newest first.
 // `full`: the source had more rows than it returned. Files sharing the
 // cursor's timestamp that were already shown are skipped (`cursor.seen`).
+// A source with no more rows whose files all made it onto this page is
+// done: later pages do not query it (`cursor.done`).
 export function mergePage(
-  results: { rows: Fetched[]; full: boolean }[],
+  results: { tool: LibrarySource; rows: Fetched[]; full: boolean }[],
   cursor: LibraryCursor | null,
   size: number,
 ): LibraryPage {
@@ -102,6 +104,14 @@ export function mergePage(
   const last = page[page.length - 1];
   const hasMore = merged.length > size || results.some(result => result.full);
 
+  const shown = new Set(page.map(row => row.item.id));
+  const done = [
+    ...(cursor?.done ?? []),
+    ...results
+      .filter(r => !r.full && r.rows.every(row => shown.has(row.item.id)))
+      .map(r => r.tool),
+  ];
+
   let nextCursor: LibraryCursor | null = null;
   if (hasMore && last) {
     const atLast = page
@@ -114,6 +124,7 @@ export function mergePage(
         cursor?.createdAt === last.createdAtRaw
           ? [...cursor.seen, ...atLast]
           : atLast,
+      done,
     };
   }
   return { items: page.map(row => row.item), nextCursor };

@@ -55,7 +55,7 @@ async function fetchSource(
   }
   let query = db
     .from(source.table)
-    .select('*')
+    .select(source.columns)
     .eq(source.owner, options.userId)
     .order('created_at', { ascending: false })
     .limit(options.limit);
@@ -71,7 +71,7 @@ async function fetchSource(
   if (isMissingTable(error) || error?.code === MISSING_COLUMN) {
     return { rows: [], full: false };
   }
-  const rows = (throwIfError({ data, error }).data ?? []) as Row[];
+  const rows = (throwIfError({ data, error }).data ?? []) as unknown as Row[];
   return {
     rows: toFetched(tool, rows, source.toItem),
     full: rows.length === options.limit,
@@ -90,10 +90,16 @@ export const libraryService = {
   async list({ cursor, filter, search }: LibraryQuery): Promise<LibraryPage> {
     const size = config.library.pageSize;
     const userId = await currentUserId();
-    const tools = filter === 'all' ? librarySources : [filter];
+    // Tables with no more files are skipped after the first page.
+    const tools = (filter === 'all' ? librarySources : [filter]).filter(
+      tool => !cursor?.done?.includes(tool),
+    );
     const limit = size + (cursor?.seen.length ?? 0);
     const results = await Promise.all(
-      tools.map(tool => fetchSource(tool, { userId, cursor, search, limit })),
+      tools.map(async tool => ({
+        tool,
+        ...(await fetchSource(tool, { userId, cursor, search, limit })),
+      })),
     );
     return mergePage(results, cursor, size);
   },

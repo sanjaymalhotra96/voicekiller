@@ -14,6 +14,9 @@ export type SourceTable = {
   owner: string;
   // Column holding the file name (searched and renamed).
   title: string;
+  // The only columns read for the list. Big ones (scripts, word timings,
+  // provider data) are left out: they made each page several MB.
+  columns: string;
   // Deletes one file through the web API.
   remove: (item: Pick<LibraryItem, 'rowId' | 'fileUrl'>) => Promise<unknown>;
   // Reads the rows through the web API instead of the table (the whole
@@ -62,6 +65,8 @@ export const sources: Record<LibrarySource, SourceTable> = {
     table: 'generated_files',
     owner: 'user_id',
     title: 'file_name',
+    columns:
+      'id, file_name, display_voice_name, voice_name, duration, audio_path, created_at',
     // DELETE /api/tts/delete/:id -> { success: true }
     remove: item =>
       apiRequest(`/api/tts/delete/${encodeURIComponent(item.rowId)}`, {
@@ -80,6 +85,7 @@ export const sources: Record<LibrarySource, SourceTable> = {
     table: 'voice_conversion',
     owner: 'user_id',
     title: 'file_name',
+    columns: 'id, file_name, file_url, created_at',
     // DELETE /api/conversion/delete { id, mediaUrl }; 403 = Studio only.
     remove: item =>
       apiRequest('/api/conversion/delete', {
@@ -100,6 +106,7 @@ export const sources: Record<LibrarySource, SourceTable> = {
     table: 'denoise_results',
     owner: 'userid',
     title: 'file_name',
+    columns: 'id, file_name, url, operation, created_at',
     // GET /api/denoise/check-updates?userId= -> { newResults: Row[] }
     list: (userId, fresh) => denoiseHistory(userId, fresh),
     // DELETE /api/denoise/delete { id, audioUrl }
@@ -121,6 +128,8 @@ export const sources: Record<LibrarySource, SourceTable> = {
     table: 'speech_text',
     owner: 'user_id',
     title: 'file_name',
+    // `transcription` is the URL of the transcript file, not its text.
+    columns: 'id, file_name, duration, file_url, transcription, created_at',
     // DELETE /api/speech-to-text/delete { fileId, fileUrl }
     remove: item =>
       apiRequest('/api/speech-to-text/delete', {
@@ -141,6 +150,8 @@ export const sources: Record<LibrarySource, SourceTable> = {
     table: 'transcription',
     owner: 'user_id',
     title: 'file_name',
+    // Not `transcription` (the word timings): View loads it when needed.
+    columns: 'id, file_name, media_url, updated_speech, created_at',
     // DELETE /api/transcribe/delete { id, mediaUrl }; 403 = Studio only.
     remove: item =>
       apiRequest('/api/transcribe/delete', {

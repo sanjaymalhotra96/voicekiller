@@ -252,8 +252,8 @@ describe('Library paging', () => {
     );
     const first = mergePage(
       [
-        { rows: a, full: false },
-        { rows: b, full: false },
+        { tool: 'audioClean', rows: a, full: false },
+        { tool: 'voiceChanger', rows: b, full: false },
       ],
       null,
       2,
@@ -262,9 +262,12 @@ describe('Library paging', () => {
       'audioClean:2',
       'voiceChanger:9',
     ]);
+    // Voice Changer's only file was shown and it has no more: done, so
+    // the next page does not query its table.
     expect(first.nextCursor).toEqual({
       createdAt: '2026-10-02T12:00:00.000Z',
       seen: ['voiceChanger:9'],
+      done: ['voiceChanger'],
     });
 
     // The next page: each source returns only rows at or before the cursor
@@ -274,8 +277,8 @@ describe('Library paging', () => {
       list.filter(f => f.item.createdAt.getTime() <= cursorTime);
     const second = mergePage(
       [
-        { rows: upTo(a), full: false },
-        { rows: upTo(b), full: false },
+        { tool: 'audioClean', rows: upTo(a), full: false },
+        { tool: 'voiceChanger', rows: upTo(b), full: false },
       ],
       first.nextCursor,
       2,
