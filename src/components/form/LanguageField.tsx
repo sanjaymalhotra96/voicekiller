@@ -10,34 +10,42 @@ import { LanguageId, languageIds } from '@/domain';
 // Sentinel option key for "no language" (e.g. no translation).
 const NONE = 'none';
 
-type Props = {
+const allLanguages: readonly LanguageId[] = languageIds.filter(
+  id => id !== 'auto',
+);
+
+type Props<L extends LanguageId> = {
   label: string;
   // null = none chosen (only with `noneLabel`).
-  value: LanguageId | null;
-  onChange: (language: LanguageId | null) => void;
+  value: L | null;
+  onChange: (language: L | null) => void;
   // Adds a first option that clears the value ("None").
   noneLabel?: string;
+  // Only these languages (default: all but `auto`).
+  languages?: readonly L[];
   tone?: FieldTone;
 };
 
 // "Language  >" field with its picker sheet. `auto` is not offered:
 // a voice or a transcript has one concrete language.
-export function LanguageField({
+export function LanguageField<L extends LanguageId = LanguageId>({
   label,
   value,
   onChange,
   noneLabel,
+  languages = allLanguages as readonly L[],
   tone = 'night',
-}: Props) {
+}: Props<L>) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const options = useMemo(() => {
-    const languages = languageIds
-      .filter(id => id !== 'auto')
-      .map(id => ({ key: id as string, label: t(`languages.${id}`) }));
-    return noneLabel ? [{ key: NONE, label: noneLabel }, ...languages] : languages;
-  }, [t, noneLabel]);
+    const items = languages.map(id => ({
+      key: id as string,
+      label: t(`languages.${id}`),
+    }));
+    return noneLabel ? [{ key: NONE, label: noneLabel }, ...items] : items;
+  }, [t, noneLabel, languages]);
 
   const display = value ? t(`languages.${value}`) : noneLabel;
 
@@ -57,7 +65,7 @@ export function LanguageField({
         title={label}
         options={options}
         value={value ?? NONE}
-        onSelect={key => onChange(key === NONE ? null : (key as LanguageId))}
+        onSelect={key => onChange(key === NONE ? null : (key as L))}
       />
     </View>
   );

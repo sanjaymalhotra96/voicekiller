@@ -20,8 +20,8 @@ import { registerUserScope } from '@/lib/userScope';
 export type SpeechDraft = {
   title: string;
   script: string;
-  // null = "Default".
-  campaignId: string | null;
+  // Campaign name; null = "default".
+  campaignName: string | null;
   voice: Voice | null;
   emotion: EmotionId;
   settings: SpeechSettings;
@@ -33,7 +33,7 @@ export type SpeechDraft = {
 type Actions = {
   setTitle: (title: string) => void;
   setScript: (script: string) => void;
-  setCampaign: (campaignId: string | null) => void;
+  setCampaign: (campaignName: string | null) => void;
   setVoice: (voice: Voice) => void;
   setEmotion: (emotion: EmotionId) => void;
   updateSettings: (patch: Partial<SpeechSettings>) => void;
@@ -47,7 +47,7 @@ type Actions = {
 const initialDraft: SpeechDraft = {
   title: '',
   script: '',
-  campaignId: null,
+  campaignName: null,
   voice: null,
   emotion: 'auto',
   settings: defaultSpeechSettings,
@@ -66,7 +66,7 @@ export const useSpeechDraft = create<SpeechDraft & Actions>()(
       ...initialDraft,
       setTitle: title => set({ title }),
       setScript: script => set({ script }),
-      setCampaign: campaignId => set({ campaignId }),
+      setCampaign: campaignName => set({ campaignName }),
       setVoice: voice => set({ voice }),
       setEmotion: emotion => set({ emotion }),
       updateSettings: patch =>
@@ -79,13 +79,23 @@ export const useSpeechDraft = create<SpeechDraft & Actions>()(
     }),
     {
       name: 'speech-draft',
-      version: 1,
+      // v2: campaigns are names (v1 stored an id, which is dropped).
+      // v3: voices come from the real catalog; an older voice is dropped.
+      version: 3,
+      migrate: (persisted, version) => {
+        const draft = { ...(persisted as Record<string, unknown>) };
+        delete draft.campaignId;
+        if (version < 3) {
+          draft.voice = null;
+        }
+        return { ...draft, campaignName: draft.campaignName ?? null } as SpeechDraft;
+      },
       storage: createJSONStorage(() => storage),
       // Persist data only, never the action functions.
       partialize: ({
         title,
         script,
-        campaignId,
+        campaignName,
         voice,
         emotion,
         settings,
@@ -94,7 +104,7 @@ export const useSpeechDraft = create<SpeechDraft & Actions>()(
       }): SpeechDraft => ({
         title,
         script,
-        campaignId,
+        campaignName,
         voice,
         emotion,
         settings,

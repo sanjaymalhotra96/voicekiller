@@ -1,4 +1,22 @@
+import type { LanguageId } from '@/domain/voices';
+
 // Speech to Text: timed segments and subtitle exports.
+
+// Subtitle languages a transcript can be translated into, with the name
+// the API expects.
+export const translationLanguages = {
+  en: 'english',
+  fr: 'french',
+  de: 'german',
+  it: 'italian',
+  pt: 'portuguese',
+  hi: 'hindi',
+  es: 'spanish',
+} as const satisfies Partial<Record<LanguageId, string>>;
+export type TranslationLanguageId = keyof typeof translationLanguages;
+export const translationLanguageIds = Object.keys(
+  translationLanguages,
+) as TranslationLanguageId[];
 
 export type TranscriptSegment = {
   // Seconds from the start of the audio.

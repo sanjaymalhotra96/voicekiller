@@ -52,7 +52,6 @@ import FilesFileText from '@/assets/icons/files/file-text.svg';
 import FilesFiles from '@/assets/icons/files/files.svg';
 import FilesFolderOpen from '@/assets/icons/files/folder-open.svg';
 import FilesLanguages from '@/assets/icons/files/languages.svg';
-import MediaAudioLines from '@/assets/icons/media/audio-lines.svg';
 import MediaMicSparkle from '@/assets/icons/media/mic-sparkle.svg';
 import MediaMic from '@/assets/icons/media/mic.svg';
 import MediaPause from '@/assets/icons/media/pause.svg';
@@ -60,7 +59,6 @@ import MediaPlay from '@/assets/icons/media/play.svg';
 import MediaStop from '@/assets/icons/media/stop.svg';
 import MediaVoice from '@/assets/icons/media/voice.svg';
 import MediaVolume from '@/assets/icons/media/volume.svg';
-import MediaWaveform from '@/assets/icons/media/waveform.svg';
 import SpeechEmotion from '@/assets/icons/speech/emotion.svg';
 import TabsHome from '@/assets/icons/tabs/home.svg';
 import TabsLibrary from '@/assets/icons/tabs/library.svg';
@@ -128,7 +126,6 @@ export const glyphs = {
   folderOpen: FilesFolderOpen,
   languages: FilesLanguages,
   // media/
-  audioLines: MediaAudioLines,
   micSparkle: MediaMicSparkle,
   mic: MediaMic,
   pause: MediaPause,
@@ -136,7 +133,6 @@ export const glyphs = {
   stop: MediaStop,
   voice: MediaVoice,
   volume: MediaVolume,
-  waveform: MediaWaveform,
   // speech/
   emotion: SpeechEmotion,
   // tabs/

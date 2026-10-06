@@ -1,3 +1,5 @@
+import type { SpeedLimits, Voice } from '@/domain/voices';
+
 // Text to Speech: settings, emotions, pauses and script helpers.
 
 export const emotionIds = [
@@ -18,10 +20,10 @@ export const pauseDurations = [0.5, 1, 1.5, 2, 2.5] as const;
 export type PauseDuration = (typeof pauseDurations)[number];
 
 export const audioFormats = ['mp3', 'wav'] as const;
-export type AudioFormat = (typeof audioFormats)[number];
+type AudioFormat = (typeof audioFormats)[number];
 
 export const deliveryModes = ['stable', 'balanced', 'creative'] as const;
-export type DeliveryMode = (typeof deliveryModes)[number];
+type DeliveryMode = (typeof deliveryModes)[number];
 
 export const speedRange = { min: 0.5, max: 2, step: 0.1 } as const;
 export const speedPresets = [0.5, 0.8, 1, 1.2, 2] as const;
@@ -38,9 +40,11 @@ export const defaultSpeechSettings: SpeechSettings = {
   delivery: 'balanced',
 };
 
-// Clamp to the range and round to one step (no 1.2000000002).
-export function snapSpeed(value: number) {
-  const { min, max, step } = speedRange;
+// Clamp to the limits (default: the whole range) and round to one step
+// (no 1.2000000002).
+export function snapSpeed(value: number, limits: SpeedLimits = speedRange) {
+  const { min, max } = limits;
+  const { step } = speedRange;
   const clamped = Math.min(max, Math.max(min, value));
   const steps = Math.round((clamped - min) / step);
   return Math.round((min + steps * step) * 10) / 10;
@@ -77,10 +81,11 @@ export function insertAtSelection(
   return { text: next, cursor: before.length + inserted.length };
 }
 
-// What the server needs to synthesise speech.
+// What the server needs to synthesise speech. services/textToSpeech sends
+// only what the voice's provider accepts (capabilitiesOf).
 export type SpeechRequest = {
   script: string;
-  voiceId: string;
+  voice: Voice;
   emotion: EmotionId | null;
   settings: SpeechSettings;
   // Acting instructions text (directable voices only).
@@ -89,5 +94,6 @@ export type SpeechRequest = {
 
 export type GenerateSpeechRequest = SpeechRequest & {
   title: string;
-  campaignId: string | null;
+  // Campaign name; "default" when none was chosen.
+  campaignName: string;
 };

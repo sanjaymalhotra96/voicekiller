@@ -7,7 +7,7 @@ import {
 } from '@supabase/supabase-js';
 
 // One error type the UI understands, whatever the source (Supabase, network).
-type AppErrorCode =
+export type AppErrorCode =
   | 'network'
   | 'invalidCredentials'
   | 'emailNotConfirmed'
@@ -24,6 +24,19 @@ type AppErrorCode =
   | 'fileTooLarge'
   | 'micPermission'
   | 'shareUnavailable'
+  | 'authRequired'
+  | 'studioRequired'
+  | 'notFound'
+  | 'paidPlanRequired'
+  | 'jobFailed'
+  | 'jobTimeout'
+  | 'sampleLength'
+  | 'renameNotAllowed'
+  | 'cancelled'
+  | 'purchasesUnavailable'
+  | 'purchaseFailed'
+  | 'conversionFailed'
+  | 'scriptTooLong'
   | 'unknown';
 
 export class AppError extends Error {

@@ -20,9 +20,10 @@ type Props = {
   playing: boolean;
   player: AudioPlayer;
   onTogglePlay: (item: ResultItem) => void;
-  onRename: (item: ResultItem) => void;
+  // Omitted when the item cannot be renamed / deleted.
+  onRename?: (item: ResultItem) => void;
   onDownload: (item: ResultItem) => void;
-  onDelete: (item: ResultItem) => void;
+  onDelete?: (item: ResultItem) => void;
 };
 
 // One result in a "Recent ..." / "My ..." grid: play, title, date or tag,
@@ -82,21 +83,23 @@ export const ResultCard = memo(function ResultCardInner({
                 {item.tag.label}
               </AppText>
             </View>
-          ) : (
+          ) : item.createdAt ? (
             <AppText variant="timestamp" className="text-night-subtle">
               {t('results.created', { date: formatDate(item.createdAt) })}
             </AppText>
-          )}
+          ) : null}
         </>
       )}
-      <View className="mt-2 w-full flex-row justify-between border-t border-night-line pt-1">
-        <IconButton
-          variant="ghost"
-          icon="edit"
-          color={palette.night.muted}
-          accessibilityLabel={t('results.rename', { name })}
-          onPress={() => onRename(item)}
-        />
+      <View className="mt-2 w-full flex-row justify-around border-t border-night-line pt-1">
+        {onRename ? (
+          <IconButton
+            variant="ghost"
+            icon="edit"
+            color={palette.night.muted}
+            accessibilityLabel={t('results.rename', { name })}
+            onPress={() => onRename(item)}
+          />
+        ) : null}
         <IconButton
           variant="ghost"
           icon="download"
@@ -105,13 +108,15 @@ export const ResultCard = memo(function ResultCardInner({
           accessibilityLabel={t('results.download', { name })}
           onPress={() => onDownload(item)}
         />
-        <IconButton
-          variant="ghost"
-          icon="trash"
-          color={palette.danger.DEFAULT}
-          accessibilityLabel={t('results.remove', { name })}
-          onPress={() => onDelete(item)}
-        />
+        {onDelete ? (
+          <IconButton
+            variant="ghost"
+            icon="trash"
+            color={palette.danger.DEFAULT}
+            accessibilityLabel={t('results.remove', { name })}
+            onPress={() => onDelete(item)}
+          />
+        ) : null}
       </View>
     </View>
   );

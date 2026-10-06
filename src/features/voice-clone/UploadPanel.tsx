@@ -2,23 +2,25 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { AudioClip, Button, MediaPanel, MediaPanelHeader } from '@/components';
-import { AudioSample, fileRules, maxMegabytes } from '@/domain';
+import { config } from '@/config';
+import type { AudioSample } from '@/domain';
 
 type Props = {
   sample: AudioSample | null;
+  // The picked file is being turned into audio.
+  preparing: boolean;
   onPick: () => void;
 };
 
-const MAX_MB = maxMegabytes(fileRules.clone);
-
 // "Upload Source Audio": pick a file; once picked, preview it in place.
-export function UploadPanel({ sample, onPick }: Props) {
+export function UploadPanel({ sample, preparing, onPick }: Props) {
   const { t } = useTranslation();
   const uploadButton = (
     <Button
       size="sm"
       variant="light"
       label={t('voiceClone.upload.action')}
+      loading={preparing}
       onPress={onPick}
     />
   );
@@ -41,7 +43,11 @@ export function UploadPanel({ sample, onPick }: Props) {
         <MediaPanelHeader
           icon="upload"
           title={t('voiceClone.upload.title')}
-          hint={t('voiceClone.upload.hint', { max: MAX_MB })}
+          hint={
+            preparing
+              ? t('upload.preparing')
+              : t('voiceClone.upload.hint', { seconds: config.clone.sampleSeconds })
+          }
           action={uploadButton}
         />
       )}

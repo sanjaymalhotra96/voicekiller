@@ -1,5 +1,5 @@
 import 'react-native-url-polyfill/auto';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { AppState } from 'react-native';
 import { config } from '@/config';
 import type { Database } from '@/lib/database.types';
@@ -34,6 +34,11 @@ export const supabase = createClient<Database>(url, anonKey, {
     detectSessionInUrl: false,
   },
 });
+
+// The tool tables (generated_files, speech_text...) are not described in
+// database.types.ts, so they are read by name through this untyped view of
+// the same client.
+export const untypedSupabase = supabase as unknown as SupabaseClient;
 
 // Refresh tokens only while the app is in the foreground.
 AppState.addEventListener('change', state => {

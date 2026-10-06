@@ -1,103 +1,66 @@
-import { randomUUID } from 'expo-crypto';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { AudioSample, fileExtension, FileRules } from '@/domain';
+import { useCallback, useState } from 'react';
+import type { AudioSample, FileRules } from '@/domain';
 import { useFilePicker } from '@/hooks/useFilePicker';
-import { AppError, toAppError } from '@/lib/errors';
-import { supabase } from '@/lib/supabase';
-import { removeUploadedFile, UploadTask, uploadFile } from '@/lib/uploadFile';
 
 export type UploadSlotState =
   | { status: 'idle' }
+  // The picked file is being turned into audio (lib/audioConvert).
+  | { status: 'preparing' }
   | { status: 'uploading'; file: AudioSample; percent: number }
-  // `path` is the Storage path the tool's Edge Function receives.
-  | { status: 'ready'; file: AudioSample; path: string };
+  | { status: 'ready'; file: AudioSample };
 
-// One "Upload Source Audio" slot: pick a file, upload it straight away
-// with progress, then hand its Storage path to the job. Changing or
-// removing the file cancels the upload and deletes the old object.
-export function useUploadSlot(rules: FileRules, bucket: string) {
-  const picker = useFilePicker(rules);
-  const [state, setState] = useState<UploadSlotState>({ status: 'idle' });
-  const [error, setError] = useState<AppError | null>(null);
-  const task = useRef<UploadTask | null>(null);
-  const uploadedPath = useRef<string | null>(null);
+// What the slot itself tracks; `preparing` comes from the picker.
+type SlotState = Exclude<UploadSlotState, { status: 'preparing' }>;
 
-  const discard = useCallback(() => {
-    task.current?.abort();
-    task.current = null;
-    if (uploadedPath.current) {
-      removeUploadedFile(bucket, uploadedPath.current).catch(() => {});
-      uploadedPath.current = null;
-    }
-  }, [bucket]);
+// One "Upload Source Audio" slot: pick an audio or video file (turned into
+// upload-ready audio by the picker), then hand the file to the job, which
+// uploads it to the API and reports progress through `showProgress`.
+export function useUploadSlot(
+  rules: FileRules,
+  // Keep only the first this-many seconds of audio (Speech Editor).
+  { maxSeconds }: { maxSeconds?: number } = {},
+) {
+  const picker = useFilePicker(rules, { maxSeconds });
+  const [state, setState] = useState<SlotState>({ status: 'idle' });
 
   const pick = useCallback(async () => {
     const file = await picker.pick();
-    if (!file) {
-      return;
+    if (file) {
+      setState({ status: 'ready', file });
     }
-    discard();
-    setError(null);
-    try {
-      const { data } = await supabase.auth.getUser();
-      if (!data.user) {
-        throw new AppError('uploadFailed');
-      }
-      const ext = fileExtension(file.name) || 'bin';
-      const path = `${data.user.id}/${randomUUID()}.${ext}`;
-      setState({ status: 'uploading', file, percent: 0 });
-      // Re-render only when the whole percent changes.
-      let lastPercent = 0;
-      const current = uploadFile({
-        bucket,
-        path,
-        file,
-        onProgress: ratio => {
-          const percent = Math.floor(ratio * 100);
-          if (percent !== lastPercent) {
-            lastPercent = percent;
-            setState({ status: 'uploading', file, percent });
-          }
-        },
-      });
-      task.current = current;
-      await current.promise;
-      if (task.current === current) {
-        task.current = null;
-        uploadedPath.current = path;
-        setState({ status: 'ready', file, path });
-      }
-    } catch (e) {
-      setState({ status: 'idle' });
-      setError(toAppError(e));
-    }
-  }, [picker, discard, bucket]);
+  }, [picker]);
 
-  const remove = useCallback(() => {
-    discard();
-    picker.clear();
-    setError(null);
-    setState({ status: 'idle' });
-  }, [discard, picker]);
-
-  // After the job used the file, keep it (the server owns it now) and
-  // reset the slot for the next one.
+  // Remove the file, or start again after the job used it.
   const reset = useCallback(() => {
-    task.current = null;
-    uploadedPath.current = null;
     picker.clear();
     setState({ status: 'idle' });
   }, [picker]);
 
-  // Cancel an unfinished upload when the screen closes.
-  useEffect(() => () => task.current?.abort(), []);
+  // The job's upload progress (0 to 1) as the % ring; null when it ended
+  // or failed.
+  const showProgress = useCallback((ratio: number | null) => {
+    setState(current => {
+      if (current.status === 'idle') {
+        return current;
+      }
+      if (ratio === null || ratio >= 1) {
+        return { status: 'ready', file: current.file };
+      }
+      const percent = Math.floor(ratio * 100);
+      return current.status === 'uploading' && current.percent === percent
+        ? current
+        : { status: 'uploading', file: current.file, percent };
+    });
+  }, []);
 
   return {
-    state,
-    path: state.status === 'ready' ? state.path : null,
-    error: error ?? picker.error,
+    state: picker.preparing ? ({ status: 'preparing' } as const) : state,
+    // The picked file, once it can be sent.
+    file: state.status === 'ready' ? state.file : null,
+    showProgress,
+    error: picker.error,
     pick,
-    remove,
+    remove: reset,
     reset,
   };
 }

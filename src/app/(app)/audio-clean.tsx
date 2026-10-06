@@ -10,12 +10,11 @@ import {
   ToggleRow,
   UploadSlot,
 } from '@/components';
-import { config } from '@/config';
 import { fileRules, maxMegabytes } from '@/domain';
 import { useLibraryJob } from '@/features/results/hooks';
 import { ResultsView } from '@/features/results/ResultsView';
-import { useStatusBarStyle, useUploadSlot } from '@/hooks';
-import { audioCleanService } from '@/services/mediaTools';
+import { useStatusBarStyle, useUnmountSignal, useUploadSlot } from '@/hooks';
+import { audioCleanService } from '@/services/audioClean';
 
 const rules = fileRules.media;
 
@@ -23,15 +22,22 @@ const rules = fileRules.media;
 export default function AudioCleanScreen() {
   useStatusBarStyle('light-content');
   const { t } = useTranslation();
-  const source = useUploadSlot(rules, config.media.sourceBucket);
+  const source = useUploadSlot(rules);
+  // Leaving the screen cancels an upload still in progress.
+  const unmountSignal = useUnmountSignal();
   const [enhance, setEnhance] = useState(false);
   const clean = useLibraryJob(audioCleanService.clean);
 
   const submit = () => {
-    if (source.path) {
+    if (source.file) {
       clean.mutate(
-        { sourcePath: source.path, enhance },
-        { onSuccess: source.reset },
+        {
+          file: source.file,
+          enhance,
+          onProgress: source.showProgress,
+          signal: unmountSignal(),
+        },
+        { onSuccess: source.reset, onError: () => source.showProgress(null) },
       );
     }
   };
@@ -64,7 +70,7 @@ export default function AudioCleanScreen() {
       <Button
         label={t('audioClean.submit')}
         loading={clean.isPending}
-        disabled={!source.path}
+        disabled={!source.file}
         onPress={submit}
       />
 

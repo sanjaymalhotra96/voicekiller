@@ -51,6 +51,17 @@ export function SpeechSettingsSheet({
   const instructionText = useSpeechDraft(state => state.instructionText);
   const setInstructionText = useSpeechDraft(state => state.setInstructionText);
   const can = capabilitiesOf(voice);
+  const speedLimits = can.speed;
+  // Quick picks the voice can use.
+  const presets = useMemo(
+    () =>
+      speedLimits
+        ? speedPresets.filter(
+            speed => speed >= speedLimits.min && speed <= speedLimits.max,
+          )
+        : [],
+    [speedLimits],
+  );
 
   const formats = useMemo(
     () => audioFormats.map(key => ({ key, label: t(`textToSpeech.formats.${key}`) })),
@@ -78,27 +89,36 @@ export function SpeechSettingsSheet({
           />
         </View>
 
-        {can.tuning ? (
+        {can.speed || can.delivery ? (
           <View className="gap-4">
             <Heading>{t('textToSpeech.settingsSheet.voiceTuning')}</Heading>
-            <AppText variant="label">{t('textToSpeech.settingsSheet.speed')}</AppText>
-            <RulerSlider
-              {...speedRange}
-              value={settings.speed}
-              onChange={speed => updateSettings({ speed })}
-              snap={snapSpeed}
-              format={formatSpeed}
-              presets={speedPresets}
-              accessibilityLabel={t('textToSpeech.settingsSheet.speed')}
-            />
-            <AppText variant="label" className="mt-2">
-              {t('textToSpeech.settingsSheet.delivery')}
-            </AppText>
-            <StepSlider
-              steps={deliverySteps}
-              value={settings.delivery}
-              onChange={delivery => updateSettings({ delivery })}
-            />
+            {speedLimits ? (
+              <>
+                <AppText variant="label">{t('textToSpeech.settingsSheet.speed')}</AppText>
+                <RulerSlider
+                  {...speedRange}
+                  {...speedLimits}
+                  value={snapSpeed(settings.speed, speedLimits)}
+                  onChange={speed => updateSettings({ speed })}
+                  snap={value => snapSpeed(value, speedLimits)}
+                  format={formatSpeed}
+                  presets={presets}
+                  accessibilityLabel={t('textToSpeech.settingsSheet.speed')}
+                />
+              </>
+            ) : null}
+            {can.delivery ? (
+              <>
+                <AppText variant="label" className={can.speed ? 'mt-2' : undefined}>
+                  {t('textToSpeech.settingsSheet.delivery')}
+                </AppText>
+                <StepSlider
+                  steps={deliverySteps}
+                  value={settings.delivery}
+                  onChange={delivery => updateSettings({ delivery })}
+                />
+              </>
+            ) : null}
           </View>
         ) : null}
 

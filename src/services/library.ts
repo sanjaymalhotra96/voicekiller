@@ -1,4 +1,3 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
 import { config } from '@/config';
 import type {
   LibraryCursor,
@@ -8,114 +7,24 @@ import type {
 } from '@/domain';
 import { librarySources } from '@/domain';
 import { AppError, toAppError } from '@/lib/errors';
+import { log } from '@/lib/logger';
 import { escapeLike } from '@/lib/postgrest';
-import { supabase } from '@/lib/supabase';
+import { supabase, untypedSupabase } from '@/lib/supabase';
 import { isMissingTable, throwIfError } from '@/lib/supabaseResult';
+import { Fetched, LibraryPage, mergePage, pageOf, toFetched } from '@/services/libraryPaging';
+import { Row, sources } from '@/services/librarySources';
 
-// Library API. Each tool keeps its files in its own table; this reads them
-// as one list. Screens use the hooks in features/library/hooks.ts.
-//
-// The exact column types of these tables are not confirmed, so rows are
-// read as plain records and every value is converted on the way in.
+// Library API. Each tool keeps its files in its own table
+// (services/librarySources.ts); this reads them as one list, paged by
+// services/libraryPaging.ts. Screens use features/library/hooks.ts.
 
-type Row = Record<string, unknown>;
-
-type SourceTable = {
-  table: string;
-  // Column holding the owner's user id (denoise_results spells it `userid`).
-  owner: string;
-  // Column holding the file name (searched and renamed).
-  title: string;
-  // Row -> file, or null when the row has no audio yet (still processing).
-  toItem: (
-    row: Row,
-  ) => Omit<LibraryItem, 'id' | 'rowId' | 'tool' | 'createdAt'> | null;
-};
-
-const text = (value: unknown) =>
-  typeof value === 'string' ? value : value == null ? '' : String(value);
-const seconds = (value: unknown) => {
-  const n = Number(value);
-  return Number.isFinite(n) && n > 0 ? n : 0;
-};
-const withAudio = <T extends { audioUrl: string }>(item: T) =>
-  item.audioUrl ? item : null;
-
-const sources: Record<LibrarySource, SourceTable> = {
-  // AI Speech: Text to Speech output.
-  textToSpeech: {
-    table: 'generated_files',
-    owner: 'user_id',
-    title: 'file_name',
-    toItem: row =>
-      withAudio({
-        title: text(row.file_name),
-        voiceName: text(row.display_voice_name) || text(row.voice_name) || null,
-        durationSeconds: seconds(row.duration),
-        audioUrl: text(row.audio_path),
-        metadata: {},
-      }),
-  },
-  voiceChanger: {
-    table: 'voice_conversion',
-    owner: 'user_id',
-    title: 'filename',
-    toItem: row =>
-      withAudio({
-        title: text(row.filename),
-        voiceName: null,
-        durationSeconds: 0,
-        audioUrl: text(row.file_url),
-        metadata: {},
-      }),
-  },
-  audioClean: {
-    table: 'denoise_results',
-    owner: 'userid',
-    title: 'file_name',
-    toItem: row =>
-      withAudio({
-        title: text(row.file_name),
-        voiceName: null,
-        durationSeconds: 0,
-        audioUrl: text(row.url),
-        metadata: { enhanced: row.operation === 'denoised_enhanced' },
-      }),
-  },
-  speechToText: {
-    table: 'speech_text',
-    owner: 'user_id',
-    title: 'file_name',
-    toItem: row =>
-      withAudio({
-        title: text(row.file_name),
-        voiceName: null,
-        durationSeconds: seconds(row.duration),
-        audioUrl: text(row.file_url),
-        metadata: {},
-      }),
-  },
-  // Plays the edited audio when there is one, otherwise the original.
-  speechEditor: {
-    table: 'transcription',
-    owner: 'user_id',
-    title: 'file_name',
-    toItem: row =>
-      withAudio({
-        title: text(row.file_name),
-        voiceName: null,
-        durationSeconds: 0,
-        audioUrl: text(row.updated_speech) || text(row.media_url),
-        metadata: {},
-      }),
-  },
-};
+export type { LibraryPage } from '@/services/libraryPaging';
 
 // Postgres: column does not exist (e.g. an optional `filename`).
 const MISSING_COLUMN = '42703';
 
 // These tables are read by name at runtime, so use the untyped client.
-const db = supabase as unknown as SupabaseClient;
+const db = untypedSupabase;
 
 const currentUserId = async () => {
   const { data } = await supabase.auth.getSession();
@@ -126,19 +35,24 @@ const currentUserId = async () => {
   return id;
 };
 
-type Fetched = { item: LibraryItem; createdAtRaw: string };
+type SourceQuery = {
+  userId: string;
+  cursor: LibraryCursor | null;
+  search: string;
+  limit: number;
+};
 
-// Newest rows of one table, at or before the cursor time.
+// Newest rows of one source, at or before the cursor time.
 async function fetchSource(
   tool: LibrarySource,
-  options: {
-    userId: string;
-    cursor: LibraryCursor | null;
-    search: string;
-    limit: number;
-  },
+  options: SourceQuery,
 ): Promise<{ rows: Fetched[]; full: boolean }> {
   const source = sources[tool];
+  if (source.list) {
+    const all = await source.list(options.userId, options.cursor === null);
+    const { rows, full } = pageOf(all, source.title, options);
+    return { rows: toFetched(tool, rows, source.toItem), full };
+  }
   let query = db
     .from(source.table)
     .select('*')
@@ -158,37 +72,11 @@ async function fetchSource(
     return { rows: [], full: false };
   }
   const rows = (throwIfError({ data, error }).data ?? []) as Row[];
-
-  const fetched: Fetched[] = [];
-  for (const row of rows) {
-    const base = source.toItem(row);
-    const createdAtRaw = text(row.created_at);
-    if (base && createdAtRaw) {
-      const rowId = text(row.id);
-      fetched.push({
-        createdAtRaw,
-        item: {
-          ...base,
-          id: `${tool}:${rowId}`,
-          rowId,
-          tool,
-          createdAt: new Date(createdAtRaw),
-        },
-      });
-    }
-  }
-  return { rows: fetched, full: rows.length === options.limit };
+  return {
+    rows: toFetched(tool, rows, source.toItem),
+    full: rows.length === options.limit,
+  };
 }
-
-const newestFirst = (a: Fetched, b: Fetched) =>
-  b.item.createdAt.getTime() - a.item.createdAt.getTime() ||
-  b.createdAtRaw.localeCompare(a.createdAtRaw) ||
-  b.item.id.localeCompare(a.item.id);
-
-export type LibraryPage = {
-  items: LibraryItem[];
-  nextCursor: LibraryCursor | null;
-};
 
 type LibraryQuery = {
   // Where the previous page ended; null for the first page.
@@ -198,78 +86,41 @@ type LibraryQuery = {
 };
 
 export const libraryService = {
-  // One tool, or all of them merged newest first. Each page asks every
-  // table for its newest rows at or before the cursor and keeps the newest
-  // `pageSize` overall, so the merged order is exact across tables.
+  // One tool, or all of them merged newest first.
   async list({ cursor, filter, search }: LibraryQuery): Promise<LibraryPage> {
     const size = config.library.pageSize;
     const userId = await currentUserId();
     const tools = filter === 'all' ? librarySources : [filter];
-    const seen = new Set(cursor?.seen ?? []);
-    const limit = size + seen.size;
-
+    const limit = size + (cursor?.seen.length ?? 0);
     const results = await Promise.all(
       tools.map(tool => fetchSource(tool, { userId, cursor, search, limit })),
     );
-    const merged = results
-      .flatMap(result => result.rows)
-      .filter(
-        row =>
-          !(
-            cursor &&
-            row.createdAtRaw === cursor.createdAt &&
-            seen.has(row.item.id)
-          ),
-      )
-      .sort(newestFirst);
-
-    const page = merged.slice(0, size);
-    const last = page[page.length - 1];
-    const hasMore =
-      merged.length > size || results.some(result => result.full);
-
-    let nextCursor: LibraryCursor | null = null;
-    if (hasMore && last) {
-      const atLast = page
-        .filter(row => row.createdAtRaw === last.createdAtRaw)
-        .map(row => row.item.id);
-      nextCursor = {
-        createdAt: last.createdAtRaw,
-        // Still at the same timestamp as before: remember earlier ones too.
-        seen:
-          cursor?.createdAt === last.createdAtRaw
-            ? [...cursor.seen, ...atLast]
-            : atLast,
-      };
-    }
-    return { items: page.map(row => row.item), nextCursor };
+    return mergePage(results, cursor, size);
   },
 
   async rename(item: Pick<LibraryItem, 'tool' | 'rowId'>, title: string) {
     const source = sources[item.tool];
     const userId = await currentUserId();
-    const { error } = await db
+    const { data, error } = await db
       .from(source.table)
       .update({ [source.title]: title })
       .eq('id', item.rowId)
-      .eq(source.owner, userId);
+      .eq(source.owner, userId)
+      .select('id');
     if (error) {
+      log('api', `rename in ${source.table} failed`, error);
       throw toAppError(error);
+    }
+    // No row changed although the file is listed: the database does not
+    // let this user update the table (no UPDATE policy).
+    if (!data?.length) {
+      log('api', `rename in ${source.table} changed no row`, item.rowId);
+      throw new AppError('renameNotAllowed');
     }
   },
 
-  // Removes the record. The audio file itself stays in object storage;
-  // cleaning that up belongs to the backend.
-  async remove(item: Pick<LibraryItem, 'tool' | 'rowId'>) {
-    const source = sources[item.tool];
-    const userId = await currentUserId();
-    const { error } = await db
-      .from(source.table)
-      .delete()
-      .eq('id', item.rowId)
-      .eq(source.owner, userId);
-    if (error) {
-      throw toAppError(error);
-    }
+  // Deletes the record and its stored file through the web API.
+  async remove(item: Pick<LibraryItem, 'tool' | 'rowId' | 'fileUrl'>) {
+    await sources[item.tool].remove(item);
   },
 };

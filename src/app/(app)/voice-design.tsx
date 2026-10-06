@@ -15,7 +15,9 @@ import {
 } from '@/components';
 import { config } from '@/config';
 import {
-  LanguageId,
+  DesignLanguageId,
+  designLanguageIds,
+  DesignSession,
   textLimits,
   VoiceVariation,
 } from '@/domain';
@@ -29,17 +31,14 @@ import { iconSize, layout, palette } from '@/theme';
 export default function VoiceDesignScreen() {
   useStatusBarStyle('light-content');
   const { t } = useTranslation();
-  const [language, setLanguage] = useState<LanguageId>(
-    config.defaultLanguage as LanguageId,
+  const [language, setLanguage] = useState<DesignLanguageId>(
+    config.defaultLanguage as DesignLanguageId,
   );
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
-  const [session, setSession] = useState<{
-    sessionId: string;
-    variations: VoiceVariation[];
-  } | null>(null);
+  const [session, setSession] = useState<DesignSession | null>(null);
   const enhance = useEnhanceDescription();
   const generate = useGenerateVariations();
   const save = useSaveDesign();
@@ -62,7 +61,7 @@ export default function VoiceDesignScreen() {
       return;
     }
     save.mutate(
-      { ...input, sessionId: session.sessionId, variationId: variation.id },
+      { ...input, session, variation },
       {
         onSuccess: () => {
           setSession(null);
@@ -115,6 +114,7 @@ export default function VoiceDesignScreen() {
         label={t('voiceDesign.language')}
         value={language}
         onChange={value => value && setLanguage(value)}
+        languages={designLanguageIds}
       />
 
       <TextField

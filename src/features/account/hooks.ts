@@ -1,19 +1,23 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSession } from '@/features/auth/AuthProvider';
 import { queryKeys } from '@/lib/queryKeys';
-import { defaultPlan } from '@/domain';
+import { defaultPlan, planForTier } from '@/domain';
+import { useSubscriptionTier } from '@/features/subscription/hooks';
 import { Account, profileService } from '@/services/profile';
 
-// Plan and usage for the signed-in user. Defaults to Basic while loading.
+// Plan and usage for the signed-in user. The plan comes from the active
+// RevenueCat subscription when there is one (it updates the moment the
+// user buys), otherwise from the account. Defaults to Basic while loading.
 export function useAccount(): Account & { isLoading: boolean } {
   const userId = useSession().session?.user.id;
+  const subscribed = planForTier(useSubscriptionTier());
   const query = useQuery({
     queryKey: queryKeys.account.profile(userId),
     queryFn: () => profileService.getAccount(userId as string),
     enabled: !!userId,
   });
   return {
-    plan: query.data?.plan ?? defaultPlan,
+    plan: subscribed ?? query.data?.plan ?? defaultPlan,
     usageMinutes: query.data?.usageMinutes ?? 0,
     isLoading: query.isPending,
   };

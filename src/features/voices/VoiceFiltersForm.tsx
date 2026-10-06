@@ -5,8 +5,8 @@ import { AppText, Button, ChipGroup, SelectField } from '@/components';
 import {
   genders,
   VoiceFilters,
-  VoiceProviderId,
-  voiceProviderIds,
+  VoiceModel,
+  voiceModels,
 } from '@/domain';
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
   onApply: () => void;
 };
 
-// Provider and gender chips, accent and language pickers, Apply.
+// Model and gender chips, accent and language pickers, Apply.
 export function VoiceFiltersForm({
   filters,
   onChange,
@@ -27,10 +27,10 @@ export function VoiceFiltersForm({
 }: Props) {
   const { t } = useTranslation();
 
-  const providerChips = useMemo(
+  const modelChips = useMemo(
     () => [
-      { key: 'all' as const, label: t('voices.providers.all') },
-      ...voiceProviderIds.map(id => ({ key: id, label: t(`voices.providers.${id}`) })),
+      { key: 'all' as const, label: t('voices.models.all') },
+      ...voiceModels.map(id => ({ key: id, label: t(`voices.models.${id}`) })),
     ],
     [t],
   );
@@ -46,11 +46,11 @@ export function VoiceFiltersForm({
       showsVerticalScrollIndicator={false}
     >
       <View className="gap-3">
-        <AppText variant="label">{t('voices.filters.provider')}</AppText>
-        <ChipGroup<VoiceProviderId | 'all'>
-          items={providerChips}
-          value={filters.provider}
-          onChange={provider => onChange({ ...filters, provider })}
+        <AppText variant="label">{t('voices.filters.model')}</AppText>
+        <ChipGroup<VoiceModel | 'all'>
+          items={modelChips}
+          value={filters.model}
+          onChange={model => onChange({ ...filters, model })}
         />
       </View>
       <View className="gap-3">

@@ -82,3 +82,24 @@ yarn-error.log
 .expo/
 dist/
 web-build/
+
+# Release signing key (see credentials/upload.properties)
+credentials/
+
+# Any other env file (.env.production, .env.development.local...).
+.env.*
+
+# Signing keys and certificates, wherever they are.
+*.jks
+*.p8
+*.p12
+*.pem
+*.mobileprovision
+
+# Store and service credentials (Play service account, RevenueCat keys).
+*service-account*.json
+*-credentials.json
+
+# Release builds.
+*.aab
+*.apk

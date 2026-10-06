@@ -8,3 +8,4 @@ export * from '@/hooks/useFilePicker';
 export * from '@/hooks/useUploadSlot';
 export * from '@/hooks/useIsOffline';
 export * from '@/hooks/useKeyboardHeight';
+export * from '@/hooks/useUnmountSignal';

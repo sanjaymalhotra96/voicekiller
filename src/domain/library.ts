@@ -27,12 +27,15 @@ export type LibraryItem = {
   // 0 when the table does not store a duration.
   durationSeconds: number;
   audioUrl: string;
+  // The stored file the server deletes along with the record (for Speech
+  // Editor the original upload, not the edited audio).
+  fileUrl: string;
   createdAt: Date;
   metadata: LibraryItemMetadata;
 };
 
 // Tool-specific details.
-export type LibraryItemMetadata = {
+type LibraryItemMetadata = {
   // Audio Clean: "Denoise & Enhance" was on.
   enhanced?: boolean;
 };

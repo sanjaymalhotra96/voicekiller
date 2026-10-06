@@ -20,16 +20,16 @@ import {
 import { CampaignSheet } from '@/features/text-to-speech/CampaignSheet';
 import { EditorToolbar } from '@/features/text-to-speech/EditorToolbar';
 import { EmotionSheet } from '@/features/text-to-speech/EmotionSheet';
-import { useCampaigns, useGenerateSpeech, usePreviewSpeech } from '@/features/text-to-speech/hooks';
+import { useGenerateSpeech, usePreviewSpeech } from '@/features/text-to-speech/hooks';
 import { PauseSheet } from '@/features/text-to-speech/PauseSheet';
-import { titleFromScript, toGenerateRequest, toSpeechRequest } from '@/features/text-to-speech/request';
+import { defaultFileName, toGenerateRequest, toSpeechRequest } from '@/features/text-to-speech/request';
 import { ScriptInput } from '@/features/text-to-speech/ScriptInput';
 import { SpeechSettingsSheet } from '@/features/text-to-speech/SpeechSettingsSheet';
 import { useSpeechDraft } from '@/features/text-to-speech/store';
 import { EditorSheet } from '@/features/text-to-speech/types';
 import { UsagePill } from '@/features/text-to-speech/UsagePill';
 import { VoicePickerSheet } from '@/features/voices/VoicePickerSheet';
-import { usePlayback, useStatusBarStyle } from '@/hooks';
+import { usePlayback, useStatusBarStyle, useUnmountSignal } from '@/hooks';
 
 const PREVIEW_ID = 'preview';
 
@@ -47,12 +47,13 @@ export default function TextToSpeechScreen() {
   const hasScript = useSpeechDraft(state => state.script.trim().length > 0);
   const voiceId = useSpeechDraft(state => state.voice?.id ?? null);
   const setVoice = useSpeechDraft(state => state.setVoice);
-  const campaignId = useSpeechDraft(state => state.campaignId);
-  const campaigns = useCampaigns();
-  const campaignName = campaigns.data?.find(c => c.id === campaignId)?.name;
+  const campaignName = useSpeechDraft(state => state.campaignName);
 
   const preview = usePreviewSpeech();
   const generate = useGenerateSpeech();
+  // Leaving the screen stops waiting for the file (the server still
+  // saves it in Library).
+  const unmountSignal = useUnmountSignal();
   const playback = usePlayback();
   // Same request as last time -> replay the same audio, no new request.
   const lastPreview = useRef<{ key: string; url: string } | null>(null);
@@ -114,14 +115,14 @@ export default function TextToSpeechScreen() {
 
   const onGenerate = () => {
     const draft = useSpeechDraft.getState();
-    const request = toGenerateRequest(draft, titleFromScript(draft.script));
+    const request = toGenerateRequest(draft, defaultFileName());
     if (!request) {
       setSheet('voice');
       return;
     }
     playback.stop();
     preview.reset();
-    generate.mutate(request, {
+    generate.mutate({ ...request, signal: unmountSignal() }, {
       onSuccess: () => {
         draft.clearScript();
         lastPreview.current = null;

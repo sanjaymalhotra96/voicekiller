@@ -1,4 +1,3 @@
-import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -10,10 +9,10 @@ import {
   FormError,
   TextArea,
 } from '@/components';
-import { textLimits } from '@/domain';
+import { keptWordTimes, textLimits } from '@/domain';
 import { useLibraryJob } from '@/features/results/hooks';
 import { layout } from '@/theme';
-import { EditorSession, speechEditorService } from '@/services/mediaTools';
+import { EditorSession, speechEditorService } from '@/services/speechEditor';
 
 type Props = {
   // Null hides the sheet.
@@ -22,8 +21,9 @@ type Props = {
   onSaved: () => void;
 };
 
-// Edit the transcription of an uploaded recording, regenerate the audio
-// from the edited text, then save it to Library.
+// Edit the transcription of an uploaded recording and regenerate the
+// audio from the edited text. Each regenerated audio is saved on the
+// Library file by the server.
 export function EditorSheet({ session, onClose, onSaved }: Props) {
   const { t } = useTranslation();
   return (
@@ -35,7 +35,7 @@ export function EditorSheet({ session, onClose, onSaved }: Props) {
     >
       {/* Keyed by session so each new upload starts from a clean editor. */}
       {session ? (
-        <EditorContent key={session.sessionId} session={session} onSaved={onSaved} />
+        <EditorContent key={session.fileId} session={session} onSaved={onSaved} />
       ) : null}
     </BottomSheet>
   );
@@ -50,11 +50,12 @@ function EditorContent({
 }) {
   const { t } = useTranslation();
   const [transcript, setTranscript] = useState(session.transcript);
-  const [audioUrl, setAudioUrl] = useState(session.audioUrl);
+  const [audioUrl, setAudioUrl] = useState(session.mediaUrl);
   // The text the current audio was made from.
   const [voicedText, setVoicedText] = useState(session.transcript);
-  const synthesize = useMutation({ mutationFn: speechEditorService.synthesize });
-  const save = useLibraryJob(speechEditorService.save);
+  // After a regeneration the original word timings no longer apply.
+  const [regenerated, setRegenerated] = useState(false);
+  const synthesize = useLibraryJob(speechEditorService.inpaint);
 
   const edited = transcript !== session.transcript;
   const needsAudio = transcript.trim() !== voicedText.trim();
@@ -62,17 +63,24 @@ function EditorContent({
   const revert = () => {
     setTranscript(session.transcript);
     setVoicedText(session.transcript);
-    setAudioUrl(session.audioUrl);
+    setAudioUrl(session.mediaUrl);
+    setRegenerated(false);
     synthesize.reset();
   };
 
   const generate = () =>
     synthesize.mutate(
-      { sessionId: session.sessionId, transcript },
+      {
+        session,
+        inputText: voicedText,
+        outputText: transcript.trim(),
+        wordTimes: regenerated ? [] : keptWordTimes(session.words, transcript),
+      },
       {
         onSuccess: url => {
           setAudioUrl(url);
           setVoicedText(transcript);
+          setRegenerated(true);
         },
       },
     );
@@ -114,20 +122,13 @@ function EditorContent({
         />
       </View>
 
-      <FormError error={synthesize.error ?? save.error} />
+      <FormError error={synthesize.error} />
 
       <Button
         className="mt-6"
-        label={t('speechEditor.sheet.save')}
-        loading={save.isPending}
-        // Save what you hear: regenerate first if the text changed.
-        disabled={needsAudio || synthesize.isPending}
-        onPress={() =>
-          save.mutate(
-            { sessionId: session.sessionId, transcript },
-            { onSuccess: onSaved },
-          )
-        }
+        label={t('speechEditor.sheet.done')}
+        disabled={synthesize.isPending}
+        onPress={onSaved}
       />
     </View>
   );

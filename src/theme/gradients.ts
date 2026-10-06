@@ -11,7 +11,7 @@ const glowAt = (at: string, hex: string, opacity: number, stop: string) =>
 
 // Shared CSS background gradients (RN New Architecture `backgroundImage`).
 // Add a new key here to give another screen its own variant.
-export const gradients = {
+const gradients = {
   // Warm peach glow at the corners + soft lavender halo behind the logo.
   brand: [
     glowAt('50% 30%', glow.lavender, 0.85, '45%'),

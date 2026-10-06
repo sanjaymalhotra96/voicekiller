@@ -3,6 +3,9 @@
 // screens. .env needs:
 //   EXPO_PUBLIC_SUPABASE_URL       Supabase > Project Settings > API
 //   EXPO_PUBLIC_SUPABASE_ANON_KEY  Supabase > Project Settings > API
+//   EXPO_PUBLIC_API_URL            Voice Killer web API base URL (no /api)
+//   EXPO_PUBLIC_REVENUECAT_ANDROID_KEY  RevenueCat > API keys (goog_...)
+//   EXPO_PUBLIC_REVENUECAT_IOS_KEY      RevenueCat > API keys (appl_...)
 //   EXPO_PUBLIC_PRIVACY_URL        Settings > Privacy Policy (optional)
 //   EXPO_PUBLIC_SUPPORT_EMAIL      Settings > Contact Us (optional)
 //   EXPO_PUBLIC_SHARE_URL          Settings > Share with friends (optional)
@@ -13,6 +16,21 @@ export const config = {
   supabase: {
     url: process.env.EXPO_PUBLIC_SUPABASE_URL ?? '',
     anonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '',
+  },
+  // Voice Killer web API (endpoints in services/*). Requests send the
+  // Supabase access token as a Bearer token.
+  api: {
+    // Trailing slashes removed, so paths can start with "/api/...".
+    baseUrl: (process.env.EXPO_PUBLIC_API_URL ?? '').replace(/\/+$/, ''),
+    timeoutMs: 30_000,
+    // File uploads (Speech to Text accepts up to 1000 MB).
+    uploadTimeoutMs: 30 * 60_000,
+  },
+  // RevenueCat (in-app subscriptions). Public SDK keys: safe in the app.
+  // Empty key: purchases are off and Upgrade says so.
+  purchases: {
+    androidKey: process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY ?? '',
+    iosKey: process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY ?? '',
   },
   auth: {
     minPasswordLength: 8,
@@ -65,39 +83,49 @@ export const config = {
       windowSize: 7,
     },
   },
+  speechEditor: {
+    // Recordings are cut to their first this-many seconds (the server
+    // takes up to 2 minutes).
+    maxSeconds: 120,
+  },
+  speechToText: {
+    // Transcript lines kept mounted around the viewport.
+    list: {
+      initialNumToRender: 12,
+      maxToRenderPerBatch: 10,
+      windowSize: 7,
+    },
+  },
   instructions: {
     // Library catalog rarely changes; refetch at most this often.
     staleTimeMs: 30 * 60_000,
   },
   clone: {
-    // Recording stops by itself after this long.
-    maxRecordSeconds: 120,
-    // Private Supabase Storage bucket for voice samples.
-    sampleBucket: 'voice-samples',
+    // Samples are cut to their first this-many seconds, and recording
+    // stops by itself after this long.
+    sampleSeconds: 30,
+    // The API rejects samples shorter than this.
+    minSampleSeconds: 1,
   },
   media: {
-    // Private Supabase Storage bucket for tool inputs.
-    sourceBucket: 'media-sources',
     // Cards shown under "Recent ..." on each tool screen.
     recentCount: 4,
+    // Preview audio files kept on the device (lib/audioCache).
+    previewFilesKept: 10,
   },
-  // Supabase Edge Functions that talk to the speech/AI providers.
+  // Supabase Edge Functions for features the web API does not cover.
   // Request/response contracts are documented in each src/services file.
   functions: {
-    createClone: 'voice-clone-create',
-    designEnhance: 'voice-design-enhance',
-    designGenerate: 'voice-design-generate',
-    designSave: 'voice-design-save',
-    changeVoice: 'voice-changer-convert',
-    cleanAudio: 'audio-clean',
-    editorTranscribe: 'speech-editor-transcribe',
-    editorSynthesize: 'speech-editor-synthesize',
-    editorSave: 'speech-editor-save',
-    sttTranscribe: 'speech-to-text-transcribe',
-    sttSave: 'speech-to-text-save',
-    generateSpeech: 'tts-generate',
-    previewSpeech: 'tts-preview',
     generateInstructions: 'acting-instructions-generate',
+  },
+  // How often running server jobs are checked, and when to give up.
+  jobs: {
+    speech: { intervalMs: 3000, timeoutMs: 10 * 60_000 },
+    // V2 voice clone speech.
+    cloneSpeech: { intervalMs: 4000, timeoutMs: 15 * 60_000 },
+    conversion: { intervalMs: 4000, timeoutMs: 15 * 60_000 },
+    inpaint: { intervalMs: 5000, timeoutMs: 5 * 60_000 },
+    transcription: { intervalMs: 5000, timeoutMs: 60 * 60_000 },
   },
   animation: {
     sheetMs: 260,

@@ -21,8 +21,10 @@ export type ResultsQuery = {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   fetchNextPage: () => void;
-  rename: (id: string, title: string) => void;
-  remove: (id: string) => void;
+  // Missing when the source cannot be renamed / deleted (the card hides
+  // those buttons).
+  rename?: (id: string, title: string) => void;
+  remove?: (id: string) => void;
   mutationError: unknown;
 };
 
@@ -36,43 +38,15 @@ const useOwnVoices = (source: OwnVoiceSource) =>
     queryFn: () => ownVoicesService.list(source),
   });
 
-// Applies a change to the list immediately; rolls back on failure and
-// refreshes every voice list (picker tabs included) afterwards.
-function useOptimisticOwnVoices<Vars>(
-  source: OwnVoiceSource,
-  mutationFn: (vars: Vars) => Promise<void>,
-  apply: (list: Voice[], vars: Vars) => Voice[],
-) {
-  const client = useQueryClient();
-  const key = queryKeys.voices.mine(source);
-  return useMutation({
-    mutationFn,
-    onMutate: async (vars: Vars) => {
-      await client.cancelQueries({ queryKey: key });
-      const previous = client.getQueryData<Voice[]>(key);
-      client.setQueryData<Voice[]>(key, list => list && apply(list, vars));
-      return { previous };
-    },
-    onError: (_error, _vars, context) =>
-      client.setQueryData(key, context?.previous),
-    onSettled: () => client.invalidateQueries({ queryKey: queryKeys.voices.all }),
-  });
-}
-
 export function useVoiceResults(source: OwnVoiceSource): ResultsQuery {
   const { t } = useTranslation();
+  const client = useQueryClient();
   const query = useOwnVoices(source);
-  const rename = useOptimisticOwnVoices(
-    source,
-    ({ id, name }: { id: string; name: string }) =>
-      ownVoicesService.rename(id, name),
-    (list, { id, name }) => list.map(v => (v.id === id ? { ...v, name } : v)),
-  );
-  const remove = useOptimisticOwnVoices(
-    source,
-    (id: string) => ownVoicesService.remove(id),
-    (list, id) => list.filter(v => v.id !== id),
-  );
+  // The picker's Cloned / Design tabs list these too.
+  const remove = useMutation({
+    mutationFn: (voice: Voice) => ownVoicesService.remove(source, voice),
+    onSettled: () => client.invalidateQueries({ queryKey: queryKeys.voices.all }),
+  });
   const items = useMemo(
     () => (query.data ?? []).map(voice => fromVoice(voice, source, t)),
     [query.data, source, t],
@@ -86,9 +60,14 @@ export function useVoiceResults(source: OwnVoiceSource): ResultsQuery {
     hasNextPage: false,
     isFetchingNextPage: false,
     fetchNextPage: noop,
-    rename: (id, name) => rename.mutate({ id, name }),
-    remove: remove.mutate,
-    mutationError: rename.error ?? remove.error,
+    // The API cannot rename clones and designs.
+    remove: id => {
+      const voice = query.data?.find(item => item.id === id);
+      if (voice) {
+        remove.mutate(voice);
+      }
+    },
+    mutationError: remove.error,
   };
 }
 

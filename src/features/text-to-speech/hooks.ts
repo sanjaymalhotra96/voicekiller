@@ -8,14 +8,6 @@ import { speechService } from '@/services/textToSpeech';
 export const useCampaigns = () =>
   useQuery({ queryKey: queryKeys.campaigns.all, queryFn: campaignsService.list });
 
-export function useCreateCampaign() {
-  const client = useQueryClient();
-  return useMutation({
-    mutationFn: campaignsService.create,
-    onSuccess: () => client.invalidateQueries({ queryKey: queryKeys.campaigns.all }),
-  });
-}
-
 export const usePreviewSpeech = () =>
   useMutation({ mutationFn: speechService.preview });
 

@@ -19,39 +19,34 @@ export type FileRules = {
 
 const MB = 1024 * 1024;
 
+// Every tool takes audio or video: a video, or audio in another format,
+// is turned into mp3 on the device before upload (lib/audioConvert).
+const audioExtensions = ['mp3', 'wav', 'm4a', 'aac', 'ogg', 'opus', 'flac', 'aiff', 'wma', 'amr'];
+const videoExtensions = ['mp4', 'mov', 'm4v', 'webm', 'mkv', 'avi', '3gp'];
+const anyMedia = {
+  extensions: [...audioExtensions, ...videoExtensions],
+  mimeTypes: ['audio/*', 'video/*'],
+};
+
+// Formats uploaded as they are; anything else becomes mp3.
+export const uploadAudioExtensions: readonly string[] = ['mp3', 'wav'];
+
 // One rule set per kind of upload. Tools reference these by name.
+// `maxBytes` is the API's upload limit, checked on the audio that is
+// actually sent (after conversion and cutting), not on the picked file.
 export const fileRules = {
-  // Voice Clone sample: short and clean.
-  clone: {
-    extensions: ['mp3', 'wav', 'm4a', 'mp4', 'mov', 'webm', 'ogg'],
-    mimeTypes: ['audio/*', 'video/mp4', 'video/quicktime', 'video/webm'],
-    maxBytes: 4 * MB,
-  },
-  // Voice Changer source and target.
-  changer: {
-    extensions: ['mp3', 'wav'],
-    mimeTypes: ['audio/mpeg', 'audio/wav', 'audio/x-wav'],
-    maxBytes: 50 * MB,
-  },
-  // Speech Editor, Audio Clean, Speech to Text.
-  media: {
-    extensions: [
-      'mp3',
-      'wav',
-      'm4a',
-      'aiff',
-      'flac',
-      'wma',
-      'ogg',
-      'mp4',
-      'mov',
-      'avi',
-      'mkv',
-      'webm',
-    ],
-    mimeTypes: ['audio/*', 'video/*'],
-    maxBytes: 50 * MB,
-  },
+  // Voice Clone: max 4 MB (api-voice-clone-design-stt.md). Cut to its
+  // first config.clone.sampleSeconds.
+  clone: { ...anyMedia, maxBytes: 4 * MB },
+  // Voice Changer: no limit in the docs.
+  changer: { ...anyMedia, maxBytes: 50 * MB },
+  // Speech Editor: max 20 MB. Cut to its first
+  // config.speechEditor.maxSeconds.
+  editor: { ...anyMedia, maxBytes: 20 * MB },
+  // Speech to Text: max 1000 MB. Full length, never cut.
+  transcription: { ...anyMedia, maxBytes: 1000 * MB },
+  // Audio Clean: 200 MB (not in the API docs yet).
+  media: { ...anyMedia, maxBytes: 200 * MB },
 } as const satisfies Record<string, FileRules>;
 
 type FileError = 'fileType' | 'fileTooLarge';

@@ -62,6 +62,9 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
   const router = useRouter();
   const actions = useResultActions(query);
   const { playback, togglePlay, download, confirmDelete, startRename } = actions;
+  // Only offered when the source supports them (see ResultsQuery).
+  const onRename = query.rename ? startRename : undefined;
+  const onDelete = query.remove ? confirmDelete : undefined;
 
   const renderCard = useCallback(
     (item: ResultItem) => {
@@ -73,9 +76,9 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
           playing={active && playback.playing}
           player={playback.player}
           onTogglePlay={togglePlay}
-          onRename={startRename}
+          onRename={onRename}
           onDownload={download}
-          onDelete={confirmDelete}
+          onDelete={onDelete}
         />
       );
     },
@@ -84,9 +87,9 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
       playback.playing,
       playback.player,
       togglePlay,
-      startRename,
+      onRename,
       download,
-      confirmDelete,
+      onDelete,
     ],
   );
   // Half-width cells, so an odd last card keeps its size.

@@ -57,9 +57,10 @@ const SPRING = { damping: 20, stiffness: 220 };
 //
 // - Drag the handle / header down to close; a short drag springs back.
 // - Tapping outside closes the keyboard first, then the sheet.
-// - iOS keyboard: the sheet rises only as far as it fits under the status
-//   bar; any part the keyboard still covers scrolls, and the focused field
-//   is scrolled into view (automaticallyAdjustKeyboardInsets).
+// - Keyboard (iOS and Android): the sheet rises only as far as it fits
+//   under the status bar; any part the keyboard still covers scrolls. On
+//   iOS the focused field is also scrolled into view
+//   (automaticallyAdjustKeyboardInsets).
 export function BottomSheet({
   visible,
   onClose,
@@ -152,6 +153,9 @@ export function BottomSheet({
     0,
     Math.min(keyboardHeight, maxHeight - (fixedHeight ?? sheetHeight)),
   );
+  // Android has no automatic keyboard inset: pad the content by the part
+  // of the keyboard the lift could not clear, so it can scroll above it.
+  const covered = Platform.OS === 'android' ? keyboardHeight - lift : 0;
 
   return (
     <Modal
@@ -224,7 +228,8 @@ export function BottomSheet({
                 className="flex-grow-0"
                 contentContainerClassName="px-4 pt-6"
                 contentContainerStyle={{
-                  paddingBottom: insets.bottom + layout.sheetBottomPadding,
+                  paddingBottom:
+                    insets.bottom + layout.sheetBottomPadding + covered,
                 }}
                 // Taps on empty space close the keyboard.
                 keyboardShouldPersistTaps="handled"

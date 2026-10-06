@@ -42,8 +42,11 @@ export default function VoiceCloneScreen() {
   const [source, setSource] = useState<CloneSource>('upload');
   const [sheet, setSheet] = useState<'microphone' | 'guide' | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const picker = useFilePicker(fileRules.clone);
-  const recorder = useVoiceRecorder(config.clone.maxRecordSeconds);
+  const picker = useFilePicker(fileRules.clone, {
+    maxSeconds: config.clone.sampleSeconds,
+    minSeconds: config.clone.minSampleSeconds,
+  });
+  const recorder = useVoiceRecorder(config.clone.sampleSeconds);
   const create = useCreateClone();
   const closeSheet = () => setSheet(null);
 
@@ -134,7 +137,11 @@ export default function VoiceCloneScreen() {
       />
 
       {source === 'upload' ? (
-        <UploadPanel sample={picker.sample} onPick={picker.pick} />
+        <UploadPanel
+          sample={picker.sample}
+          preparing={picker.preparing}
+          onPick={picker.pick}
+        />
       ) : (
         <RecordPanel
           recorder={recorder}
@@ -153,7 +160,7 @@ export default function VoiceCloneScreen() {
         icon="micSparkle"
         label={t('voiceClone.submit')}
         loading={create.isPending}
-        disabled={recorder.isRecording}
+        disabled={recorder.isRecording || picker.preparing}
         onPress={submit}
       />
 

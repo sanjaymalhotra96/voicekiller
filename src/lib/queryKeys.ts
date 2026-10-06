@@ -18,6 +18,7 @@ export const queryKeys = {
       [...queryKeys.voices.all, 'list', params] as const,
     mine: (source: 'cloned' | 'design') =>
       [...queryKeys.voices.all, 'mine', source] as const,
+    favorites: () => [...queryKeys.voices.all, 'favorites'] as const,
   },
   instructions: {
     all: ['instructions'] as const,
@@ -26,5 +27,8 @@ export const queryKeys = {
   },
   campaigns: {
     all: ['campaigns'] as const,
+  },
+  subscription: {
+    all: ['subscription'] as const,
   },
 };

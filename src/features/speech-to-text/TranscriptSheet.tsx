@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { FlatList, ListRenderItem, View } from 'react-native';
 import {
   AppText,
   AudioPlayerCard,
@@ -18,14 +18,12 @@ import {
   transcriptMimeTypes,
   TranscriptSegment,
 } from '@/domain';
-import { useLibraryJob } from '@/features/results/hooks';
 import { SegmentRow } from '@/features/speech-to-text/SegmentRow';
 import { shareTextFile } from '@/lib/shareFile';
+import { config } from '@/config';
 import { layout } from '@/theme';
-import {
-  speechToTextService,
-  TranscriptionSession,
-} from '@/services/mediaTools';
+import { cn } from '@/utils';
+import type { TranscriptionSession } from '@/services/speechToText';
 
 type Props = {
   // Null hides the sheet.
@@ -38,7 +36,8 @@ type Props = {
   onSaved: () => void;
 };
 
-// Results: listen, fix any line, export subtitles or save to Library.
+// Results: listen, fix any line and export subtitles. The server already
+// saved the transcript in Library.
 export function TranscriptSheet({
   session,
   textLanguage,
@@ -53,6 +52,8 @@ export function TranscriptSheet({
       onClose={onClose}
       title={t('speechToText.sheet.title')}
       height={layout.sheetHeight}
+      // The transcript is a virtualised list: it scrolls by itself.
+      scrollable={false}
     >
       {session ? (
         <TranscriptContent
@@ -83,7 +84,6 @@ function TranscriptContent({
     session.segments,
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const save = useLibraryJob(speechToTextService.save);
   const share = useMutation({
     mutationFn: (format: TranscriptFormat) =>
       shareTextFile(
@@ -110,28 +110,41 @@ function TranscriptContent({
     [t],
   );
 
-  return (
-    <View className="gap-5">
-      <View className="gap-3">
+  const lastIndex = segments.length - 1;
+  // Each line is one list row; together they draw the bordered box of the
+  // design (rounded top on the first row, bottom on the last).
+  const renderItem = useCallback<ListRenderItem<TranscriptSegment>>(
+    ({ item, index }) => (
+      <View
+        className={cn(
+          'border-x border-line-neutral bg-muted px-4 pb-5',
+          index === 0 && 'rounded-t-xl border-t pt-4',
+          index === lastIndex && 'rounded-b-xl border-b pb-4',
+        )}
+      >
+        <SegmentRow
+          index={index}
+          segment={item}
+          rtl={rtl}
+          onChange={updateSegment}
+        />
+      </View>
+    ),
+    [lastIndex, rtl, updateSegment],
+  );
+
+  const header = (
+    <View className="gap-3 pb-3">
+      <View className="gap-3 pb-2">
         <AppText variant="label">{t('speechToText.sheet.audio')}</AppText>
         <AudioPlayerCard uri={session.audioUrl} />
       </View>
+      <AppText variant="label">{t('speechToText.sheet.content')}</AppText>
+    </View>
+  );
 
-      <View className="gap-3">
-        <AppText variant="label">{t('speechToText.sheet.content')}</AppText>
-        <View className="gap-5 rounded-xl border border-line-neutral bg-muted p-4">
-          {segments.map((segment, index) => (
-            <SegmentRow
-              key={`${segment.start}-${index}`}
-              index={index}
-              segment={segment}
-              rtl={rtl}
-              onChange={updateSegment}
-            />
-          ))}
-        </View>
-      </View>
-
+  const footer = (
+    <View className="gap-5 pt-5">
       {menuOpen ? (
         <OptionList
           options={formatOptions}
@@ -142,7 +155,7 @@ function TranscriptContent({
         />
       ) : null}
 
-      <FormError error={share.error ?? save.error} />
+      <FormError error={share.error} />
 
       <View className="flex-row gap-5">
         <Button
@@ -154,17 +167,28 @@ function TranscriptContent({
           className="flex-1 flex-row-reverse"
         />
         <Button
-          label={t('speechToText.sheet.save')}
-          loading={save.isPending}
-          onPress={() =>
-            save.mutate(
-              { sessionId: session.sessionId, segments },
-              { onSuccess: onSaved },
-            )
-          }
+          label={t('speechToText.sheet.finish')}
+          onPress={onSaved}
           className="flex-1"
         />
       </View>
     </View>
+  );
+
+  return (
+    <FlatList
+      data={segments}
+      keyExtractor={(segment, index) => `${segment.start}-${index}`}
+      renderItem={renderItem}
+      ListHeaderComponent={header}
+      ListFooterComponent={footer}
+      {...config.speechToText.list}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
+      // iOS: the line being edited stays above the keyboard.
+      automaticallyAdjustKeyboardInsets
+      showsVerticalScrollIndicator={false}
+      className="flex-1"
+    />
   );
 }

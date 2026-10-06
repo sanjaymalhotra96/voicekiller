@@ -4,7 +4,11 @@ import { ActivityIndicator, FlatList, ListRenderItem, View } from 'react-native'
 import { Button, EmptyState, FormError } from '@/components';
 import { config } from '@/config';
 import type { Voice, VoiceQuery } from '@/domain';
-import { useToggleFavorite, useVoices } from '@/features/voices/hooks';
+import {
+  useFavoriteVoices,
+  useToggleFavorite,
+  useVoices,
+} from '@/features/voices/hooks';
 import { VoiceRow } from '@/features/voices/VoiceRow';
 import { usePlayback } from '@/hooks';
 import { errorMessageKey } from '@/lib/errors';
@@ -23,6 +27,8 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
   const { t } = useTranslation();
   const voices = useVoices(query);
   const favorite = useToggleFavorite();
+  const favorites = useFavoriteVoices();
+  const favoriteIds = favorites.ids;
   const playback = usePlayback();
 
   const items = useMemo(
@@ -35,7 +41,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
     (voice: Voice) => toggle({ id: voice.id, audioUrl: voice.previewUrl }),
     [toggle],
   );
-  const toggleFavorite = favorite.mutate;
+  const toggleFavorite = favorite.toggle;
 
   const renderItem = useCallback<ListRenderItem<Voice>>(
     ({ item }) => {
@@ -48,6 +54,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
           playing={active && playback.playing}
           player={player}
           onTogglePlay={playVoice}
+          favorite={favoriteIds.has(item.id)}
           onToggleFavorite={toggleFavorite}
           onSelect={onSelect}
         />
@@ -59,6 +66,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
       player,
       playVoice,
       toggleFavorite,
+      favoriteIds,
       onSelect,
       selectedId,
     ],
@@ -90,7 +98,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
 
   return (
     <View className="flex-1">
-      <FormError error={favorite.error} className="mb-2" />
+      <FormError error={favorite.error ?? favorites.error} className="mb-2" />
       <FlatList
         data={items}
         keyExtractor={voice => voice.id}

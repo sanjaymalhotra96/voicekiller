@@ -8,16 +8,22 @@ import { config } from '@/config';
 import { ProfileCard } from '@/features/account/ProfileCard';
 import { SettingsAction, settingsMenu } from '@/features/account/settingsMenu';
 import { useSignOut } from '@/features/auth/hooks';
+import { useUpgrade } from '@/features/subscription/hooks';
 import { openLink } from '@/utils';
 
 export default function SettingsScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const signOut = useSignOut();
+  const upgrade = useUpgrade();
   const { links } = config;
 
-  // TODO: open the subscription / paywall screen once it is designed.
-  const openSubscription = () => {};
+  // RevenueCat paywall when free; the store's subscription page when paid.
+  const openSubscription = () => {
+    if (!upgrade.isPending) {
+      upgrade.mutate();
+    }
+  };
 
   const handlers: Record<SettingsAction, () => void> = {
     personalInfo: () => router.push('/personal-info'),
@@ -71,7 +77,7 @@ export default function SettingsScreen() {
         );
       })}
 
-      <FormError error={signOut.error} />
+      <FormError error={upgrade.error ?? signOut.error} />
       {/* Signing out flips RootNavigator back to Welcome. */}
       <Button
         variant="dangerSoft"

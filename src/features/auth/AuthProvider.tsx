@@ -8,6 +8,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { setPurchasesUser } from '@/lib/purchases';
 import { supabase } from '@/lib/supabase';
 import { resetUserScope } from '@/lib/userScope';
 
@@ -46,6 +47,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           resetUserScope();
         }
         userIdRef.current = userId;
+        // Purchases follow the signed-in user (RevenueCat app user id).
+        setPurchasesUser(userId);
       }
       setState({ session, isLoading: false });
     });

@@ -7,7 +7,8 @@ export type ResultItem = {
   id: string;
   title: string;
   audioUrl: string | null;
-  createdAt: Date;
+  // Null when the API does not send one (clones, designs).
+  createdAt: Date | null;
   // Small pill under the title ("English", "Enhanced").
   tag?: { label: string; icon?: IconName };
 };

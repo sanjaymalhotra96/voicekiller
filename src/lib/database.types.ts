@@ -43,27 +43,6 @@ export type Database = {
         };
         Relationships: [];
       };
-      campaigns: {
-        Row: {
-          id: string;
-          user_id: string;
-          name: string;
-          created_at: string;
-        };
-        Insert: {
-          id?: string;
-          user_id?: string;
-          name: string;
-          created_at?: string;
-        };
-        Update: {
-          id?: string;
-          user_id?: string;
-          name?: string;
-          created_at?: string;
-        };
-        Relationships: [];
-      };
       custom_instructions: {
         Row: {
           id: string;
@@ -112,71 +91,58 @@ export type Database = {
         };
         Relationships: [];
       };
-      voice_favorites: {
-        Row: {
-          user_id: string;
-          voice_id: string;
-          created_at: string;
-        };
-        Insert: {
-          user_id?: string;
-          voice_id: string;
-          created_at?: string;
-        };
-        Update: {
-          user_id?: string;
-          voice_id?: string;
-          created_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'voice_favorites_voice_id_fkey';
-            columns: ['voice_id'];
-            isOneToOne: false;
-            referencedRelation: 'voices';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
+      // Voice catalog (read only in the app).
       voices: {
         Row: {
           id: string;
-          owner_id: string | null;
-          name: string;
-          description: string;
+          voice: string;
+          display_name: string;
+          gender: string | null;
+          sample: string | null;
           provider: string;
-          gender: string;
-          accent: string;
-          language: string;
-          source: string;
-          preview_url: string | null;
+          locale: string | null;
+          language: string | null;
+          accent: string | null;
+          plan: string | null;
+          age: string | null;
+          denoise: boolean | null;
+          description: string[] | null;
           created_at: string;
+          updated_at: string;
         };
         Insert: {
           id?: string;
-          owner_id?: string | null;
-          name: string;
-          description?: string;
-          provider: string;
-          gender: string;
-          accent?: string;
-          language?: string;
-          source?: string;
-          preview_url?: string | null;
+          voice?: string;
+          display_name?: string;
+          gender?: string | null;
+          sample?: string | null;
+          provider?: string;
+          locale?: string | null;
+          language?: string | null;
+          accent?: string | null;
+          plan?: string | null;
+          age?: string | null;
+          denoise?: boolean | null;
+          description?: string[] | null;
           created_at?: string;
+          updated_at?: string;
         };
         Update: {
           id?: string;
-          owner_id?: string | null;
-          name?: string;
-          description?: string;
+          voice?: string;
+          display_name?: string;
+          gender?: string | null;
+          sample?: string | null;
           provider?: string;
-          gender?: string;
-          accent?: string;
-          language?: string;
-          source?: string;
-          preview_url?: string | null;
+          locale?: string | null;
+          language?: string | null;
+          accent?: string | null;
+          plan?: string | null;
+          age?: string | null;
+          denoise?: boolean | null;
+          description?: string[] | null;
           created_at?: string;
+          updated_at?: string;
         };
         Relationships: [];
       };

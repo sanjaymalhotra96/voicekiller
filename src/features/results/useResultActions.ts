@@ -34,7 +34,7 @@ export function useResultActions(query: Pick<ResultsQuery, 'rename' | 'remove'>)
         cancelLabel: t('common.cancel'),
         onConfirm: () => {
           stop();
-          remove(item.id);
+          remove?.(item.id);
         },
       }),
     [t, stop, remove],
@@ -53,7 +53,7 @@ export function useResultActions(query: Pick<ResultsQuery, 'rename' | 'remove'>)
       onClose: () => setRenaming(null),
       onSave: (title: string) => {
         if (renaming) {
-          rename(renaming.id, title);
+          rename?.(renaming.id, title);
         }
         setRenaming(null);
       },

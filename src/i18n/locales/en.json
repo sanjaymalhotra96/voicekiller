@@ -87,14 +87,27 @@
     "rateLimited": "Too many attempts. Please wait a moment.",
     "unknown": "Something went wrong. Please try again.",
     "currentPasswordWrong": "Current password is incorrect.",
-    "uploadFailed": "Could not upload the photo. Please try again.",
-    "quotaExceeded": "You are out of minutes. Upgrade your plan to keep creating.",
+    "uploadFailed": "Could not upload the file. Please try again.",
+    "quotaExceeded": "You have reached your plan's limit. Upgrade your plan to keep creating.",
     "serviceUnavailable": "This feature is not available right now. Please try again later.",
     "campaignExists": "You already have a campaign with that name.",
-    "fileType": "Use an mp3, wav, m4a, mp4, mov, webm or ogg file.",
-    "fileTooLarge": "This file is larger than 4 MB. Please pick a shorter clip.",
+    "fileType": "This file type is not supported.",
+    "fileTooLarge": "This file is too large. Please pick a smaller one.",
     "micPermission": "Allow microphone access in Settings to record your voice.",
-    "shareUnavailable": "Sharing is not available on this device."
+    "shareUnavailable": "Sharing is not available on this device.",
+    "authRequired": "Your session has expired. Please sign in again.",
+    "studioRequired": "This needs the Studio plan.",
+    "notFound": "This file no longer exists.",
+    "paidPlanRequired": "This needs a paid plan.",
+    "jobFailed": "We couldn't finish this. Please try again.",
+    "jobTimeout": "This is taking longer than expected. Check Library in a few minutes.",
+    "sampleLength": "Use a voice sample at least 1 second long.",
+    "renameNotAllowed": "This file can't be renamed right now.",
+    "cancelled": "Cancelled.",
+    "purchasesUnavailable": "Subscriptions are not available yet. Please try again later.",
+    "purchaseFailed": "The purchase could not be completed. You have not been charged.",
+    "conversionFailed": "This file couldn't be turned into audio. Please try another file.",
+    "scriptTooLong": "Free plans can generate up to 1,000 characters at a time. Shorten the script or upgrade."
   },
   "tabs": {
     "dashboard": "Dashboard",
@@ -347,44 +360,57 @@
     "emptyFavorites": "No favorite voices yet. Tap the heart on a voice to keep it here.",
     "filters": {
       "title": "Filters",
-      "provider": "Provider",
+      "model": "Model",
       "gender": "Gender",
       "accent": "Accent",
       "language": "Language",
       "apply": "Apply Filters"
     },
-    "providers": {
-      "all": "All providers",
-      "expressive": "Expressive",
-      "directable": "Directable",
-      "directablePro": "Directable Pro",
-      "qwenTts": "Qwen-tts"
-    },
     "genders": {
       "female": "Female",
       "male": "Male",
       "neutral": "Neutral"
+    },
+    "models": {
+      "all": "All models",
+      "expressive": "Expressive",
+      "directable": "Directable",
+      "directablePro": "Directable Pro"
     }
   },
   "accents": {
     "auto": "Auto",
-    "ar-SA": "AR - Saudi Arabian",
-    "zh-north": "CN - Northern",
-    "zh-south": "CN - Southern",
+    "ar-001": "AR - Arabic",
+    "ar-EG": "AR - Egyptian",
+    "cs-CZ": "CS - Czech",
     "de-DE": "DE - German",
-    "en-US": "EN - American",
+    "el-GR": "EL - Greek",
     "en-AU": "EN - Australian",
+    "en-CA": "EN - Canadian",
     "en-GB": "EN - British",
+    "en-IE": "EN - Irish",
     "en-IN": "EN - Indian",
-    "en-US-south": "EN - Southern American",
-    "en-WA": "EN - West African",
+    "en-NZ": "EN - New Zealand",
+    "en-US": "EN - American",
+    "en-ZA": "EN - South African",
+    "es-419": "ES - Latin American",
     "es-ES": "ES - Spanish",
+    "fr-CA": "FR - Canadian",
     "fr-FR": "FR - French",
+    "hi-IN": "HI - Hindi",
     "it-IT": "IT - Italian",
     "ja-JP": "JA - Japanese",
+    "jv-ID": "JV - Javanese",
     "ko-KR": "KO - Korean",
+    "nl-NL": "NL - Dutch",
+    "pl-PL": "PL - Polish",
     "pt-BR": "PT - Brazilian",
-    "ru-RU": "RU - Russian"
+    "pt-PT": "PT - Portuguese",
+    "sw-KE": "SW - Kenyan Swahili",
+    "ta-IN": "TA - Tamil",
+    "te-IN": "TE - Telugu",
+    "vi-VN": "VI - Vietnamese",
+    "zh-CN": "ZH - Mandarin"
   },
   "languages": {
     "auto": "Auto",
@@ -475,7 +501,7 @@
     },
     "upload": {
       "title": "Upload Source Audio",
-      "hint": "Max {{max}}MB",
+      "hint": "Audio or video. The first {{seconds}} seconds are used.",
       "action": "Upload"
     },
     "record": {
@@ -497,7 +523,7 @@
     "guideSheet": {
       "title": "Recording guide",
       "tips": [
-        "Use 30 seconds to 2 minutes of clear speech from one speaker.",
+        "Use about 30 seconds of clear speech from one speaker. Longer clips are cut to the first 30 seconds.",
         "Record in a quiet room, without music or background noise.",
         "Speak naturally, in the tone you want the clone to have.",
         "Keep the microphone at a steady distance from your mouth."
@@ -543,7 +569,8 @@
     "change": "Change",
     "remove": "Remove {{name}}",
     "uploading": "Uploading {{percent}}%",
-    "maxSize": "Max {{max}}MB"
+    "maxSize": "Max {{max}}MB",
+    "preparing": "Preparing audio…"
   },
   "player": {
     "play": "Play",
@@ -593,8 +620,9 @@
       "transcription": "Transcription",
       "revert": "Revert to original",
       "generate": "Generate Audio",
-      "save": "Export & Save"
-    }
+      "done": "Done"
+    },
+    "uploadHint": "Audio or video, max {{max}}MB. The first {{minutes}} minutes are used."
   },
   "audioClean": {
     "title": "Audio Clean",
@@ -616,12 +644,12 @@
       "edit": "Edit line {{number}}",
       "done": "Done editing line {{number}}",
       "download": "Download",
-      "save": "Save",
       "formats": {
         "srt": "Subtitles (.srt)",
         "vtt": "Web subtitles (.vtt)",
         "txt": "Plain text (.txt)"
-      }
+      },
+      "finish": "Done"
     }
   },
   "offline": {

@@ -23,7 +23,8 @@ type Props = {
   onRemove: () => void;
 };
 
-// File input for tool screens. Empty: Upload. Uploading: % ring.
+// File input for tool screens. Empty: Upload. Preparing: converting
+// to audio. Uploading: % ring.
 // Ready: file name, size, delete and Change.
 export function UploadSlot({ state, title, hint, onPick, onRemove }: Props) {
   const { t } = useTranslation();
@@ -59,6 +60,7 @@ export function UploadSlot({ state, title, hint, onPick, onRemove }: Props) {
   }
 
   const uploading = state.status === 'uploading';
+  const preparing = state.status === 'preparing';
   return (
     <MediaPanel>
       <MediaPanelHeader
@@ -82,12 +84,13 @@ export function UploadSlot({ state, title, hint, onPick, onRemove }: Props) {
           ) : undefined
         }
         title={title}
-        hint={hint}
+        hint={preparing ? t('upload.preparing') : hint}
         action={
           <Button
             size="sm"
             variant="light"
             label={t('upload.action')}
+            loading={preparing}
             disabled={uploading}
             onPress={onPick}
           />

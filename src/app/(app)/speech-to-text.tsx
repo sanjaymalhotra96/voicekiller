@@ -1,5 +1,4 @@
 // Route: /speech-to-text
-import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -15,16 +14,19 @@ import {
   fileRules,
   LanguageId,
   maxMegabytes,
+  TranslationLanguageId,
+  translationLanguageIds,
 } from '@/domain';
+import { useLibraryJob } from '@/features/results/hooks';
 import { ResultsView } from '@/features/results/ResultsView';
 import { TranscriptSheet } from '@/features/speech-to-text/TranscriptSheet';
-import { useStatusBarStyle, useUploadSlot } from '@/hooks';
+import { useStatusBarStyle, useUnmountSignal, useUploadSlot } from '@/hooks';
 import {
   speechToTextService,
   TranscriptionSession,
-} from '@/services/mediaTools';
+} from '@/services/speechToText';
 
-const rules = fileRules.media;
+const rules = fileRules.transcription;
 
 // "harvard.wav" -> "harvard" for exported subtitle files.
 const baseName = (name: string) => name.replace(/\.[^.]+$/, '') || 'transcript';
@@ -33,21 +35,31 @@ const baseName = (name: string) => name.replace(/\.[^.]+$/, '') || 'transcript';
 export default function SpeechToTextScreen() {
   useStatusBarStyle('light-content');
   const { t } = useTranslation();
-  const source = useUploadSlot(rules, config.media.sourceBucket);
+  const source = useUploadSlot(rules);
+  // Leaving the screen stops the upload and the wait; the server still
+  // finishes and saves the transcript in Library.
+  const unmountSignal = useUnmountSignal();
   const [language, setLanguage] = useState<LanguageId>(
     config.defaultLanguage as LanguageId,
   );
-  const [translateTo, setTranslateTo] = useState<LanguageId | null>(null);
-  const transcribe = useMutation({ mutationFn: speechToTextService.transcribe });
+  const [translateTo, setTranslateTo] = useState<TranslationLanguageId | null>(null);
+  // The server saves the transcript as a Library file when it is done.
+  const transcribe = useLibraryJob(speechToTextService.transcribe);
   const [session, setSession] = useState<TranscriptionSession | null>(null);
   const fileName =
-    source.state.status === 'idle' ? 'transcript' : baseName(source.state.file.name);
+    'file' in source.state ? baseName(source.state.file.name) : 'transcript';
 
   const start = () => {
-    if (source.path) {
+    if (source.file) {
       transcribe.mutate(
-        { sourcePath: source.path, language, translateTo },
-        { onSuccess: setSession },
+        {
+          file: source.file,
+          language,
+          translateTo,
+          onProgress: source.showProgress,
+          signal: unmountSignal(),
+        },
+        { onSuccess: setSession, onError: () => source.showProgress(null) },
       );
     }
   };
@@ -74,6 +86,7 @@ export default function SpeechToTextScreen() {
         value={translateTo}
         onChange={setTranslateTo}
         noneLabel={t('speechToText.noTranslation')}
+        languages={translationLanguageIds}
       />
 
       <FormError error={source.error ?? transcribe.error} />
@@ -81,7 +94,7 @@ export default function SpeechToTextScreen() {
       <Button
         label={t('speechToText.submit')}
         loading={transcribe.isPending}
-        disabled={!source.path}
+        disabled={!source.file}
         onPress={start}
       />
 

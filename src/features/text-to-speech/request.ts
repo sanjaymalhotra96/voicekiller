@@ -1,6 +1,6 @@
 import {
   capabilitiesOf,
-  defaultSpeechSettings,
+  defaultCampaign,
   GenerateSpeechRequest,
   SpeechRequest,
 } from '@/domain';
@@ -19,11 +19,9 @@ export function toSpeechRequest(draft: SpeechDraft): SpeechRequest | null {
 
   return {
     script,
-    voiceId: draft.voice.id,
+    voice: draft.voice,
     emotion: can.emotions && draft.emotion !== 'auto' ? draft.emotion : null,
-    settings: can.tuning
-      ? draft.settings
-      : { ...defaultSpeechSettings, format: draft.settings.format },
+    settings: draft.settings,
     instructions: can.actingInstructions && instructions ? instructions : null,
   };
 }
@@ -37,19 +35,12 @@ export function toGenerateRequest(
     ? {
         ...request,
         title: draft.title.trim() || fallbackTitle,
-        campaignId: draft.campaignId,
+        campaignName: draft.campaignName ?? defaultCampaign,
       }
     : null;
 }
 
-// "We're a full-service UI/UX design agency that..." -> first words, as
-// the Library title when the user left File name empty.
-export function titleFromScript(script: string, maxLength = 40) {
-  const clean = script.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  if (clean.length <= maxLength) {
-    return clean;
-  }
-  const cut = clean.slice(0, maxLength);
-  const lastSpace = cut.lastIndexOf(' ');
-  return `${(lastSpace > maxLength / 2 ? cut.slice(0, lastSpace) : cut).trim()}…`;
-}
+// File name when the user left it empty, like the web dashboard:
+// "speech_1700000000" (seconds since 1970, so each one is unique).
+export const defaultFileName = (now = Date.now()) =>
+  `speech_${Math.floor(now / 1000)}`;

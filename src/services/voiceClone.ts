@@ -1,50 +1,85 @@
-import { randomUUID } from 'expo-crypto';
+import { cloneProvider, CreateCloneInput, Voice, voiceKey } from '@/domain';
 import { config } from '@/config';
-import { CreateCloneInput, fileExtension, Voice } from '@/domain';
-import type { TableRow } from '@/lib/database.types';
-import { AppError, toAppError } from '@/lib/errors';
-import { invokeFunction } from '@/lib/functions';
-import { supabase } from '@/lib/supabase';
-import { uploadFile } from '@/lib/uploadFile';
-import { voiceFromRow } from '@/services/ownVoices';
+import { apiRequest, apiUpload } from '@/lib/api';
+import { toUploadAudio } from '@/lib/audioConvert';
+import { AppError } from '@/lib/errors';
 
-// Voice Clone. Listing, renaming and deleting clones: services/ownVoices.
+// Voice Clone.
 //
-// Contract (implement in supabase/functions):
-//   voice-clone-create  body: { name, language, samplePath }
-//                       samplePath is in the private voice-samples bucket.
-//                       200 -> { voice: voices row }  (owner_id = caller,
-//                       source = 'cloned')
+// GET    /api/voice-clone/loadvoices
+//   -> { voiceClones: [{ id, dbId, name, originalId, sample, provider,
+//        gender, denoise, isCustom, CloneProvider }] }
+// POST   /api/voice-clone   multipart { name, audio, provider: "V3", language }
+//   -> { success, message }. Sample: 1 to 180 seconds, max 4 MB. Studio
+//   plans keep one clone: a new one replaces the previous.
+// DELETE /api/voice-clone/delete  { provider, modelId, id, name }
 
-const currentUserId = async () => {
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data.user) {
-    throw toAppError(error);
-  }
-  return data.user.id;
+type CloneDto = {
+  // Model id; empty when the plan saves only the sample.
+  id?: string | null;
+  dbId: string | number;
+  name?: string;
+  sample?: string | null;
+  CloneProvider?: string;
 };
 
+const toVoice = (clone: CloneDto): Voice => ({
+  id: voiceKey(cloneProvider, String(clone.dbId)),
+  // "" makes the server clone from the sample for each request.
+  voice: clone.id ?? '',
+  name: clone.name ?? '',
+  description: '',
+  provider: cloneProvider,
+  gender: 'neutral',
+  accent: '',
+  language: '',
+  source: 'cloned',
+  previewUrl: clone.sample || null,
+  createdAt: null,
+  plan: null,
+  recordId: String(clone.dbId),
+  cloneEngine: clone.CloneProvider ?? 'V1',
+});
+
 export const clonesService = {
-  // Streams the sample to Storage, then asks the server to clone it.
-  async create({ name, language, sample }: CreateCloneInput): Promise<Voice> {
-    const userId = await currentUserId();
-    const ext = fileExtension(sample.name) || 'm4a';
-    const samplePath = `${userId}/${randomUUID()}.${ext}`;
-
-    await uploadFile({
-      bucket: config.clone.sampleBucket,
-      path: samplePath,
-      file: sample,
-    }).promise;
-
-    const { voice } = await invokeFunction<{ voice: TableRow<'voices'> }>(
-      config.functions.createClone,
-      { name, language, samplePath },
+  async listMine(): Promise<Voice[]> {
+    const { voiceClones } = await apiRequest<{ voiceClones?: CloneDto[] }>(
+      '/api/voice-clone/loadvoices',
     );
-    const mapped = voiceFromRow(voice);
-    if (!mapped) {
-      throw new AppError('unknown', voice);
+    return (voiceClones ?? []).map(toVoice);
+  },
+
+  // Uploads the sample; resolves once the clone is created.
+  async create({ name, language, sample }: CreateCloneInput): Promise<void> {
+    const response = await apiUpload<{ success?: boolean; message?: string }>(
+      '/api/voice-clone',
+      {
+        name,
+        language,
+        provider: 'V3',
+        // A recording is m4a: mp3 it, and keep the first 30 seconds.
+        audio: await toUploadAudio(sample, {
+          maxSeconds: config.clone.sampleSeconds,
+          minSeconds: config.clone.minSampleSeconds,
+        }),
+      },
+      // 400: the sample is shorter than 1 s or longer than 180 s.
+      { codes: { 400: 'sampleLength' } },
+    );
+    if (response.success === false) {
+      throw new AppError('unknown', response);
     }
-    return mapped;
+  },
+
+  async remove(voice: Voice): Promise<void> {
+    await apiRequest('/api/voice-clone/delete', {
+      method: 'DELETE',
+      body: {
+        provider: voice.cloneEngine,
+        modelId: voice.voice,
+        id: voice.recordId,
+        name: voice.name,
+      },
+    });
   },
 };

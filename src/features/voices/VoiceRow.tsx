@@ -21,6 +21,8 @@ type Props = {
   playing: boolean;
   player: AudioPlayer;
   onTogglePlay: (voice: Voice) => void;
+  // In the user's favourites.
+  favorite: boolean;
   onToggleFavorite: (voice: Voice) => void;
   onSelect: (voice: Voice) => void;
 };
@@ -34,6 +36,7 @@ export const VoiceRow = memo(function VoiceRowInner({
   playing,
   player,
   onTogglePlay,
+  favorite,
   onToggleFavorite,
   onSelect,
 }: Props) {
@@ -69,12 +72,12 @@ export const VoiceRow = memo(function VoiceRowInner({
       </View>
       <IconButton
         variant="ghost"
-        icon={voice.isFavorite ? 'heartFilled' : 'heart'}
-        color={voice.isFavorite ? palette.primary.DEFAULT : palette.ink.subtle}
-        accessibilityLabel={t(voice.isFavorite ? 'voices.unfavorite' : 'voices.favorite', {
+        icon={favorite ? 'heartFilled' : 'heart'}
+        color={favorite ? palette.primary.DEFAULT : palette.ink.subtle}
+        accessibilityLabel={t(favorite ? 'voices.unfavorite' : 'voices.favorite', {
           name,
         })}
-        accessibilityState={{ checked: voice.isFavorite }}
+        accessibilityState={{ checked: favorite }}
         onPress={() => onToggleFavorite(voice)}
       />
       <Radio selected={selected} tone="ink" />

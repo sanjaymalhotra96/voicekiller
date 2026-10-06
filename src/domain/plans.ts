@@ -1,6 +1,6 @@
 // Subscription plan IDs. Must match the check constraint on
 // public.profiles.plan. Display data lives in features/account/plans.ts.
-export const planIds = ['basic', 'studio'] as const;
+const planIds = ['basic', 'studio'] as const;
 
 export type PlanId = (typeof planIds)[number];
 

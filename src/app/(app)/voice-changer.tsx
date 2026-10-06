@@ -9,12 +9,11 @@ import {
   ScreenHeader,
   UploadSlot,
 } from '@/components';
-import { config } from '@/config';
 import { fileRules, maxMegabytes } from '@/domain';
 import { useLibraryJob } from '@/features/results/hooks';
 import { ResultsView } from '@/features/results/ResultsView';
 import { useStatusBarStyle, useUploadSlot } from '@/hooks';
-import { voiceChangerService } from '@/services/mediaTools';
+import { voiceChangerService } from '@/services/voiceChanger';
 
 const rules = fileRules.changer;
 
@@ -22,23 +21,30 @@ const rules = fileRules.changer;
 export default function VoiceChangerScreen() {
   useStatusBarStyle('light-content');
   const { t } = useTranslation();
-  const source = useUploadSlot(rules, config.media.sourceBucket);
-  const target = useUploadSlot(rules, config.media.sourceBucket);
+  const source = useUploadSlot(rules);
+  const target = useUploadSlot(rules);
   const convert = useLibraryJob(voiceChangerService.convert);
   const hint = t('upload.maxSize', { max: maxMegabytes(rules) });
 
   const submit = () => {
-    if (source.path && target.path) {
-      convert.mutate(
-        { sourcePath: source.path, targetPath: target.path },
-        {
-          onSuccess: () => {
-            source.reset();
-            target.reset();
-          },
-        },
-      );
+    if (!source.file || !target.file) {
+      return;
     }
+    // Both files go up in one request: both rings show its progress.
+    const showProgress = (ratio: number | null) => {
+      source.showProgress(ratio);
+      target.showProgress(ratio);
+    };
+    convert.mutate(
+      { source: source.file, target: target.file, onProgress: showProgress },
+      {
+        onSuccess: () => {
+          source.reset();
+          target.reset();
+        },
+        onError: () => showProgress(null),
+      },
+    );
   };
 
   return (
@@ -72,7 +78,7 @@ export default function VoiceChangerScreen() {
       <Button
         label={t('voiceChanger.submit')}
         loading={convert.isPending}
-        disabled={!source.path || !target.path}
+        disabled={!source.file || !target.file}
         onPress={submit}
       />
 
