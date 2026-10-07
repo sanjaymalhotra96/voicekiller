@@ -1,6 +1,7 @@
 // Plain domain types and IDs. No React, no Supabase: every layer may
 // import from here, and this folder imports from nothing else in src.
 export * from '@/domain/campaigns';
+export * from '@/domain/entry';
 export * from '@/domain/voiceClone';
 export * from '@/domain/voiceDesign';
 export * from '@/domain/instructions';

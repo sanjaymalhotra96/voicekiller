@@ -1,4 +1,5 @@
 import React, { forwardRef, ReactNode, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TextInput, TextInputProps, View } from 'react-native';
 import { AppText, textVariants } from '@/components/ui/AppText';
 import { FieldLabel } from '@/components/ui/FieldLabel';
@@ -24,8 +25,6 @@ type TextAreaProps = Omit<TextInputProps, 'multiline'> & {
   className?: string;
 };
 
-const formatCount = (value: number) => value.toLocaleString('en-US');
-
 // Multi-line input: scripts, descriptions, transcriptions, prompts.
 export const TextArea = forwardRef<TextInput, TextAreaProps>(
   function TextAreaInner(
@@ -48,7 +47,10 @@ export const TextArea = forwardRef<TextInput, TextAreaProps>(
     },
     ref,
   ) {
+    const { i18n } = useTranslation();
     const [focused, setFocused] = useState(false);
+    // Digit grouping follows the app language ("1,000" / "1.000").
+    const formatCount = (n: number) => n.toLocaleString(i18n.language);
     const scheme = fieldTones[tone];
     const night = tone === 'night';
     const subtle = night ? 'text-night-subtle' : 'text-ink-subtle';

@@ -1,14 +1,11 @@
 import { useRouter } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ActivityIndicator,
-  FlatList,
-  ListRenderItem,
-  View,
-} from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { images } from '@/assets';
 import {
+  FlashList,
+  FlashListRenderItem,
   AppText,
   Button,
   EmptyState,
@@ -50,7 +47,7 @@ export function MyInstructionsTab() {
     [t, removeItem],
   );
 
-  const renderItem = useCallback<ListRenderItem<CustomInstruction>>(
+  const renderItem = useCallback<FlashListRenderItem<CustomInstruction>>(
     ({ item }) => (
       <CustomInstructionRow
         item={item}
@@ -120,7 +117,7 @@ export function MyInstructionsTab() {
         />
       </View>
       <FormError error={remove.error} />
-      <FlatList
+      <FlashList
         data={custom.data}
         keyExtractor={item => item.id}
         renderItem={renderItem}

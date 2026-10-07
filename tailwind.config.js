@@ -1,6 +1,6 @@
 const { palette } = require('./src/theme/palette');
 const { fontFamily } = require('./src/theme/fonts');
-const { control, borderWidth } = require('./src/theme/sizes');
+const { control, borderWidth, radius } = require('./src/theme/sizes');
 const {
   fontSize,
   lineHeight,
@@ -27,6 +27,7 @@ module.exports = {
       size: control,
       maxWidth: control,
       borderWidth,
+      borderRadius: radius,
     },
   },
   plugins: [],

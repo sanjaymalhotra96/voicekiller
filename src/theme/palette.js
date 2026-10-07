@@ -13,6 +13,9 @@ const palette = {
     // Voice chip on the dark editor.
     night: '#361E16',
     'night-line': '#765346',
+    // Text on the orange onboarding screen and its card labels.
+    ink: '#3A1607',
+    deep: '#A8350A',
   },
   // Dark surfaces (Text to Speech editor). bg-night, border-night-line...
   night: {

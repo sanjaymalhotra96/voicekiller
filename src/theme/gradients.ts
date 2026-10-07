@@ -1,6 +1,6 @@
 import { alpha, palette } from '@/theme/palette';
 
-const { ai, glow, primary, surface } = palette;
+const { ai, canvas, glow, primary, surface } = palette;
 
 // A tint that fades from `opacity` at `at` to transparent at `stop`.
 const glowAt = (at: string, hex: string, opacity: number, stop: string) =>
@@ -28,6 +28,10 @@ const gradients = {
   // AI actions and round play buttons: orange into purple.
   ai: `linear-gradient(90deg, ${ai.from} 0%, ${ai.to} 100%)`,
   play: `linear-gradient(135deg, ${ai.from} 0%, ${ai.to} 100%)`,
+
+  // Soft edges on the onboarding marquee rows.
+  fadeLeft: `linear-gradient(90deg, ${canvas} 0%, ${alpha(canvas, 0)} 100%)`,
+  fadeRight: `linear-gradient(270deg, ${canvas} 0%, ${alpha(canvas, 0)} 100%)`,
 } as const;
 
 export type GradientName = keyof typeof gradients;

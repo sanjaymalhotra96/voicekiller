@@ -1,13 +1,15 @@
 import { useRouter } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, View } from 'react-native';
 import {
-  ActivityIndicator,
-  FlatList,
-  ListRenderItem,
-  View,
-} from 'react-native';
-import { Button, ChipTabs, EmptyState, TextField } from '@/components';
+  FlashList,
+  FlashListRenderItem,
+  Button,
+  ChipTabs,
+  EmptyState,
+  TextField,
+} from '@/components';
 import type { ActingInstruction } from '@/domain';
 import { useActingInstructions } from '@/features/instructions/hooks';
 import { InstructionRow } from '@/features/instructions/InstructionRow';
@@ -16,7 +18,6 @@ import { useInstructionSelection } from '@/features/instructions/useInstructionS
 import { usePlayback } from '@/hooks';
 import { errorMessageKey } from '@/lib/errors';
 import { palette } from '@/theme';
-import { clipOffscreenRows } from '@/utils';
 
 const EMPTY: ActingInstruction[] = [];
 
@@ -41,7 +42,7 @@ export function InstructionLibraryTab() {
   );
   const { selectLibrary, libraryId } = selection;
 
-  const renderItem = useCallback<ListRenderItem<ActingInstruction>>(
+  const renderItem = useCallback<FlashListRenderItem<ActingInstruction>>(
     ({ item }) => {
       const active = playback.activeId === item.id;
       return (
@@ -111,12 +112,11 @@ export function InstructionLibraryTab() {
         returnKeyType="search"
         autoCorrect={false}
       />
-      <FlatList
+      <FlashList
         data={filters.visible}
         keyExtractor={item => item.id}
         renderItem={renderItem}
         extraData={playback.activeId}
-        removeClippedSubviews={clipOffscreenRows}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}

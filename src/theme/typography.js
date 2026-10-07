@@ -13,15 +13,18 @@ const fontSize = {
   heading: '26px', // screen titles
   display: '30px', // welcome / verify titles
   badge: '34px', // OTP "****" bubble
+  hero: '44px', // onboarding titles
 };
 
 const lineHeight = {
   lead: '26px',
   badge: '40px',
+  hero: '46px',
 };
 
 const letterSpacing = {
   badge: '6px',
+  hero: '-1.3px',
 };
 
 const aspectRatio = {

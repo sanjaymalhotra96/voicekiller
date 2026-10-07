@@ -21,6 +21,7 @@ const plainBackgrounds = {
   none: 'bg-canvas',
   surface: 'bg-surface',
   night: 'bg-night',
+  primary: 'bg-primary',
 } as const;
 type PlainBackground = keyof typeof plainBackgrounds;
 
@@ -95,10 +96,7 @@ export function SafeArea({
 // SafeArea options per route file name. Unlisted routes get the defaults
 // (brand gradient, all edges, no scroll); `null` means no wrapper (used for
 // nested navigators such as the tabs).
-type SafeAreaLayouts = Record<
-  string,
-  Omit<SafeAreaProps, 'children'> | null
->;
+type SafeAreaLayouts = Record<string, Omit<SafeAreaProps, 'children'> | null>;
 
 // Common presets for the layouts above.
 export const safeAreaPresets = {
@@ -113,8 +111,7 @@ export const safeAreaPresets = {
   page: {
     background: 'surface',
     className: 'px-4',
-    edges:
-      Platform.OS === 'ios' ? ['bottom', 'left', 'right'] : ALL_EDGES,
+    edges: Platform.OS === 'ios' ? ['bottom', 'left', 'right'] : ALL_EDGES,
   },
 } as const satisfies Record<string, Omit<SafeAreaProps, 'children'>>;
 

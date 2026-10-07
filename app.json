@@ -11,7 +11,8 @@
     "newArchEnabled": true,
     "ios": {
       "bundleIdentifier": "com.voicekiller",
-      "icon": "./src/assets/app/icon.png"
+      "icon": "./src/assets/app/icon.png",
+      "usesAppleSignIn": true
     },
     "android": {
       "package": "com.voicekiller",
@@ -55,7 +56,8 @@
       "./plugins/withAndroidBuildProperties",
       "./plugins/withReleaseSigning",
       "./plugins/withAudioConversion",
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-apple-authentication"
     ],
     "scheme": "voicekiller",
     "userInterfaceStyle": "light",

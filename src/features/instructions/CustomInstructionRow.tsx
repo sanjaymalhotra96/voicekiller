@@ -1,12 +1,7 @@
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
-import {
-  AppText,
-  ExpandableText,
-  IconButton,
-  Radio,
-} from '@/components';
+import { AppText, ExpandableText, IconButton, Radio } from '@/components';
 import type { CustomInstruction } from '@/domain';
 import { palette } from '@/theme';
 import { formatDate } from '@/utils';

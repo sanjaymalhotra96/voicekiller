@@ -4,6 +4,8 @@
 //   EXPO_PUBLIC_SUPABASE_URL       Supabase > Project Settings > API
 //   EXPO_PUBLIC_SUPABASE_ANON_KEY  Supabase > Project Settings > API
 //   EXPO_PUBLIC_API_URL            Voice Killer web API base URL (no /api)
+//   EXPO_PUBLIC_ONBOARDING_ACTING_KEY  key for the onboarding acting demo
+//   EXPO_PUBLIC_ONBOARDING_CLONE_KEY   key for the onboarding clone demo
 //   EXPO_PUBLIC_REVENUECAT_ANDROID_KEY  RevenueCat > API keys (goog_...)
 //   EXPO_PUBLIC_REVENUECAT_IOS_KEY      RevenueCat > API keys (appl_...)
 //   EXPO_PUBLIC_PRIVACY_URL        Settings > Privacy Policy (optional)
@@ -48,12 +50,6 @@ export const config = {
     allTabPerGroup: 3,
     // Wait this long after typing before searching.
     searchDebounceMs: 300,
-    // FlatList virtualisation: rows kept mounted around the viewport.
-    list: {
-      initialNumToRender: 12,
-      maxToRenderPerBatch: 10,
-      windowSize: 7,
-    },
   },
   // Contact Us: the Chatwoot website widget (app/(app)/support.tsx). The
   // website token is public: it is in every page that shows the widget.
@@ -62,6 +58,12 @@ export const config = {
       baseUrl: 'https://app.chatwoot.com',
       websiteToken: 'YvFNYYDJXTdXEp6kcFtDcJS2',
     },
+  },
+  // Onboarding demos (POST /api/app-onboard/acting and /clone). Called
+  // before sign-in, so they send these fixed keys rather than a user token.
+  onboarding: {
+    actingKey: process.env.EXPO_PUBLIC_ONBOARDING_ACTING_KEY ?? '',
+    cloneKey: process.env.EXPO_PUBLIC_ONBOARDING_CLONE_KEY ?? '',
   },
   // Settings links, set in .env. Empty: Share sends a message without a
   // link, and Privacy Policy does nothing.
@@ -86,11 +88,6 @@ export const config = {
   voices: {
     pageSize: 30,
     searchDebounceMs: 300,
-    list: {
-      initialNumToRender: 10,
-      maxToRenderPerBatch: 10,
-      windowSize: 7,
-    },
   },
   speechEditor: {
     // Recordings are cut to their first this-many seconds (the server

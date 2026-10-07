@@ -35,6 +35,14 @@ export const fieldTones = {
     placeholder: palette.ink.subtle,
     icon: palette.ink.subtle,
   },
+  // Warm tint with a peach border (onboarding acting instructions).
+  warm: {
+    box: 'border-line bg-primary-wash',
+    focus: 'border-primary bg-primary-wash',
+    text: 'text-primary-ink',
+    placeholder: palette.ink.subtle,
+    icon: palette.ink.subtle,
+  },
   // Dark editor (Text to Speech).
   night: {
     box: 'border-night-line bg-night-surface',

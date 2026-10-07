@@ -7,6 +7,7 @@ import { cn } from '@/utils';
 // TextInput reuses these strings too: className={textVariants.input}.
 export const textVariants = {
   display: 'font-sans-bold text-display text-ink',
+  hero: 'font-sans-bold text-hero leading-hero tracking-hero text-ink',
   badge: 'font-sans-bold text-badge leading-badge tracking-badge text-ink',
   heading: 'font-sans-bold text-heading leading-8 text-ink',
   title: 'font-sans-bold text-2xl text-ink',

@@ -1,8 +1,9 @@
 import { useAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-// Anything with audio: a Library file, a voice sample, a preview.
-type Playable = { id: string; audioUrl: string | null };
+// Anything with audio: a Library file, a voice sample, a preview. A number
+// is a bundled clip (require('...wav')).
+type Playable = { id: string; audioUrl: string | number | null };
 
 // One shared player for a list (one native player, however many rows): tapping another item switches tracks,
 // tapping the active item toggles play/pause.
@@ -54,10 +55,14 @@ export function usePlayback() {
         }
         return;
       }
-      if (!item.audioUrl) {
+      if (item.audioUrl === null || item.audioUrl === '') {
         return;
       }
-      player.replace({ uri: item.audioUrl });
+      player.replace(
+        typeof item.audioUrl === 'number'
+          ? item.audioUrl
+          : { uri: item.audioUrl },
+      );
       player.play();
       setActiveId(item.id);
     },

@@ -4,6 +4,7 @@
 // grid in currentColor so <Icon color> can tint them, then add them here.
 import type { FC } from 'react';
 import type { SvgProps } from 'react-native-svg';
+import NavigationArrowDown from '@/assets/icons/navigation/arrow-down.svg';
 import NavigationArrowRight from '@/assets/icons/navigation/arrow-right.svg';
 import NavigationCaretDown from '@/assets/icons/navigation/caret-down.svg';
 import NavigationChevronDown from '@/assets/icons/navigation/chevron-down.svg';
@@ -26,6 +27,7 @@ import ActionsSearch from '@/assets/icons/actions/search.svg';
 import ActionsSettings from '@/assets/icons/actions/settings.svg';
 import ActionsShare from '@/assets/icons/actions/share.svg';
 import ActionsSparkles from '@/assets/icons/actions/sparkles.svg';
+import ActionsTap from '@/assets/icons/actions/tap.svg';
 import ActionsTrash from '@/assets/icons/actions/trash.svg';
 import ActionsUpload from '@/assets/icons/actions/upload.svg';
 import ActionsWand from '@/assets/icons/actions/wand.svg';
@@ -58,6 +60,7 @@ import MediaPause from '@/assets/icons/media/pause.svg';
 import MediaPlay from '@/assets/icons/media/play.svg';
 import MediaStop from '@/assets/icons/media/stop.svg';
 import MediaVoice from '@/assets/icons/media/voice.svg';
+import MediaVolumeOff from '@/assets/icons/media/volume-off.svg';
 import MediaVolume from '@/assets/icons/media/volume.svg';
 import SpeechEmotion from '@/assets/icons/speech/emotion.svg';
 import TabsHome from '@/assets/icons/tabs/home.svg';
@@ -73,6 +76,7 @@ import ToolsVoiceDesign from '@/assets/icons/tools/voice-design.svg';
 
 export const glyphs = {
   // navigation/
+  arrowDown: NavigationArrowDown,
   arrowRight: NavigationArrowRight,
   caretDown: NavigationCaretDown,
   chevronDown: NavigationChevronDown,
@@ -96,6 +100,7 @@ export const glyphs = {
   settings: ActionsSettings,
   share: ActionsShare,
   sparkles: ActionsSparkles,
+  tap: ActionsTap,
   trash: ActionsTrash,
   upload: ActionsUpload,
   wand: ActionsWand,
@@ -133,6 +138,7 @@ export const glyphs = {
   stop: MediaStop,
   voice: MediaVoice,
   volume: MediaVolume,
+  volumeOff: MediaVolumeOff,
   // speech/
   emotion: SpeechEmotion,
   // tabs/

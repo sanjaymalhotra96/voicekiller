@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, View } from 'react-native';
 import {
-  ActivityIndicator,
-  FlatList,
-  ListRenderItem,
-  View,
-} from 'react-native';
-import { Button, EmptyState, FormError } from '@/components';
-import { config } from '@/config';
+  FlashList,
+  FlashListRenderItem,
+  Button,
+  EmptyState,
+  FormError,
+} from '@/components';
 import type { Voice, VoiceQuery } from '@/domain';
 import {
   useFavoriteVoices,
@@ -18,7 +18,6 @@ import { VoiceRow } from '@/features/voices/VoiceRow';
 import { usePlayback } from '@/hooks';
 import { errorMessageKey } from '@/lib/errors';
 import { palette } from '@/theme';
-import { clipOffscreenRows } from '@/utils';
 
 type Props = {
   query: VoiceQuery;
@@ -49,7 +48,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
   );
   const toggleFavorite = favorite.toggle;
 
-  const renderItem = useCallback<ListRenderItem<Voice>>(
+  const renderItem = useCallback<FlashListRenderItem<Voice>>(
     ({ item }) => {
       const active = playback.activeId === item.id;
       return (
@@ -105,13 +104,11 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
   return (
     <View className="flex-1">
       <FormError error={favorite.error ?? favorites.error} className="mb-2" />
-      <FlatList
+      <FlashList
         data={items}
         keyExtractor={voice => voice.id}
         renderItem={renderItem}
         extraData={playback.activeId}
-        {...config.voices.list}
-        removeClippedSubviews={clipOffscreenRows}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         // iOS: rows under the keyboard stay reachable.

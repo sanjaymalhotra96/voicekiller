@@ -33,6 +33,9 @@ type Options = {
   codes?: StatusCodes;
   timeoutMs?: number;
   signal?: AbortSignal;
+  // Fixed API key sent instead of the user's access token, for the few
+  // endpoints called before sign-in (onboarding).
+  token?: string;
 };
 
 // The API often answers 400/403/500 with a message that says more than
@@ -85,11 +88,14 @@ const headersFor = (baseUrl: string, token: string) => ({
 });
 
 // Base URL and the current access token, or why there is none.
-async function session() {
+async function session(fixedToken?: string) {
   const { baseUrl } = config.api;
   if (!baseUrl) {
     log('api', 'EXPO_PUBLIC_API_URL is not set in .env');
     throw new AppError('serviceUnavailable', 'EXPO_PUBLIC_API_URL missing');
+  }
+  if (fixedToken) {
+    return { baseUrl, token: fixedToken };
   }
   const { data } = await supabase.auth.getSession();
   const token = data.session?.access_token;
@@ -109,9 +115,14 @@ async function send(
     codes,
     timeoutMs = config.api.timeoutMs,
     signal,
+    token: fixedToken,
   }: Options,
 ) {
-  const { baseUrl, token } = await session();
+  const { baseUrl, token } = await session(fixedToken);
+  // Cancelled while the token was read: the listener below would never fire.
+  if (signal?.aborted) {
+    throw new AppError('cancelled');
+  }
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   const cancel = () => controller.abort();
@@ -149,14 +160,20 @@ async function send(
 }
 
 // JSON request and response.
-export async function apiRequest<T>(path: string, options: Options = {}): Promise<T> {
+export async function apiRequest<T>(
+  path: string,
+  options: Options = {},
+): Promise<T> {
   const response = await send(path, options);
   return parseJson(await response.text()) as T;
 }
 
 // A request that answers with audio, saved for listening (lib/audioCache).
 // Returns a uri a player can open.
-export async function apiAudio(path: string, options: Options = {}): Promise<string> {
+export async function apiAudio(
+  path: string,
+  options: Options = {},
+): Promise<string> {
   const response = await send(path, { method: 'POST', ...options });
   const bytes = new Uint8Array(await response.arrayBuffer());
   return saveAudio(bytes, 'mp3');
@@ -197,6 +214,10 @@ export async function apiUpload<T>(
     }
   }
 
+  // Cancelled while preparing: don't start sending a (possibly huge) file.
+  if (signal?.aborted) {
+    throw new AppError('cancelled');
+  }
   const xhr = new XMLHttpRequest();
   const cancel = () => xhr.abort();
   signal?.addEventListener('abort', cancel);
@@ -212,7 +233,8 @@ export async function apiUpload<T>(
           onProgress?.(event.loaded / event.total);
         }
       };
-      xhr.onload = () => resolve({ status: xhr.status, text: xhr.responseText });
+      xhr.onload = () =>
+        resolve({ status: xhr.status, text: xhr.responseText });
       xhr.onerror = () => reject(new AppError('network'));
       xhr.ontimeout = () => reject(new AppError('network', 'timeout'));
       xhr.onabort = () => reject(new AppError('cancelled'));

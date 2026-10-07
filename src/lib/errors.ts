@@ -40,6 +40,7 @@ export type AppErrorCode =
   | 'samePassword'
   | 'passwordNotSet'
   | 'googleSignInFailed'
+  | 'appleSignInFailed'
   | 'unknown';
 
 export class AppError extends Error {

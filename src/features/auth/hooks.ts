@@ -12,6 +12,10 @@ export const useSignIn = () => useMutation({ mutationFn: authService.signIn });
 export const useGoogleSignIn = () =>
   useMutation({ mutationFn: authService.signInWithGoogle });
 
+// Apple (iOS): same as Google, through the native Apple sheet.
+export const useAppleSignIn = () =>
+  useMutation({ mutationFn: authService.signInWithApple });
+
 export const useSignOut = () =>
   useMutation({ mutationFn: authService.signOut });
 

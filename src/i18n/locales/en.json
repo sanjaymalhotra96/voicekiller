@@ -110,7 +110,8 @@
     "scriptTooLong": "Free plans can generate up to 1,000 characters at a time. Shorten the script or upgrade.",
     "samePassword": "Your new password must be different from your current one.",
     "passwordNotSet": "You signed up with Google, so this account has no password to change.",
-    "googleSignInFailed": "Google sign-in didn't finish. Please try again."
+    "googleSignInFailed": "Google sign-in didn't finish. Please try again.",
+    "appleSignInFailed": "Apple sign-in didn't finish. Please try again."
   },
   "tabs": {
     "dashboard": "Dashboard",
@@ -662,5 +663,126 @@
   "support": {
     "title": "Contact Us",
     "error": "Chat couldn't load. Check your connection and try again."
+  },
+  "onboarding": {
+    "step": "Step {{step}} of {{total}}",
+    "next": "Next",
+    "playSample": "Play {{name}} sample",
+    "stopSample": "Stop {{name}} sample",
+    "voices": {
+      "title": "AI voices that actually <brand>act.</brand>",
+      "subtitle": "Text to speech, voice cloning & more.",
+      "samples": {
+        "happy": "Happy",
+        "angry": "Angry",
+        "sarcastic": "Sarcastic",
+        "excited": "Excited",
+        "crying": "Crying",
+        "pirate": "Pirate",
+        "scared": "Scared",
+        "laughing": "Laughing",
+        "calm": "Calm",
+        "evilVillain": "Evil Villain",
+        "dramatic": "Dramatic",
+        "confident": "Confident",
+        "nervous": "Nervous",
+        "romantic": "Romantic",
+        "sleepy": "Sleepy",
+        "energetic": "Energetic",
+        "madScientist": "Mad Scientist",
+        "horror": "Horror",
+        "surprised": "Surprised",
+        "awkward": "Awkward",
+        "shocked": "Shocked",
+        "tired": "Tired",
+        "santaClaus": "Santa Claus",
+        "curious": "Curious",
+        "playful": "Playful",
+        "serious": "Serious",
+        "sad": "Sad",
+        "rap": "Rap",
+        "disappointed": "Disappointed",
+        "sportsCommentator": "Sports Commentator"
+      }
+    },
+    "direct": {
+      "title": "Now you direct the voice.",
+      "subtitle": "Pick a feeling. Hit play.",
+      "actingLabel": "Acting instructions",
+      "actingPlaceholder": "Describe how it should be said",
+      "scriptLabel": "Script",
+      "script": "I can’t believe you did this. After everything we’ve been through.",
+      "generate": "Generate",
+      "generating": "Generating…",
+      "playing": "Playing",
+      "tags": {
+        "awkward": {
+          "label": "Awkward",
+          "text": "Awkward delivery with hesitant timing and uncertain inflection"
+        },
+        "crying": {
+          "label": "Crying",
+          "text": "Read this while crying"
+        },
+        "laugh": {
+          "label": "Laugh",
+          "text": "Laughing delivery with audible amusement."
+        },
+        "sarcasm": {
+          "label": "Sarcasm",
+          "text": "Sarcastic delivery with dry, pointed emphasis."
+        },
+        "relieved": {
+          "label": "Relieved",
+          "text": "Relieved — you were worried they wouldn’t come."
+        },
+        "excited": {
+          "label": "Excited",
+          "text": "Excited delivery with bright inflection and quick pacing."
+        }
+      }
+    },
+    "stop": "Stop playback",
+    "clone": {
+      "title": "Clone a voice <brand>in seconds.</brand>",
+      "subtitle": "Hear the real voice. Then make it say anything.",
+      "playReal": "Play real {{name}} voice",
+      "stopReal": "Stop real {{name}} voice",
+      "lineLabel": "Make {{name}} say",
+      "linePlaceholder": "Type anything",
+      "play": "Play the clone",
+      "cloning": "Cloning {{name}}…",
+      "playing": "Playing · {{name}} clone"
+    },
+    "change": {
+      "title": "Change your voice. Keep your style.",
+      "subtitle": "Best for voice mimicry videos.",
+      "before": "Before",
+      "beforeCaption": "Your normal voice",
+      "after": "After",
+      "turnInto": "Turn it into",
+      "play": "Play {{name}}",
+      "stop": "Stop {{name}}"
+    },
+    "clean": {
+      "title": "Bad audio? Fixed in <brand>one tap.</brand>",
+      "subtitle": "Remove noise, echo, and hum. Keep only your voice.",
+      "play": "Play",
+      "pause": "Pause",
+      "noisy": "Noisy",
+      "clean": "Clean",
+      "switch": "Clean audio",
+      "hint": "Try flipping it while it plays."
+    },
+    "edit": {
+      "title": "Fix mistakes by editing text.",
+      "subtitle": "Change a word. Your voice says it. No re-recording.",
+      "original": "Original",
+      "fixed": "Fixed",
+      "wordWrong": "{{word}}, mistake. Tap to fix it",
+      "wordFixed": "{{word}}. Fixed from {{from}}. Tap to undo",
+      "hintWrong": "Tap the mistake to fix it.",
+      "hintFixed": "Fixed. Tap again to undo."
+    }
   }
 }

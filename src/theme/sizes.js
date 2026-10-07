@@ -1,7 +1,7 @@
 // Size tokens shared by tailwind.config.js and components.
 // Tailwind: h-control, h-button, h-button-sm, size-otp, size-checkbox,
 // size-icon-btn, size-tile, size-avatar, h-indicator, h-action-card,
-// border-welcome-ring.
+// border-welcome-ring, border-emphasis, rounded-card, rounded-panel.
 
 const control = {
   control: '60px', // text fields, auth buttons
@@ -32,10 +32,21 @@ const control = {
   'stop-active': '26px', // selected delivery mode stop
   'count-badge': '18px', // red count bubble on the filter button
   textarea: '200px', // multi-line inputs in light screens
+  pill: '52px', // tappable sound pills (onboarding samples, voices)
+  'compare-row': '72px', // Before / After clip rows (onboarding)
+  'wave-box': '150px', // large waveform panel (onboarding audio clean)
+  'switch-track': '68px', // width of a toggle switch track
 };
 
 const borderWidth = {
   'welcome-ring': '1.5px', // rings around the welcome logo
+  emphasis: '1.5px', // selected pills and highlighted rows
+};
+
+// Corner radii beyond Tailwind's scale.
+const radius = {
+  card: '28px', // large white cards (onboarding)
+  panel: '20px', // panels inside a card
 };
 
 // Icon glyph sizes in dp: <Icon size={iconSize.md} />
@@ -76,4 +87,4 @@ const layout = {
   ringStroke: 3,
 };
 
-module.exports = { control, borderWidth, iconSize, layout };
+module.exports = { control, borderWidth, radius, iconSize, layout };

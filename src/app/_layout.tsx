@@ -10,7 +10,12 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { fontAssets } from '@/assets';
 import { ErrorBoundary, OfflineSheet } from '@/components';
+import { entryGroups } from '@/domain';
 import { AuthProvider, useSession } from '@/features/auth/AuthProvider';
+import {
+  completeOnboarding,
+  useOnboardingCompleted,
+} from '@/features/onboarding/store';
 import { queryClient } from '@/lib/queryClient';
 import { stackScreenOptions } from '@/theme';
 
@@ -20,10 +25,12 @@ SplashScreen.preventAutoHideAsync();
 // Fade into the first screen instead of cutting to it.
 SplashScreen.setOptions({ fade: true, duration: 300 });
 
-// Signed in -> (app); signed out -> (auth). Supabase session changes
-// (sign in, OTP verified, sign out) switch between them automatically.
+// Signed in -> (app); signed out -> (onboarding) at launch, then
+// (auth). Supabase session changes (sign in, OTP verified, sign out) and
+// finishing onboarding switch between them automatically.
 function SessionStack() {
   const { session, isLoading } = useSession();
+  const onboarded = useOnboardingCompleted();
 
   useEffect(() => {
     if (!isLoading) {
@@ -31,16 +38,28 @@ function SessionStack() {
     }
   }, [isLoading]);
 
+  // Signed in at any point this run: a later sign-out opens Welcome, not
+  // onboarding. (A fresh launch while signed out still shows onboarding.)
+  useEffect(() => {
+    if (session) {
+      completeOnboarding();
+    }
+  }, [session]);
+
   if (isLoading) {
     return null;
   }
 
+  const groups = entryGroups(!!session, onboarded);
   return (
     <Stack screenOptions={stackScreenOptions}>
-      <Stack.Protected guard={!session}>
+      <Stack.Protected guard={groups.onboarding}>
+        <Stack.Screen name="(onboarding)" />
+      </Stack.Protected>
+      <Stack.Protected guard={groups.auth}>
         <Stack.Screen name="(auth)" />
       </Stack.Protected>
-      <Stack.Protected guard={!!session}>
+      <Stack.Protected guard={groups.app}>
         <Stack.Screen name="(app)" />
       </Stack.Protected>
     </Stack>

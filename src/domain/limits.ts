@@ -17,4 +17,8 @@ export const textLimits = {
   // Text to Speech script and Speech Editor transcription. Free plans
   // are limited to 1000 characters by the server (error: scriptTooLong).
   script: 50_000,
+  // Onboarding demos: custom acting instructions and the line a preset
+  // clone says.
+  onboardingInstructions: 200,
+  onboardingCloneScript: 200,
 } as const;

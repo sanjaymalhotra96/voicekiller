@@ -1,14 +1,11 @@
 // Route: /library
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ActivityIndicator,
-  FlatList,
-  ListRenderItem,
-  View,
-} from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { images } from '@/assets';
 import {
+  FlashList,
+  FlashListRenderItem,
   ActionSheet,
   AppText,
   ChipTabs,
@@ -26,7 +23,7 @@ import { usePlayback } from '@/hooks';
 import { config } from '@/config';
 import { textLimits } from '@/domain';
 import { palette } from '@/theme';
-import { clipOffscreenRows, cn } from '@/utils';
+import { cn } from '@/utils';
 
 export default function LibraryScreen() {
   const { t } = useTranslation();
@@ -75,7 +72,7 @@ export default function LibraryScreen() {
     () => ({ activeId: playback.activeId, playing: playback.playing }),
     [playback.activeId, playback.playing],
   );
-  const renderRow = useCallback<ListRenderItem<LibraryRow>>(
+  const renderRow = useCallback<FlashListRenderItem<LibraryRow>>(
     ({ item: row, index }) => {
       if (row.type === 'header') {
         return (
@@ -130,13 +127,13 @@ export default function LibraryScreen() {
       );
     }
     return (
-      <FlatList
+      <FlashList
         data={rows}
         keyExtractor={row => row.key}
+        // Headers and file rows are recycled separately.
+        getItemType={row => row.type}
         renderItem={renderRow}
         extraData={extraData}
-        {...config.library.list}
-        removeClippedSubviews={clipOffscreenRows}
         className="flex-1"
         contentContainerClassName={cn('pb-6', rows.length === 0 && 'flex-1')}
         keyboardShouldPersistTaps="handled"

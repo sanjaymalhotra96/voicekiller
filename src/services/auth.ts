@@ -1,4 +1,11 @@
+import * as AppleAuthentication from 'expo-apple-authentication';
+import {
+  CryptoDigestAlgorithm,
+  digestStringAsync,
+  randomUUID,
+} from 'expo-crypto';
 import { openAuthSessionAsync } from 'expo-web-browser';
+import { Platform } from 'react-native';
 import { config } from '@/config';
 import { AppError } from '@/lib/errors';
 import { throwIfError } from '@/lib/supabaseResult';
@@ -26,6 +33,8 @@ type AuthService = {
   sendPasswordReset(email: string): Promise<void>;
   // False when the user closed the Google page without signing in.
   signInWithGoogle(): Promise<boolean>;
+  // iOS only. False when the user dismissed the Apple sheet.
+  signInWithApple(): Promise<boolean>;
 };
 
 // The values Supabase puts on the way back, in the query (?code=) or the
@@ -98,6 +107,59 @@ export const authService: AuthService = {
       );
     } else {
       throw new AppError('googleSignInFailed', params.get('error_description'));
+    }
+    return true;
+  },
+  // Native Sign in with Apple (iOS). Apple's sheet returns an identity
+  // token, which Supabase verifies and turns into a session; no browser.
+  // A nonce ties that token to this request: Apple gets its SHA-256, and
+  // Supabase gets the raw value to check against it.
+  async signInWithApple() {
+    if (Platform.OS !== 'ios') {
+      throw new AppError('appleSignInFailed', 'iOS only');
+    }
+    const nonce = randomUUID();
+    const hashedNonce = await digestStringAsync(
+      CryptoDigestAlgorithm.SHA256,
+      nonce,
+    );
+    let credential: AppleAuthentication.AppleAuthenticationCredential;
+    try {
+      credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+        nonce: hashedNonce,
+      });
+    } catch (error) {
+      if ((error as { code?: string }).code === 'ERR_REQUEST_CANCELED') {
+        return false;
+      }
+      throw new AppError('appleSignInFailed', error);
+    }
+    if (!credential.identityToken) {
+      throw new AppError('appleSignInFailed', 'no identity token');
+    }
+    throwIfError(
+      await supabase.auth.signInWithIdToken({
+        provider: 'apple',
+        token: credential.identityToken,
+        nonce,
+      }),
+    );
+    // Apple shares the name only on the very first sign-in and never puts
+    // it in the token, so save it now (same field as email sign-up).
+    const fullName = [
+      credential.fullName?.givenName,
+      credential.fullName?.familyName,
+    ]
+      .filter(Boolean)
+      .join(' ');
+    if (fullName) {
+      throwIfError(
+        await supabase.auth.updateUser({ data: { full_name: fullName } }),
+      );
     }
     return true;
   },

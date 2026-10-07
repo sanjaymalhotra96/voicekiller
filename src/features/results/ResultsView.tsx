@@ -1,13 +1,10 @@
 import { useRouter } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, View } from 'react-native';
 import {
-  ActivityIndicator,
-  FlatList,
-  ListRenderItem,
-  View,
-} from 'react-native';
-import {
+  FlashList,
+  FlashListRenderItem,
   AppText,
   Button,
   EmptyState,
@@ -36,7 +33,6 @@ import { useResultActions } from '@/features/results/useResultActions';
 import { errorMessageKey } from '@/lib/errors';
 import { palette } from '@/theme';
 import type { OwnVoiceSource } from '@/services/ownVoices';
-import { clipOffscreenRows } from '@/utils';
 
 // `recent`: section on a tool screen (title, "View all", first few cards,
 // no scrolling of its own). `all`: the full, virtualised "My ..." grid.
@@ -115,7 +111,7 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
     ],
   );
   // Half-width cells, so an odd last card keeps its size.
-  const renderItem = useCallback<ListRenderItem<ResultItem>>(
+  const renderItem = useCallback<FlashListRenderItem<ResultItem>>(
     ({ item }) => <View className="w-1/2 p-1.5">{renderCard(item)}</View>,
     [renderCard],
   );
@@ -212,15 +208,12 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
   return (
     <View className="flex-1 gap-3">
       <FormError error={query.mutationError} />
-      <FlatList
+      <FlashList
         data={query.items}
         keyExtractor={item => item.id}
         renderItem={renderItem}
         extraData={playback.activeId}
         numColumns={2}
-        initialNumToRender={8}
-        windowSize={7}
-        removeClippedSubviews={clipOffscreenRows}
         onEndReachedThreshold={0.5}
         onEndReached={query.fetchNextPage}
         ListFooterComponent={
