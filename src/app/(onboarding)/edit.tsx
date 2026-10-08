@@ -19,7 +19,7 @@ import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
 import { completeOnboarding } from '@/features/onboarding/store';
 import { useClipPlayer } from '@/features/onboarding/useClipPlayer';
 import { useStatusBarStyle } from '@/hooks';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const ORIGINAL_ID = 'original';
@@ -28,6 +28,7 @@ const FIXED_ID = 'fixed';
 // Step 6: "Fix mistakes by editing text." Tap the wrong word in the
 // transcript to fix it, then hear the original and the edited take.
 export default function OnboardingEditScreen() {
+  const colors = useColors();
   const { t } = useTranslation();
   useStatusBarStyle('light-content');
   const [fixed, setFixed] = useState(false);
@@ -69,7 +70,7 @@ export default function OnboardingEditScreen() {
       })}
       onPress={onWord}
       className="bg-primary-soft font-sans-bold text-primary-deep underline"
-      style={{ textDecorationColor: palette.primary.dark }}
+      style={{ textDecorationColor: colors.primary.dark }}
     >
       {` ${editorWrongWord} `}
     </Text>
@@ -88,7 +89,7 @@ export default function OnboardingEditScreen() {
           tone="neutral"
           title={t('onboarding.edit.original')}
           wave={editorWave}
-          waveColors={editorOriginalColors}
+          waveColors={editorOriginalColors(colors)}
           playing={playingId === ORIGINAL_ID}
           onPress={() => playOrStop(ORIGINAL_ID, editorOriginalUrl)}
         />
@@ -105,7 +106,7 @@ export default function OnboardingEditScreen() {
             <Icon
               name={fixed ? 'check' : 'tap'}
               size={iconSize.sm}
-              color={fixed ? palette.ink.DEFAULT : palette.primary.deep}
+              color={fixed ? colors.ink.DEFAULT : colors.primary.deep}
             />
             <AppText
               className={cn(
@@ -126,7 +127,7 @@ export default function OnboardingEditScreen() {
           tone="highlight"
           title={t('onboarding.edit.fixed')}
           wave={editorWave}
-          waveColors={editorFixedColors}
+          waveColors={editorFixedColors(colors)}
           playing={playingId === FIXED_ID}
           disabled={!fixed}
           onPress={() => playOrStop(FIXED_ID, editorFixedUrl)}

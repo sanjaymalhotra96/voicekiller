@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { TextInput, View } from 'react-native';
 import { AppText, IconButton, textVariants } from '@/components';
 import { formatTimestamp, TranscriptSegment } from '@/domain';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -21,6 +21,7 @@ export const SegmentRow = memo(function SegmentRowInner({
   rtl,
   onChange,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const [editing, setEditing] = useState(false);
   const number = index + 1;
@@ -48,7 +49,7 @@ export const SegmentRow = memo(function SegmentRowInner({
             value={segment.text}
             onChangeText={text => onChange(index, text)}
             accessibilityLabel={t('speechToText.sheet.edit', { number })}
-            selectionColor={palette.primary.DEFAULT}
+            selectionColor={colors.primary.DEFAULT}
             className={cn(
               'flex-1 rounded-lg border border-primary bg-surface px-3 py-2',
               textVariants.body,
@@ -68,7 +69,7 @@ export const SegmentRow = memo(function SegmentRowInner({
         <IconButton
           variant="ghost"
           icon={editing ? 'check' : 'edit'}
-          color={palette.ink.muted}
+          color={colors.ink.muted}
           accessibilityLabel={
             editing
               ? t('speechToText.sheet.done', { number })

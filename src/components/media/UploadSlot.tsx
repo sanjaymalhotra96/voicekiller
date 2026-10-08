@@ -7,7 +7,7 @@ import { AppText } from '@/components/ui/AppText';
 import { Button } from '@/components/ui/Button';
 import { IconButton } from '@/components/ui/IconButton';
 import type { UploadSlotState } from '@/hooks/useUploadSlot';
-import { control, palette } from '@/theme';
+import { control, useColors } from '@/theme';
 import { formatBytes } from '@/utils/format';
 
 // Ring size in dp: the `play` bubble token.
@@ -26,6 +26,7 @@ type Props = {
 // File input for tool screens. Empty: Upload. Uploading: % ring.
 // Ready: file name, size, delete and Change.
 export function UploadSlot({ state, title, hint, onPick, onRemove }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
 
   if (state.status === 'ready') {
@@ -41,7 +42,7 @@ export function UploadSlot({ state, title, hint, onPick, onRemove }: Props) {
               <IconButton
                 variant="ghost"
                 icon="trash"
-                color={palette.danger.DEFAULT}
+                color={colors.danger.DEFAULT}
                 accessibilityLabel={t('upload.remove', { name: file.name })}
                 onPress={onRemove}
               />
@@ -73,7 +74,7 @@ export function UploadSlot({ state, title, hint, onPick, onRemove }: Props) {
               <ProgressRing
                 size={RING}
                 ratio={state.percent / 100}
-                trackColor={palette.night.line}
+                trackColor={colors.night.line}
               />
               <AppText variant="tag" className="absolute text-night-text">
                 {`${state.percent}%`}

@@ -13,7 +13,7 @@ import { defaultCampaign, textLimits } from '@/domain';
 import { useCampaigns } from '@/features/text-to-speech/hooks';
 import { useSpeechDraft } from '@/features/text-to-speech/store';
 import type { EditorSheetProps } from '@/features/text-to-speech/types';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const sameName = (a: string, b: string) =>
@@ -23,6 +23,7 @@ const sameName = (a: string, b: string) =>
 // only a name saved with each file, so a new one exists on the server as
 // soon as a file is generated with it.
 export function CampaignSheet({ visible, onClose }: EditorSheetProps) {
+  const colors = useColors();
   const { t } = useTranslation();
   const campaignName = useSpeechDraft(state => state.campaignName);
   const setCampaign = useSpeechDraft(state => state.setCampaign);
@@ -101,14 +102,14 @@ export function CampaignSheet({ visible, onClose }: EditorSheetProps) {
                 trimmed ? 'bg-primary' : 'bg-line-neutral',
               )}
             >
-              <Icon name="add" size={iconSize.md} color={palette.surface} />
+              <Icon name="add" size={iconSize.md} color={colors.contrast} />
             </Pressable>
           }
         />
         {duplicate ? <Banner message={t('errors.campaignExists')} /> : null}
         <FormError error={campaigns.error} />
         {campaigns.isPending ? (
-          <ActivityIndicator color={palette.primary.DEFAULT} />
+          <ActivityIndicator color={colors.primary.DEFAULT} />
         ) : (
           <OptionList
             options={options}

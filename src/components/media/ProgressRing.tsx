@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, { Circle } from 'react-native-svg';
-import { layout, palette } from '@/theme';
+import { layout, useColors } from '@/theme';
 
 type Props = {
   // Outer diameter in dp.
@@ -18,10 +18,14 @@ const clamp = (value: number) => Math.min(1, Math.max(0, value));
 export function ProgressRing({
   size,
   ratio,
-  color = palette.primary.DEFAULT,
-  trackColor = palette.primary.soft,
+  color: colorProp,
+  trackColor: trackColorProp,
   stroke = layout.ringStroke,
 }: Props) {
+  const colors = useColors();
+  // Defaults: orange on a peach track.
+  const color = colorProp ?? colors.primary.DEFAULT;
+  const trackColor = trackColorProp ?? colors.primary.soft;
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
   const centre = size / 2;

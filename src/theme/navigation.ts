@@ -1,16 +1,19 @@
-import { palette } from '@/theme/palette';
+import type { Palette } from '@/theme/ThemeProvider';
 
-// Look shared by every Stack in src/app.
-export const stackScreenOptions = {
-  headerShown: false,
-  animation: 'slide_from_right',
-  contentStyle: { backgroundColor: palette.canvas },
-} as const;
+// Look shared by every Stack in src/app, from the active palette:
+// stackScreenOptions(useColors()).
+export const stackScreenOptions = (colors: Palette) =>
+  ({
+    headerShown: false,
+    animation: 'slide_from_right',
+    contentStyle: { backgroundColor: colors.canvas },
+  }) as const;
 
 // Screen background shown behind transitions, per screen look.
-export const screenContentStyles = {
-  // Dark editor (Text to Speech).
-  night: { backgroundColor: palette.night.DEFAULT },
-  // White pages (Acting Instruction modal).
-  surface: { backgroundColor: palette.surface },
-} as const;
+export const screenContentStyles = (colors: Palette) =>
+  ({
+    // Dark editor (Text to Speech).
+    night: { backgroundColor: colors.night.DEFAULT },
+    // White pages (Acting Instruction modal).
+    surface: { backgroundColor: colors.surface },
+  }) as const;

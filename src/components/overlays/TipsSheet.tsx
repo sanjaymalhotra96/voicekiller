@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { BottomSheet } from '@/components/overlays/BottomSheet';
 import { AppText } from '@/components/ui/AppText';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 
 type Props = {
   visible: boolean;
@@ -14,6 +14,7 @@ type Props = {
 
 // Checklist of tips (the "Guide" pill on Voice Clone and Voice Design).
 export function TipsSheet({ visible, onClose, title, tips }: Props) {
+  const colors = useColors();
   return (
     <BottomSheet visible={visible} onClose={onClose} title={title}>
       <View className="gap-4">
@@ -22,7 +23,7 @@ export function TipsSheet({ visible, onClose, title, tips }: Props) {
             <Icon
               name="checkCircle"
               size={iconSize.md}
-              color={palette.success.DEFAULT}
+              color={colors.success.DEFAULT}
             />
             <AppText variant="body" className="flex-1 text-ink">
               {tip}

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { AppText } from '@/components/ui/AppText';
 import { Button, ButtonVariant } from '@/components/ui/Button';
 import { IconButton } from '@/components/ui/IconButton';
-import { layout, palette } from '@/theme';
+import { layout, useColors } from '@/theme';
 
 type DialogAction = {
   label: string;
@@ -25,6 +25,7 @@ type Props = {
 // Centred dialog with a close button and side-by-side actions
 // ("Save changes?  Discard | Confirm").
 export function Dialog({ visible, onClose, title, message, actions }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
 
   return (
@@ -41,7 +42,7 @@ export function Dialog({ visible, onClose, title, message, actions }: Props) {
         accessibilityLabel={t('common.close')}
         onPress={onClose}
         className="flex-1 items-center justify-center px-6"
-        style={{ backgroundColor: palette.overlay }}
+        style={{ backgroundColor: colors.overlay }}
       >
         {/* Inner Pressable swallows taps so they don't close the dialog. */}
         <Pressable

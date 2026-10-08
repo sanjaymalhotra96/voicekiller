@@ -16,12 +16,13 @@ import { OnboardingCard } from '@/features/onboarding/OnboardingCard';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
 import { TakeButton } from '@/features/onboarding/TakeButton';
 import { useCrossfadePair } from '@/features/onboarding/useCrossfadePair';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
 // Step 5: "Bad audio? Fixed in one tap." One recording plays; the switch
 // crossfades between the noisy original and the cleaned version.
 export default function OnboardingCleanScreen() {
+  const colors = useColors();
   const router = useRouter();
   const { t } = useTranslation();
   const pair = useCrossfadePair(noisyAudioUrl, cleanAudioUrl);
@@ -50,7 +51,7 @@ export default function OnboardingCleanScreen() {
         >
           <EqualizerBars
             heights={clean ? cleanWave : noisyWave}
-            color={clean ? palette.primary.DEFAULT : palette.ink.inactive}
+            color={clean ? colors.primary.DEFAULT : colors.ink.inactive}
             gap={4}
             barWidth={4}
             animated={pair.playing}

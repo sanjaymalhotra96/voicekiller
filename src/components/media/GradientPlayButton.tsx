@@ -3,7 +3,7 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import { PlaybackRing } from '@/components/media/PlaybackRing';
 import { Icon } from '@/components/ui/Icon';
-import { control, gradientStyle, iconSize, layout, palette } from '@/theme';
+import { control, gradientStyle, iconSize, layout, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 // Diameter in dp, from the `play-lg` size token.
@@ -31,6 +31,7 @@ export function GradientPlayButton({
   accessibilityLabel,
   disabled = false,
 }: Props) {
+  const colors = useColors();
   return (
     <Pressable
       accessibilityRole="button"
@@ -39,7 +40,7 @@ export function GradientPlayButton({
       hitSlop={layout.hitSlop}
       disabled={disabled}
       onPress={onPress}
-      style={active || disabled ? undefined : gradientStyle('play')}
+      style={active || disabled ? undefined : gradientStyle(colors, 'play')}
       className={cn(
         'size-play-lg items-center justify-center overflow-hidden rounded-full active:opacity-80',
         active ? 'bg-surface' : 'bg-ai',
@@ -54,7 +55,7 @@ export function GradientPlayButton({
       <Icon
         name={active && playing ? 'pause' : 'play'}
         size={iconSize.md}
-        color={active ? palette.primary.DEFAULT : palette.surface}
+        color={active ? colors.primary.DEFAULT : colors.contrast}
       />
     </Pressable>
   );

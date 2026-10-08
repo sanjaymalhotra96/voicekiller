@@ -9,7 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { pillLooks, SoundPill } from '@/features/onboarding/SoundPill';
 import type { OnboardingSample } from '@/features/onboarding/voicesDemo';
-import { gradientStyle } from '@/theme';
+import { gradientStyle, useColors } from '@/theme';
 
 type Props = {
   samples: OnboardingSample[];
@@ -32,6 +32,7 @@ export function MarqueeRow({
   activeId,
   onPress,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const reduceMotion = useReducedMotion();
   const reverse = index % 2 === 1;
@@ -118,12 +119,12 @@ export function MarqueeRow({
       <View
         pointerEvents="none"
         className="absolute bottom-0 left-0 top-0 w-7"
-        style={gradientStyle('fadeLeft')}
+        style={gradientStyle(colors, 'fadeLeft')}
       />
       <View
         pointerEvents="none"
         className="absolute bottom-0 right-0 top-0 w-7"
-        style={gradientStyle('fadeRight')}
+        style={gradientStyle(colors, 'fadeRight')}
       />
     </View>
   );

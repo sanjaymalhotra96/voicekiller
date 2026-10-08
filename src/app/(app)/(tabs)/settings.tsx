@@ -8,26 +8,20 @@ import { config } from '@/config';
 import { ProfileCard } from '@/features/account/ProfileCard';
 import { SettingsAction, settingsMenu } from '@/features/account/settingsMenu';
 import { useSignOut } from '@/features/auth/hooks';
-import { useUpgrade } from '@/features/subscription/hooks';
+import { useOpenSubscription } from '@/features/subscription/hooks';
 import { openLink } from '@/utils';
 
 export default function SettingsScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const signOut = useSignOut();
-  const upgrade = useUpgrade();
+  const openSubscription = useOpenSubscription();
   const { links } = config;
-
-  // RevenueCat paywall when free; the store's subscription page when paid.
-  const openSubscription = () => {
-    if (!upgrade.isPending) {
-      upgrade.mutate();
-    }
-  };
 
   const handlers: Record<SettingsAction, () => void> = {
     personalInfo: () => router.push('/personal-info'),
     changePassword: () => router.push('/change-password'),
+    // Unlock Studio when free; the store's subscription page when paid.
     subscription: openSubscription,
     // Links come from .env. Share works without one; Privacy does
     // nothing until EXPO_PUBLIC_PRIVACY_URL is set.
@@ -74,7 +68,7 @@ export default function SettingsScreen() {
         );
       })}
 
-      <FormError error={upgrade.error ?? signOut.error} />
+      <FormError error={signOut.error} />
       {/* Signing out flips RootNavigator back to Welcome. */}
       <Button
         variant="dangerSoft"

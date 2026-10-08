@@ -32,6 +32,25 @@ module.exports = {
   },
   overrides: [
     {
+      // App code imports through the @/ alias only, never ./ or ../.
+      // (Root config files run in plain Node, where @/ does not exist.)
+      files: ['src/**'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            patterns: [
+              {
+                group: ['./*', '../*'],
+                message:
+                  'Import with the @/ alias (e.g. @/components), not a relative path.',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
       // Where the tokens are defined.
       files: ['src/theme/**', 'tailwind.config.js'],
       rules: { 'no-restricted-syntax': 'off' },

@@ -4,7 +4,7 @@ import { TextInput, TextInputProps, View } from 'react-native';
 import { AppText, textVariants } from '@/components/ui/AppText';
 import { FieldLabel } from '@/components/ui/FieldLabel';
 import { FieldTone, fieldTones } from '@/components/ui/fieldTones';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type TextAreaProps = Omit<TextInputProps, 'multiline'> & {
@@ -47,11 +47,12 @@ export const TextArea = forwardRef<TextInput, TextAreaProps>(
     },
     ref,
   ) {
+    const colors = useColors();
     const { i18n } = useTranslation();
     const [focused, setFocused] = useState(false);
     // Digit grouping follows the app language ("1,000" / "1.000").
     const formatCount = (n: number) => n.toLocaleString(i18n.language);
-    const scheme = fieldTones[tone];
+    const scheme = fieldTones(colors)[tone];
     const night = tone === 'night';
     const subtle = night ? 'text-night-subtle' : 'text-ink-subtle';
     const count =
@@ -84,7 +85,7 @@ export const TextArea = forwardRef<TextInput, TextAreaProps>(
             maxLength={maxLength}
             className={cn('flex-1', textVariants.body, scheme.text)}
             placeholderTextColor={scheme.placeholder}
-            selectionColor={palette.primary.DEFAULT}
+            selectionColor={colors.primary.DEFAULT}
             onFocus={e => {
               setFocused(true);
               onFocus?.(e);

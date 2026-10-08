@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, Palette, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Segment<K extends string> = {
@@ -22,38 +22,40 @@ type Props<K extends string> = {
   className?: string;
 };
 
-const styles = {
-  tabs: {
-    track: 'flex-row rounded-xl border border-line-neutral bg-muted p-1',
-    item: 'h-segment flex-1 flex-row items-center justify-center gap-2 rounded-lg',
-    on: 'bg-primary',
-    off: '',
-    textOn: 'text-surface',
-    textOff: 'text-ink-subtle',
-    iconOn: palette.surface,
-    iconOff: palette.ink.subtle,
-  },
-  cards: {
-    track: 'flex-row gap-5',
-    item: 'h-option flex-1 flex-row items-center justify-center gap-2 rounded-xl border',
-    on: 'border-primary-soft bg-primary-soft',
-    off: 'border-muted bg-muted',
-    textOn: 'text-primary',
-    textOff: 'text-ink',
-    iconOn: palette.primary.DEFAULT,
-    iconOff: palette.ink.DEFAULT,
-  },
-  night: {
-    track: 'flex-row rounded-xl border border-night-line bg-night-surface p-1.5',
-    item: 'h-segment flex-1 flex-row items-center justify-center gap-2 rounded-lg',
-    on: 'bg-primary-night',
-    off: '',
-    textOn: 'text-night-text',
-    textOff: 'text-night-muted',
-    iconOn: palette.night.text,
-    iconOff: palette.night.muted,
-  },
-} as const;
+const styles = (c: Palette) =>
+  ({
+    tabs: {
+      track: 'flex-row rounded-xl border border-line-neutral bg-muted p-1',
+      item: 'h-segment flex-1 flex-row items-center justify-center gap-2 rounded-lg',
+      on: 'bg-primary',
+      off: '',
+      textOn: 'text-contrast',
+      textOff: 'text-ink-subtle',
+      iconOn: c.contrast,
+      iconOff: c.ink.subtle,
+    },
+    cards: {
+      track: 'flex-row gap-5',
+      item: 'h-option flex-1 flex-row items-center justify-center gap-2 rounded-xl border',
+      on: 'border-primary-soft bg-primary-soft',
+      off: 'border-muted bg-muted',
+      textOn: 'text-primary',
+      textOff: 'text-ink',
+      iconOn: c.primary.DEFAULT,
+      iconOff: c.ink.DEFAULT,
+    },
+    night: {
+      track:
+        'flex-row rounded-xl border border-night-line bg-night-surface p-1.5',
+      item: 'h-segment flex-1 flex-row items-center justify-center gap-2 rounded-lg',
+      on: 'bg-primary-night',
+      off: '',
+      textOn: 'text-night-text',
+      textOff: 'text-night-muted',
+      iconOn: c.night.text,
+      iconOff: c.night.muted,
+    },
+  } as const);
 
 // Single choice between a few options shown side by side.
 export function SegmentedControl<K extends string>({
@@ -63,7 +65,8 @@ export function SegmentedControl<K extends string>({
   variant = 'tabs',
   className,
 }: Props<K>) {
-  const s = styles[variant];
+  const colors = useColors();
+  const s = styles(colors)[variant];
   return (
     <View accessibilityRole="tablist" className={cn(s.track, className)}>
       {segments.map(segment => {

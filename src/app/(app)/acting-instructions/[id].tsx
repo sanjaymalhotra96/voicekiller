@@ -16,11 +16,12 @@ import { DetailSection } from '@/features/instructions/DetailSection';
 import { useActingInstructions } from '@/features/instructions/hooks';
 import { useInstructionSelection } from '@/features/instructions/useInstructionSelection';
 import { usePlayback } from '@/hooks';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 
 // Script, acting instructions and an audio sample for one library entry.
 // Read from the cached library list, so it opens without a request.
 export default function InstructionDetailScreen() {
+  const colors = useColors();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useTranslation();
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function InstructionDetailScreen() {
   if (library.isPending) {
     return (
       <View className="flex-1 items-center justify-center">
-        <ActivityIndicator color={palette.primary.DEFAULT} />
+        <ActivityIndicator color={colors.primary.DEFAULT} />
       </View>
     );
   }

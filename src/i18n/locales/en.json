@@ -106,6 +106,7 @@
     "cancelled": "Cancelled.",
     "purchasesUnavailable": "Subscriptions are not available yet. Please try again later.",
     "purchaseFailed": "The purchase could not be completed. You have not been charged.",
+    "nothingToRestore": "No previous purchase was found for this store account.",
     "conversionFailed": "This file couldn't be turned into audio. Please try another file.",
     "scriptTooLong": "Free plans can generate up to 1,000 characters at a time. Shorten the script or upgrade.",
     "samePassword": "Your new password must be different from your current one.",
@@ -226,6 +227,26 @@
       "subtitle": "Transcribe audio",
       "tag": "Speech to Text"
     }
+  },
+  "paywall": {
+    "title": "Unlock Studio",
+    "close": "Close",
+    "features": {
+      "voices": "2,000+ voices",
+      "clones": "Unlimited voice clones",
+      "audioClean": "Audio Clean",
+      "voiceChanger": "Voice Changer",
+      "speechEditor": "AI Speech Editor"
+    },
+    "yearly": "Yearly",
+    "monthly": "Monthly",
+    "minutes": "{{count}} minutes/month",
+    "save": "Save {{percent}}%",
+    "continue": "Continue",
+    "cancelAnytime": "Cancel anytime",
+    "restore": "Restore",
+    "terms": "Terms",
+    "privacy": "Privacy"
   },
   "plan": {
     "basic": "Basic Plan",

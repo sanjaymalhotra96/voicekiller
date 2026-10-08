@@ -17,7 +17,7 @@ import {
 import { VoiceRow } from '@/features/voices/VoiceRow';
 import { usePlayback } from '@/hooks';
 import { errorMessageKey } from '@/lib/errors';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 
 type Props = {
   query: VoiceQuery;
@@ -29,6 +29,7 @@ type Props = {
 // player. Mounted only while the picker is open, so the player and the
 // pages are released when it closes.
 export function VoiceList({ query, selectedId, onSelect }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const voices = useVoices(query);
   const favorite = useToggleFavorite();
@@ -80,7 +81,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
   if (voices.isPending) {
     return (
       <View className="flex-1 items-center justify-center">
-        <ActivityIndicator color={palette.primary.DEFAULT} />
+        <ActivityIndicator color={colors.primary.DEFAULT} />
       </View>
     );
   }
@@ -124,7 +125,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
           voices.isFetchingNextPage ? (
             <ActivityIndicator
               className="py-4"
-              color={palette.primary.DEFAULT}
+              color={colors.primary.DEFAULT}
             />
           ) : null
         }

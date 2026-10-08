@@ -6,3 +6,4 @@ export * from '@/theme/shadows';
 export * from '@/theme/sizes';
 export * from '@/theme/tones';
 export * from '@/theme/typography';
+export * from '@/theme/ThemeProvider';

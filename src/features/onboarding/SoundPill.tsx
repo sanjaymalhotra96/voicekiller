@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Pressable, View } from 'react-native';
 import { AppText, Icon } from '@/components';
 import { EqualizerBars } from '@/features/onboarding/EqualizerBars';
-import { palette, shadows } from '@/theme';
+import { shadows, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const BAR_HEIGHTS = [12, 16, 10];
@@ -41,13 +41,14 @@ export const SoundPill = memo(function SoundPillInner({
   onPress,
   className,
 }: Props) {
+  const colors = useColors();
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
       accessibilityState={{ selected }}
       onPress={() => onPress(id)}
-      style={selected ? shadows.pillActive : undefined}
+      style={selected ? shadows(colors).pillActive : undefined}
       className={cn(
         'h-pill flex-row items-center gap-2.5 rounded-full border-emphasis pl-2 pr-5 active:opacity-80',
         selected ? 'border-primary bg-surface' : look.box,
@@ -61,9 +62,9 @@ export const SoundPill = memo(function SoundPillInner({
         )}
       >
         {sounding ? (
-          <EqualizerBars heights={BAR_HEIGHTS} color={palette.surface} />
+          <EqualizerBars heights={BAR_HEIGHTS} color={colors.contrast} />
         ) : (
-          <Icon name="play" size={14} color={palette.primary.dark} />
+          <Icon name="play" size={14} color={colors.primary.dark} />
         )}
       </View>
       <AppText className="font-sans-semibold text-lg text-ink">{label}</AppText>

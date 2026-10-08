@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { FormError } from '@/components/form/FormError';
 import { Icon, IconName } from '@/components/ui/Icon';
 import { TextField } from '@/components/ui/TextField';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 
 type Props = {
   visible: boolean;
@@ -40,6 +40,7 @@ export function ConfirmSheet({
   illustration,
   icon = 'trash',
 }: Props) {
+  const colors = useColors();
   const [typed, setTyped] = useState('');
   const matches = typed.trim() === confirmWord;
 
@@ -59,7 +60,7 @@ export function ConfirmSheet({
           <Icon
             name={icon}
             size={iconSize.xxl}
-            color={palette.primary.DEFAULT}
+            color={colors.primary.DEFAULT}
           />
         )}
         <AppText variant="title" className="mt-2 text-center">

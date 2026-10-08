@@ -1,6 +1,6 @@
 import React from 'react';
 import { glyphs, IconName } from '@/assets';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 
 export type { IconName } from '@/assets';
 
@@ -15,8 +15,12 @@ type Props = {
 export function Icon({
   name,
   size = iconSize.md,
-  color = palette.ink.subtle,
+  color,
 }: Props) {
+  const colors = useColors();
   const Glyph = glyphs[name];
-  return <Glyph width={size} height={size} color={color} />;
+  // Default: subtle grey of the active scheme.
+  return (
+    <Glyph width={size} height={size} color={color ?? colors.ink.subtle} />
+  );
 }

@@ -28,7 +28,7 @@ import { AppText } from '@/components/ui/AppText';
 import { IconButton } from '@/components/ui/IconButton';
 import { config } from '@/config';
 import { useKeyboardHeight } from '@/hooks/useKeyboardHeight';
-import { layout, palette } from '@/theme';
+import { layout, useColors } from '@/theme';
 import { dismissKeyboardOnBlankTouch } from '@/utils';
 
 type Props = {
@@ -70,6 +70,7 @@ export function BottomSheet({
   scrollable = true,
   children,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { height: screenHeight } = useWindowDimensions();
@@ -183,7 +184,11 @@ export function BottomSheet({
       {/* Gestures inside an Android Modal need their own root view. */}
       <GestureHandlerRootView style={styles.fill}>
         <Animated.View
-          style={[StyleSheet.absoluteFill, styles.backdrop, backdropStyle]}
+          style={[
+            StyleSheet.absoluteFill,
+            { backgroundColor: colors.overlay },
+            backdropStyle,
+          ]}
         >
           <Pressable
             style={styles.fill}
@@ -201,7 +206,11 @@ export function BottomSheet({
             onLayout={event => setSheetHeight(event.nativeEvent.layout.height)}
             // Blank space anywhere in the sheet closes the keyboard.
             onStartShouldSetResponder={dismissKeyboardOnBlankTouch}
-            style={[styles.sheet, { height: fixedHeight, maxHeight }, sheetStyle]}
+            style={[
+              styles.sheet,
+              { height: fixedHeight, maxHeight, backgroundColor: colors.surface },
+              sheetStyle,
+            ]}
           >
             <GestureDetector gesture={pan}>
               {/* Handle + header: drag here; a tap closes the keyboard. */}
@@ -271,9 +280,7 @@ export function BottomSheet({
 const styles = StyleSheet.create({
   fill: { flex: 1 },
   bottom: { justifyContent: 'flex-end' },
-  backdrop: { backgroundColor: palette.overlay },
   sheet: {
-    backgroundColor: palette.surface,
     borderTopLeftRadius: layout.sheetRadius,
     borderTopRightRadius: layout.sheetRadius,
     overflow: 'hidden',

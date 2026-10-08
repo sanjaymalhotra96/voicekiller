@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { ProgressBar } from '@/components/media/ProgressBar';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 
 type Props = {
   uri: string;
@@ -14,6 +14,7 @@ type Props = {
 // sheets (Speech Editor, Speech to Text). Owns one player for `uri`,
 // released when the card unmounts. Give it `key={uri}` to switch audio.
 export function AudioPlayerCard({ uri }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const player = useAudioPlayer(uri);
   const { playing, currentTime, duration, didJustFinish } =
@@ -43,7 +44,7 @@ export function AudioPlayerCard({ uri }: Props) {
         <Icon
           name={playing ? 'pause' : 'play'}
           size={iconSize.md}
-          color={palette.primary.DEFAULT}
+          color={colors.primary.DEFAULT}
         />
       </Pressable>
     </View>

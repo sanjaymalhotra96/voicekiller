@@ -4,7 +4,7 @@ import { AppText } from '@/components/ui/AppText';
 import { Artwork, ArtworkSource } from '@/components/ui/Artwork';
 import { Button } from '@/components/ui/Button';
 import type { IconName } from '@/components/ui/Icon';
-import { gradientStyle, layout } from '@/theme';
+import { gradientStyle, layout, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -26,13 +26,14 @@ export function ActionCard({
   illustration,
   className,
 }: Props) {
+  const colors = useColors();
   return (
     <View
       className={cn(
         'h-action-card flex-row items-center overflow-hidden rounded-2xl border border-line px-5',
         className,
       )}
-      style={gradientStyle('actionCard')}
+      style={gradientStyle(colors, 'actionCard')}
     >
       <View className="flex-1 items-start gap-3">
         <AppText variant="cardTitle" className="text-xl">

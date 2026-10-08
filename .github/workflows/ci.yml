@@ -32,3 +32,5 @@ jobs:
       - name: Lint
         run: npm run lint -- --max-warnings=0
 
+      - name: Test
+        run: npm test -- --ci

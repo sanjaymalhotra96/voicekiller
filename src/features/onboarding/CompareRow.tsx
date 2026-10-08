@@ -3,34 +3,37 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { AppText, Icon } from '@/components';
 import { EqualizerBars } from '@/features/onboarding/EqualizerBars';
-import { palette } from '@/theme';
+import { Palette, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const BAR_HEIGHTS = [14, 18, 11];
 
-const tones = {
+const tones = (c: Palette) =>
+  ({
   // Before: grey, dark play glyph.
   neutral: {
     box: 'border-line-neutral bg-field',
     circle: 'bg-surface',
     circleOn: 'bg-ink',
-    glyph: palette.ink.DEFAULT,
+    bars: c.surface,
+    glyph: c.ink.DEFAULT,
     caption: 'font-sans text-ink-subtle',
-    wave: palette.ink.inactive,
+    wave: c.ink.inactive,
   },
   // After: orange highlight.
   highlight: {
     box: 'border-line bg-primary-wash',
     circle: 'bg-primary',
     circleOn: 'bg-primary-dark',
-    glyph: palette.surface,
+    bars: c.contrast,
+    glyph: c.contrast,
     caption: 'font-sans-semibold text-primary-deep',
-    wave: palette.primary.DEFAULT,
+    wave: c.primary.DEFAULT,
   },
-} as const;
+  }) as const;
 
 type Props = {
-  tone: keyof typeof tones;
+  tone: keyof ReturnType<typeof tones>;
   title: string;
   caption?: string;
   wave: readonly number[];
@@ -55,8 +58,9 @@ export function CompareRow({
   onPress,
   className,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
-  const s = tones[tone];
+  const s = tones(colors)[tone];
   const name = caption ? `${title}, ${caption}` : title;
   return (
     <Pressable
@@ -82,7 +86,7 @@ export function CompareRow({
         )}
       >
         {playing ? (
-          <EqualizerBars heights={BAR_HEIGHTS} color={palette.surface} />
+          <EqualizerBars heights={BAR_HEIGHTS} color={s.bars} />
         ) : (
           <Icon name="play" size={16} color={s.glyph} />
         )}

@@ -35,6 +35,7 @@ export type AppErrorCode =
   | 'cancelled'
   | 'purchasesUnavailable'
   | 'purchaseFailed'
+  | 'nothingToRestore'
   | 'conversionFailed'
   | 'scriptTooLong'
   | 'samePassword'
@@ -79,7 +80,8 @@ function functionsHttpCode(error: FunctionsHttpError): AppErrorCode {
 
 export function toAppError(error: unknown): AppError {
   if (error instanceof AppError) return error;
-  if (error instanceof FunctionsFetchError) return new AppError('network', error);
+  if (error instanceof FunctionsFetchError)
+    return new AppError('network', error);
   if (error instanceof FunctionsRelayError) {
     return new AppError('serviceUnavailable', error);
   }
@@ -102,3 +104,22 @@ export function toAppError(error: unknown): AppError {
 // i18n key for any thrown value: t(errorMessageKey(error)).
 export const errorMessageKey = (error: unknown) =>
   `errors.${toAppError(error).code}` as const;
+
+// The API often answers 400/403/500 with a message that says more than
+// the status ("Voice Design is only available for Studio users").
+export function codeForMessage(message: string): AppErrorCode | null {
+  if (/studio/i.test(message)) return 'studioRequired';
+  if (/pro account required/i.test(message)) return 'studioRequired';
+  // "Monthly limit reached", "Your account limit has been reached. Upgrade
+  // to continue denoising".
+  if (/limit (has been )?reached|upgrade to continue/i.test(message)) {
+    return 'quotaExceeded';
+  }
+  if (/longer than 1000 characters/i.test(message)) return 'scriptTooLong';
+  if (/free account|paid/i.test(message)) return 'paidPlanRequired';
+  // Some endpoints answer 403 for a missing or expired token.
+  if (/not authenticated|unauthorized|invalid token/i.test(message)) {
+    return 'authRequired';
+  }
+  return null;
+}

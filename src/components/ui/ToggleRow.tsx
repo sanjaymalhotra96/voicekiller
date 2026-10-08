@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 
 type Props = {
   label: string;
@@ -13,6 +13,7 @@ type Props = {
 
 // Label with an on/off switch ("Denoise & Enhance").
 export function ToggleRow({ label, value, onChange, tone = 'light' }: Props) {
+  const colors = useColors();
   const night = tone === 'night';
   return (
     <View className="flex-row items-center justify-between gap-3">
@@ -23,11 +24,11 @@ export function ToggleRow({ label, value, onChange, tone = 'light' }: Props) {
         accessibilityLabel={label}
         value={value}
         onValueChange={onChange}
-        thumbColor={palette.surface}
-        ios_backgroundColor={night ? palette.night.line : palette.line.neutral}
+        thumbColor={colors.contrast}
+        ios_backgroundColor={night ? colors.night.line : colors.line.neutral}
         trackColor={{
-          false: night ? palette.night.line : palette.line.neutral,
-          true: palette.primary.DEFAULT,
+          false: night ? colors.night.line : colors.line.neutral,
+          true: colors.primary.DEFAULT,
         }}
       />
     </View>

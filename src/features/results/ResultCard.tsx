@@ -10,7 +10,7 @@ import {
   PlayButton,
 } from '@/components';
 import type { ResultItem } from '@/features/results/types';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn, formatDate } from '@/utils';
 
 type Props = {
@@ -42,6 +42,7 @@ export const ResultCard = memo(function ResultCardInner({
   onDownload,
   onDelete,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const name = item.title;
 
@@ -80,7 +81,7 @@ export const ResultCard = memo(function ResultCardInner({
                 <Icon
                   name={item.tag.icon}
                   size={iconSize.xxs}
-                  color={palette.night.muted}
+                  color={colors.night.muted}
                 />
               ) : null}
               <AppText variant="tag" className="text-night-muted">
@@ -99,7 +100,7 @@ export const ResultCard = memo(function ResultCardInner({
           <IconButton
             variant="ghost"
             icon="eye"
-            color={palette.night.muted}
+            color={colors.night.muted}
             accessibilityLabel={t('results.view', { name })}
             onPress={() => onView(item)}
           />
@@ -107,7 +108,7 @@ export const ResultCard = memo(function ResultCardInner({
           <IconButton
             variant="ghost"
             icon="edit"
-            color={palette.night.muted}
+            color={colors.night.muted}
             accessibilityLabel={t('results.rename', { name })}
             onPress={() => onRename(item)}
           />
@@ -116,7 +117,7 @@ export const ResultCard = memo(function ResultCardInner({
           <IconButton
             variant="ghost"
             icon="download"
-            color={palette.night.muted}
+            color={colors.night.muted}
             disabled={!item.audioUrl}
             accessibilityLabel={t('results.download', { name })}
             onPress={() => onDownload(item)}
@@ -126,7 +127,7 @@ export const ResultCard = memo(function ResultCardInner({
           <IconButton
             variant="ghost"
             icon="trash"
-            color={palette.danger.DEFAULT}
+            color={colors.danger.DEFAULT}
             accessibilityLabel={t('results.remove', { name })}
             onPress={() => onDelete(item)}
           />

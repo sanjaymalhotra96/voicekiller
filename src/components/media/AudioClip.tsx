@@ -4,7 +4,7 @@ import { Pressable, View } from 'react-native';
 import { ProgressBar } from '@/components/media/ProgressBar';
 import { AppText } from '@/components/ui/AppText';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 
 type Props = {
   uri: string;
@@ -17,6 +17,7 @@ type Props = {
 // voice sample). It owns a player for this file only, which loads the
 // duration up front and is released when the clip unmounts.
 export function AudioClip({ uri, name, playLabel, pauseLabel }: Props) {
+  const colors = useColors();
   const player = useAudioPlayer(uri);
   const { playing, currentTime, duration, didJustFinish } =
     useAudioPlayerStatus(player);
@@ -45,7 +46,7 @@ export function AudioClip({ uri, name, playLabel, pauseLabel }: Props) {
         <Icon
           name={playing ? 'pause' : 'play'}
           size={iconSize.md}
-          color={palette.primary.DEFAULT}
+          color={colors.primary.DEFAULT}
         />
       </Pressable>
       <View className="flex-1 gap-1">

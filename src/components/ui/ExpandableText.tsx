@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { AppText, TextVariant } from '@/components/ui/AppText';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -24,6 +24,7 @@ export function ExpandableText({
   collapseAfterChars = 90,
   className,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const [expanded, setExpanded] = useState(false);
   const collapsible = text.length > collapseAfterChars;
@@ -48,7 +49,7 @@ export function ExpandableText({
           <Icon
             name={expanded ? 'chevronUp' : 'chevronDown'}
             size={iconSize.xs}
-            color={palette.ink.muted}
+            color={colors.ink.muted}
           />
         </Pressable>
       ) : null}

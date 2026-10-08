@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type ListItemProps = {
@@ -20,6 +20,7 @@ function ListItem({
   onPress,
   divider = true,
 }: ListItemProps) {
+  const colors = useColors();
   return (
     <Pressable
       accessibilityRole="button"
@@ -27,7 +28,7 @@ function ListItem({
       onPress={onPress}
       className="flex-row items-center gap-3 active:opacity-60"
     >
-      <Icon name={icon} size={iconSize.md} color={palette.ink.DEFAULT} />
+      <Icon name={icon} size={iconSize.md} color={colors.ink.DEFAULT} />
       <View
         className={cn(
           'flex-1 flex-row items-center justify-between py-4',
@@ -38,7 +39,7 @@ function ListItem({
         <Icon
           name="chevronRight"
           size={iconSize.sm}
-          color={palette.ink.subtle}
+          color={colors.ink.subtle}
         />
       </View>
     </Pressable>

@@ -1,6 +1,5 @@
-import { alpha, palette } from '@/theme/palette';
-
-const { ai, canvas, glow, primary, surface } = palette;
+import { alpha } from '@/theme/palette';
+import type { Palette } from '@/theme/ThemeProvider';
 
 // A tint that fades from `opacity` at `at` to transparent at `stop`.
 const glowAt = (at: string, hex: string, opacity: number, stop: string) =>
@@ -9,9 +8,10 @@ const glowAt = (at: string, hex: string, opacity: number, stop: string) =>
     0,
   )} ${stop})`;
 
-// Shared CSS background gradients (RN New Architecture `backgroundImage`).
-// Add a new key here to give another screen its own variant.
-const gradients = {
+// Shared CSS background gradients (RN New Architecture `backgroundImage`),
+// built from the active palette. Add a key here to give another screen
+// its own variant.
+const gradients = ({ ai, canvas, glow, primary, surface }: Palette) => ({
   // Warm peach glow at the corners + soft lavender halo behind the logo.
   brand: [
     glowAt('50% 30%', glow.lavender, 0.85, '45%'),
@@ -32,12 +32,13 @@ const gradients = {
   // Soft edges on the onboarding marquee rows.
   fadeLeft: `linear-gradient(90deg, ${canvas} 0%, ${alpha(canvas, 0)} 100%)`,
   fadeRight: `linear-gradient(270deg, ${canvas} 0%, ${alpha(canvas, 0)} 100%)`,
-} as const;
+});
 
-export type GradientName = keyof typeof gradients;
+export type GradientName = keyof ReturnType<typeof gradients>;
 
 // The only place that knows the style prop name. On RN >= 0.87 switch
 // `experimental_backgroundImage` to `backgroundImage`.
-export const gradientStyle = (name: GradientName) => ({
-  experimental_backgroundImage: gradients[name],
+// `colors` is useColors() from the calling component.
+export const gradientStyle = (colors: Palette, name: GradientName) => ({
+  experimental_backgroundImage: gradients(colors)[name],
 });

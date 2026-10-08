@@ -17,12 +17,13 @@ import { useInstructionFilters } from '@/features/instructions/useInstructionFil
 import { useInstructionSelection } from '@/features/instructions/useInstructionSelection';
 import { usePlayback } from '@/hooks';
 import { errorMessageKey } from '@/lib/errors';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 
 const EMPTY: ActingInstruction[] = [];
 
 // Library tab: category chips, search and the instruction list.
 export function InstructionLibraryTab() {
+  const colors = useColors();
   const { t } = useTranslation();
   const router = useRouter();
   const library = useActingInstructions();
@@ -72,7 +73,7 @@ export function InstructionLibraryTab() {
   if (library.isPending) {
     return (
       <View className="flex-1 items-center justify-center">
-        <ActivityIndicator color={palette.primary.DEFAULT} />
+        <ActivityIndicator color={colors.primary.DEFAULT} />
       </View>
     );
   }

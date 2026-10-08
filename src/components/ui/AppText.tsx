@@ -19,7 +19,7 @@ export const textVariants = {
   input: 'font-sans text-body text-ink',
   fieldLabel: 'font-sans-medium text-sm text-ink',
   listItem: 'font-sans-medium text-base text-ink',
-  ribbon: 'font-sans-bold text-tiny uppercase tracking-wide text-surface',
+  ribbon: 'font-sans-bold text-tiny uppercase tracking-wide text-contrast',
   stat: 'font-sans-semibold text-lg text-ink',
   subtitle: 'font-sans text-sm text-ink-muted',
   labelSm: 'font-sans-medium text-small text-ink-muted',
@@ -30,9 +30,9 @@ export const textVariants = {
   rowTitle: 'font-sans-medium text-body text-ink',
   overline: 'font-sans text-xs uppercase tracking-wide text-ink-faint',
   tab: 'font-sans text-small',
-  micro: 'font-sans-bold text-micro uppercase text-surface',
-  button: 'font-sans-semibold text-base text-surface',
-  buttonSm: 'font-sans-semibold text-body text-surface',
+  micro: 'font-sans-bold text-micro uppercase text-contrast',
+  button: 'font-sans-semibold text-base text-contrast',
+  buttonSm: 'font-sans-semibold text-body text-contrast',
 } as const;
 
 export type TextVariant = keyof typeof textVariants;

@@ -4,7 +4,7 @@ import { ActivityIndicator, Pressable } from 'react-native';
 import { AppText, Icon, IconName } from '@/components';
 import { EqualizerBars } from '@/features/onboarding/EqualizerBars';
 import type { TakePhase } from '@/features/onboarding/useGeneratedTake';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const BAR_HEIGHTS = [14, 20, 11, 17];
@@ -35,6 +35,7 @@ export function TakeButton({
   disabled = false,
   onPress,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const label = labels[phase];
   return (
@@ -56,17 +57,22 @@ export function TakeButton({
       )}
     >
       {phase === 'idle' ? (
-        <Icon name={idleIcon} size={iconSize.md} color={palette.surface} />
+        <Icon name={idleIcon} size={iconSize.md} color={colors.contrast} />
       ) : phase === 'loading' ? (
-        <ActivityIndicator size="small" color={palette.surface} />
+        <ActivityIndicator size="small" color={colors.contrast} />
       ) : (
         <EqualizerBars
           heights={BAR_HEIGHTS}
-          color={palette.primary.DEFAULT}
+          color={colors.primary.DEFAULT}
           gap={3}
         />
       )}
-      <AppText variant="button" numberOfLines={1} className="shrink text-lg">
+      <AppText
+        variant="button"
+        numberOfLines={1}
+        // On the dark (inverting) pill while playing.
+        className={cn('shrink text-lg', phase === 'playing' && 'text-surface')}
+      >
         {label}
       </AppText>
     </Pressable>

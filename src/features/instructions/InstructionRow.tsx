@@ -11,7 +11,7 @@ import {
 } from '@/components';
 import type { ActingInstruction } from '@/domain';
 import { categoryTones } from '@/features/instructions/categories';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -36,6 +36,7 @@ export const InstructionRow = memo(function InstructionRowInner({
   onInfo,
   onSelect,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const name = item.name;
 
@@ -73,7 +74,7 @@ export const InstructionRow = memo(function InstructionRowInner({
       <IconButton
         variant="ghost"
         icon="info"
-        color={palette.ink.subtle}
+        color={colors.ink.subtle}
         accessibilityLabel={t('instructions.details', { name })}
         onPress={() => onInfo(item)}
       />

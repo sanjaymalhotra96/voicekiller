@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { AppText, ExpandableText, IconButton, Radio } from '@/components';
 import type { CustomInstruction } from '@/domain';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import { formatDate } from '@/utils';
 
 type Props = {
@@ -20,6 +20,7 @@ export const CustomInstructionRow = memo(function CustomInstructionRowInner({
   onSelect,
   onDelete,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
 
   return (
@@ -42,7 +43,7 @@ export const CustomInstructionRow = memo(function CustomInstructionRowInner({
       <IconButton
         variant="ghost"
         icon="trash"
-        color={palette.danger.DEFAULT}
+        color={colors.danger.DEFAULT}
         accessibilityLabel={t('instructions.mine.remove', { name: item.name })}
         onPress={() => onDelete(item)}
       />

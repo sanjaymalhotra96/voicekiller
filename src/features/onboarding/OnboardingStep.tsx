@@ -4,33 +4,34 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { AppText, Icon, TransText } from '@/components';
 import { onboardingSteps } from '@/features/onboarding/store';
-import { iconSize, palette, shadows } from '@/theme';
+import { iconSize, Palette, shadows, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 // `canvas`: dark text and orange accents on the warm canvas.
 // `primary`: white on the orange screen.
 export type OnboardingTone = 'canvas' | 'primary';
 
-const tones = {
+const tones = (c: Palette) =>
+  ({
   canvas: {
     track: 'bg-line',
     fill: 'bg-primary',
     title: undefined,
     subtitle: 'font-sans text-ink-subtle',
     next: 'bg-primary active:bg-primary-dark',
-    nextIcon: palette.surface,
-    nextShadow: shadows.fab,
+    nextIcon: c.contrast,
+    nextShadow: shadows(c).fab,
   },
   primary: {
-    track: 'bg-surface/30',
-    fill: 'bg-surface',
-    title: 'text-surface',
+    track: 'bg-contrast/30',
+    fill: 'bg-contrast',
+    title: 'text-contrast',
     subtitle: 'font-sans-semibold text-primary-ink',
-    next: 'bg-surface active:opacity-80',
-    nextIcon: palette.primary.dark,
-    nextShadow: shadows.fabLight,
+    next: 'bg-contrast active:opacity-80',
+    nextIcon: c.primary.dark,
+    nextShadow: shadows(c).fabLight,
   },
-} as const;
+  }) as const;
 
 type Props = {
   // 1-based position, for the progress bar.
@@ -57,7 +58,8 @@ export function OnboardingStep({
   children,
 }: Props) {
   const { t } = useTranslation();
-  const s = tones[tone];
+  const colors = useColors();
+  const s = tones(colors)[tone];
   return (
     <View className="flex-1 pb-6 pt-4">
       <View className="px-6">

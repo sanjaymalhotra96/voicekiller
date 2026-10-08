@@ -1,26 +1,30 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, Palette, useColors } from '@/theme';
 import { cn } from '@/utils';
 
-const variants = {
-  // White with a border (header back, sheet close).
-  outlined: { box: 'border border-line-neutral bg-surface', color: palette.ink.DEFAULT },
-  // Icon only (row menus, info).
-  ghost: { box: '', color: palette.ink.DEFAULT },
-  // Dark editor header and toolbar.
-  night: {
-    box: 'border border-night-line bg-night-surface',
-    color: palette.night.text,
-  },
-  // Filled dark (add button).
-  solid: { box: 'bg-ink', color: palette.surface },
-  // Soft grey square (filter button next to search).
-  muted: { box: 'border border-line-neutral bg-muted', color: palette.ink.DEFAULT },
-} as const;
+const variants = (c: Palette) =>
+  ({
+    // White with a border (header back, sheet close).
+    outlined: {
+      box: 'border border-line-neutral bg-surface',
+      color: c.ink.DEFAULT,
+    },
+    // Icon only (row menus, info).
+    ghost: { box: '', color: c.ink.DEFAULT },
+    // Dark editor header and toolbar.
+    night: {
+      box: 'border border-night-line bg-night-surface',
+      color: c.night.text,
+    },
+    // Filled dark (add button).
+    solid: { box: 'bg-ink', color: c.surface },
+    // Soft grey square (filter button next to search).
+    muted: { box: 'border border-line-neutral bg-muted', color: c.ink.DEFAULT },
+  } as const);
 
-type IconButtonVariant = keyof typeof variants;
+type IconButtonVariant = keyof ReturnType<typeof variants>;
 
 type Props = {
   icon: IconName;
@@ -54,7 +58,8 @@ export function IconButton({
   accessibilityState,
   className,
 }: Props) {
-  const v = variants[variant];
+  const colors = useColors();
+  const v = variants(colors)[variant];
 
   return (
     <Pressable

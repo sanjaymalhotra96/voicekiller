@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export function Checkbox({ checked, onChange, children, error }: Props) {
+  const colors = useColors();
   return (
     <Pressable
       accessibilityRole="checkbox"
@@ -31,7 +32,7 @@ export function Checkbox({ checked, onChange, children, error }: Props) {
         )}
       >
         {checked && (
-          <Icon name="check" size={iconSize.xs} color={palette.surface} />
+          <Icon name="check" size={iconSize.xs} color={colors.contrast} />
         )}
       </View>
       {children}

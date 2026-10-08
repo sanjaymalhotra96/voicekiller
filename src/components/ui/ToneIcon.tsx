@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, toneClasses, toneColor, ToneName } from '@/theme';
+import { iconSize, toneClasses, toneColor, ToneName, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -11,6 +11,7 @@ type Props = {
 
 // Icon on a tinted square, coloured by tone.
 export function ToneIcon({ icon, tone }: Props) {
+  const colors = useColors();
   return (
     <View
       className={cn(
@@ -18,7 +19,7 @@ export function ToneIcon({ icon, tone }: Props) {
         toneClasses[tone].tile,
       )}
     >
-      <Icon name={icon} size={iconSize.md} color={toneColor(tone)} />
+      <Icon name={icon} size={iconSize.md} color={toneColor(colors, tone)} />
     </View>
   );
 }

@@ -49,13 +49,13 @@ function VoiceOption({
       <View
         className={cn(
           'size-8 items-center justify-center rounded-full',
-          selected ? 'bg-surface/15' : 'bg-surface',
+          selected ? 'bg-contrast/15' : 'bg-surface',
         )}
       >
         <AppText
           className={cn(
             'font-sans-bold text-xs',
-            selected ? 'text-surface' : 'text-primary-deep',
+            selected ? 'text-contrast' : 'text-primary-deep',
           )}
         >
           {voice.initials}
@@ -65,7 +65,7 @@ function VoiceOption({
         numberOfLines={1}
         className={cn(
           'shrink font-sans-bold text-body',
-          selected ? 'text-surface' : 'text-ink',
+          selected ? 'text-contrast' : 'text-ink',
         )}
       >
         {voice.name}

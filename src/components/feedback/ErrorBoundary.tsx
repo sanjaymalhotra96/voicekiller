@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 
 type Props = { children: ReactNode };
 type State = { error: Error | null };
@@ -35,6 +35,7 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 
 function CrashScreen({ onRetry }: { onRetry: () => void }) {
+  const colors = useColors();
   const { t } = useTranslation();
 
   return (
@@ -42,7 +43,7 @@ function CrashScreen({ onRetry }: { onRetry: () => void }) {
       <Icon
         name="alert"
         size={iconSize.xxl}
-        color={palette.danger.DEFAULT}
+        color={colors.danger.DEFAULT}
       />
       <AppText variant="title" className="text-center">
         {t('crash.title')}

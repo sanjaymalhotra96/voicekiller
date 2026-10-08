@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ViewProps } from 'react-native';
-import { gradientStyle, GradientName } from '@/theme';
+import { GradientName, gradientStyle, useColors } from '@/theme';
 
 type Props = ViewProps & {
   variant?: GradientName;
@@ -13,10 +13,11 @@ export function GradientBackground({
   style,
   ...rest
 }: Props) {
+  const colors = useColors();
   return (
     <View
       className={`flex-1 overflow-hidden bg-canvas ${className ?? ''}`}
-      style={[gradientStyle(variant), style]}
+      style={[gradientStyle(colors, variant), style]}
       {...rest}
     />
   );

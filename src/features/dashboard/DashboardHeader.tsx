@@ -5,10 +5,11 @@ import { icons } from '@/assets';
 import { AppText, Avatar } from '@/components';
 import { useAccount } from '@/features/account/hooks';
 import { useCurrentUser } from '@/features/auth/useCurrentUser';
-import { layout, palette } from '@/theme';
+import { layout, useColors } from '@/theme';
 
 // Logo, "Dashboard" + greeting, and the user's avatar.
 export function DashboardHeader() {
+  const colors = useColors();
   const { t } = useTranslation();
   const user = useCurrentUser();
   const { plan } = useAccount();
@@ -19,7 +20,7 @@ export function DashboardHeader() {
       <LogoMark
         width={layout.headerLogo}
         height={layout.headerLogo}
-        color={palette.primary.DEFAULT}
+        color={colors.primary.DEFAULT}
       />
       <View className="flex-1">
         <AppText variant="heading" accessibilityRole="header">

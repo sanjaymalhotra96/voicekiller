@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
 import { ToneIcon } from '@/components/ui/ToneIcon';
-import { iconSize, palette, toneClasses, ToneName } from '@/theme';
+import { iconSize, toneClasses, ToneName, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -27,9 +27,10 @@ export function FeatureCard({
   layout = 'row',
   className,
 }: Props) {
+  const colors = useColors();
   const isTile = layout === 'tile';
   const arrow = (
-    <Icon name="arrowRight" size={iconSize.sm} color={palette.ink.DEFAULT} />
+    <Icon name="arrowRight" size={iconSize.sm} color={colors.ink.DEFAULT} />
   );
   const text = (
     <View className={isTile ? 'mt-5' : 'flex-1'}>

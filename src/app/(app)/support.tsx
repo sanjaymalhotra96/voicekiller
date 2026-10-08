@@ -6,17 +6,20 @@ import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { Banner, ScreenHeader } from '@/components';
 import { config } from '@/config';
 import { useCurrentUser } from '@/features/auth/useCurrentUser';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 
 // The Chatwoot website widget, opened straight away. The page tells the
 // app when the chat is ready ("ready") or failed to load ("error").
-function chatPage(user: { id?: string; email: string; fullName: string }) {
+function chatPage(
+  user: { id?: string; email: string; fullName: string },
+  background: string,
+) {
   const { baseUrl, websiteToken } = config.support.chatwoot;
   // JSON.stringify keeps user text from breaking out of the script.
   const identity = JSON.stringify({ email: user.email, name: user.fullName });
   return `<!doctype html>
 <html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<style>html,body{margin:0;height:100%;background:${palette.surface}}</style></head>
+<style>html,body{margin:0;height:100%;background:${background}}</style></head>
 <body><script>
   var post = function (m) { window.ReactNativeWebView.postMessage(m); };
   window.chatwootSettings = { position: "right", type: "standard", launcherTitle: "", hideMessageBubble: true };
@@ -38,14 +41,15 @@ function chatPage(user: { id?: string; email: string; fullName: string }) {
 }
 
 export default function SupportScreen() {
+  const colors = useColors();
   const { t } = useTranslation();
   const user = useCurrentUser();
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
-  // Rebuilt (and the chat reloaded) only if the user changes.
+  // Rebuilt (and the chat reloaded) only if the user or the scheme changes.
   const { id, email, fullName } = user;
   const html = useMemo(
-    () => chatPage({ id, email, fullName }),
-    [id, email, fullName],
+    () => chatPage({ id, email, fullName }, colors.surface),
+    [id, email, fullName, colors.surface],
   );
 
   const onMessage = ({ nativeEvent }: WebViewMessageEvent) => {
@@ -79,7 +83,7 @@ export default function SupportScreen() {
         />
         {state === 'loading' ? (
           <View className="absolute inset-0 items-center justify-center bg-surface">
-            <ActivityIndicator color={palette.primary.DEFAULT} />
+            <ActivityIndicator color={colors.primary.DEFAULT} />
           </View>
         ) : null}
       </View>

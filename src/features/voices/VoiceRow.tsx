@@ -10,7 +10,7 @@ import {
   Radio,
 } from '@/components';
 import type { Voice } from '@/domain';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -40,6 +40,7 @@ export const VoiceRow = memo(function VoiceRowInner({
   onToggleFavorite,
   onSelect,
 }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const name = voice.name;
 
@@ -73,7 +74,7 @@ export const VoiceRow = memo(function VoiceRowInner({
       <IconButton
         variant="ghost"
         icon={favorite ? 'heartFilled' : 'heart'}
-        color={favorite ? palette.primary.DEFAULT : palette.ink.subtle}
+        color={favorite ? colors.primary.DEFAULT : colors.ink.subtle}
         accessibilityLabel={t(favorite ? 'voices.unfavorite' : 'voices.favorite', {
           name,
         })}

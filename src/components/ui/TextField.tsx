@@ -5,7 +5,7 @@ import { AppText, textVariants } from '@/components/ui/AppText';
 import { FieldLabel } from '@/components/ui/FieldLabel';
 import { FieldTone, fieldTones } from '@/components/ui/fieldTones';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 export type TextFieldProps = TextInputProps & {
@@ -48,16 +48,17 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
     },
     ref,
   ) {
+    const colors = useColors();
     const { t } = useTranslation();
     const [focused, setFocused] = useState(false);
     const [hidden, setHidden] = useState(password);
-    const scheme = fieldTones[tone];
+    const scheme = fieldTones(colors)[tone];
 
     const hasError = !!error || invalid;
     const accent = hasError
-      ? palette.danger.DEFAULT
+      ? colors.danger.DEFAULT
       : focused
-      ? palette.primary.DEFAULT
+      ? colors.primary.DEFAULT
       : scheme.icon;
 
     return (
@@ -83,7 +84,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
             accessibilityLabel={label ?? rest.placeholder}
             className={cn('h-full flex-1', textVariants.input, scheme.text)}
             placeholderTextColor={scheme.placeholder}
-            selectionColor={palette.primary.DEFAULT}
+            selectionColor={colors.primary.DEFAULT}
             secureTextEntry={hidden}
             onFocus={e => {
               setFocused(true);

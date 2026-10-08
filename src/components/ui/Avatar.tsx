@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const sizes = {
@@ -37,6 +37,7 @@ export function Avatar({
   uploading = false,
   className,
 }: Props) {
+  const colors = useColors();
   const initial = name.trim().charAt(0).toUpperCase() || '?';
   const s = sizes[size];
   // Broken or unreachable photo URLs fall back to the initial.
@@ -69,7 +70,7 @@ export function Avatar({
         )}
         {uploading ? (
           <View className="absolute inset-0 items-center justify-center bg-surface/60">
-            <ActivityIndicator color={palette.primary.DEFAULT} />
+            <ActivityIndicator color={colors.primary.DEFAULT} />
           </View>
         ) : null}
       </View>
@@ -81,7 +82,7 @@ export function Avatar({
           disabled={uploading}
           className="absolute -bottom-2 -right-2 size-avatar-badge items-center justify-center rounded-full bg-primary active:bg-primary-dark"
         >
-          <Icon name="camera" size={iconSize.md} color={palette.surface} />
+          <Icon name="camera" size={iconSize.md} color={colors.contrast} />
         </Pressable>
       ) : null}
       {badge ? (

@@ -25,10 +25,11 @@ import { useEnhanceDescription, useGenerateVariations, useSaveDesign } from '@/f
 import { VariationsSheet } from '@/features/voice-design/VariationsSheet';
 import { ResultsView } from '@/features/results/ResultsView';
 import { useStatusBarStyle } from '@/hooks';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 
 // Describe a voice in words; pick one of the generated variations.
 export default function VoiceDesignScreen() {
+  const colors = useColors();
   useStatusBarStyle('light-content');
   const { t } = useTranslation();
   const [language, setLanguage] = useState<DesignLanguageId>(
@@ -89,9 +90,9 @@ export default function VoiceDesignScreen() {
       className="size-icon-btn items-center justify-center rounded-full bg-surface active:opacity-70"
     >
       {enhance.isPending ? (
-        <ActivityIndicator color={palette.ink.DEFAULT} />
+        <ActivityIndicator color={colors.ink.DEFAULT} />
       ) : (
-        <Icon name="wand" size={iconSize.md} color={palette.ink.DEFAULT} />
+        <Icon name="wand" size={iconSize.md} color={colors.ink.DEFAULT} />
       )}
     </Pressable>
   );

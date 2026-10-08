@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, toneClasses, toneColor, ToneName } from '@/theme';
+import { iconSize, toneClasses, toneColor, ToneName, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -13,6 +13,7 @@ type Props = {
 
 // Small coloured pill ("AI Speech", "Sarah", "0:42").
 export function Tag({ label, tone, icon }: Props) {
+  const colors = useColors();
   return (
     <View
       className={cn(
@@ -21,7 +22,7 @@ export function Tag({ label, tone, icon }: Props) {
       )}
     >
       {icon ? (
-        <Icon name={icon} size={iconSize.xxs} color={toneColor(tone)} />
+        <Icon name={icon} size={iconSize.xxs} color={toneColor(colors, tone)} />
       ) : null}
       <AppText
         variant="tag"

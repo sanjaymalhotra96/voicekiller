@@ -1,4 +1,4 @@
-import { palette } from '@/theme/palette';
+import type { Palette } from '@/theme/ThemeProvider';
 
 // Class names per accent tone (kept literal so Tailwind can see them).
 // card: tinted card, tile: icon square, tag/tagText: small pill.
@@ -55,5 +55,6 @@ export const toneClasses = {
 
 export type ToneName = keyof typeof toneClasses;
 
-// Icon colour for a tone.
-export const toneColor = (tone: ToneName) => palette.tone[tone].DEFAULT;
+// Icon colour for a tone, from the active palette (useColors()).
+export const toneColor = (colors: Palette, tone: ToneName) =>
+  colors.tone[tone].DEFAULT;

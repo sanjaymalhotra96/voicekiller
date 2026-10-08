@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 
 // Dashed dark card that holds upload / record controls on tool screens.
 export function MediaPanel({ children }: { children: ReactNode }) {
@@ -31,11 +31,12 @@ export function MediaPanelHeader({
   hint,
   action,
 }: HeaderProps) {
+  const colors = useColors();
   return (
     <View className="flex-row items-center gap-3">
       <View className="size-play items-center justify-center rounded-full bg-night-surface">
         {leading ?? (
-          <Icon name={icon} size={iconSize.md} color={palette.night.text} />
+          <Icon name={icon} size={iconSize.md} color={colors.night.text} />
         )}
       </View>
       <View className="flex-1 gap-0.5">

@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { AppText, Icon, IconName } from '@/components';
-import { iconSize, palette, shadows } from '@/theme';
+import { iconSize, shadows, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 // Knob travel inside the 68 x 40 track (4 dp padding, 32 dp knob).
@@ -29,6 +29,7 @@ function Side({
   activeColor: string;
   onPress: () => void;
 }) {
+  const colors = useColors();
   return (
     <Pressable
       accessibilityRole="button"
@@ -39,7 +40,7 @@ function Side({
       <Icon
         name={icon}
         size={iconSize.md}
-        color={active ? activeColor : palette.ink.subtle}
+        color={active ? activeColor : colors.ink.subtle}
       />
       <AppText
         className={cn(
@@ -60,6 +61,7 @@ type Props = {
 
 // Noisy [switch] Clean. Both labels are tappable too.
 export function CleanSwitch({ clean, onChange }: Props) {
+  const colors = useColors();
   const { t } = useTranslation();
   const reduceMotion = useReducedMotion();
   const offset = useSharedValue(clean ? TRAVEL : 0);
@@ -80,7 +82,7 @@ export function CleanSwitch({ clean, onChange }: Props) {
         icon="volumeOff"
         active={!clean}
         activeClass="text-ink"
-        activeColor={palette.ink.DEFAULT}
+        activeColor={colors.ink.DEFAULT}
         onPress={() => onChange(false)}
       />
       <Pressable
@@ -94,7 +96,7 @@ export function CleanSwitch({ clean, onChange }: Props) {
         )}
       >
         <Animated.View
-          style={[shadows.knob, knob]}
+          style={[shadows(colors).knob, knob]}
           className="size-8 rounded-full bg-surface"
         />
       </Pressable>
@@ -103,7 +105,7 @@ export function CleanSwitch({ clean, onChange }: Props) {
         icon="sparkles"
         active={clean}
         activeClass="text-primary-deep"
-        activeColor={palette.primary.deep}
+        activeColor={colors.primary.deep}
         onPress={() => onChange(true)}
       />
     </View>

@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Pressable } from 'react-native';
 import type { SvgIcon } from '@/assets';
 import { AppText } from '@/components';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -22,6 +22,7 @@ export function AuthButton({
   variant = 'full',
   loading = false,
 }: Props) {
+  const colors = useColors();
   const isTile = variant === 'tile';
   const size = isTile ? iconSize.xl : iconSize.lg;
 
@@ -39,7 +40,7 @@ export function AuthButton({
     >
       {loading ? (
         <ActivityIndicator
-          color={palette.primary.DEFAULT}
+          color={colors.primary.DEFAULT}
           style={{ width: size, height: size }}
         />
       ) : (

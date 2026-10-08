@@ -10,7 +10,7 @@ import { TranscriptSheet } from '@/features/speech-to-text/TranscriptSheet';
 import { queryKeys } from '@/lib/queryKeys';
 import { speechEditorService } from '@/services/speechEditor';
 import { speechToTextService } from '@/services/speechToText';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 
 type Props = {
   tool: ResultTool;
@@ -82,6 +82,7 @@ function Loading({
 }: {
   query: { error: unknown; isError: boolean; refetch: () => unknown };
 }) {
+  const colors = useColors();
   const { t } = useTranslation();
   if (query.isError) {
     return (
@@ -98,7 +99,7 @@ function Loading({
   }
   return (
     <View className="flex-1 items-center justify-center py-16">
-      <ActivityIndicator color={palette.primary.DEFAULT} />
+      <ActivityIndicator color={colors.primary.DEFAULT} />
     </View>
   );
 }

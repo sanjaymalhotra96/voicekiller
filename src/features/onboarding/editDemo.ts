@@ -1,4 +1,4 @@
-import { palette } from '@/theme';
+import type { Palette } from '@/theme';
 
 // Onboarding step 6 (speech editor): a line recorded with a wrong word,
 // and the same take after the word was fixed by editing the transcript.
@@ -31,11 +31,8 @@ const isEditedBar = (i: number) => (i >= 3 && i <= 4) || (i >= 13 && i <= 14);
 const waveColors = (base: string, mark: string) =>
   editorWave.map((_, i) => (isEditedBar(i) ? mark : base));
 
-export const editorOriginalColors = waveColors(
-  palette.ink.inactive,
-  palette.primary.dark,
-);
-export const editorFixedColors = waveColors(
-  palette.primary.DEFAULT,
-  palette.ink.DEFAULT,
-);
+// Bar colours before and after the fix, from the active palette.
+export const editorOriginalColors = (c: Palette) =>
+  waveColors(c.ink.inactive, c.primary.dark);
+export const editorFixedColors = (c: Palette) =>
+  waveColors(c.primary.DEFAULT, c.ink.DEFAULT);

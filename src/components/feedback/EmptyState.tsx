@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Artwork, ArtworkSource } from '@/components/ui/Artwork';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -29,6 +29,7 @@ export function EmptyState({
   tone = 'light',
   className,
 }: Props) {
+  const colors = useColors();
   const textClass = tone === 'night' ? 'text-night-text' : 'text-ink';
   return (
     <View
@@ -40,7 +41,7 @@ export function EmptyState({
         <Icon
           name={icon}
           size={iconSize.xxl}
-          color={tone === 'night' ? palette.night.muted : palette.ink.subtle}
+          color={tone === 'night' ? colors.night.muted : colors.ink.subtle}
         />
       )}
       <View className="items-center gap-1">

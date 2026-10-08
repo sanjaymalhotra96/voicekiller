@@ -3,7 +3,7 @@ import { GestureResponderEvent, LayoutChangeEvent, View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Chip } from '@/components/ui/Chip';
 import { Icon } from '@/components/ui/Icon';
-import { control, iconSize, palette } from '@/theme';
+import { control, iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 // The value label is centred over the marker.
@@ -37,6 +37,7 @@ export function RulerSlider({
   presets,
   accessibilityLabel,
 }: Props) {
+  const colors = useColors();
   const [width, setWidth] = useState(0);
   const ticks = useMemo(
     () => Array.from({ length: Math.round((max - min) / step) + 1 }),
@@ -84,7 +85,7 @@ export function RulerSlider({
               {format(value)}
             </AppText>
             <View className="-mt-1.5">
-              <Icon name="caretDown" size={iconSize.xxs} color={palette.primary.DEFAULT} />
+              <Icon name="caretDown" size={iconSize.xxs} color={colors.primary.DEFAULT} />
             </View>
           </View>
         ) : null}

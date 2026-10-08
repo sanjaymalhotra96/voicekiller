@@ -7,12 +7,13 @@ import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { useIsOffline } from '@/hooks/useIsOffline';
 import { recheckConnection } from '@/lib/network';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 
 // Slides up when the internet drops and closes on its own when it is
 // back. The user may dismiss it; it shows again on the next drop.
 // Screens underneath stay mounted, so nothing reloads or is lost.
 export function OfflineSheet() {
+  const colors = useColors();
   const { t } = useTranslation();
   const offline = useIsOffline();
   const [dismissed, setDismissed] = useState(false);
@@ -44,7 +45,7 @@ export function OfflineSheet() {
         className="items-center gap-3 pb-2"
       >
         <View className="size-avatar-lg items-center justify-center rounded-full bg-primary-wash">
-          <Icon name="wifiOff" size={iconSize.xxl} color={palette.primary.DEFAULT} />
+          <Icon name="wifiOff" size={iconSize.xxl} color={colors.primary.DEFAULT} />
         </View>
         <AppText variant="title" accessibilityRole="header" className="mt-2 text-center">
           {t('offline.title')}

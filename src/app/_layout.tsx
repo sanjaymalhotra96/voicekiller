@@ -4,6 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router/stack';
 import * as SplashScreen from 'expo-splash-screen';
+import * as SystemUI from 'expo-system-ui';
 import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -17,7 +18,12 @@ import {
   useOnboardingCompleted,
 } from '@/features/onboarding/store';
 import { queryClient } from '@/lib/queryClient';
-import { stackScreenOptions } from '@/theme';
+import {
+  stackScreenOptions,
+  ThemeProvider,
+  useColors,
+  useColorSchemeName,
+} from '@/theme';
 
 // Keep the native splash up until fonts and the stored session are ready,
 // so there is no blank frame on launch.
@@ -30,6 +36,7 @@ SplashScreen.setOptions({ fade: true, duration: 300 });
 // finishing onboarding switch between them automatically.
 function SessionStack() {
   const { session, isLoading } = useSession();
+  const colors = useColors();
   const onboarded = useOnboardingCompleted();
 
   useEffect(() => {
@@ -52,7 +59,7 @@ function SessionStack() {
 
   const groups = entryGroups(!!session, onboarded);
   return (
-    <Stack screenOptions={stackScreenOptions}>
+    <Stack screenOptions={stackScreenOptions(colors)}>
       <Stack.Protected guard={groups.onboarding}>
         <Stack.Screen name="(onboarding)" />
       </Stack.Protected>
@@ -66,6 +73,32 @@ function SessionStack() {
   );
 }
 
+// Status bar icons that read on the canvas: dark on light, light on dark.
+// Screens with their own background (orange, editor) override it with
+// useStatusBarStyle.
+function SchemeStatusBar() {
+  const scheme = useColorSchemeName();
+  return (
+    <StatusBar
+      barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
+    />
+  );
+}
+
+// Canvas colour (same as the splash) so no white shows between frames,
+// also behind the native root view (keyboard, rotation) via expo-system-ui.
+function ThemedRoot({ children }: { children: React.ReactNode }) {
+  const colors = useColors();
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(colors.canvas).catch(() => {});
+  }, [colors.canvas]);
+  return (
+    <GestureHandlerRootView className="flex-1 bg-canvas">
+      {children}
+    </GestureHandlerRootView>
+  );
+}
+
 // App root: providers, then the session-aware stack.
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts(fontAssets);
@@ -76,20 +109,21 @@ export default function RootLayout() {
   }
 
   return (
-    // Canvas colour (same as the splash) so no white shows between frames.
-    <GestureHandlerRootView className="flex-1 bg-canvas">
-      <ErrorBoundary>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <SafeAreaProvider>
-              <StatusBar barStyle="dark-content" />
-              <SessionStack />
-              {/* Bottom sheet while offline; hides itself on reconnect. */}
-              <OfflineSheet />
-            </SafeAreaProvider>
-          </AuthProvider>
-        </QueryClientProvider>
-      </ErrorBoundary>
-    </GestureHandlerRootView>
+    <ThemeProvider>
+      <ThemedRoot>
+        <ErrorBoundary>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <SafeAreaProvider>
+                <SchemeStatusBar />
+                <SessionStack />
+                {/* Bottom sheet while offline; hides itself on reconnect. */}
+                <OfflineSheet />
+              </SafeAreaProvider>
+            </AuthProvider>
+          </QueryClientProvider>
+        </ErrorBoundary>
+      </ThemedRoot>
+    </ThemeProvider>
   );
 }

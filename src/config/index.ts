@@ -9,6 +9,7 @@
 //   EXPO_PUBLIC_REVENUECAT_ANDROID_KEY  RevenueCat > API keys (goog_...)
 //   EXPO_PUBLIC_REVENUECAT_IOS_KEY      RevenueCat > API keys (appl_...)
 //   EXPO_PUBLIC_PRIVACY_URL        Settings > Privacy Policy (optional)
+//   EXPO_PUBLIC_TERMS_URL          Paywall > Terms (optional)
 //   EXPO_PUBLIC_SHARE_URL          Settings > Share with friends (optional)
 
 export const config = {
@@ -66,9 +67,10 @@ export const config = {
     cloneKey: process.env.EXPO_PUBLIC_ONBOARDING_CLONE_KEY ?? '',
   },
   // Settings links, set in .env. Empty: Share sends a message without a
-  // link, and Privacy Policy does nothing.
+  // link, and Privacy Policy and Terms do nothing.
   links: {
     privacyPolicy: process.env.EXPO_PUBLIC_PRIVACY_URL ?? '',
+    terms: process.env.EXPO_PUBLIC_TERMS_URL ?? '',
     appStore: process.env.EXPO_PUBLIC_SHARE_URL ?? '',
   },
   storage: {

@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router/stack';
 import React from 'react';
 import { safeAreaLayout } from '@/components';
-import { stackScreenOptions } from '@/theme';
+import { stackScreenOptions, useColors } from '@/theme';
 
 // First-launch intro, shown before the Welcome screen. Each step sets its
 // own flat background; the editable steps scroll above the keyboard.
@@ -15,7 +15,8 @@ const screenLayout = safeAreaLayout({
 });
 
 export default function OnboardingLayout() {
+  const colors = useColors();
   return (
-    <Stack screenOptions={stackScreenOptions} screenLayout={screenLayout} />
+    <Stack screenOptions={stackScreenOptions(colors)} screenLayout={screenLayout} />
   );
 }

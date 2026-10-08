@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View } from 'react-native';
 import { AppText, Icon, IconName } from '@/components';
-import { iconSize, toneColor, ToneName } from '@/theme';
+import { iconSize, toneColor, ToneName, useColors } from '@/theme';
 
 type Props = {
   title: string;
@@ -13,10 +13,11 @@ type Props = {
 // Titled grey card on the instruction details screen
 // ("Script", "Acting Instructions", "Audio Sample").
 export function DetailSection({ title, icon, tone, children }: Props) {
+  const colors = useColors();
   return (
     <View className="gap-3">
       <View className="flex-row items-center gap-2">
-        <Icon name={icon} size={iconSize.md} color={toneColor(tone)} />
+        <Icon name={icon} size={iconSize.md} color={toneColor(colors, tone)} />
         <AppText variant="label" accessibilityRole="header">
           {title}
         </AppText>

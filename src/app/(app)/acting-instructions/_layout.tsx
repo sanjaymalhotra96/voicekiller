@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router/stack';
 import React from 'react';
 import { safeAreaLayout, safeAreaPresets } from '@/components';
-import { screenContentStyles, stackScreenOptions } from '@/theme';
+import { screenContentStyles, stackScreenOptions, useColors } from '@/theme';
 
 // Acting Instruction pages, presented as one modal over the editor.
 const screenLayout = safeAreaLayout({
@@ -11,11 +11,12 @@ const screenLayout = safeAreaLayout({
 });
 
 export default function ActingInstructionsLayout() {
+  const colors = useColors();
   return (
     <Stack
       screenOptions={{
-        ...stackScreenOptions,
-        contentStyle: screenContentStyles.surface,
+        ...stackScreenOptions(colors),
+        contentStyle: screenContentStyles(colors).surface,
       }}
       screenLayout={screenLayout}
     />

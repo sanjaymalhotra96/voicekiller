@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const tones = {
@@ -19,6 +19,7 @@ type Props = {
 // Visual radio mark only. The tappable row around it owns the
 // accessibility role and state.
 export function Radio({ selected, tone = 'primary' }: Props) {
+  const colors = useColors();
   return (
     <View
       className={cn(
@@ -27,7 +28,11 @@ export function Radio({ selected, tone = 'primary' }: Props) {
       )}
     >
       {selected ? (
-        <Icon name="check" size={iconSize.xs} color={palette.surface} />
+        <Icon
+          name="check"
+          size={iconSize.xs}
+          color={tone === 'ink' ? colors.surface : colors.contrast}
+        />
       ) : null}
     </View>
   );

@@ -32,6 +32,8 @@ export const queryKeys = {
   subscription: {
     all: ['subscription'] as const,
   },
+  // Store prices for the paywall (RevenueCat offering).
+  studioPlans: ['studioPlans'] as const,
   results: {
     // A saved file opened with "View" (transcript or editor file).
     view: (fileId: string | undefined) => ['results', 'view', fileId] as const,

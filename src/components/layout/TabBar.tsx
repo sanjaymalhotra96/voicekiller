@@ -4,7 +4,7 @@ import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppText } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 export type TabIcon = { tabIcon: IconName };
@@ -12,6 +12,7 @@ export type TabIcon = { tabIcon: IconName };
 // Bottom tab bar: icon + label, orange line over the active tab.
 // Each screen sets `tabBarLabel` and `tabIcon` in its options.
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+  const colors = useColors();
   const insets = useSafeAreaInsets();
 
   return (
@@ -24,7 +25,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
         const focused = state.index === index;
         const label = String(options.tabBarLabel ?? route.name);
         const icon = (options as typeof options & Partial<TabIcon>).tabIcon;
-        const color = focused ? palette.primary.DEFAULT : palette.ink.inactive;
+        const color = focused ? colors.primary.DEFAULT : colors.ink.inactive;
 
         const onPress = () => {
           const event = navigation.emit({

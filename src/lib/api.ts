@@ -2,7 +2,7 @@ import { fetch as nativeFetch } from 'expo/fetch';
 import { config } from '@/config';
 import type { AudioSample } from '@/domain';
 import { saveAudio } from '@/lib/audioCache';
-import { AppError, AppErrorCode } from '@/lib/errors';
+import { AppError, AppErrorCode, codeForMessage } from '@/lib/errors';
 import { log } from '@/lib/logger';
 import { supabase } from '@/lib/supabase';
 
@@ -37,21 +37,6 @@ type Options = {
   // endpoints called before sign-in (onboarding).
   token?: string;
 };
-
-// The API often answers 400/403/500 with a message that says more than
-// the status ("Voice Design is only available for Studio users").
-function codeForMessage(message: string): AppErrorCode | null {
-  if (/studio/i.test(message)) return 'studioRequired';
-  if (/pro account required/i.test(message)) return 'studioRequired';
-  if (/limit reached/i.test(message)) return 'quotaExceeded';
-  if (/longer than 1000 characters/i.test(message)) return 'scriptTooLong';
-  if (/free account|paid/i.test(message)) return 'paidPlanRequired';
-  // Some endpoints answer 403 for a missing or expired token.
-  if (/not authenticated|unauthorized|invalid token/i.test(message)) {
-    return 'authRequired';
-  }
-  return null;
-}
 
 const messageOf = (json: unknown) => {
   const body = json as { error?: unknown; message?: unknown } | null;

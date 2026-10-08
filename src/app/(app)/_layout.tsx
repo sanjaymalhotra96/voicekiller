@@ -1,7 +1,8 @@
 import { Stack } from 'expo-router/stack';
 import React from 'react';
 import { safeAreaLayout, safeAreaPresets } from '@/components';
-import { screenContentStyles, stackScreenOptions } from '@/theme';
+import { useUpgradeOnPlanLimit } from '@/features/subscription/hooks';
+import { screenContentStyles, stackScreenOptions, useColors } from '@/theme';
 
 // Dark tool screens (route file names). Their forms scroll; the editor
 // and the results grid scroll themselves.
@@ -19,6 +20,7 @@ const darkScreens = ['text-to-speech', 'results/[tool]', ...darkForms];
 const screenLayout = safeAreaLayout({
   '(tabs)': null, // the tabs wrap their own screens
   'acting-instructions': null, // nested stack wraps its own screens
+  paywall: null, // edge-to-edge orange header; pads itself
   'personal-info': safeAreaPresets.form,
   'change-password': safeAreaPresets.form,
   // Full-width chat: the screen pads only its header.
@@ -38,8 +40,14 @@ export const unstable_settings = {
 };
 
 export default function AppLayout() {
+  const colors = useColors();
+  // Out of minutes or a paid-only feature: show the plans (/paywall).
+  useUpgradeOnPlanLimit();
   return (
-    <Stack screenOptions={stackScreenOptions} screenLayout={screenLayout}>
+    <Stack
+      screenOptions={stackScreenOptions(colors)}
+      screenLayout={screenLayout}
+    >
       {/* Declared first: the start screen. */}
       <Stack.Screen name="(tabs)" />
       {darkScreens.map(name => (
@@ -47,12 +55,16 @@ export default function AppLayout() {
           key={name}
           name={name}
           // Dark behind the slide transition, no white flash.
-          options={{ contentStyle: screenContentStyles.night }}
+          options={{ contentStyle: screenContentStyles(colors).night }}
         />
       ))}
       <Stack.Screen
         name="acting-instructions"
         options={{ presentation: 'modal' }}
+      />
+      <Stack.Screen
+        name="paywall"
+        options={{ presentation: 'fullScreenModal' }}
       />
     </Stack>
   );

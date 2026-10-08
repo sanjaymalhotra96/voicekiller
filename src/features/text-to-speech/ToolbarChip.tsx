@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Pressable } from 'react-native';
 import { AppText, Badge, Icon, IconName } from '@/components';
-import { iconSize, palette } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -28,8 +28,9 @@ export const ToolbarChip = memo(function ToolbarChipInner({
   chevron = false,
   badge,
 }: Props) {
+  const colors = useColors();
   const accent = tone === 'accent';
-  const color = accent ? palette.primary.DEFAULT : palette.night.text;
+  const color = accent ? colors.primary.DEFAULT : colors.night.text;
 
   return (
     <Pressable

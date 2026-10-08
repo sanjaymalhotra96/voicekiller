@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo-google-fonts/figtree": "^0.4.1",
     "@expo-google-fonts/plus-jakarta-sans": "^0.4.2",
     "@expo/metro-runtime": "~57.0.16",
     "@hookform/resolvers": "^5.9.1",
@@ -43,6 +44,7 @@
     "expo-system-ui": "~57.0.4",
     "expo-web-browser": "~57.0.3",
     "i18next": "^26.4.2",
+    "lucide-react-native": "^1.53.0",
     "nativewind": "^4.2.7",
     "react": "19.2.3",
     "react-dom": "19.2.3",

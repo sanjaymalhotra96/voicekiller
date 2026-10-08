@@ -2,28 +2,30 @@ import React from 'react';
 import { View } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, palette } from '@/theme';
+import { iconSize, Palette, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Variant = 'error' | 'success';
 
-const variants: Record<
+const variants = (
+  c: Palette,
+): Record<
   Variant,
   { box: string; text: string; icon: IconName; color: string }
-> = {
+> => ({
   error: {
     box: 'border-danger-line bg-danger-soft',
     text: 'text-danger',
     icon: 'alert',
-    color: palette.danger.DEFAULT,
+    color: c.danger.DEFAULT,
   },
   success: {
     box: 'border-tone-green-line bg-tone-green-soft',
     text: 'text-tone-green',
     icon: 'checkCircle',
-    color: palette.tone.green.DEFAULT,
+    color: c.tone.green.DEFAULT,
   },
-};
+});
 
 type Props = {
   message: string;
@@ -33,7 +35,8 @@ type Props = {
 
 // Inline banner for request results ("Incorrect email or password.").
 export function Banner({ message, variant = 'error', className }: Props) {
-  const v = variants[variant];
+  const colors = useColors();
+  const v = variants(colors)[variant];
 
   return (
     <View

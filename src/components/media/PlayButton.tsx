@@ -1,27 +1,28 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, Palette, useColors } from '@/theme';
 import { cn } from '@/utils';
 
-const tones = {
+const tones = (c: Palette) =>
+  ({
   // Light lists: orange with a white play glyph.
   light: {
     idle: 'bg-primary',
-    idleIcon: palette.surface,
+    idleIcon: c.contrast,
   },
   // Dark cards: dark disc with an orange play glyph.
   night: {
     idle: 'bg-night-surface',
-    idleIcon: palette.primary.DEFAULT,
+    idleIcon: c.primary.DEFAULT,
   },
-} as const;
+  }) as const;
 
 type Props = {
   playing: boolean;
   onPress: () => void;
   accessibilityLabel: string;
-  tone?: keyof typeof tones;
+  tone?: keyof ReturnType<typeof tones>;
   // No audio yet.
   disabled?: boolean;
 };
@@ -35,7 +36,8 @@ export function PlayButton({
   tone = 'light',
   disabled = false,
 }: Props) {
-  const s = tones[tone];
+  const colors = useColors();
+  const s = tones(colors)[tone];
   return (
     <Pressable
       accessibilityRole="button"
@@ -53,7 +55,7 @@ export function PlayButton({
       <Icon
         name={playing ? 'pause' : 'play'}
         size={iconSize.md}
-        color={playing ? palette.primary.DEFAULT : s.idleIcon}
+        color={playing ? colors.primary.DEFAULT : s.idleIcon}
       />
     </Pressable>
   );

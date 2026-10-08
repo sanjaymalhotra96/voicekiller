@@ -22,10 +22,11 @@ import { useLibraryItemActions } from '@/features/library/useLibraryItemActions'
 import { usePlayback } from '@/hooks';
 import { config } from '@/config';
 import { textLimits } from '@/domain';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
 export default function LibraryScreen() {
+  const colors = useColors();
   const { t } = useTranslation();
   const filters = useLibraryFilters();
   const library = useLibraryItems(filters.query);
@@ -113,7 +114,7 @@ export default function LibraryScreen() {
     if (library.isPending) {
       return (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color={palette.primary.DEFAULT} />
+          <ActivityIndicator color={colors.primary.DEFAULT} />
         </View>
       );
     }
@@ -153,7 +154,7 @@ export default function LibraryScreen() {
           library.isFetchingNextPage ? (
             <ActivityIndicator
               className="py-4"
-              color={palette.primary.DEFAULT}
+              color={colors.primary.DEFAULT}
             />
           ) : null
         }

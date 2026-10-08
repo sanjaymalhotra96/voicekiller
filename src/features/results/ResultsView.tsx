@@ -31,7 +31,7 @@ import {
 } from '@/features/results/types';
 import { useResultActions } from '@/features/results/useResultActions';
 import { errorMessageKey } from '@/lib/errors';
-import { palette } from '@/theme';
+import { useColors } from '@/theme';
 import type { OwnVoiceSource } from '@/services/ownVoices';
 
 // `recent`: section on a tool screen (title, "View all", first few cards,
@@ -63,6 +63,7 @@ function LibraryResults(props: Props) {
 }
 
 function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
+  const colors = useColors();
   const { t } = useTranslation();
   const router = useRouter();
   const actions = useResultActions(query);
@@ -148,7 +149,7 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
           ) : null}
         </View>
         {query.isPending ? (
-          <ActivityIndicator color={palette.primary.DEFAULT} />
+          <ActivityIndicator color={colors.primary.DEFAULT} />
         ) : recent.length > 0 ? (
           <View className="-mx-1.5 flex-row flex-wrap">
             {recent.map(item => (
@@ -183,7 +184,7 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
   if (query.isPending) {
     return (
       <View className="flex-1 items-center justify-center">
-        <ActivityIndicator color={palette.primary.DEFAULT} />
+        <ActivityIndicator color={colors.primary.DEFAULT} />
       </View>
     );
   }
@@ -220,7 +221,7 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
           query.isFetchingNextPage ? (
             <ActivityIndicator
               className="py-4"
-              color={palette.primary.DEFAULT}
+              color={colors.primary.DEFAULT}
             />
           ) : null
         }

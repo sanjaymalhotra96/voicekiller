@@ -1,7 +1,7 @@
 import React from 'react';
 import { useWindowDimensions, View } from 'react-native';
 import { icons, images, SvgIcon } from '@/assets';
-import { gradientStyle, palette, shadows } from '@/theme';
+import { gradientStyle, shadows, useColors } from '@/theme';
 
 // Positions are measured from the 440pt-wide design, relative to the logo
 // centre, and scaled to the device width.
@@ -37,6 +37,7 @@ const centred = (x: number, y: number, size: number) => ({
 });
 
 export function WelcomeIllustration() {
+  const colors = useColors();
   const { width } = useWindowDimensions();
   const scale = width / DESIGN_WIDTH;
   const cx = width / 2;
@@ -66,9 +67,9 @@ export function WelcomeIllustration() {
 
       <View
         className="absolute rounded-full"
-        style={[centred(cx, cy, logoSize), gradientStyle('logo'), shadows.logo]}
+        style={[centred(cx, cy, logoSize), gradientStyle(colors, 'logo'), shadows(colors).logo]}
       >
-        <LogoMark width={logoSize} height={logoSize} color={palette.surface} />
+        <LogoMark width={logoSize} height={logoSize} color={colors.contrast} />
       </View>
     </View>
   );

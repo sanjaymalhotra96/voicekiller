@@ -3,7 +3,7 @@ import { Pressable } from 'react-native';
 import { AppText } from '@/components/ui/AppText';
 import { FieldTone, fieldTones } from '@/components/ui/fieldTones';
 import { Icon } from '@/components/ui/Icon';
-import { iconSize } from '@/theme';
+import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
 
 type Props = {
@@ -31,7 +31,8 @@ export function SelectField({
   chevron = 'forward',
   className,
 }: Props) {
-  const scheme = fieldTones[tone];
+  const colors = useColors();
+  const scheme = fieldTones(colors)[tone];
   return (
     <Pressable
       accessibilityRole="button"

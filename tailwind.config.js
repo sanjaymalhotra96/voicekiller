@@ -1,4 +1,4 @@
-const { palette } = require('./src/theme/palette');
+const { themeColors } = require('./src/theme/palette');
 const { fontFamily } = require('./src/theme/fonts');
 const { control, borderWidth, radius } = require('./src/theme/sizes');
 const {
@@ -15,8 +15,9 @@ module.exports = {
   theme: {
     extend: {
       // All tokens come from src/theme: `bg-primary`, `font-sans-bold`,
+      // (colours are CSS variables, filled per scheme by ThemeProvider)
       // `h-control`, `text-body`, ...
-      colors: palette,
+      colors: themeColors(),
       fontFamily,
       fontSize,
       lineHeight,

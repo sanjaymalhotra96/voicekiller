@@ -2,20 +2,21 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import { AppText, TextVariant } from '@/components/ui/AppText';
 import { Icon, IconName } from '@/components/ui/Icon';
-import { iconSize, layout, palette } from '@/theme';
+import { iconSize, layout, Palette, useColors } from '@/theme';
 import { cn } from '@/utils';
 
-const tones = {
-  default: { text: 'text-ink', color: palette.ink.DEFAULT },
-  accent: { text: 'text-tone-purple', color: palette.tone.purple.DEFAULT },
-  danger: { text: 'text-danger', color: palette.danger.DEFAULT },
-} as const;
+const tones = (c: Palette) =>
+  ({
+    default: { text: 'text-ink', color: c.ink.DEFAULT },
+    accent: { text: 'text-tone-purple', color: c.tone.purple.DEFAULT },
+    danger: { text: 'text-danger', color: c.danger.DEFAULT },
+  } as const);
 
 type Props = {
   label: string;
   onPress: () => void;
   icon?: IconName;
-  tone?: keyof typeof tones;
+  tone?: keyof ReturnType<typeof tones>;
   variant?: TextVariant;
   className?: string;
   textClassName?: string;
@@ -32,7 +33,8 @@ export function TextLink({
   className,
   textClassName,
 }: Props) {
-  const t = tones[tone];
+  const colors = useColors();
+  const t = tones(colors)[tone];
 
   return (
     <Pressable
