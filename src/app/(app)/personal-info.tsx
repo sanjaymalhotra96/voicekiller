@@ -20,7 +20,6 @@ import {
 import { ChangeEmailSheet } from '@/features/account/ChangeEmailSheet';
 import { useDeleteAccount, useUpdateProfile } from '@/features/account/hooks';
 import { profileSchema, ProfileValues } from '@/features/account/schemas';
-import { useAvatarPicker } from '@/features/account/useAvatarPicker';
 import { useCurrentUser } from '@/features/auth/useCurrentUser';
 import { useCopyToClipboard, useUnsavedChangesGuard } from '@/hooks';
 import { formatDateInput } from '@/utils';
@@ -30,7 +29,6 @@ export default function PersonalInfoScreen() {
   const user = useCurrentUser();
   const updateProfile = useUpdateProfile();
   const deleteAccount = useDeleteAccount();
-  const avatar = useAvatarPicker();
   const clipboard = useCopyToClipboard();
   const [emailSheet, setEmailSheet] = useState(false);
   const [deleteSheet, setDeleteSheet] = useState(false);
@@ -74,12 +72,8 @@ export default function PersonalInfoScreen() {
         size="lg"
         name={user.fullName}
         uri={user.avatarUrl}
-        onEdit={avatar.pick}
-        editLabel={t('profile.changePhoto')}
-        uploading={avatar.uploading}
         className="mb-2 mt-4 self-center"
       />
-      <FormError error={avatar.error} />
 
       <TextField
         tone="outline"

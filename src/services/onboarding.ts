@@ -4,7 +4,8 @@ import { AppError } from '@/lib/errors';
 import { log } from '@/lib/logger';
 
 // Onboarding demos, called before sign-in with fixed keys from .env
-// instead of a user token. Each returns a local uri to play.
+// instead of a user token. Each returns a uri to play: a saved file, or
+// the server's link to a ready-made sample.
 
 function keyOrThrow(key: string, envName: string) {
   if (!key) {

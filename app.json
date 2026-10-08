@@ -2,7 +2,7 @@
   "expo": {
     "name": "Voice Killer",
     "slug": "voicekiller",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "platforms": [
       "ios",
@@ -16,7 +16,7 @@
     },
     "android": {
       "package": "com.voicekiller",
-      "versionCode": 9,
+      "versionCode": 10,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/app/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

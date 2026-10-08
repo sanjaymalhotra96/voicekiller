@@ -1,6 +1,6 @@
 import { File } from 'expo-file-system';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { usePlayback } from '@/hooks';
+import { usePlayback, useStopOnBlur } from '@/hooks';
 
 export type TakePhase = 'idle' | 'loading' | 'playing';
 
@@ -33,6 +33,9 @@ export function useGeneratedTake(presets: Record<string, Source> = {}) {
     stop();
   }, [stop]);
 
+  // Leaving the step (Next, back, swipe) silences it.
+  useStopOnBlur(reset);
+
   const start = useCallback(
     (key: string, source: Source) => {
       setTakeKey(key);
@@ -45,10 +48,13 @@ export function useGeneratedTake(presets: Record<string, Source> = {}) {
     async (key: string, generate: (signal: AbortSignal) => Promise<string>) => {
       reset();
       const saved = takes.current.get(key);
-      // Preview files are pruned (lib/audioCache), so check it is still there.
+      // Preview files are pruned (lib/audioCache), so check a saved file is
+      // still there. Bundled clips and web links always are.
       if (
         saved !== undefined &&
-        (typeof saved === 'number' || new File(saved).exists)
+        (typeof saved === 'number' ||
+          /^https?:/.test(saved) ||
+          new File(saved).exists)
       ) {
         start(key, saved);
         return;

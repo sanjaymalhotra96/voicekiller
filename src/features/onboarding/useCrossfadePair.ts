@@ -1,5 +1,6 @@
 import { AudioPlayer, useAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useStopOnBlur } from '@/hooks';
 
 const FADE_MS = 220;
 const FADE_STEPS = 8;
@@ -107,6 +108,9 @@ export function useCrossfadePair(urlA: string, urlB: string) {
     },
     [a, b, align, setVolumes],
   );
+
+  // Leaving the step (Next, back, swipe) silences both tracks.
+  useStopOnBlur(pause);
 
   return { playing, useB, play, pause, setUseB };
 }

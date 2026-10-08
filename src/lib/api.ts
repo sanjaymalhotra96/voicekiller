@@ -160,6 +160,17 @@ export async function apiAudio(
   options: Options = {},
 ): Promise<string> {
   const response = await send(path, { method: 'POST', ...options });
+  // Some answers are a link instead of the audio itself, e.g. onboarding
+  // acting presets: { "url": "https://.../app-samples/awkward.mp3" }.
+  // Play the link directly; never save JSON as an .mp3 (it cannot play).
+  if (/json/i.test(response.headers.get('content-type') ?? '')) {
+    const url = (await response.json().catch(() => null))?.url;
+    if (typeof url === 'string' && /^https?:\/\//.test(url)) {
+      return url;
+    }
+    log('api', `${path} answered JSON without an audio url`);
+    throw new AppError('serviceUnavailable', 'no audio in response');
+  }
   const bytes = new Uint8Array(await response.arrayBuffer());
   return saveAudio(bytes, 'mp3');
 }
