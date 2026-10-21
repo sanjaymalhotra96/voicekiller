@@ -2,7 +2,11 @@ import React, { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextInput, View } from 'react-native';
 import { AppText, IconButton, textVariants } from '@/components';
-import { formatTimestamp, TranscriptSegment } from '@/domain';
+import {
+  formatTimestamp,
+  isTimedTranscriptSegment,
+  TranscriptSegment,
+} from '@/domain';
 import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
@@ -32,7 +36,11 @@ export const SegmentRow = memo(function SegmentRowInner({
       <View className="flex-row items-center gap-2">
         <View className="rounded bg-primary-soft px-2 py-1">
           <AppText variant="caption" className="text-primary">
-            {`${formatTimestamp(segment.start)} → ${formatTimestamp(segment.end)}`}
+            {isTimedTranscriptSegment(segment)
+              ? `${formatTimestamp(segment.start)} → ${formatTimestamp(
+                  segment.end,
+                )}`
+              : t('speechToText.sheet.timingUnavailable')}
           </AppText>
         </View>
         <View className="rounded bg-tone-blue-tile px-2 py-1">

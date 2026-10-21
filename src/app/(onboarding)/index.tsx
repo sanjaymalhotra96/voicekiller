@@ -1,11 +1,10 @@
 // Route: / (first launch, before onboarding is completed)
-import { useRouter } from 'expo-router';
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
 import { MarqueeRow } from '@/features/onboarding/MarqueeRow';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
+import { useOnboardingPlayer } from '@/features/onboarding/useOnboardingPlayer';
 import { sampleRows, samplesById } from '@/features/onboarding/voicesDemo';
-import { usePlayback } from '@/hooks';
 
 // Marquee speed per row, in dp per second (rows drift at slightly
 // different paces so they never line up).
@@ -14,10 +13,7 @@ const ROW_SPEEDS = [19, 16, 17, 15, 18];
 // Step 1: "AI voices that actually act." Rows of Acting Instruction pills
 // drift past; tapping one plays its sample.
 export default function OnboardingVoicesScreen() {
-  const router = useRouter();
-  const { activeId, playing, toggle, stop } = usePlayback();
-  // Only show the bars while audio is actually going (not after a pause).
-  const playingId = playing ? activeId : null;
+  const { playingId, loadingId, playOrStop, stop } = useOnboardingPlayer();
 
   const onPill = useCallback(
     (id: string) => {
@@ -25,18 +21,14 @@ export default function OnboardingVoicesScreen() {
       if (!sample) {
         return;
       }
-      if (id === playingId) {
-        stop();
-      } else {
-        toggle(sample);
-      }
+      playOrStop(sample);
     },
-    [playingId, stop, toggle],
+    [playOrStop],
   );
 
-  const onNext = () => {
+  const onNext = (go: (name: string) => void) => {
     stop();
-    router.push('/direct');
+    go('direct');
   };
 
   return (
@@ -55,6 +47,7 @@ export default function OnboardingVoicesScreen() {
             samples={samples}
             speed={ROW_SPEEDS[i]}
             activeId={playingId}
+            loadingId={loadingId}
             onPress={onPill}
           />
         ))}

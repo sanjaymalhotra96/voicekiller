@@ -1,21 +1,19 @@
 import { config } from '@/config';
 import type {
   LibraryCursor,
-  LibraryFilter,
   LibraryItem,
   LibrarySource,
 } from '@/domain';
-import { librarySources } from '@/domain';
 import { AppError, toAppError } from '@/lib/errors';
 import { log } from '@/lib/logger';
 import { escapeLike } from '@/lib/postgrest';
 import { supabase, untypedSupabase } from '@/lib/supabase';
 import { isMissingTable, throwIfError } from '@/lib/supabaseResult';
-import { Fetched, LibraryPage, mergePage, pageOf, toFetched } from '@/services/libraryPaging';
+import { Fetched, LibraryPage, createLibraryPage, pageOf, toFetched } from '@/services/libraryPaging';
 import { Row, sources } from '@/services/librarySources';
 
 // Library API. Each tool keeps its files in its own table
-// (services/librarySources.ts); this reads them as one list, paged by
+// (services/librarySources.ts); this reads the selected tool, paged by
 // services/libraryPaging.ts. Screens use features/library/hooks.ts.
 
 export type { LibraryPage } from '@/services/libraryPaging';
@@ -81,27 +79,18 @@ async function fetchSource(
 type LibraryQuery = {
   // Where the previous page ended; null for the first page.
   cursor: LibraryCursor | null;
-  filter: LibraryFilter;
+  filter: LibrarySource;
   search: string;
 };
 
 export const libraryService = {
-  // One tool, or all of them merged newest first.
+  // Query only the selected tool, newest first.
   async list({ cursor, filter, search }: LibraryQuery): Promise<LibraryPage> {
     const size = config.library.pageSize;
     const userId = await currentUserId();
-    // Tables with no more files are skipped after the first page.
-    const tools = (filter === 'all' ? librarySources : [filter]).filter(
-      tool => !cursor?.done?.includes(tool),
-    );
     const limit = size + (cursor?.seen.length ?? 0);
-    const results = await Promise.all(
-      tools.map(async tool => ({
-        tool,
-        ...(await fetchSource(tool, { userId, cursor, search, limit })),
-      })),
-    );
-    return mergePage(results, cursor, size);
+    const result = await fetchSource(filter, { userId, cursor, search, limit });
+    return createLibraryPage(result, cursor, size);
   },
 
   async rename(item: Pick<LibraryItem, 'tool' | 'rowId'>, title: string) {

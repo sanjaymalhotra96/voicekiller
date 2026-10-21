@@ -1,4 +1,5 @@
 <resources>
+  <color name="iconBackground">#000000</color>
   <!-- Dark scheme: canvas of the dark palette (src/theme/palette.js). -->
   <color name="splashscreen_background">#121212</color>
   <color name="activityBackground">#121212</color>

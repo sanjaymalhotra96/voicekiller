@@ -8,10 +8,21 @@ const glowAt = (at: string, hex: string, opacity: number, stop: string) =>
     0,
   )} ${stop})`;
 
+// `hex` fading to transparent in direction `angle`.
+const fade = (angle: string, hex: string) =>
+  `linear-gradient(${angle}, ${hex} 0%, ${alpha(hex, 0)} 100%)`;
+
 // Shared CSS background gradients (RN New Architecture `backgroundImage`),
 // built from the active palette. Add a key here to give another screen
 // its own variant.
-const gradients = ({ ai, canvas, glow, primary, surface }: Palette) => ({
+const gradients = ({
+  ai,
+  canvas,
+  glow,
+  paywall,
+  primary,
+  surface,
+}: Palette) => ({
   // Warm peach glow at the corners + soft lavender halo behind the logo.
   brand: [
     glowAt('50% 30%', glow.lavender, 0.85, '45%'),
@@ -32,6 +43,13 @@ const gradients = ({ ai, canvas, glow, primary, surface }: Palette) => ({
   // Soft edges on the onboarding marquee rows.
   fadeLeft: `linear-gradient(90deg, ${canvas} 0%, ${alpha(canvas, 0)} 100%)`,
   fadeRight: `linear-gradient(270deg, ${canvas} 0%, ${alpha(canvas, 0)} 100%)`,
+
+  // 3-day trial paywall: the Try button and the selected plan's border.
+  trialCta: `linear-gradient(90deg, ${paywall.brand} 0%, ${paywall.light} 60%, ${paywall.gold} 100%)`,
+  trialBorder: `linear-gradient(90deg, ${paywall.brand} 0%, ${paywall.light} 50%, ${paywall.gold} 100%)`,
+  // Soft edges on its review marquee.
+  trialFadeLeft: fade('90deg', paywall.canvas),
+  trialFadeRight: fade('270deg', paywall.canvas),
 });
 
 export type GradientName = keyof ReturnType<typeof gradients>;

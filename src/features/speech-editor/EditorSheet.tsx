@@ -123,14 +123,14 @@ function EditorContent({
 
       <View className="flex-row gap-5">
         <Button
-          variant="neutral"
+          variant="primary"
           label={t('speechEditor.sheet.revert')}
           disabled={!edited}
           onPress={revert}
           className="flex-1"
         />
         <Button
-          variant="outline"
+          variant="primary"
           label={t('speechEditor.sheet.generate')}
           loading={synthesize.isPending}
           disabled={!needsAudio || !transcript.trim()}

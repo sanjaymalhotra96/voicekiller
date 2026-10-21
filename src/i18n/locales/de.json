@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "Schließen",
+    "back": "Zurück",
+    "copied": "Kopiert",
+    "cancel": "Abbrechen",
+    "change": "Ändern",
+    "save": "Speichern",
+    "beta": "Beta",
+    "delete": "Löschen",
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "E-Mail",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "continueWithEmail": "Mit E-Mail fortfahren",
+    "haveAccount": "Du hast bereits ein Konto? <link>Anmelden</link>"
+  },
+  "welcome": {
+    "title": "Willkommen bei <brand>{{appName}}</brand>",
+    "subtitle": "Das erste KI-Stimmtool mit Regieanweisungen: Du bestimmst die Emotion, und die Stimme setzt sie um."
+  },
+  "signUp": {
+    "title": "Registrieren",
+    "subtitle": "Nur ein paar Angaben, dann kann es losgehen.",
+    "fullName": "Dein vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "agree": "Ich akzeptiere die <link>Allgemeinen Geschäftsbedingungen</link>",
+    "submit": "Registrieren",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen"
+  },
+  "signIn": {
+    "title": "Anmelden",
+    "subtitle": "Willkommen zurück! Wir haben dich vermisst.",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "forgot": "Passwort vergessen?",
+    "submit": "Anmelden"
+  },
+  "verify": {
+    "title": "Code-Bestätigung",
+    "subtitle": "Wir haben einen Einmalcode an <bold>{{email}}</bold> gesendet",
+    "resendIn": "Erneut senden in {{time}} Sekunden möglich.",
+    "resendReady": "Erneutes Senden möglich. <link>Code erneut senden</link>",
+    "submit": "Bestätigen",
+    "digit": "Ziffer {{index}}"
+  },
+  "forgotPassword": {
+    "title": "Passwort vergessen?",
+    "subtitle": "Gib deine E-Mail-Adresse ein. Wir senden dir einen Link zum Zurücksetzen deines Passworts.",
+    "email": "E-Mail-Adresse",
+    "submit": "Link zum Zurücksetzen senden",
+    "backToLogin": "Zurück zur Anmeldung",
+    "sent": "Link zum Zurücksetzen an <bold>{{email}}</bold> gesendet. Prüfe deinen Posteingang."
+  },
+  "resetPassword": {
+    "title": "Passwort zurücksetzen",
+    "subtitle": "Wähle ein neues Passwort für dein Konto.",
+    "submit": "Passwort zurücksetzen",
+    "done": "Dein Passwort wurde zurückgesetzt. Du kannst dich jetzt mit deinem neuen Passwort anmelden.",
+    "requestLink": "Neuen Link zum Zurücksetzen anfordern",
+    "continue": "Weiter"
+  },
+  "validation": {
+    "nameRequired": "Bitte gib deinen Namen ein.",
+    "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "passwordRequired": "Bitte gib dein Passwort ein.",
+    "passwordShort": "Das Passwort muss mindestens {{min}} Zeichen lang sein.",
+    "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+    "termsRequired": "Bitte akzeptiere die Allgemeinen Geschäftsbedingungen.",
+    "otpIncomplete": "Bitte gib den vollständigen Code ein.",
+    "titleRequired": "Bitte gib einen Namen ein.",
+    "dobInvalid": "Verwende das Format dd/mm/yy.",
+    "currentPasswordRequired": "Bitte gib dein aktuelles Passwort ein.",
+    "samePassword": "Das neue Passwort muss anders sein.",
+    "promptRequired": "Bitte beschreibe die gewünschte Stimme.",
+    "voiceNameRequired": "Bitte gib einen Namen für die Stimme ein.",
+    "sampleRequired": "Bitte lade eine Stimmprobe hoch oder nimm eine auf.",
+    "descriptionRequired": "Bitte beschreibe die Stimme."
+  },
+  "errors": {
+    "network": "Keine Internetverbindung. Bitte versuche es erneut.",
+    "invalidCredentials": "E-Mail-Adresse oder Passwort falsch.",
+    "emailNotConfirmed": "Bitte bestätige deine E-Mail-Adresse, bevor du dich anmeldest.",
+    "emailTaken": "Mit dieser E-Mail-Adresse gibt es bereits ein Konto.",
+    "weakPassword": "Bitte wähle ein stärkeres Passwort.",
+    "otpInvalid": "Ungültiger Einmalcode. Bitte versuche es erneut.",
+    "recoveryLinkInvalid": "Dieser Link zum Zurücksetzen ist ungültig oder abgelaufen. Bitte fordere einen neuen an.",
+    "rateLimited": "Zu viele Versuche. Bitte warte einen Moment.",
+    "unknown": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "currentPasswordWrong": "Das aktuelle Passwort ist falsch.",
+    "uploadFailed": "Die Datei konnte nicht hochgeladen werden. Bitte versuche es erneut.",
+    "quotaExceeded": "Du hast das Limit deines Tarifs erreicht. Wechsle zu einem höheren Tarif, um weiter Inhalte zu erstellen.",
+    "serviceUnavailable": "Diese Funktion ist derzeit nicht verfügbar. Bitte versuche es später erneut.",
+    "campaignExists": "Du hast bereits eine Kampagne mit diesem Namen.",
+    "fileType": "Dieser Dateityp wird nicht unterstützt.",
+    "fileTooLarge": "Diese Datei ist zu groß. Bitte wähle eine kleinere Datei.",
+    "micPermission": "Erlaube den Mikrofonzugriff in den Einstellungen, um deine Stimme aufzunehmen.",
+    "photoLibraryPermission": "Erlaube den Zugriff auf Fotos in den Einstellungen, um ein Video auszuwählen.",
+    "shareUnavailable": "Teilen ist auf diesem Gerät nicht verfügbar.",
+    "transcriptUnavailable": "Für diese Datei ist kein Transkript verfügbar.",
+    "transcriptTimingUnavailable": "Dieses Transkript enthält keine verwendbaren Zeitangaben. Wähle Text (.txt), um es herunterzuladen.",
+    "authRequired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
+    "studioRequired": "Dafür benötigst du den Studio-Tarif.",
+    "notFound": "Diese Datei existiert nicht mehr.",
+    "paidPlanRequired": "Dafür benötigst du einen kostenpflichtigen Tarif.",
+    "jobFailed": "Der Vorgang konnte nicht abgeschlossen werden. Bitte versuche es erneut.",
+    "jobTimeout": "Das dauert länger als erwartet. Sieh in ein paar Minuten in der Bibliothek nach.",
+    "sampleLength": "Verwende eine Stimmprobe von mindestens 1 Sekunde.",
+    "renameNotAllowed": "Diese Datei kann derzeit nicht umbenannt werden.",
+    "cancelled": "Abgebrochen.",
+    "purchasesUnavailable": "Abonnements sind noch nicht verfügbar. Bitte versuche es später erneut.",
+    "purchaseFailed": "Der Kauf konnte nicht abgeschlossen werden. Dir wurde nichts berechnet.",
+    "nothingToRestore": "Für dieses Store-Konto wurde kein früherer Kauf gefunden.",
+    "conversionFailed": "Diese Datei konnte nicht in Audio umgewandelt werden. Versuche es mit einer anderen Datei.",
+    "scriptTooLong": "Mit kostenlosen Tarifen kannst du bis zu 1.000 Zeichen auf einmal generieren. Kürze den Text oder wechsle zu einem höheren Tarif.",
+    "samePassword": "Dein neues Passwort muss sich vom aktuellen unterscheiden.",
+    "passwordNotSet": "Du hast dich mit Google registriert. Für dieses Konto gibt es daher kein Passwort, das du ändern kannst.",
+    "googleSignInFailed": "Die Google-Anmeldung wurde nicht abgeschlossen. Bitte versuche es erneut.",
+    "appleSignInFailed": "Die Apple-Anmeldung wurde nicht abgeschlossen. Bitte versuche es erneut."
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "library": "Bibliothek",
+    "settings": "Einstellungen"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "greeting": "Hallo, {{name}}",
+    "sections": {
+      "create": "Erstellen",
+      "transform": "Umwandeln"
+    },
+    "actionCard": {
+      "title": "Text-zu-Sprache",
+      "action": "Sprache erstellen"
+    }
+  },
+  "library": {
+    "title": "Bibliothek",
+    "search": "Dateien suchen ...",
+    "empty": {
+      "title": "Du hast noch keine Dateien!",
+      "message": "Erstelle eine neue Datei über das Dashboard."
+    },
+    "noResults": "Keine Dateien entsprechen deiner Suche.",
+    "groups": {
+      "today": "Heute",
+      "yesterday": "Gestern",
+      "thisWeek": "Diese Woche",
+      "earlier": "Früher"
+    },
+    "actions": {
+      "title": "Details",
+      "rename": "Umbenennen",
+      "download": "Herunterladen",
+      "delete": "Löschen",
+      "more": "Weitere Optionen für {{title}}",
+      "play": "{{title}} abspielen",
+      "pause": "{{title}} pausieren"
+    },
+    "rename": {
+      "title": "Umbenennen",
+      "placeholder": "Dateiname"
+    },
+    "delete": {
+      "title": "Datei löschen?",
+      "message": "„{{title}}“ wird dauerhaft gelöscht.",
+      "confirm": "Löschen",
+      "cancel": "Abbrechen"
+    },
+    "retry": "Erneut versuchen",
+    "untitled": "Ohne Titel"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "sections": {
+      "general": "Allgemein",
+      "others": "Weitere"
+    },
+    "items": {
+      "personalInfo": "Persönliche Daten",
+      "changePassword": "Passwort ändern",
+      "subscription": "Abonnement verwalten",
+      "share": "Mit Freunden teilen",
+      "contact": "Kontakt",
+      "privacy": "Datenschutzerklärung"
+    },
+    "signOut": "Abmelden",
+    "shareMessage": "Ich verwende {{appName}}, um KI-Stimmen zu erstellen. Probier es aus: {{url}}",
+    "shareMessageNoLink": "Ich verwende {{appName}}, um KI-Stimmen zu erstellen."
+  },
+  "crash": {
+    "title": "Etwas ist schiefgelaufen",
+    "message": "In der App ist ein unerwarteter Fehler aufgetreten. Bitte versuche es erneut.",
+    "retry": "Erneut versuchen"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "Text-zu-Sprache",
+      "subtitle": "Schreiben und anhören",
+      "tag": "KI-Sprache"
+    },
+    "voiceClone": {
+      "title": "Stimme klonen",
+      "subtitle": "Jede Stimme nachbilden",
+      "tag": "Stimme klonen"
+    },
+    "voiceDesign": {
+      "title": "Stimme gestalten",
+      "subtitle": "Beschreibe eine Stimme",
+      "tag": "Stimme gestalten"
+    },
+    "voiceChanger": {
+      "title": "Stimmveränderer",
+      "subtitle": "Verändere deine Stimme",
+      "tag": "Stimmveränderer"
+    },
+    "audioClean": {
+      "title": "Audio bereinigen",
+      "subtitle": "Rauschen entfernen",
+      "tag": "Audio bereinigen"
+    },
+    "speechEditor": {
+      "title": "Spracheditor",
+      "subtitle": "Wörter korrigieren",
+      "tag": "Spracheditor"
+    },
+    "speechToText": {
+      "title": "Sprache-zu-Text",
+      "subtitle": "Audio transkribieren",
+      "tag": "Sprache-zu-Text"
+    }
+  },
+  "trialOffer": {
+    "title": "Wir möchten, dass du es ausprobierst",
+    "titleHighlight": "Voicekiller kostenlos",
+    "noPaymentToday": "Heute keine Zahlung",
+    "cta": "Für $0.00 testen"
+  },
+  "trialPaywall": {
+    "later": "Später",
+    "stars": "5 von 5 Sternen",
+    "reviews": {
+      "textToSpeech": "„Die Stimmen klingen so echt. Meine Zuhörer merken nicht, dass es KI ist.“",
+      "acting": "„Ich tippe ‚sag es wie ein trauriger Abschied‘ und die Emotion sitzt jedes Mal.“",
+      "voiceClone": "„In einer Minute meine Stimme geklont. Jetzt mache ich Videos ohne Aufnahme.“",
+      "allInOne": "„Audio bereinigen, Stimmen ändern, Fehler korrigieren. Eine App ersetzt vier Tools.“"
+    },
+    "kicker": "Hör auf, für 5 verschiedene Tools zu zahlen",
+    "title": "Die besten <brand>KI-Sprachtools</brand> auf <brand>einer Plattform</brand>",
+    "perMonth": "{{price}}/Monat",
+    "perYear": "{{price}}/Jahr",
+    "monthlyNote": "{{days}} Tage gratis · jederzeit kündbar",
+    "yearlyNote": "{{days}} Tage gratis · {{percent}} % sparen",
+    "trialNote": "{{days}} Tage gratis",
+    "cta": "{{days}} Tage GRATIS testen",
+    "then": "danach {{price}}",
+    "disclaimer": "Heute keine Kosten. Kündige vor Tag {{days}} und dir wird nichts berechnet."
+  },
+  "paywall": {
+    "title": "Studio freischalten",
+    "close": "Schließen",
+    "features": {
+      "voices": "Über 2.000 Stimmen",
+      "clones": "Unbegrenztes Stimmenklonen",
+      "audioClean": "Audio bereinigen",
+      "voiceChanger": "Stimmveränderer",
+      "speechEditor": "KI-Spracheditor"
+    },
+    "yearly": "Jährlich",
+    "monthly": "Monatlich",
+    "minutes": "{{count}} Minuten/Monat",
+    "save": "Spare {{percent}} %",
+    "continue": "Weiter",
+    "cancelAnytime": "Jederzeit kündbar",
+    "restore": "Käufe wiederherstellen",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz"
+  },
+  "plan": {
+    "basic": "Basic-Tarif",
+    "studio": "Studio",
+    "buyStudio": "Studio kaufen",
+    "usage": "Nutzung",
+    "usageOf": "/ {{limit}} Minuten",
+    "usageThisMonth": "Nutzung diesen Monat",
+    "usageMinutes": "{{used}} / {{limit}} Min.",
+    "remaining": "{{count}} Minuten verbleibend"
+  },
+  "profile": {
+    "title": "Persönliche Daten",
+    "userId": "Benutzer-ID",
+    "fullName": "Dein vollständiger Name",
+    "email": "Deine E-Mail-Adresse",
+    "dob": "Geburtsdatum",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "Profilbild ändern",
+    "copyId": "Benutzer-ID kopieren",
+    "deleteAccount": "Konto löschen",
+    "save": "Änderungen speichern",
+    "saved": "Deine Änderungen wurden gespeichert.",
+    "changeEmail": {
+      "title": "E-Mail-Adresse ändern",
+      "subtitle": "Wir senden einen Bestätigungslink an die neue Adresse.",
+      "placeholder": "Neue E-Mail-Adresse",
+      "submit": "Link senden",
+      "sent": "Prüfe {{email}}, um die Änderung zu bestätigen."
+    },
+    "unsaved": {
+      "title": "Änderungen speichern?",
+      "message": "Deine nicht gespeicherten Änderungen gehen verloren. Möchtest du sie vor dem Schließen speichern?",
+      "discard": "Verwerfen",
+      "confirm": "Bestätigen"
+    },
+    "delete": {
+      "title": "Konto wird gelöscht",
+      "message": "Wenn du dein Konto löschst, werden alle deine Daten aus unserer Datenbank entfernt. Dies kann nicht rückgängig gemacht werden.",
+      "prompt": "Gib zur Bestätigung „{{word}}“ ein",
+      "word": "DELETE",
+      "submit": "Konto löschen"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "Aktuelles Passwort eingeben",
+    "title": "Passwort ändern",
+    "current": "Aktuelles Passwort",
+    "new": "Neues Passwort",
+    "newPlaceholder": "Neues Passwort eingeben (mindestens {{min}} Zeichen)",
+    "confirm": "Passwort bestätigen",
+    "confirmPlaceholder": "Neues Passwort bestätigen",
+    "submit": "Passwort ändern",
+    "done": "Dein Passwort wurde geändert."
+  },
+  "notFound": {
+    "title": "Diese Seite existiert nicht.",
+    "action": "Zur Startseite"
+  },
+  "textToSpeech": {
+    "title": "Text-zu-Sprache",
+    "fileName": "Dateiname (optional)",
+    "campaign": "Kampagne",
+    "scriptPlaceholder": "Gib deinen Text hier ein oder füge ihn ein ...",
+    "scriptLabel": "Text",
+    "scriptLimitExceeded": "Diese Stimme unterstützt bis zu {{max}} Zeichen. Kürze den Text oder wähle eine andere Stimme.",
+    "chooseVoice": "Stimme auswählen",
+    "voiceLabel": "Stimme: {{name}}",
+    "emotions": "Emotionen",
+    "addPause": "Pause hinzufügen",
+    "settings": "Einstellungen",
+    "preview": "Vorschau",
+    "stopPreview": "Stopp",
+    "generate": "Generieren",
+    "campaignSheet": {
+      "title": "Kampagne",
+      "placeholder": "Name der neuen Kampagne ...",
+      "create": "Kampagne erstellen",
+      "default": "Standard"
+    },
+    "pauseSheet": {
+      "title": "Pause hinzufügen",
+      "seconds_one": "{{count}} Sekunde",
+      "seconds_other": "{{count}} Sekunden"
+    },
+    "settingsSheet": {
+      "title": "Einstellungen",
+      "audioFormat": "Audioformat",
+      "voiceTuning": "Stimme anpassen",
+      "speed": "Geschwindigkeit",
+      "delivery": "Sprechmodus",
+      "actingInstructions": "Regieanweisungen",
+      "instruction": "Anweisung",
+      "chooseInstruction": "Anweisung auswählen",
+      "ownInstructions": "Eigene Anweisungen eingeben",
+      "ownPlaceholder": "Beschreibe, wie der Text gesprochen werden soll ..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "Stabiler",
+      "balanced": "Ausgewogen",
+      "creative": "Kreativer"
+    }
+  },
+  "emotions": {
+    "auto": "Auto",
+    "happy": "Fröhlich",
+    "sad": "Traurig",
+    "angry": "Wütend",
+    "fearful": "Ängstlich",
+    "disgusted": "Angewidert",
+    "surprised": "Überrascht",
+    "calm": "Ruhig",
+    "fluent": "Flüssig"
+  },
+  "voices": {
+    "title": "Stimme auswählen",
+    "search": "Stimmen suchen ...",
+    "sources": {
+      "library": "Bibliothek",
+      "cloned": "Geklont",
+      "design": "Gestaltet",
+      "favorites": "Favoriten"
+    },
+    "openFilters": "Filter",
+    "openFiltersCount": "Filter, {{count}} aktiv",
+    "favorite": "{{name}} zu Favoriten hinzufügen",
+    "unfavorite": "{{name}} aus Favoriten entfernen",
+    "select": "{{name}} auswählen",
+    "play": "Stimmprobe von {{name}} abspielen",
+    "pause": "Stimmprobe von {{name}} pausieren",
+    "empty": "Keine Stimmen entsprechen deiner Suche.",
+    "emptyFavorites": "Du hast noch keine Lieblingsstimmen. Tippe auf das Herz einer Stimme, um sie hier zu speichern.",
+    "filters": {
+      "title": "Filter",
+      "model": "Modell",
+      "gender": "Geschlecht",
+      "accent": "Akzent",
+      "language": "Sprache",
+      "apply": "Filter anwenden"
+    },
+    "genders": {
+      "female": "Weiblich",
+      "male": "Männlich",
+      "neutral": "Neutral"
+    },
+    "models": {
+      "all": "Alle Modelle",
+      "expressive": "Expressive",
+      "directable": "Directable",
+      "directablePro": "Directable Pro"
+    }
+  },
+  "accents": {
+    "auto": "Auto",
+    "ar-001": "AR - Arabisch",
+    "ar-EG": "AR - Ägyptisch",
+    "cs-CZ": "CS - Tschechisch",
+    "de-DE": "DE - Deutsch",
+    "el-GR": "EL - Griechisch",
+    "en-AU": "EN - Australisch",
+    "en-CA": "EN - Kanadisch",
+    "en-GB": "EN - Britisch",
+    "en-IE": "EN - Irisch",
+    "en-IN": "EN - Indisch",
+    "en-NZ": "EN - Neuseeländisch",
+    "en-US": "EN - Amerikanisch",
+    "en-ZA": "EN - Südafrikanisch",
+    "es-419": "ES - Lateinamerikanisch",
+    "es-ES": "ES - Spanisch",
+    "fr-CA": "FR - Kanadisch",
+    "fr-FR": "FR - Französisch",
+    "hi-IN": "HI - Hindi",
+    "it-IT": "IT - Italienisch",
+    "ja-JP": "JA - Japanisch",
+    "jv-ID": "JV - Javanisch",
+    "ko-KR": "KO - Koreanisch",
+    "nl-NL": "NL - Niederländisch",
+    "pl-PL": "PL - Polnisch",
+    "pt-BR": "PT - Brasilianisch",
+    "pt-PT": "PT - Portugiesisch",
+    "sw-KE": "SW - Kenianisches Swahili",
+    "ta-IN": "TA - Tamil",
+    "te-IN": "TE - Telugu",
+    "vi-VN": "VI - Vietnamesisch",
+    "zh-CN": "ZH - Mandarin"
+  },
+  "languages": {
+    "auto": "Auto",
+    "ar": "Arabisch",
+    "yue": "Kantonesisch",
+    "zh": "Chinesisch",
+    "cs": "Tschechisch",
+    "nl": "Niederländisch",
+    "en": "Englisch",
+    "fi": "Finnisch",
+    "fr": "Französisch",
+    "de": "Deutsch",
+    "el": "Griechisch",
+    "he": "Hebräisch",
+    "hi": "Hindi",
+    "hu": "Ungarisch",
+    "id": "Indonesisch",
+    "it": "Italienisch",
+    "ja": "Japanisch",
+    "ko": "Koreanisch",
+    "pl": "Polnisch",
+    "pt": "Portugiesisch",
+    "ru": "Russisch",
+    "es": "Spanisch",
+    "sv": "Schwedisch",
+    "tr": "Türkisch",
+    "uk": "Ukrainisch"
+  },
+  "instructions": {
+    "title": "Regieanweisung",
+    "tabs": {
+      "library": "Bibliothek",
+      "mine": "Meine Anweisungen"
+    },
+    "all": "Alle ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "Emotionen",
+      "characters": "Charaktere",
+      "situations": "Situationen",
+      "accents": "Akzente"
+    },
+    "search": "Anweisungen suchen ...",
+    "noResults": "Keine Anweisungen entsprechen deiner Suche.",
+    "details": "Details zu {{name}}",
+    "select": "{{name}} verwenden",
+    "play": "Stimmprobe von {{name}} abspielen",
+    "pause": "Stimmprobe von {{name}} pausieren",
+    "notFound": "Diese Anweisung existiert nicht mehr.",
+    "detail": {
+      "script": "Text",
+      "instructions": "Regieanweisungen",
+      "sample": "Hörprobe",
+      "playSample": "Tippen, um die Hörprobe abzuspielen",
+      "noSample": "Noch keine Hörprobe vorhanden",
+      "use": "Diese Anweisung verwenden"
+    },
+    "mine": {
+      "title": "Meine eigenen Anweisungen",
+      "add": "Neue Anweisung",
+      "emptyTitle": "Keine eigenen Anweisungen",
+      "emptyMessage": "Erstelle und speichere eigene Regieanweisungen, die du in deinen Projekten verwenden kannst.",
+      "generate": "Anweisungen mit KI erstellen",
+      "created": "Erstellt: {{date}}",
+      "remove": "{{name}} löschen",
+      "removeTitle": "Anweisung löschen?",
+      "removeMessage": "„{{name}}“ wird dauerhaft gelöscht."
+    },
+    "create": {
+      "title": "Neue Regieanweisung",
+      "name": "Name der Anweisung",
+      "namePlaceholder": "Z. B. „Warm und freundlich“, „Professionelle Nachrichten“",
+      "prompt": "Regieanweisungen eingeben",
+      "promptPlaceholder": "Anweisungen erstellen für ...",
+      "hint": "Z. B.: Lass die KI automatisch Anweisungen für eine Roboterstimme erstellen.",
+      "submit": "Anweisungen generieren"
+    }
+  },
+  "voiceClone": {
+    "title": "Stimme klonen",
+    "guide": "Anleitung",
+    "language": "Sprache",
+    "voiceName": "Name der Stimme",
+    "voiceNamePlaceholder": "Z. B. ruhiger Erzähler",
+    "sources": {
+      "upload": "Audio hochladen",
+      "record": "Audio aufnehmen"
+    },
+    "upload": {
+      "title": "Quell-Audio hochladen",
+      "hint": "Audio oder Video. Die ersten {{seconds}} Sekunden werden verwendet.",
+      "action": "Hochladen"
+    },
+    "record": {
+      "title": "Nimm deine Stimme auf",
+      "hint": "Wähle dein Mikrofon aus und tippe auf Aufnehmen.",
+      "action": "Aufnehmen",
+      "stop": "Stopp",
+      "again": "Erneut aufnehmen",
+      "recording": "Aufnahme läuft {{time}}",
+      "microphone": "Mikrofon",
+      "defaultMicrophone": "Standardmikrofon",
+      "fileName": "Recording.m4a"
+    },
+    "clip": {
+      "play": "{{name}} abspielen",
+      "pause": "{{name}} pausieren"
+    },
+    "submit": "Stimme erstellen",
+    "guideSheet": {
+      "title": "Aufnahmeanleitung",
+      "tips": [
+        "Verwende etwa 30 Sekunden klare Sprache von einer Person. Bei längeren Clips werden nur die ersten 30 Sekunden verwendet.",
+        "Nimm in einem ruhigen Raum ohne Musik oder Hintergrundgeräusche auf.",
+        "Sprich natürlich und in dem Ton, den die geklonte Stimme haben soll.",
+        "Halte das Mikrofon in einem gleichmäßigen Abstand zu deinem Mund."
+      ]
+    }
+  },
+  "results": {
+    "play": "{{name}} abspielen",
+    "pause": "{{name}} pausieren",
+    "created": "Erstellt: {{date}}",
+    "rename": "{{name}} umbenennen",
+    "renameTitle": "Umbenennen",
+    "renameLabel": "Namen bearbeiten",
+    "renamePlaceholder": "Name",
+    "download": "{{name}} herunterladen",
+    "remove": "{{name}} löschen",
+    "removeTitle": "Datei löschen?",
+    "removeMessage": "„{{name}}“ wird dauerhaft gelöscht.",
+    "viewAll": "Alle anzeigen",
+    "empty": "Hier gibt es noch nichts.",
+    "enhanced": "Verbessert",
+    "recent": {
+      "voiceClone": "Letzte Stimmklone",
+      "voiceDesign": "Zuletzt gestaltete Stimmen",
+      "voiceChanger": "Letzte Stimmänderungen",
+      "audioClean": "Letzte Audiobereinigungen",
+      "speechEditor": "Letzte Sprachdateien",
+      "speechToText": "Letzte Transkriptionen"
+    },
+    "titles": {
+      "voiceClone": "Meine Stimmklone",
+      "voiceDesign": "Meine gestalteten Stimmen",
+      "voiceChanger": "Meine Stimmänderungen",
+      "audioClean": "Meine Audiobereinigungen",
+      "speechEditor": "Meine Sprachdateien",
+      "speechToText": "Meine Transkriptionen"
+    },
+    "view": "{{name}} anzeigen"
+  },
+  "upload": {
+    "chooseSource": "Auswählen aus",
+    "files": "Dateien",
+    "gallery": "Galerie (Videos)",
+    "source": "Quell-Audio hochladen",
+    "target": "Ziel-Audio hochladen",
+    "action": "Hochladen",
+    "change": "Ändern",
+    "remove": "{{name}} entfernen",
+    "uploading": "Hochladen {{percent}} %",
+    "maxSize": "Max. {{max}} MB"
+  },
+  "player": {
+    "play": "Abspielen",
+    "pause": "Pause"
+  },
+  "voiceChanger": {
+    "title": "Stimmveränderer",
+    "source": "Quell-Audio",
+    "target": "Zielstimme",
+    "submit": "Umwandlung starten"
+  },
+  "voiceDesign": {
+    "title": "Stimme gestalten",
+    "guide": "Anleitung",
+    "language": "Sprache",
+    "name": "Name der Stimme",
+    "namePlaceholder": "Z. B. ruhiger Erzähler",
+    "description": "Stimmbeschreibung",
+    "descriptionPlaceholder": "„Warme, tiefe Männerstimme mit leicht britischem Akzent, ruhigem Tempo und bestimmtem Ton.“",
+    "descriptionHint": "Schreibe die Beschreibung auf Englisch.",
+    "enhance": "Beschreibung mit KI verbessern",
+    "submit": "Stimme erstellen",
+    "variations": {
+      "title": "Stimme auswählen",
+      "subtitle": "Höre dir die {{count}} erstellten Varianten an und wähle deinen Favoriten.",
+      "item": "Stimmvariante {{number}}",
+      "play": "Variante {{number}} abspielen",
+      "pause": "Variante {{number}} pausieren",
+      "save": "Stimme speichern"
+    },
+    "guideSheet": {
+      "title": "So beschreibst du eine Stimme",
+      "tips": [
+        "Beschreibe, wer spricht: Alter, Geschlecht und Charakter.",
+        "Beschreibe den Klang: warm, rau, hell, tief.",
+        "Ergänze Akzent und Sprechtempo, z. B. leichter britischer Akzent und ruhiges Tempo.",
+        "Nenne die Stimmung oder den Einsatzzweck, z. B. ein ruhiger Erzähler für Hörbücher."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "Spracheditor",
+    "submit": "Starten",
+    "sheet": {
+      "title": "Spracheditor",
+      "audio": "Audio",
+      "transcription": "Transkription",
+      "revert": "Original wiederherstellen",
+      "generate": "Audio generieren",
+      "done": "Fertig"
+    },
+    "uploadHint": "Audio oder Video, max. {{max}} MB. Die ersten {{minutes}} Minuten werden verwendet."
+  },
+  "audioClean": {
+    "title": "Audio bereinigen",
+    "description": "Die Audioverbesserung lässt deine Aufnahme wie mit einem professionellen Mikrofon klingen.",
+    "enhance": "Entrauschen und verbessern",
+    "submit": "Audio bereinigen"
+  },
+  "speechToText": {
+    "title": "Sprache-zu-Text",
+    "language": "Sprache",
+    "translation": "Übersetzte Untertitel",
+    "noTranslation": "Keine",
+    "submit": "Transkription starten",
+    "sheet": {
+      "title": "Ergebnisse",
+      "audio": "Audio",
+      "content": "Inhalt",
+      "timingUnavailable": "Keine Zeitangaben verfügbar",
+      "segment": "#{{number}}",
+      "edit": "Zeile {{number}} bearbeiten",
+      "done": "Bearbeitung von Zeile {{number}} abschließen",
+      "download": "Herunterladen",
+      "formats": {
+        "srt": "Untertitel (.srt)",
+        "vtt": "Web-Untertitel (.vtt)",
+        "txt": "Klartext (.txt)"
+      },
+      "finish": "Fertig"
+    }
+  },
+  "offline": {
+    "title": "Keine Internetverbindung",
+    "message": "Prüfe deine WLAN-Verbindung oder mobilen Daten. Die App macht weiter, sobald du wieder online bist.",
+    "stillOffline": "Noch immer keine Verbindung. Prüfe dein WLAN oder deine mobilen Daten und versuche es erneut.",
+    "retry": "Erneut versuchen"
+  },
+  "support": {
+    "title": "Kontakt",
+    "error": "Der Chat konnte nicht geladen werden. Prüfe deine Verbindung und versuche es erneut."
+  },
+  "onboarding": {
+    "step": "Schritt {{step}} von {{total}}",
+    "next": "Weiter",
+    "playSample": "Stimmprobe von {{name}} abspielen",
+    "stopSample": "Stimmprobe von {{name}} stoppen",
+    "voices": {
+      "title": "KI-Stimmen, die wirklich <brand>schauspielern.</brand>",
+      "subtitle": "Text-zu-Sprache, Stimmenklonen und mehr.",
+      "samples": {
+        "happy": "Fröhlich",
+        "angry": "Wütend",
+        "sarcastic": "Sarkastisch",
+        "excited": "Begeistert",
+        "crying": "Weinend",
+        "pirate": "Pirat",
+        "scared": "Verängstigt",
+        "laughing": "Lachend",
+        "calm": "Ruhig",
+        "evilVillain": "Bösewicht",
+        "dramatic": "Dramatisch",
+        "confident": "Selbstbewusst",
+        "nervous": "Nervös",
+        "romantic": "Romantisch",
+        "sleepy": "Schläfrig",
+        "energetic": "Energiegeladen",
+        "madScientist": "Verrückter Wissenschaftler",
+        "horror": "Horror",
+        "surprised": "Überrascht",
+        "awkward": "Verlegen",
+        "shocked": "Schockiert",
+        "tired": "Müde",
+        "santaClaus": "Weihnachtsmann",
+        "curious": "Neugierig",
+        "playful": "Verspielt",
+        "serious": "Ernst",
+        "sad": "Traurig",
+        "rap": "Rap",
+        "disappointed": "Enttäuscht",
+        "sportsCommentator": "Sportkommentator"
+      }
+    },
+    "direct": {
+      "title": "Jetzt führst du Regie.",
+      "subtitle": "Wähle ein Gefühl. Drücke auf Play.",
+      "actingLabel": "Regieanweisungen (zum Bearbeiten tippen)",
+      "actingPlaceholder": "Beschreibe, wie es gesprochen werden soll",
+      "scriptLabel": "Text",
+      "script": "Oh, toll. Du bist da. Ich dachte schon, du kommst nicht mehr.",
+      "generate": "Generieren",
+      "generating": "Wird generiert …",
+      "playing": "Wiedergabe läuft",
+      "tags": {
+        "awkward": {
+          "label": "Verlegen",
+          "text": "Unsicherer Vortrag mit zögerlichem Timing und schwankender Betonung"
+        },
+        "crying": {
+          "label": "Weinend",
+          "text": "Lies diesen Text weinend vor"
+        },
+        "laugh": {
+          "label": "Lachen",
+          "text": "Lachender Vortrag mit hörbarer Freude."
+        },
+        "sarcasm": {
+          "label": "Sarkasmus",
+          "text": "Sarkastischer Vortrag mit trockener, pointierter Betonung."
+        },
+        "relieved": {
+          "label": "Erleichtert",
+          "text": "Erleichtert – du hattest Sorge, dass die Person nicht kommen würde."
+        },
+        "excited": {
+          "label": "Begeistert",
+          "text": "Begeisterter Vortrag mit lebendiger Betonung und schnellem Tempo."
+        }
+      }
+    },
+    "stop": "Wiedergabe stoppen",
+    "clone": {
+      "title": "Klone eine Stimme <brand>in Sekunden.</brand>",
+      "subtitle": "Höre die echte Stimme. Lass sie dann sagen, was du möchtest.",
+      "selectVoice": "Stimme von {{name}} auswählen",
+      "playReal": "Echte Stimme von {{name}} abspielen",
+      "stopReal": "Echte Stimme von {{name}} stoppen",
+      "lineLabel": "Zum Bearbeiten tippen",
+      "linePlaceholder": "Schreibe etwas Beliebiges",
+      "play": "Stimmklon abspielen",
+      "cloning": "{{name}} wird geklont …",
+      "playing": "Wiedergabe · Stimmklon von {{name}}"
+    },
+    "change": {
+      "title": "Verändere deine Stimme. Behalte deinen Stil.",
+      "subtitle": "Ideal für Videos mit Stimmenimitation.",
+      "before": "Vorher",
+      "beforeCaption": "Deine normale Stimme",
+      "after": "Nachher",
+      "turnInto": "Umwandeln in",
+      "play": "{{name}} abspielen",
+      "stop": "{{name}} stoppen"
+    },
+    "clean": {
+      "title": "Schlechter Ton? <brand>Ein Fingertipp</brand> genügt.",
+      "subtitle": "Entferne Rauschen, Echo und Brummen. Nur deine Stimme bleibt.",
+      "play": "Abspielen",
+      "stop": "Stopp",
+      "noisy": "Verrauscht",
+      "clean": "Bereinigt",
+      "switch": "Audio bereinigen",
+      "hint": "Wechsle während der Wiedergabe hin und her."
+    },
+    "edit": {
+      "title": "Korrigiere Fehler direkt im Text.",
+      "subtitle": "Ändere ein Wort. Deine Stimme spricht es. Keine neue Aufnahme nötig.",
+      "original": "Original",
+      "fixed": "Korrigiert",
+      "wordWrong": "{{word}}, Fehler. Zum Korrigieren tippen",
+      "wordFixed": "{{word}}. Korrigiert von {{from}}. Zum Rückgängigmachen tippen",
+      "hintWrong": "Tippe auf den Fehler, um ihn zu korrigieren.",
+      "hintFixed": "Korrigiert. Tippe erneut, um es rückgängig zu machen."
+    }
+  },
+  "review": {
+    "title": "Gefällt dir {{appName}}?",
+    "yes": "Ja",
+    "no": "Nein"
+  }
+}

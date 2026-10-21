@@ -1,6 +1,5 @@
 // Route: /acting-instructions/new
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'expo-router';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +22,6 @@ import { useInstructionSelection } from '@/features/instructions/useInstructionS
 // saves them to "My Instructions" and selects them for the script.
 export default function NewInstructionScreen() {
   const { t } = useTranslation();
-  const router = useRouter();
   const fieldError = useFieldError();
   const generate = useGenerateInstruction();
   const { selectCustom } = useInstructionSelection();
@@ -34,10 +32,7 @@ export default function NewInstructionScreen() {
 
   const submit = handleSubmit(values =>
     generate.mutate(values, {
-      onSuccess: created => {
-        selectCustom(created);
-        router.back();
-      },
+      onSuccess: created => selectCustom(created),
     }),
   );
 

@@ -1,5 +1,5 @@
 import { config } from '@/config';
-import type { GenerateSpeechRequest, SpeechRequest } from '@/domain';
+import type { GeneratedSpeech, GenerateSpeechRequest, SpeechRequest } from '@/domain';
 import { apiAudio, apiRequest, JobControls } from '@/lib/api';
 import { AppError } from '@/lib/errors';
 import { log } from '@/lib/logger';
@@ -21,6 +21,11 @@ import { isV2Clone, toMetadata } from '@/services/speechMetadata';
 type JobStatus = {
   status: string;
   error?: string;
+  result?: {
+    url: string;
+    id: string | number;
+    file_name: string;
+  };
 };
 
 // Characters the preview reads, like the web dashboard.
@@ -47,7 +52,7 @@ export const speechService = {
   async generate({
     signal,
     ...request
-  }: GenerateSpeechRequest & Pick<JobControls, 'signal'>): Promise<void> {
+  }: GenerateSpeechRequest & Pick<JobControls, 'signal'>): Promise<GeneratedSpeech> {
     const v2 = isV2Clone(request);
     log('api', `generate with ${v2 ? 'V2 clone' : 'tts'}`, {
       ...toMetadata(request),
@@ -67,7 +72,7 @@ export const speechService = {
       },
     );
 
-    await pollJob(
+    return pollJob(
       async () => {
         const job = await apiRequest<JobStatus>(
           `/api/tts/status/${encodeURIComponent(jobId)}`,
@@ -76,7 +81,15 @@ export const speechService = {
         if (job.status === 'error') {
           throw new AppError('jobFailed', job.error);
         }
-        return job.status === 'done' ? true : undefined;
+        if (job.status !== 'done') return undefined;
+        if (!job.result?.url) {
+          throw new AppError('jobFailed', 'The completed speech job returned no audio URL');
+        }
+        return {
+          id: String(job.result.id),
+          title: job.result.file_name,
+          audioUrl: job.result.url,
+        };
       },
       { ...(v2 ? config.jobs.cloneSpeech : config.jobs.speech), signal },
     );

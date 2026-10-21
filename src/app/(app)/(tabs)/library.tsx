@@ -20,7 +20,6 @@ import { LibraryListItem } from '@/features/library/LibraryListItem';
 import { useLibraryFilters } from '@/features/library/useLibraryFilters';
 import { useLibraryItemActions } from '@/features/library/useLibraryItemActions';
 import { usePlayback } from '@/hooks';
-import { config } from '@/config';
 import { textLimits } from '@/domain';
 import { useColors } from '@/theme';
 import { cn } from '@/utils';
@@ -39,19 +38,7 @@ export default function LibraryScreen() {
     () => library.data?.pages.flatMap(page => page.items) ?? [],
     [library.data],
   );
-  // All tab (not searching): an overview, the newest few per date group.
-  // A feature chip or a search shows every file and loads more on scroll.
-  const isOverview = filters.query.filter === 'all' && !filters.query.search;
-  const rows = useMemo(
-    () =>
-      toLibraryRows(
-        items,
-        isOverview ? config.library.allTabPerGroup : Infinity,
-      ),
-    [items, isOverview],
-  );
-  // Nothing to show: an empty library (not just an empty search result),
-  // or files that could not be loaded. Both show the same friendly dog.
+  const rows = useMemo(() => toLibraryRows(items), [items]);
   // Pull to refresh only. A background refetch (switching back to a chip)
   // must not drive the spinner: on iOS that locks the list in place.
   const [pulling, setPulling] = useState(false);
@@ -64,14 +51,14 @@ export default function LibraryScreen() {
     }
   }, [library]);
 
-  const isEmptyLibrary =
-    library.isError ||
-    (library.isSuccess && items.length === 0 && !filters.isFiltering);
-
   const { toggle } = playback;
   const extraData = useMemo(
-    () => ({ activeId: playback.activeId, playing: playback.playing }),
-    [playback.activeId, playback.playing],
+    () => ({
+      activeId: playback.activeId,
+      playing: playback.playing,
+      loading: playback.loading,
+    }),
+    [playback.activeId, playback.playing, playback.loading],
   );
   const renderRow = useCallback<FlashListRenderItem<LibraryRow>>(
     ({ item: row, index }) => {
@@ -92,6 +79,7 @@ export default function LibraryScreen() {
           item={row.item}
           active={active}
           playing={active && playback.playing}
+          loading={active && playback.loading}
           player={playback.player}
           onTogglePlay={toggle}
           onMore={actions.openMenu}
@@ -106,6 +94,7 @@ export default function LibraryScreen() {
       actions.openMenu,
       playback.activeId,
       playback.playing,
+      playback.loading,
       playback.player,
     ],
   );
@@ -116,15 +105,6 @@ export default function LibraryScreen() {
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator color={colors.primary.DEFAULT} />
         </View>
-      );
-    }
-    if (isEmptyLibrary) {
-      return (
-        <EmptyState
-          illustration={images.libraryEmpty}
-          title={t('library.empty.title')}
-          message={t('library.empty.message')}
-        />
       );
     }
     return (
@@ -145,9 +125,8 @@ export default function LibraryScreen() {
         // Load the next page shortly before reaching the end.
         onEndReachedThreshold={0.5}
         onEndReached={() =>
-          !isOverview &&
           library.hasNextPage &&
-          !library.isFetchingNextPage &&
+          !library.isFetching &&
           library.fetchNextPage()
         }
         ListFooterComponent={
@@ -161,7 +140,7 @@ export default function LibraryScreen() {
         // A search with no matches says so; a feature chip with no files
         // shows the same dog and message as an empty library.
         ListEmptyComponent={
-          filters.query.search ? (
+          library.isError ? null : filters.query.search ? (
             <EmptyState icon="search" title={t('library.noResults')} />
           ) : (
             <EmptyState
@@ -193,17 +172,19 @@ export default function LibraryScreen() {
         clearButtonMode="while-editing"
       />
 
-      {isEmptyLibrary ? null : (
-        <ChipTabs
-          items={filters.chips}
-          value={filters.filter}
-          onChange={filters.setFilter}
-          className="-mx-4"
-          contentClassName="px-4"
-        />
-      )}
+      <ChipTabs
+        items={filters.chips}
+        value={filters.filter}
+        onChange={filters.setFilter}
+        className="-mx-4"
+        contentClassName="px-4"
+      />
 
+      <FormError error={library.error} />
       <FormError error={actions.error} />
+      {actions.isDownloading ? (
+        <ActivityIndicator color={colors.primary.DEFAULT} />
+      ) : null}
 
       {body}
 

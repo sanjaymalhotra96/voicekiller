@@ -1,6 +1,7 @@
 import { File } from 'expo-file-system';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { usePlayback, useStopOnBlur } from '@/hooks';
+import { useStopOnBlur } from '@/hooks';
+import { usePreviewPlayback } from '@/hooks/usePreviewPlayback';
 
 export type TakePhase = 'idle' | 'loading' | 'playing';
 
@@ -9,12 +10,17 @@ type Source = string | number;
 
 // Onboarding demos: generate a take on the server and play it. Takes are
 // kept for the visit by `key`, so asking for one already heard plays at
-// once. `presets` are takes bundled with the app. Plain clips (e.g. a real
-// voice sample) go through the same player with `playClip`, so only one
-// thing ever sounds at a time.
-export function useGeneratedTake(presets: Record<string, Source> = {}) {
-  const { activeId, playing, toggle, stop } = usePlayback();
-  const takes = useRef(new Map<string, Source>(Object.entries(presets)));
+// once. Plain clips (e.g. a real voice sample) go through the same player
+// with `playClip`, so only one thing ever sounds at a time.
+export function useGeneratedTake() {
+  const {
+    activeId,
+    playing,
+    loading: buffering,
+    play: playPreview,
+    stop,
+  } = usePreviewPlayback();
+  const takes = useRef(new Map<string, string>());
   const request = useRef<AbortController | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -39,9 +45,9 @@ export function useGeneratedTake(presets: Record<string, Source> = {}) {
   const start = useCallback(
     (key: string, source: Source) => {
       setTakeKey(key);
-      toggle({ id: key, audioUrl: source });
+      playPreview({ id: key, audioUrl: source });
     },
-    [toggle],
+    [playPreview],
   );
 
   const play = useCallback(
@@ -49,12 +55,10 @@ export function useGeneratedTake(presets: Record<string, Source> = {}) {
       reset();
       const saved = takes.current.get(key);
       // Preview files are pruned (lib/audioCache), so check a saved file is
-      // still there. Bundled clips and web links always are.
+      // still there. Web links are used directly.
       if (
         saved !== undefined &&
-        (typeof saved === 'number' ||
-          /^https?:/.test(saved) ||
-          new File(saved).exists)
+        (/^https?:/.test(saved) || new File(saved).exists)
       ) {
         start(key, saved);
         return;
@@ -85,18 +89,27 @@ export function useGeneratedTake(presets: Record<string, Source> = {}) {
   const playClip = useCallback(
     (id: string, source: Source) => {
       reset();
-      toggle({ id, audioUrl: source });
+      playPreview({ id, audioUrl: source });
     },
-    [reset, toggle],
+    [reset, playPreview],
   );
 
   // What is sounding right now, take or clip.
   const playingId = playing ? activeId : null;
-  const phase: TakePhase = loading
-    ? 'loading'
-    : playingId !== null && playingId === takeKey
-    ? 'playing'
-    : 'idle';
+  const phase: TakePhase =
+    loading || (buffering && activeId === takeKey)
+      ? 'loading'
+      : playingId !== null && playingId === takeKey
+      ? 'playing'
+      : 'idle';
 
-  return { phase, playingId, error, play, playClip, reset };
+  return {
+    phase,
+    playingId,
+    loadingId: buffering ? activeId : null,
+    error,
+    play,
+    playClip,
+    reset,
+  };
 }

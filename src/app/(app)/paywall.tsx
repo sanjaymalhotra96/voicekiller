@@ -1,14 +1,17 @@
 // Route: /paywall (full-screen modal)
-// Unlock Studio. Opens by itself once after sign-up (Dashboard), and from
-// Settings > Manage Subscription / Upgrade while the user is free.
-import { useRouter } from 'expo-router';
+// The trial offer (after signup) opens this route. Supabase account_type
+// decides whether to show plans or send an already-paid account straight
+// to the dashboard.
+import { Redirect, useRouter } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
+import { ActivityIndicator, Alert, View } from 'react-native';
+import { Button, FormError } from '@/components';
 import { config } from '@/config';
 import { yearlySavingsPercent } from '@/domain';
 import { plans } from '@/features/account/plans';
 import {
+  useAccountType,
   usePaywallOpenFlag,
   usePurchase,
   useRestorePurchases,
@@ -20,13 +23,17 @@ import {
 } from '@/features/subscription/PaywallScreen';
 import { useStatusBarStyle } from '@/hooks';
 import { AppError, errorMessageKey } from '@/lib/errors';
+import { useColors } from '@/theme';
 import { openLink } from '@/utils';
 
 export default function PaywallRoute() {
-  useStatusBarStyle('light-content');
   usePaywallOpenFlag();
   const { t } = useTranslation();
   const router = useRouter();
+  const colors = useColors();
+  const account = useAccountType();
+  useStatusBarStyle(account.data === 'free' ? 'light-content' : 'dark-content');
+
   const studioPlans = useStudioPlans();
   const purchase = usePurchase();
   const restore = useRestorePurchases();
@@ -42,7 +49,7 @@ export default function PaywallRoute() {
   // Errors as an alert, so the screen itself stays exactly as designed.
   const showError = (error: unknown) => Alert.alert(t(errorMessageKey(error)));
 
-  // Back to whatever opened it (Dashboard after sign-up, or Settings).
+  // Back to the dashboard or the screen that opened the paywall.
   const close = () =>
     router.canGoBack() ? router.back() : router.replace('/');
 
@@ -63,6 +70,27 @@ export default function PaywallRoute() {
       showError(error);
     }
   };
+
+  if (account.isError) {
+    return (
+      <View className="flex-1 justify-center gap-4 px-5">
+        <FormError error={account.error} />
+        <Button label={t('crash.retry')} onPress={() => account.refetch()} />
+      </View>
+    );
+  }
+
+  if (account.isPending || account.isFetching) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }
+
+  if (account.data !== 'free') {
+    return <Redirect href="/" />;
+  }
 
   return (
     <PaywallScreen

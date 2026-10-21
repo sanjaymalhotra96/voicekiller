@@ -23,8 +23,7 @@ export default function SettingsScreen() {
     changePassword: () => router.push('/change-password'),
     // Unlock Studio when free; the store's subscription page when paid.
     subscription: openSubscription,
-    // Links come from .env. Share works without one; Privacy does
-    // nothing until EXPO_PUBLIC_PRIVACY_URL is set.
+    // Use the configured store link, or share text while one is unavailable.
     share: () =>
       Share.share({
         message: links.appStore

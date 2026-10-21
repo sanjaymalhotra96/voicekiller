@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import { capabilitiesOf } from '@/domain';
+import { capabilitiesOf, speechRulesFor } from '@/domain';
 import { useSpeechDraft } from '@/features/text-to-speech/store';
 import { ToolbarChip } from '@/features/text-to-speech/ToolbarChip';
 import type { EditorSheet } from '@/features/text-to-speech/types';
@@ -15,6 +15,7 @@ export function EditorToolbar({ onOpen }: Props) {
   const { t } = useTranslation();
   const voice = useSpeechDraft(state => state.voice);
   const can = capabilitiesOf(voice);
+  const rules = speechRulesFor(voice);
 
   return (
     <View className="flex-row items-center justify-end gap-2">
@@ -39,12 +40,14 @@ export function EditorToolbar({ onOpen }: Props) {
           onPress={() => onOpen('emotion')}
         />
       ) : null}
-      <ToolbarChip
-        icon="pause"
-        label={t('textToSpeech.addPause')}
-        accessibilityLabel={t('textToSpeech.addPause')}
-        onPress={() => onOpen('pause')}
-      />
+      {rules.pauses ? (
+        <ToolbarChip
+          icon="pause"
+          label={t('textToSpeech.addPause')}
+          accessibilityLabel={t('textToSpeech.addPause')}
+          onPress={() => onOpen('pause')}
+        />
+      ) : null}
       <ToolbarChip
         icon="settings"
         accessibilityLabel={t('textToSpeech.settings')}

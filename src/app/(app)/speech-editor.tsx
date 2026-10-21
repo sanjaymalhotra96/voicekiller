@@ -23,7 +23,10 @@ export default function SpeechEditorScreen() {
   // Leaving the screen cancels an upload still in progress.
   const unmountSignal = useUnmountSignal();
   // The uploaded recording is saved as a Library file straight away.
-  const transcribe = useLibraryJob(speechEditorService.transcribe);
+  // Not a result yet, so it does not count towards the review prompt.
+  const transcribe = useLibraryJob(speechEditorService.transcribe, {
+    countsForReview: false,
+  });
   const [session, setSession] = useState<EditorSession | null>(null);
 
   const start = () => {

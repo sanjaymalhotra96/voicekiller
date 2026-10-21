@@ -29,8 +29,8 @@ const lightPalette = {
   // Text and icons on a coloured fill (orange buttons, red ribbons, the
   // orange onboarding screen). White in both schemes.
   contrast: '#FFFFFF',
-  // Unlock Studio paywall, exactly as designed (its own orange, not
-  // `primary`). Used by features/subscription/PaywallScreen.
+  // Unlock Studio and 3-day trial paywalls, exactly as designed (their
+  // own orange, not `primary`). Used by features/subscription.
   paywall: {
     brand: '#f97316', // header, Continue, selected border, check
     tile: '#ffedd5', // feature icon squares
@@ -42,6 +42,14 @@ const lightPalette = {
     plan: '#525252', // Yearly / Monthly
     footer: '#737373', // Cancel anytime, Restore, Terms, Privacy
     page: '#ffffff', // screen background
+    // 3-day trial paywall (features/subscription/TrialPaywallScreen).
+    canvas: '#f7f7f8', // screen background
+    raised: '#ffffff', // review and plan cards
+    light: '#fb923c', // middle of the orange-to-gold gradient
+    gold: '#fbbf24', // end of the gradient
+    deep: '#9a3412', // text shadow on the gradient button
+    star: '#f59e0b', // review stars
+    highlight: '#ea580c', // highlighted words in the title
   },
   // Dark surfaces (Text to Speech editor). bg-night, border-night-line...
   // Already dark, so the same in both schemes.
@@ -187,6 +195,13 @@ const darkPalette = {
     plan: '#a3a3a3',
     footer: '#8a8a8a',
     page: '#121212',
+    canvas: '#121212',
+    raised: '#1c1c1e',
+    light: '#fb923c',
+    gold: '#fbbf24',
+    deep: '#9a3412',
+    star: '#f59e0b',
+    highlight: '#fb923c',
   },
   night: {
     DEFAULT: '#101112',

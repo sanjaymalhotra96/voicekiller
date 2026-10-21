@@ -1,5 +1,4 @@
 import {
-  keepPreviousData,
   useInfiniteQuery,
   useMutation,
   useQuery,
@@ -25,7 +24,6 @@ export const useVoices = (query: VoiceQuery) =>
       voicesService.list({ ...query, cursor: pageParam }),
     initialPageParam: null as VoiceCursor | null,
     getNextPageParam: (last: VoicePage) => last.nextCursor,
-    placeholderData: keepPreviousData,
   });
 
 const favoritesKey = queryKeys.voices.favorites();

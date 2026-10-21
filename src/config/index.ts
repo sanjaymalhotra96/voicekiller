@@ -1,23 +1,37 @@
-// App-wide settings. Environment values come from EXPO_PUBLIC_* variables
-// in .env (not committed to git); everything else is tuned here, not in
-// screens. .env needs:
-//   EXPO_PUBLIC_SUPABASE_URL       Supabase > Project Settings > API
-//   EXPO_PUBLIC_SUPABASE_ANON_KEY  Supabase > Project Settings > API
-//   EXPO_PUBLIC_API_URL            Voice Killer web API base URL (no /api)
-//   EXPO_PUBLIC_ONBOARDING_ACTING_KEY  key for the onboarding acting demo
-//   EXPO_PUBLIC_ONBOARDING_CLONE_KEY   key for the onboarding clone demo
-//   EXPO_PUBLIC_REVENUECAT_ANDROID_KEY  RevenueCat > API keys (goog_...)
-//   EXPO_PUBLIC_REVENUECAT_IOS_KEY      RevenueCat > API keys (appl_...)
-//   EXPO_PUBLIC_PRIVACY_URL        Settings > Privacy Policy (optional)
-//   EXPO_PUBLIC_TERMS_URL          Paywall > Terms (optional)
-//   EXPO_PUBLIC_SHARE_URL          Settings > Share with friends (optional)
+import { Platform } from 'react-native';
+import Constants from 'expo-constants';
+
+// App-wide settings. Unprefixed values come through app.config.js and
+// expo-constants; EXPO_PUBLIC_* values are inlined by Expo. Either name
+// works. Set them in EAS or a local .env (not committed).
+//   SUPABASE_URL / EXPO_PUBLIC_SUPABASE_URL
+//   SUPABASE_ANON_KEY / EXPO_PUBLIC_SUPABASE_ANON_KEY
+//   EXPO_PUBLIC_API_URL            Voice Killer web API (no /api)
+//   ONBOARDING_ACTING_KEY          onboarding acting demo
+//   ONBOARDING_CLONE_KEY           onboarding clone demo
+//   REVENUECAT_ANDROID_KEY / EXPO_PUBLIC_REVENUECAT_ANDROID_KEY
+//   REVENUECAT_IOS_KEY / EXPO_PUBLIC_REVENUECAT_IOS_KEY
+//   META_CLIENT_TOKEN             Meta client token, never the App Secret
+//   EXPO_PUBLIC_PRIVACY_URL
+//   EXPO_PUBLIC_TERMS_URL
+
+const extra: {
+  SUPABASE_URL?: string;
+  SUPABASE_ANON_KEY?: string;
+  REVENUECAT_ANDROID_KEY?: string;
+  REVENUECAT_IOS_KEY?: string;
+  ONBOARDING_ACTING_KEY?: string;
+  ONBOARDING_CLONE_KEY?: string;
+  META_CLIENT_TOKEN?: string;
+  META_APP_ID?: string;
+} = Constants.expoConfig?.extra ?? {};
 
 export const config = {
   // Language preselected in voice and transcription forms.
   defaultLanguage: 'en',
   supabase: {
-    url: process.env.EXPO_PUBLIC_SUPABASE_URL ?? '',
-    anonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '',
+    url: extra.SUPABASE_URL ?? '',
+    anonKey: extra.SUPABASE_ANON_KEY ?? '',
   },
   // Voice Killer web API (endpoints in services/*). Requests send the
   // Supabase access token as a Bearer token.
@@ -31,15 +45,20 @@ export const config = {
   // RevenueCat (in-app subscriptions). Public SDK keys: safe in the app.
   // Empty key: purchases are off and Upgrade says so.
   purchases: {
-    androidKey: process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY ?? '',
-    iosKey: process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY ?? '',
+    androidKey: extra.REVENUECAT_ANDROID_KEY ?? '',
+    iosKey: extra.REVENUECAT_IOS_KEY ?? '',
+  },
+  meta: {
+    appId: extra.META_APP_ID ?? '',
+    clientToken: extra.META_CLIENT_TOKEN ?? '',
   },
   auth: {
     minPasswordLength: 8,
     // Must match Supabase: Authentication > Providers > Email > OTP length.
     otpLength: 6,
     otpResendSeconds: 60,
-    // Deep link opened from the reset-password email.
+    // Recovery email opens the app's reset screen. Also list this in Supabase:
+    // Authentication > URL Configuration > Redirect URLs.
     resetPasswordRedirect: 'voicekiller://reset-password',
     // Google sign-in returns here. Must be listed in Supabase: Authentication
     // > URL Configuration > Redirect URLs.
@@ -47,8 +66,6 @@ export const config = {
   },
   library: {
     pageSize: 30,
-    // All tab: files shown per date group (Today, Yesterday...).
-    allTabPerGroup: 3,
     // Wait this long after typing before searching.
     searchDebounceMs: 300,
   },
@@ -63,15 +80,18 @@ export const config = {
   // Onboarding demos (POST /api/app-onboard/acting and /clone). Called
   // before sign-in, so they send these fixed keys rather than a user token.
   onboarding: {
-    actingKey: process.env.EXPO_PUBLIC_ONBOARDING_ACTING_KEY ?? '',
-    cloneKey: process.env.EXPO_PUBLIC_ONBOARDING_CLONE_KEY ?? '',
+    actingKey: extra.ONBOARDING_ACTING_KEY ?? '',
+    cloneKey: extra.ONBOARDING_CLONE_KEY ?? '',
   },
-  // Settings links, set in .env. Empty: Share sends a message without a
-  // link, and Privacy Policy and Terms do nothing.
+  // Shared by Settings and the paywall. Store links work after publication.
   links: {
     privacyPolicy: process.env.EXPO_PUBLIC_PRIVACY_URL ?? '',
     terms: process.env.EXPO_PUBLIC_TERMS_URL ?? '',
-    appStore: process.env.EXPO_PUBLIC_SHARE_URL ?? '',
+    appStore: Platform.select({
+      ios: 'https://apps.apple.com/app/id6818937314',
+      android: 'https://play.google.com/store/apps/details?id=com.voicekiller',
+      default: '',
+    }),
   },
   storage: {
     avatar: {
@@ -137,5 +157,7 @@ export const config = {
   },
   animation: {
     sheetMs: 260,
+    // Onboarding step 1 → 2: primary circle grows from the Next button.
+    revealMs: 520,
   },
 } as const;

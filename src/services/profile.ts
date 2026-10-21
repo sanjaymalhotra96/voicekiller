@@ -1,9 +1,12 @@
+import type { User } from '@supabase/supabase-js';
 import { ImageManipulator, SaveFormat } from 'expo-image-manipulator';
 import { config } from '@/config';
 import { PlanId, planFromAccountType } from '@/domain';
+import { apiRequest } from '@/lib/api';
 import { AppError, toAppError } from '@/lib/errors';
 import { supabase } from '@/lib/supabase';
 import { isMissingTable, throwIfError } from '@/lib/supabaseResult';
+import { clearUserFiles } from '@/lib/userFiles';
 
 // Profile and account API. Screens use features/account/hooks.ts.
 // Updating the Supabase user fires USER_UPDATED, so AuthProvider (and
@@ -58,6 +61,49 @@ async function resizeAvatar(localUri: string) {
 }
 
 export const profileService = {
+  // Match the website's signup fields. Existing accounts keep their plan
+  // and profile, including when a previous signup needs to be retried.
+  // True only when this call created the profile (a new app signup).
+  async createIfMissing(user: User | null): Promise<boolean> {
+    if (!user?.email) {
+      throw new AppError('authRequired');
+    }
+    const fullName =
+      user.user_metadata.full_name || user.user_metadata.name || '';
+    const [firstName = '', ...lastName] = fullName.trim().split(/\s+/);
+    const { data } = throwIfError(
+      await supabase
+        .from('users')
+        .upsert(
+          {
+            id: user.id,
+            f_name: firstName,
+            l_name: lastName.join(' '),
+            email: user.email.trim().toLowerCase(),
+            account_type: 'free',
+          },
+          { onConflict: 'id', ignoreDuplicates: true },
+        )
+        .select('id'),
+    );
+    return (data?.length ?? 0) > 0;
+  },
+
+  // Supabase is the source of truth for the paywall's account check.
+  async getAccountType(userId: string): Promise<string> {
+    const { data } = throwIfError(
+      await supabase
+        .from('users')
+        .select('account_type')
+        .eq('id', userId)
+        .single(),
+    );
+    if (!data.account_type) {
+      throw new AppError('serviceUnavailable');
+    }
+    return data.account_type;
+  },
+
   async getAccount(userId: string): Promise<Account> {
     const [user, billing] = await Promise.all([
       supabase
@@ -152,9 +198,26 @@ export const profileService = {
     }
   },
 
-  // Runs the public.delete_user() database function, then signs out.
+  // All plans: the API derives the user from the access token. Keep the
+  // local session on failure so a pending deletion can be retried.
   async deleteAccount() {
-    throwIfError(await supabase.rpc('delete_user'));
-    await supabase.auth.signOut({ scope: 'local' });
+    const result = await apiRequest<{ success: boolean; message: string }>(
+      '/api/account',
+      {
+        method: 'DELETE',
+        // Provider and storage cleanup runs sequentially, like long uploads.
+        timeoutMs: config.api.uploadTimeoutMs,
+      },
+    );
+    if (result?.success !== true) {
+      throw new AppError('unknown', result);
+    }
+    try {
+      await clearUserFiles();
+    } finally {
+      // AuthProvider clears cached queries and user-scoped drafts on sign-out.
+      // Always discard the session once the server confirms deletion.
+      await supabase.auth.signOut({ scope: 'local' });
+    }
   },
 };

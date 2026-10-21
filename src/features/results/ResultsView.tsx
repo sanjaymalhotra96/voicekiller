@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, View } from 'react-native';
 import {
@@ -30,6 +30,8 @@ import {
   viewableTools,
 } from '@/features/results/types';
 import { useResultActions } from '@/features/results/useResultActions';
+import { TranscriptDownloadMenu } from '@/features/speech-to-text/TranscriptDownloadMenu';
+import { useTranscriptDownload } from '@/features/speech-to-text/useTranscriptDownload';
 import { errorMessageKey } from '@/lib/errors';
 import { useColors } from '@/theme';
 import type { OwnVoiceSource } from '@/services/ownVoices';
@@ -67,8 +69,19 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
   const { t } = useTranslation();
   const router = useRouter();
   const actions = useResultActions(query);
+  const transcriptDownload = useTranscriptDownload();
+  const { mutate: downloadTranscript, isPending: downloadingTranscript } =
+    transcriptDownload;
   const { playback, togglePlay, download, confirmDelete, startRename } =
     actions;
+  const playbackState = useMemo(
+    () => ({
+      id: playback.activeId,
+      playing: playback.playing,
+      loading: playback.loading,
+    }),
+    [playback.activeId, playback.playing, playback.loading],
+  );
   // Only offered when the source supports them (see ResultsQuery).
   const onRename = query.rename ? startRename : undefined;
   const onDelete = query.remove ? confirmDelete : undefined;
@@ -76,24 +89,46 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
   const [viewing, setViewing] = useState<LibraryItem | null>(null);
   const { file } = query;
   const onView = useCallback(
-    (item: ResultItem) => setViewing(file?.(item.id) ?? null),
-    [file],
+    (item: ResultItem) => {
+      playback.stop();
+      setViewing(file?.(item.id) ?? null);
+    },
+    [file, playback.stop],
   );
   const canView = viewableTools.includes(tool) && !!file;
-  const onDownload = undownloadableTools.includes(tool) ? undefined : download;
+  const isTranscript = tool === 'speechToText';
+  const onDownload =
+    isTranscript || undownloadableTools.includes(tool) ? undefined : download;
 
   const renderCard = useCallback(
     (item: ResultItem) => {
       const active = playback.activeId === item.id;
+      const transcriptFile = isTranscript ? file?.(item.id) : undefined;
       return (
         <ResultCard
           item={item}
           active={active}
           playing={active && playback.playing}
+          loading={active && playback.loading}
           player={playback.player}
           onTogglePlay={togglePlay}
           onRename={onRename}
           onView={canView ? onView : undefined}
+          viewPrimary={isTranscript}
+          downloadControl={
+            isTranscript ? (
+              <TranscriptDownloadMenu
+                variant="icon"
+                accessibilityLabel={t('results.download', { name: item.title })}
+                loading={downloadingTranscript}
+                disabled={!transcriptFile}
+                onSelect={format => {
+                  if (transcriptFile)
+                    downloadTranscript({ file: transcriptFile, format });
+                }}
+              />
+            ) : undefined
+          }
           onDownload={onDownload}
           onDelete={onDelete}
         />
@@ -102,6 +137,7 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
     [
       playback.activeId,
       playback.playing,
+      playback.loading,
       playback.player,
       togglePlay,
       onRename,
@@ -109,11 +145,16 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
       onView,
       onDownload,
       onDelete,
+      isTranscript,
+      file,
+      t,
+      downloadingTranscript,
+      downloadTranscript,
     ],
   );
-  // Half-width cells, so an odd last card keeps its size.
+  // FlashList sizes each column; the card fills that column's width.
   const renderItem = useCallback<FlashListRenderItem<ResultItem>>(
-    ({ item }) => <View className="w-1/2 p-1.5">{renderCard(item)}</View>,
+    ({ item }) => <View className="w-full p-1.5">{renderCard(item)}</View>,
     [renderCard],
   );
 
@@ -174,7 +215,16 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
             {t('results.empty')}
           </AppText>
         )}
-        <FormError error={query.mutationError} />
+        {actions.isDownloading ? (
+          <ActivityIndicator color={colors.primary.DEFAULT} />
+        ) : null}
+        <FormError
+          error={
+            transcriptDownload.error ??
+            actions.downloadError ??
+            query.mutationError
+          }
+        />
         {renameSheet}
         {viewer}
       </View>
@@ -208,12 +258,21 @@ function ResultsBody({ tool, mode, query }: Props & { query: ResultsQuery }) {
 
   return (
     <View className="flex-1 gap-3">
-      <FormError error={query.mutationError} />
+      {actions.isDownloading ? (
+        <ActivityIndicator color={colors.primary.DEFAULT} />
+      ) : null}
+      <FormError
+        error={
+          transcriptDownload.error ??
+          actions.downloadError ??
+          query.mutationError
+        }
+      />
       <FlashList
         data={query.items}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        extraData={playback.activeId}
+        extraData={playbackState}
         numColumns={2}
         onEndReachedThreshold={0.5}
         onEndReached={query.fetchNextPage}

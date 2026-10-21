@@ -1,5 +1,4 @@
 // Route: /change (onboarding step 4)
-import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
@@ -10,18 +9,22 @@ import {
   ChangerVoice,
   changerVoices,
 } from '@/features/onboarding/changeDemo';
+import { cloneVoices } from '@/features/onboarding/cloneDemo';
 import { CompareRow } from '@/features/onboarding/CompareRow';
 import {
   CardLabel,
   OnboardingCard,
 } from '@/features/onboarding/OnboardingCard';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
-import { useClipPlayer } from '@/features/onboarding/useClipPlayer';
+import { SamplePlaybackIcon } from '@/features/onboarding/SamplePlaybackIcon';
+import { useOnboardingPlayer } from '@/features/onboarding/useOnboardingPlayer';
 import { useStatusBarStyle } from '@/hooks';
+import { useColors } from '@/theme';
 import { cn } from '@/utils';
 
 const BEFORE_ID = 'before';
 const afterId = (voice: ChangerVoice) => `after:${voice.id}`;
+const sampleId = (voice: ChangerVoice) => `sample:${voice.id}`;
 
 // The voice grid, two per row.
 const voiceRows = [changerVoices.slice(0, 2), changerVoices.slice(2, 4)];
@@ -29,68 +32,94 @@ const voiceRows = [changerVoices.slice(0, 2), changerVoices.slice(2, 4)];
 function VoiceOption({
   voice,
   selected,
+  playing,
+  loading,
+  previewLabel,
+  onPreview,
   onPress,
 }: {
   voice: ChangerVoice;
   selected: boolean;
+  playing: boolean;
+  loading: boolean;
+  previewLabel: string;
+  onPreview: () => void;
   onPress: () => void;
 }) {
+  const colors = useColors();
+
   return (
-    <Pressable
-      accessibilityRole="radio"
-      accessibilityLabel={voice.name}
-      accessibilityState={{ selected }}
-      onPress={onPress}
+    <View
       className={cn(
-        'h-option flex-1 flex-row items-center gap-2 rounded-2xl px-3 active:opacity-80',
+        'h-option flex-1 flex-row items-center rounded-2xl pl-1',
         selected ? 'bg-ink' : 'bg-field',
       )}
     >
-      <View
-        className={cn(
-          'size-8 items-center justify-center rounded-full',
-          selected ? 'bg-contrast/15' : 'bg-surface',
-        )}
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={previewLabel}
+        accessibilityState={{ busy: loading, disabled: loading }}
+        disabled={loading}
+        onPress={onPreview}
+        className="size-11 items-center justify-center rounded-full active:opacity-70"
       >
-        <AppText
+        <View
           className={cn(
-            'font-sans-bold text-xs',
-            selected ? 'text-contrast' : 'text-primary-deep',
+            'size-8 items-center justify-center rounded-full',
+            selected ? 'bg-contrast/15' : 'bg-surface',
           )}
         >
-          {voice.initials}
-        </AppText>
-      </View>
-      <AppText
-        numberOfLines={1}
-        className={cn(
-          'shrink font-sans-bold text-body',
-          selected ? 'text-contrast' : 'text-ink',
-        )}
+          <SamplePlaybackIcon
+            playing={playing}
+            loading={loading}
+            color={selected ? colors.contrast : colors.primary.deep}
+          />
+        </View>
+      </Pressable>
+      <Pressable
+        accessibilityRole="radio"
+        accessibilityLabel={voice.name}
+        accessibilityState={{ selected }}
+        onPress={onPress}
+        className="h-full flex-1 justify-center rounded-r-2xl pl-1 pr-3 active:opacity-80"
       >
-        {voice.name}
-      </AppText>
-    </Pressable>
+        <AppText
+          numberOfLines={1}
+          className={cn(
+            'font-sans-bold text-body',
+            selected ? 'text-contrast' : 'text-ink',
+          )}
+        >
+          {voice.name}
+        </AppText>
+      </Pressable>
+    </View>
   );
 }
 
 // Step 4: "Change your voice. Keep your style." The same take before and
 // after the voice changer, for whichever voice is picked.
 export default function OnboardingChangeScreen() {
-  const router = useRouter();
   const { t } = useTranslation();
   useStatusBarStyle('light-content');
   const [voice, setVoice] = useState(changerVoices[0]);
-  const { playingId, playOrStop, stop } = useClipPlayer();
+  const { playingId, loadingId, playOrStop, stop } = useOnboardingPlayer();
 
   const onVoice = (next: ChangerVoice) => {
     stop();
     setVoice(next);
   };
 
-  const onNext = () => {
+  const onPreview = (next: ChangerVoice) => {
+    const cloneId = next.id === 'elon' ? 'musk' : next.id;
+    const sample = cloneVoices.find(item => item.id === cloneId);
+    if (!sample) return;
+    playOrStop({ id: sampleId(next), audioUrl: sample.sample });
+  };
+
+  const onNext = (go: (name: string) => void) => {
     stop();
-    router.push('/clean');
+    go('clean');
   };
 
   return (
@@ -108,7 +137,10 @@ export default function OnboardingChangeScreen() {
           caption={t('onboarding.change.beforeCaption')}
           wave={changerBeforeWave}
           playing={playingId === BEFORE_ID}
-          onPress={() => playOrStop(BEFORE_ID, changerBeforeUrl)}
+          loading={loadingId === BEFORE_ID}
+          onPress={() =>
+            playOrStop({ id: BEFORE_ID, audioUrl: changerBeforeUrl })
+          }
         />
 
         <CardLabel icon="arrowDown" className="mb-2.5 mt-4">
@@ -123,6 +155,15 @@ export default function OnboardingChangeScreen() {
                   key={item.id}
                   voice={item}
                   selected={item.id === voice.id}
+                  playing={playingId === sampleId(item)}
+                  loading={loadingId === sampleId(item)}
+                  previewLabel={t(
+                    playingId === sampleId(item)
+                      ? 'onboarding.clone.stopReal'
+                      : 'onboarding.clone.playReal',
+                    { name: item.name },
+                  )}
+                  onPreview={() => onPreview(item)}
                   onPress={() => onVoice(item)}
                 />
               ))}
@@ -136,7 +177,10 @@ export default function OnboardingChangeScreen() {
           caption={voice.name}
           wave={voice.wave}
           playing={playingId === afterId(voice)}
-          onPress={() => playOrStop(afterId(voice), voice.audioUrl)}
+          loading={loadingId === afterId(voice)}
+          onPress={() =>
+            playOrStop({ id: afterId(voice), audioUrl: voice.audioUrl })
+          }
           className="mt-4"
         />
       </OnboardingCard>

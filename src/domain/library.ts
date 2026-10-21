@@ -42,9 +42,6 @@ type LibraryItemMetadata = {
   transcriptUrl?: string;
 };
 
-// Library list filter: one tool, or everything.
-export type LibraryFilter = LibrarySource | 'all';
-
 // Where the next page starts: the creation time of the last file shown
 // (raw database value, microseconds kept) and the ids already shown at
 // exactly that time, so rows sharing a timestamp are neither repeated nor
@@ -52,6 +49,4 @@ export type LibraryFilter = LibrarySource | 'all';
 export type LibraryCursor = {
   createdAt: string;
   seen: string[];
-  // Tools whose files have all been shown: later pages skip their table.
-  done?: LibrarySource[];
 };

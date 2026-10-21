@@ -34,6 +34,7 @@ import { dismissKeyboardOnBlankTouch } from '@/utils';
 type Props = {
   visible: boolean;
   onClose: () => void;
+  onDismiss?: () => void;
   title?: string;
   subtitle?: string;
   // Fraction of the screen height (0-1). Omit to fit the content.
@@ -62,6 +63,7 @@ const SPRING = { damping: 20, stiffness: 220 };
 export function BottomSheet({
   visible,
   onClose,
+  onDismiss,
   title,
   subtitle,
   height,
@@ -180,6 +182,7 @@ export function BottomSheet({
       statusBarTranslucent
       navigationBarTranslucent
       onRequestClose={onClose}
+      onDismiss={onDismiss}
     >
       {/* Gestures inside an Android Modal need their own root view. */}
       <GestureHandlerRootView style={styles.fill}>

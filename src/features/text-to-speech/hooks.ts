@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { recordSuccessfulOperation } from '@/features/review/prompt';
 import { useSpeechDraft } from '@/features/text-to-speech/store';
 import { queryKeys } from '@/lib/queryKeys';
 import { campaignsService } from '@/services/campaigns';
@@ -22,11 +23,13 @@ export function useGenerateSpeech() {
   const client = useQueryClient();
   return useMutation({
     mutationFn: speechService.generate,
-    onSuccess: () =>
-      Promise.all([
+    onSuccess: () => {
+      recordSuccessfulOperation();
+      return Promise.all([
         client.invalidateQueries({ queryKey: queryKeys.library.all }),
         client.invalidateQueries({ queryKey: queryKeys.account.all }),
-      ]),
+      ]);
+    },
   });
 }
 

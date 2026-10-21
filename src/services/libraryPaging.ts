@@ -1,9 +1,8 @@
 import type { LibraryCursor, LibraryItem, LibrarySource } from '@/domain';
 import { asText, fileNameFromUrl } from '@/utils';
 
-// Paging for Library: pure functions, no I/O (see libraryPaging.test.ts).
-// Every source is read newest first at or before a cursor time; the pages
-// are merged here so the order is exact across tables.
+// Paging for one Library source: pure functions, no I/O.
+// Files at the cursor timestamp are tracked to avoid repeats between pages.
 
 type Row = Record<string, unknown>;
 
@@ -77,19 +76,16 @@ export type LibraryPage = {
   nextCursor: LibraryCursor | null;
 };
 
-// Merges what each source returned into one page of `size`, newest first.
-// `full`: the source had more rows than it returned. Files sharing the
+// Builds one source's page of `size`, newest first.
+// `full`: the source may have more rows. Files sharing the
 // cursor's timestamp that were already shown are skipped (`cursor.seen`).
-// A source with no more rows whose files all made it onto this page is
-// done: later pages do not query it (`cursor.done`).
-export function mergePage(
-  results: { tool: LibrarySource; rows: Fetched[]; full: boolean }[],
+export function createLibraryPage(
+  result: { rows: Fetched[]; full: boolean },
   cursor: LibraryCursor | null,
   size: number,
 ): LibraryPage {
   const seen = new Set(cursor?.seen ?? []);
-  const merged = results
-    .flatMap(result => result.rows)
+  const remaining = result.rows
     .filter(
       row =>
         !(
@@ -100,17 +96,9 @@ export function mergePage(
     )
     .sort(newestFirst);
 
-  const page = merged.slice(0, size);
+  const page = remaining.slice(0, size);
   const last = page[page.length - 1];
-  const hasMore = merged.length > size || results.some(result => result.full);
-
-  const shown = new Set(page.map(row => row.item.id));
-  const done = [
-    ...(cursor?.done ?? []),
-    ...results
-      .filter(r => !r.full && r.rows.every(row => shown.has(row.item.id)))
-      .map(r => r.tool),
-  ];
+  const hasMore = remaining.length > size || result.full;
 
   let nextCursor: LibraryCursor | null = null;
   if (hasMore && last) {
@@ -124,7 +112,6 @@ export function mergePage(
         cursor?.createdAt === last.createdAtRaw
           ? [...cursor.seen, ...atLast]
           : atLast,
-      done,
     };
   }
   return { items: page.map(row => row.item), nextCursor };

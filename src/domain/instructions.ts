@@ -1,5 +1,5 @@
 // Acting instructions: the shared library and the user's own.
-// Must match the check constraint on public.acting_instructions.category.
+// Categories supported by the library filters.
 
 export const instructionCategories = [
   'emotions',
@@ -14,15 +14,22 @@ export const isInstructionCategory = (
 ): value is InstructionCategory =>
   (instructionCategories as readonly string[]).includes(value);
 
-// Library entry (public.acting_instructions).
+// Library entry (public.instructions).
 export type ActingInstruction = {
   id: string;
   name: string;
-  category: InstructionCategory;
+  category: InstructionCategory | null;
   instructions: string;
   sampleScript: string;
   sampleAudioUrl: string | null;
 };
+
+// This database entry tells the speech API to derive directions from the script.
+export const isAutomaticInstruction = (
+  item: Pick<ActingInstruction, 'name' | 'instructions'>,
+) =>
+  item.name.trim() === 'AI' &&
+  item.instructions.trim() === 'Generate instructions based on the script';
 
 // The user's own (public.custom_instructions).
 export type CustomInstruction = {
@@ -48,7 +55,9 @@ export function countByCategory(
     instructionCategories.map(category => [category, 0]),
   ) as Record<InstructionCategory, number>;
   for (const item of items) {
-    counts[item.category] += 1;
+    if (item.category !== null) {
+      counts[item.category] += 1;
+    }
   }
   return counts;
 }

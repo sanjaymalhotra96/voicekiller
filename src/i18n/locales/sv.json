@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "Stäng",
+    "back": "Tillbaka",
+    "copied": "Kopierat",
+    "cancel": "Avbryt",
+    "change": "Ändra",
+    "save": "Spara",
+    "beta": "Beta",
+    "delete": "Radera",
+    "showMore": "Visa mer",
+    "showLess": "Visa mindre"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "E-post",
+    "continueWithGoogle": "Fortsätt med Google",
+    "continueWithEmail": "Fortsätt med e-post",
+    "haveAccount": "Har du redan ett konto? <link>Logga in</link>"
+  },
+  "welcome": {
+    "title": "Välkommen till <brand>{{appName}}</brand>",
+    "subtitle": "Det är det första AI-röstverktyget byggt kring skådespelarinstruktioner. Du anger känslan och rösten gestaltar den."
+  },
+  "signUp": {
+    "title": "Registrera dig",
+    "subtitle": "Bara några snabba uppgifter för att komma igång.",
+    "fullName": "Ditt fullständiga namn",
+    "email": "E-postadress",
+    "password": "Lösenord",
+    "confirmPassword": "Bekräfta lösenord",
+    "agree": "Jag godkänner <link>användarvillkoren</link>",
+    "submit": "Registrera dig",
+    "showPassword": "Visa lösenord",
+    "hidePassword": "Dölj lösenord"
+  },
+  "signIn": {
+    "title": "Logga in",
+    "subtitle": "Välkommen tillbaka! Vi har saknat dig.",
+    "email": "E-postadress",
+    "password": "Lösenord",
+    "forgot": "Glömt lösenordet?",
+    "submit": "Logga in"
+  },
+  "verify": {
+    "title": "Kodverifiering",
+    "subtitle": "Vi har skickat en engångskod till <bold>{{email}}</bold>",
+    "resendIn": "Du kan skicka igen om {{time}} sekunder.",
+    "resendReady": "Du kan skicka igen. <link>Skicka koden igen</link>",
+    "submit": "Verifiera",
+    "digit": "Siffra {{index}}"
+  },
+  "forgotPassword": {
+    "title": "Glömt lösenordet?",
+    "subtitle": "Ange din e-postadress så skickar vi en länk för att återställa ditt lösenord.",
+    "email": "E-postadress",
+    "submit": "Skicka återställningslänk",
+    "backToLogin": "Tillbaka till inloggning",
+    "sent": "En återställningslänk har skickats till <bold>{{email}}</bold>. Kontrollera din inkorg."
+  },
+  "resetPassword": {
+    "title": "Återställ lösenord",
+    "subtitle": "Välj ett nytt lösenord för ditt konto.",
+    "submit": "Återställ lösenord",
+    "done": "Ditt lösenord har återställts. Du kan nu logga in med ditt nya lösenord.",
+    "requestLink": "Begär en ny återställningslänk",
+    "continue": "Fortsätt"
+  },
+  "validation": {
+    "nameRequired": "Ange ditt namn.",
+    "emailInvalid": "Ange en giltig e-postadress.",
+    "passwordRequired": "Ange ditt lösenord.",
+    "passwordShort": "Lösenordet måste innehålla minst {{min}} tecken.",
+    "passwordMismatch": "Lösenorden stämmer inte överens.",
+    "termsRequired": "Godkänn användarvillkoren.",
+    "otpIncomplete": "Ange hela koden.",
+    "titleRequired": "Ange ett namn.",
+    "dobInvalid": "Använd formatet dd/mm/yy (dag/månad/tvåsiffrigt år).",
+    "currentPasswordRequired": "Ange ditt nuvarande lösenord.",
+    "samePassword": "Det nya lösenordet måste vara annorlunda.",
+    "promptRequired": "Beskriv rösten du vill ha.",
+    "voiceNameRequired": "Ange ett namn på rösten.",
+    "sampleRequired": "Ladda upp eller spela in ett röstprov.",
+    "descriptionRequired": "Beskriv rösten."
+  },
+  "errors": {
+    "network": "Ingen internetanslutning. Försök igen.",
+    "invalidCredentials": "Fel e-postadress eller lösenord.",
+    "emailNotConfirmed": "Verifiera din e-postadress innan du loggar in.",
+    "emailTaken": "Det finns redan ett konto med den här e-postadressen.",
+    "weakPassword": "Välj ett starkare lösenord.",
+    "otpInvalid": "Ogiltig engångskod. Försök igen.",
+    "recoveryLinkInvalid": "Återställningslänken är ogiltig eller har gått ut. Begär en ny.",
+    "rateLimited": "För många försök. Vänta en stund.",
+    "unknown": "Något gick fel. Försök igen.",
+    "currentPasswordWrong": "Det nuvarande lösenordet är felaktigt.",
+    "uploadFailed": "Det gick inte att ladda upp filen. Försök igen.",
+    "quotaExceeded": "Du har nått gränsen för din plan. Uppgradera för att fortsätta skapa.",
+    "serviceUnavailable": "Den här funktionen är inte tillgänglig just nu. Försök igen senare.",
+    "campaignExists": "Du har redan en kampanj med det namnet.",
+    "fileType": "Den här filtypen stöds inte.",
+    "fileTooLarge": "Filen är för stor. Välj en mindre fil.",
+    "micPermission": "Tillåt mikrofonåtkomst i Inställningar för att spela in din röst.",
+    "photoLibraryPermission": "Tillåt åtkomst till Bilder i Inställningar för att välja en video.",
+    "shareUnavailable": "Delning är inte tillgänglig på den här enheten.",
+    "transcriptUnavailable": "Det finns ingen transkription för den här filen.",
+    "transcriptTimingUnavailable": "Transkriptionen saknar användbara tidsangivelser. Välj Text (.txt) för att ladda ner den.",
+    "authRequired": "Din session har gått ut. Logga in igen.",
+    "studioRequired": "Detta kräver Studio-planen.",
+    "notFound": "Den här filen finns inte längre.",
+    "paidPlanRequired": "Detta kräver en betalplan.",
+    "jobFailed": "Vi kunde inte slutföra åtgärden. Försök igen.",
+    "jobTimeout": "Det tar längre tid än väntat. Kontrollera biblioteket om några minuter.",
+    "sampleLength": "Använd ett röstprov som är minst 1 sekund långt.",
+    "renameNotAllowed": "Det går inte att byta namn på filen just nu.",
+    "cancelled": "Avbrutet.",
+    "purchasesUnavailable": "Prenumerationer är inte tillgängliga ännu. Försök igen senare.",
+    "purchaseFailed": "Köpet kunde inte slutföras. Du har inte debiterats.",
+    "nothingToRestore": "Inga tidigare köp hittades för det här butikskontot.",
+    "conversionFailed": "Filen kunde inte omvandlas till ljud. Prova en annan fil.",
+    "scriptTooLong": "Gratisplaner kan generera upp till 1 000 tecken åt gången. Korta ner manuset eller uppgradera.",
+    "samePassword": "Ditt nya lösenord måste skilja sig från det nuvarande.",
+    "passwordNotSet": "Du registrerade dig med Google, så kontot har inget lösenord att ändra.",
+    "googleSignInFailed": "Inloggningen med Google slutfördes inte. Försök igen.",
+    "appleSignInFailed": "Inloggningen med Apple slutfördes inte. Försök igen."
+  },
+  "tabs": {
+    "dashboard": "Översikt",
+    "library": "Bibliotek",
+    "settings": "Inställningar"
+  },
+  "dashboard": {
+    "title": "Översikt",
+    "greeting": "Hej, {{name}}",
+    "sections": {
+      "create": "Skapa",
+      "transform": "Omvandla"
+    },
+    "actionCard": {
+      "title": "Text till tal",
+      "action": "Skapa tal"
+    }
+  },
+  "library": {
+    "title": "Bibliotek",
+    "search": "Sök filer...",
+    "empty": {
+      "title": "Du har inga filer ännu!",
+      "message": "Skapa en ny fil från översikten."
+    },
+    "noResults": "Inga filer matchar din sökning.",
+    "groups": {
+      "today": "Idag",
+      "yesterday": "Igår",
+      "thisWeek": "Den här veckan",
+      "earlier": "Tidigare"
+    },
+    "actions": {
+      "title": "Detaljer",
+      "rename": "Byt namn",
+      "download": "Ladda ner",
+      "delete": "Radera",
+      "more": "Fler alternativ för {{title}}",
+      "play": "Spela upp {{title}}",
+      "pause": "Pausa {{title}}"
+    },
+    "rename": {
+      "title": "Byt namn",
+      "placeholder": "Filnamn"
+    },
+    "delete": {
+      "title": "Radera filen?",
+      "message": "\"{{title}}\" raderas permanent.",
+      "confirm": "Radera",
+      "cancel": "Avbryt"
+    },
+    "retry": "Försök igen",
+    "untitled": "Utan titel"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "sections": {
+      "general": "Allmänt",
+      "others": "Övrigt"
+    },
+    "items": {
+      "personalInfo": "Personuppgifter",
+      "changePassword": "Ändra lösenord",
+      "subscription": "Hantera prenumeration",
+      "share": "Dela med vänner",
+      "contact": "Kontakta oss",
+      "privacy": "Integritetspolicy"
+    },
+    "signOut": "Logga ut",
+    "shareMessage": "Jag använder {{appName}} för att skapa AI-röster. Prova själv: {{url}}",
+    "shareMessageNoLink": "Jag använder {{appName}} för att skapa AI-röster."
+  },
+  "crash": {
+    "title": "Något gick fel",
+    "message": "Ett oväntat fel uppstod i appen. Försök igen.",
+    "retry": "Försök igen"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "Text till tal",
+      "subtitle": "Skriv och lyssna",
+      "tag": "AI-tal"
+    },
+    "voiceClone": {
+      "title": "Röstkloning",
+      "subtitle": "Kopiera vilken röst som helst",
+      "tag": "Röstkloning"
+    },
+    "voiceDesign": {
+      "title": "Röstdesign",
+      "subtitle": "Beskriv en röst",
+      "tag": "Röstdesign"
+    },
+    "voiceChanger": {
+      "title": "Röstförändrare",
+      "subtitle": "Byt ut din röst",
+      "tag": "Röstförändrare"
+    },
+    "audioClean": {
+      "title": "Ljudrensning",
+      "subtitle": "Ta bort brus",
+      "tag": "Ljudrensning"
+    },
+    "speechEditor": {
+      "title": "Talredigerare",
+      "subtitle": "Rätta till orden",
+      "tag": "Talredigerare"
+    },
+    "speechToText": {
+      "title": "Tal till text",
+      "subtitle": "Transkribera ljud",
+      "tag": "Tal till text"
+    }
+  },
+  "trialOffer": {
+    "title": "Vi vill att du provar",
+    "titleHighlight": "Voicekiller gratis",
+    "noPaymentToday": "Inget att betala idag",
+    "cta": "Prova för $0.00"
+  },
+  "trialPaywall": {
+    "later": "Senare",
+    "stars": "5 av 5 stjärnor",
+    "reviews": {
+      "textToSpeech": "”Rösterna låter så äkta att mina lyssnare inte märker att det är AI.”",
+      "acting": "”Jag skriver ’säg det som ett sorgset farväl’ och känslan sitter varje gång.”",
+      "voiceClone": "”Klonade min röst på en minut. Nu gör jag videor utan att spela in.”",
+      "allInOne": "”Rensa ljud, byta röster, rätta misstag. En app ersatte fyra verktyg.”"
+    },
+    "kicker": "Sluta betala för 5 olika verktyg",
+    "title": "De bästa <brand>AI-talverktygen</brand> på <brand>en plattform</brand>",
+    "perMonth": "{{price}}/månad",
+    "perYear": "{{price}}/år",
+    "monthlyNote": "{{days}} dagar gratis · avsluta när du vill",
+    "yearlyNote": "{{days}} dagar gratis · spara {{percent}} %",
+    "trialNote": "{{days}} dagar gratis",
+    "cta": "Testa GRATIS i {{days}} dagar",
+    "then": "sedan {{price}}",
+    "disclaimer": "Ingen debitering i dag. Avsluta före dag {{days}} så debiteras du inte."
+  },
+  "paywall": {
+    "title": "Lås upp Studio",
+    "close": "Stäng",
+    "features": {
+      "voices": "Över 2 000 röster",
+      "clones": "Obegränsad röstkloning",
+      "audioClean": "Ljudrensning",
+      "voiceChanger": "Röstförändrare",
+      "speechEditor": "AI-talredigerare"
+    },
+    "yearly": "Årsvis",
+    "monthly": "Månadsvis",
+    "minutes": "{{count}} minuter/månad",
+    "save": "Spara {{percent}} %",
+    "continue": "Fortsätt",
+    "cancelAnytime": "Avsluta när som helst",
+    "restore": "Återställ köp",
+    "terms": "Villkor",
+    "privacy": "Integritet"
+  },
+  "plan": {
+    "basic": "Basplan",
+    "studio": "Studio",
+    "buyStudio": "Köp Studio",
+    "usage": "Användning",
+    "usageOf": "/ {{limit}} minuter",
+    "usageThisMonth": "Användning den här månaden",
+    "usageMinutes": "{{used}} / {{limit}} min",
+    "remaining": "{{count}} minuter kvar"
+  },
+  "profile": {
+    "title": "Personuppgifter",
+    "userId": "Användar-ID",
+    "fullName": "Ditt fullständiga namn",
+    "email": "Din e-postadress",
+    "dob": "Födelsedatum",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "Ändra profilbild",
+    "copyId": "Kopiera användar-ID",
+    "deleteAccount": "Radera konto",
+    "save": "Spara ändringar",
+    "saved": "Dina ändringar har sparats.",
+    "changeEmail": {
+      "title": "Ändra e-postadress",
+      "subtitle": "Vi skickar en bekräftelselänk till den nya adressen.",
+      "placeholder": "Ny e-postadress",
+      "submit": "Skicka länk",
+      "sent": "Kontrollera inkorgen för {{email}} för att bekräfta ändringen."
+    },
+    "unsaved": {
+      "title": "Spara ändringar?",
+      "message": "Dina osparade ändringar går förlorade. Vill du spara innan du stänger?",
+      "discard": "Kasta ändringar",
+      "confirm": "Bekräfta"
+    },
+    "delete": {
+      "title": "Radera kontot",
+      "message": "Om du raderar ditt konto tas all din information bort från vår databas. Detta går inte att ångra.",
+      "prompt": "Skriv \"{{word}}\" för att bekräfta",
+      "word": "DELETE",
+      "submit": "Radera konto"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "Ange nuvarande lösenord",
+    "title": "Ändra lösenord",
+    "current": "Nuvarande lösenord",
+    "new": "Nytt lösenord",
+    "newPlaceholder": "Ange nytt lösenord (minst {{min}} tecken)",
+    "confirm": "Bekräfta lösenord",
+    "confirmPlaceholder": "Bekräfta nytt lösenord",
+    "submit": "Ändra lösenord",
+    "done": "Ditt lösenord har ändrats."
+  },
+  "notFound": {
+    "title": "Den här sidan finns inte.",
+    "action": "Gå till startsidan"
+  },
+  "textToSpeech": {
+    "title": "Text till tal",
+    "fileName": "Filnamn (valfritt)",
+    "campaign": "Kampanj",
+    "scriptPlaceholder": "Skriv eller klistra in ditt manus här...",
+    "scriptLabel": "Manus",
+    "scriptLimitExceeded": "Den här rösten stöder upp till {{max}} tecken. Korta ner manuset eller välj en annan röst.",
+    "chooseVoice": "Välj röst",
+    "voiceLabel": "Röst: {{name}}",
+    "emotions": "Känslor",
+    "addPause": "Lägg till paus",
+    "settings": "Inställningar",
+    "preview": "Provlyssna",
+    "stopPreview": "Stoppa",
+    "generate": "Generera",
+    "campaignSheet": {
+      "title": "Kampanj",
+      "placeholder": "Namn på ny kampanj...",
+      "create": "Skapa kampanj",
+      "default": "Standard"
+    },
+    "pauseSheet": {
+      "title": "Lägg till paus",
+      "seconds_one": "{{count}} sekund",
+      "seconds_other": "{{count}} sekunder"
+    },
+    "settingsSheet": {
+      "title": "Inställningar",
+      "audioFormat": "Ljudformat",
+      "voiceTuning": "Röstjustering",
+      "speed": "Hastighet",
+      "delivery": "Framförandestil",
+      "actingInstructions": "Skådespelarinstruktioner",
+      "instruction": "Instruktion",
+      "chooseInstruction": "Välj en instruktion",
+      "ownInstructions": "Skriv egna instruktioner",
+      "ownPlaceholder": "Beskriv hur manuset ska framföras..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "Stabilare",
+      "balanced": "Balanserad",
+      "creative": "Mer kreativ"
+    }
+  },
+  "emotions": {
+    "auto": "Auto",
+    "happy": "Glad",
+    "sad": "Ledsen",
+    "angry": "Arg",
+    "fearful": "Rädd",
+    "disgusted": "Äcklad",
+    "surprised": "Förvånad",
+    "calm": "Lugn",
+    "fluent": "Flytande"
+  },
+  "voices": {
+    "title": "Välj röst",
+    "search": "Sök röster...",
+    "sources": {
+      "library": "Bibliotek",
+      "cloned": "Klonade",
+      "design": "Designade",
+      "favorites": "Favoriter"
+    },
+    "openFilters": "Filter",
+    "openFiltersCount": "Filter, {{count}} aktiva",
+    "favorite": "Lägg till {{name}} som favorit",
+    "unfavorite": "Ta bort {{name}} från favoriter",
+    "select": "Välj {{name}}",
+    "play": "Spela upp röstprov för {{name}}",
+    "pause": "Pausa röstprov för {{name}}",
+    "empty": "Inga röster matchar din sökning.",
+    "emptyFavorites": "Inga favoritröster ännu. Tryck på hjärtat vid en röst för att spara den här.",
+    "filters": {
+      "title": "Filter",
+      "model": "Modell",
+      "gender": "Kön",
+      "accent": "Accent",
+      "language": "Språk",
+      "apply": "Använd filter"
+    },
+    "genders": {
+      "female": "Kvinnlig",
+      "male": "Manlig",
+      "neutral": "Neutral"
+    },
+    "models": {
+      "all": "Alla modeller",
+      "expressive": "Uttrycksfull",
+      "directable": "Regisserbar",
+      "directablePro": "Regisserbar Pro"
+    }
+  },
+  "accents": {
+    "auto": "Auto",
+    "ar-001": "AR - Arabiska",
+    "ar-EG": "AR - Egyptisk",
+    "cs-CZ": "CS - Tjeckiska",
+    "de-DE": "DE - Tyska",
+    "el-GR": "EL - Grekiska",
+    "en-AU": "EN - Australisk",
+    "en-CA": "EN - Kanadensisk",
+    "en-GB": "EN - Brittisk",
+    "en-IE": "EN - Irländsk",
+    "en-IN": "EN - Indisk",
+    "en-NZ": "EN - Nyzeeländsk",
+    "en-US": "EN - Amerikansk",
+    "en-ZA": "EN - Sydafrikansk",
+    "es-419": "ES - Latinamerikansk",
+    "es-ES": "ES - Spansk",
+    "fr-CA": "FR - Kanadensisk",
+    "fr-FR": "FR - Fransk",
+    "hi-IN": "HI - Hindi",
+    "it-IT": "IT - Italienska",
+    "ja-JP": "JA - Japanska",
+    "jv-ID": "JV - Javanesiska",
+    "ko-KR": "KO - Koreanska",
+    "nl-NL": "NL - Nederländska",
+    "pl-PL": "PL - Polska",
+    "pt-BR": "PT - Brasiliansk",
+    "pt-PT": "PT - Portugisisk",
+    "sw-KE": "SW - Kenyansk swahili",
+    "ta-IN": "TA - Tamil",
+    "te-IN": "TE - Telugu",
+    "vi-VN": "VI - Vietnamesiska",
+    "zh-CN": "ZH - Mandarin"
+  },
+  "languages": {
+    "auto": "Auto",
+    "ar": "Arabiska",
+    "yue": "Kantonesiska",
+    "zh": "Kinesiska",
+    "cs": "Tjeckiska",
+    "nl": "Nederländska",
+    "en": "Engelska",
+    "fi": "Finska",
+    "fr": "Franska",
+    "de": "Tyska",
+    "el": "Grekiska",
+    "he": "Hebreiska",
+    "hi": "Hindi",
+    "hu": "Ungerska",
+    "id": "Indonesiska",
+    "it": "Italienska",
+    "ja": "Japanska",
+    "ko": "Koreanska",
+    "pl": "Polska",
+    "pt": "Portugisiska",
+    "ru": "Ryska",
+    "es": "Spanska",
+    "sv": "Svenska",
+    "tr": "Turkiska",
+    "uk": "Ukrainska"
+  },
+  "instructions": {
+    "title": "Skådespelarinstruktion",
+    "tabs": {
+      "library": "Bibliotek",
+      "mine": "Mina instruktioner"
+    },
+    "all": "Alla ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "Känslor",
+      "characters": "Karaktärer",
+      "situations": "Situationer",
+      "accents": "Accenter"
+    },
+    "search": "Sök instruktioner...",
+    "noResults": "Inga instruktioner matchar din sökning.",
+    "details": "Detaljer för {{name}}",
+    "select": "Använd {{name}}",
+    "play": "Spela upp röstprov för {{name}}",
+    "pause": "Pausa röstprov för {{name}}",
+    "notFound": "Den här instruktionen finns inte längre.",
+    "detail": {
+      "script": "Manus",
+      "instructions": "Skådespelarinstruktioner",
+      "sample": "Ljudprov",
+      "playSample": "Tryck för att spela upp ljudprovet",
+      "noSample": "Inget ljudprov ännu",
+      "use": "Använd den här instruktionen"
+    },
+    "mine": {
+      "title": "Mina egna instruktioner",
+      "add": "Ny instruktion",
+      "emptyTitle": "Inga egna instruktioner",
+      "emptyMessage": "Skapa och spara egna skådespelarinstruktioner som du kan använda i dina projekt.",
+      "generate": "Generera instruktioner med AI",
+      "created": "Skapad: {{date}}",
+      "remove": "Radera {{name}}",
+      "removeTitle": "Radera instruktionen?",
+      "removeMessage": "\"{{name}}\" raderas permanent."
+    },
+    "create": {
+      "title": "Ny skådespelarinstruktion",
+      "name": "Instruktionens namn",
+      "namePlaceholder": "T.ex. ”Varm och vänlig”, ”Professionell nyhetsuppläsning”",
+      "prompt": "Ange skådespelarinstruktioner",
+      "promptPlaceholder": "Skapa instruktioner för ...",
+      "hint": "Skriv till exempel ”Skapa instruktioner för en robotröst”, så genererar AI dem automatiskt.",
+      "submit": "Generera instruktioner"
+    }
+  },
+  "voiceClone": {
+    "title": "Röstkloning",
+    "guide": "Guide",
+    "language": "Språk",
+    "voiceName": "Röstnamn",
+    "voiceNamePlaceholder": "T.ex. Lugn berättarröst",
+    "sources": {
+      "upload": "Ladda upp ljud",
+      "record": "Spela in ljud"
+    },
+    "upload": {
+      "title": "Ladda upp källjud",
+      "hint": "Ljud eller video. De första {{seconds}} sekunderna används.",
+      "action": "Ladda upp"
+    },
+    "record": {
+      "title": "Spela in din röst",
+      "hint": "Välj mikrofon och tryck på Spela in.",
+      "action": "Spela in",
+      "stop": "Stoppa",
+      "again": "Spela in igen",
+      "recording": "Spelar in {{time}}",
+      "microphone": "Mikrofon",
+      "defaultMicrophone": "Standardmikrofon",
+      "fileName": "Inspelning.m4a"
+    },
+    "clip": {
+      "play": "Spela upp {{name}}",
+      "pause": "Pausa {{name}}"
+    },
+    "submit": "Skapa röst",
+    "guideSheet": {
+      "title": "Inspelningsguide",
+      "tips": [
+        "Använd cirka 30 sekunder tydligt tal från en person. Längre klipp kortas till de första 30 sekunderna.",
+        "Spela in i ett tyst rum utan musik eller bakgrundsljud.",
+        "Tala naturligt, med den ton du vill att den klonade rösten ska ha.",
+        "Håll mikrofonen på ett jämnt avstånd från munnen."
+      ]
+    }
+  },
+  "results": {
+    "play": "Spela upp {{name}}",
+    "pause": "Pausa {{name}}",
+    "created": "Skapad: {{date}}",
+    "rename": "Byt namn på {{name}}",
+    "renameTitle": "Byt namn",
+    "renameLabel": "Ändra namnet",
+    "renamePlaceholder": "Namn",
+    "download": "Ladda ner {{name}}",
+    "remove": "Radera {{name}}",
+    "removeTitle": "Radera filen?",
+    "removeMessage": "\"{{name}}\" raderas permanent.",
+    "viewAll": "Visa alla",
+    "empty": "Inget här ännu.",
+    "enhanced": "Förbättrat",
+    "recent": {
+      "voiceClone": "Senaste kloningarna",
+      "voiceDesign": "Senast designade röster",
+      "voiceChanger": "Senaste röstomvandlingarna",
+      "audioClean": "Senaste ljudrensningarna",
+      "speechEditor": "Senaste talklippen",
+      "speechToText": "Senaste transkriptionerna"
+    },
+    "titles": {
+      "voiceClone": "Mina klonade röster",
+      "voiceDesign": "Mina designade röster",
+      "voiceChanger": "Mina röstomvandlingar",
+      "audioClean": "Mina rensade ljud",
+      "speechEditor": "Mina talklipp",
+      "speechToText": "Mina transkriptioner"
+    },
+    "view": "Visa {{name}}"
+  },
+  "upload": {
+    "chooseSource": "Välj från",
+    "files": "Filer",
+    "gallery": "Galleri (videor)",
+    "source": "Ladda upp källjud",
+    "target": "Ladda upp målljud",
+    "action": "Ladda upp",
+    "change": "Ändra",
+    "remove": "Ta bort {{name}}",
+    "uploading": "Laddar upp {{percent}} %",
+    "maxSize": "Max {{max}} MB"
+  },
+  "player": {
+    "play": "Spela upp",
+    "pause": "Pausa"
+  },
+  "voiceChanger": {
+    "title": "Röstförändrare",
+    "source": "Källjud",
+    "target": "Målröst",
+    "submit": "Starta omvandling"
+  },
+  "voiceDesign": {
+    "title": "Röstdesign",
+    "guide": "Guide",
+    "language": "Språk",
+    "name": "Röstnamn",
+    "namePlaceholder": "T.ex. Lugn berättarröst",
+    "description": "Röstbeskrivning",
+    "descriptionPlaceholder": "\"Warm, deep male voice with a slight British accent, measured pace, and authoritative tone.\"",
+    "descriptionHint": "Skriv beskrivningen på engelska.",
+    "enhance": "Förbättra beskrivningen med AI",
+    "submit": "Skapa röst",
+    "variations": {
+      "title": "Välj röst",
+      "subtitle": "Lyssna på de {{count}} genererade varianterna och välj den du gillar",
+      "item": "Röstvariant {{number}}",
+      "play": "Spela upp variant {{number}}",
+      "pause": "Pausa variant {{number}}",
+      "save": "Spara röst"
+    },
+    "guideSheet": {
+      "title": "Beskriva en röst",
+      "tips": [
+        "Ange vem som talar: ålder, kön och personlighet.",
+        "Beskriv klangen: varm, raspig, ljus eller djup.",
+        "Lägg till accent och tempo, till exempel lätt brittisk accent och lugnt tempo.",
+        "Ange känsla eller användning, till exempel en lugn berättarröst för ljudböcker."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "Talredigerare",
+    "submit": "Starta",
+    "sheet": {
+      "title": "Talredigerare",
+      "audio": "Ljud",
+      "transcription": "Transkription",
+      "revert": "Återställ originalet",
+      "generate": "Generera ljud",
+      "done": "Klar"
+    },
+    "uploadHint": "Ljud eller video, max {{max}} MB. De första {{minutes}} minuterna används."
+  },
+  "audioClean": {
+    "title": "Ljudrensning",
+    "description": "Ljudförbättringen får inspelningen att låta som om den gjorts med en professionell mikrofon.",
+    "enhance": "Ta bort brus och förbättra",
+    "submit": "Ljudrensning"
+  },
+  "speechToText": {
+    "title": "Tal till text",
+    "language": "Språk",
+    "translation": "Översatta undertexter",
+    "noTranslation": "Ingen",
+    "submit": "Starta transkribering",
+    "sheet": {
+      "title": "Resultat",
+      "audio": "Ljud",
+      "content": "Innehåll",
+      "timingUnavailable": "Tidsangivelser saknas",
+      "segment": "#{{number}}",
+      "edit": "Redigera rad {{number}}",
+      "done": "Slutför redigering av rad {{number}}",
+      "download": "Ladda ner",
+      "formats": {
+        "srt": "Undertexter (.srt)",
+        "vtt": "Webbundertexter (.vtt)",
+        "txt": "Oformaterad text (.txt)"
+      },
+      "finish": "Klar"
+    }
+  },
+  "offline": {
+    "title": "Ingen internetanslutning",
+    "message": "Kontrollera ditt Wi-Fi eller din mobildata. Appen fortsätter så snart du är ansluten igen.",
+    "stillOffline": "Fortfarande ingen anslutning. Kontrollera ditt Wi-Fi eller din mobildata och försök igen.",
+    "retry": "Försök igen"
+  },
+  "support": {
+    "title": "Kontakta oss",
+    "error": "Chatten kunde inte laddas. Kontrollera anslutningen och försök igen."
+  },
+  "onboarding": {
+    "step": "Steg {{step}} av {{total}}",
+    "next": "Nästa",
+    "playSample": "Spela upp röstprov för {{name}}",
+    "stopSample": "Stoppa röstprov för {{name}}",
+    "voices": {
+      "title": "AI-röster som faktiskt <brand>skådespelar.</brand>",
+      "subtitle": "Text till tal, röstkloning och mycket mer.",
+      "samples": {
+        "happy": "Glad",
+        "angry": "Arg",
+        "sarcastic": "Sarkastisk",
+        "excited": "Upprymd",
+        "crying": "Gråtande",
+        "pirate": "Pirat",
+        "scared": "Rädd",
+        "laughing": "Skrattande",
+        "calm": "Lugn",
+        "evilVillain": "Ond skurk",
+        "dramatic": "Dramatisk",
+        "confident": "Självsäker",
+        "nervous": "Nervös",
+        "romantic": "Romantisk",
+        "sleepy": "Sömnig",
+        "energetic": "Energisk",
+        "madScientist": "Galen vetenskapsman",
+        "horror": "Skräck",
+        "surprised": "Förvånad",
+        "awkward": "Obekväm",
+        "shocked": "Chockad",
+        "tired": "Trött",
+        "santaClaus": "Jultomten",
+        "curious": "Nyfiken",
+        "playful": "Lekfull",
+        "serious": "Allvarlig",
+        "sad": "Ledsen",
+        "rap": "Rap",
+        "disappointed": "Besviken",
+        "sportsCommentator": "Sportkommentator"
+      }
+    },
+    "direct": {
+      "title": "Nu regisserar du rösten.",
+      "subtitle": "Välj en känsla. Tryck på spela upp.",
+      "actingLabel": "Skådespelarinstruktioner (tryck för att redigera)",
+      "actingPlaceholder": "Beskriv hur det ska sägas",
+      "scriptLabel": "Manus",
+      "script": "Åh, vad bra. Du är här. Jag började tro att du inte skulle komma.",
+      "generate": "Generera",
+      "generating": "Genererar…",
+      "playing": "Spelar upp",
+      "tags": {
+        "awkward": {
+          "label": "Obekväm",
+          "text": "Obekvämt framförande med tveksam timing och osäkert tonfall"
+        },
+        "crying": {
+          "label": "Gråtande",
+          "text": "Läs detta medan du gråter"
+        },
+        "laugh": {
+          "label": "Skratt",
+          "text": "Skrattande framförande där det tydligt hörs att du är road."
+        },
+        "sarcasm": {
+          "label": "Sarkasm",
+          "text": "Sarkastiskt framförande med torr, spetsig betoning."
+        },
+        "relieved": {
+          "label": "Lättad",
+          "text": "Lättad – du var orolig för att personen inte skulle komma."
+        },
+        "excited": {
+          "label": "Upprymd",
+          "text": "Upprymt framförande med livligt tonfall och högt tempo."
+        }
+      }
+    },
+    "stop": "Stoppa uppspelning",
+    "clone": {
+      "title": "Klona en röst <brand>på några sekunder.</brand>",
+      "subtitle": "Lyssna på den riktiga rösten. Låt den sedan säga vad som helst.",
+      "selectVoice": "Välj rösten {{name}}",
+      "playReal": "Spela upp den riktiga rösten för {{name}}",
+      "stopReal": "Stoppa den riktiga rösten för {{name}}",
+      "lineLabel": "Tryck för att redigera",
+      "linePlaceholder": "Skriv vad som helst",
+      "play": "Spela upp den klonade rösten",
+      "cloning": "Klonar {{name}}…",
+      "playing": "Spelar upp · klon av {{name}}"
+    },
+    "change": {
+      "title": "Ändra din röst. Behåll din stil.",
+      "subtitle": "Perfekt för videor med röstimitationer.",
+      "before": "Före",
+      "beforeCaption": "Din vanliga röst",
+      "after": "Efter",
+      "turnInto": "Omvandla till",
+      "play": "Spela upp {{name}}",
+      "stop": "Stoppa {{name}}"
+    },
+    "clean": {
+      "title": "Dåligt ljud? Fixat med <brand>ett tryck.</brand>",
+      "subtitle": "Ta bort brus, eko och brum. Behåll bara din röst.",
+      "play": "Spela upp",
+      "stop": "Stoppa",
+      "noisy": "Brusigt",
+      "clean": "Rent",
+      "switch": "Rensa ljud",
+      "hint": "Prova att växla medan ljudet spelas upp."
+    },
+    "edit": {
+      "title": "Rätta misstag genom att redigera texten.",
+      "subtitle": "Ändra ett ord. Din röst säger det. Ingen ny inspelning behövs.",
+      "original": "Original",
+      "fixed": "Rättat",
+      "wordWrong": "{{word}}, fel. Tryck för att rätta",
+      "wordFixed": "{{word}}. Ändrat från {{from}}. Tryck för att ångra",
+      "hintWrong": "Tryck på felet för att rätta det.",
+      "hintFixed": "Rättat. Tryck igen för att ångra."
+    }
+  },
+  "review": {
+    "title": "Gillar du {{appName}}?",
+    "yes": "Ja",
+    "no": "Nej"
+  }
+}

@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "닫기",
+    "back": "뒤로",
+    "copied": "복사됨",
+    "cancel": "취소",
+    "change": "변경",
+    "save": "저장",
+    "beta": "베타",
+    "delete": "삭제",
+    "showMore": "더 보기",
+    "showLess": "간략히 보기"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "이메일",
+    "continueWithGoogle": "Google로 계속하기",
+    "continueWithEmail": "이메일로 계속하기",
+    "haveAccount": "이미 계정이 있으신가요? <link>로그인</link>"
+  },
+  "welcome": {
+    "title": "<brand>{{appName}}</brand>에 오신 것을 환영합니다",
+    "subtitle": "연기 지시를 중심으로 설계된 최초의 AI 음성 도구입니다. 원하는 감정을 알려주면 목소리가 그대로 연기합니다."
+  },
+  "signUp": {
+    "title": "회원가입",
+    "subtitle": "몇 가지 정보만 입력하면 시작할 수 있어요.",
+    "fullName": "이름",
+    "email": "이메일 주소",
+    "password": "비밀번호",
+    "confirmPassword": "비밀번호 확인",
+    "agree": "<link>이용약관</link>에 동의합니다",
+    "submit": "회원가입",
+    "showPassword": "비밀번호 표시",
+    "hidePassword": "비밀번호 숨기기"
+  },
+  "signIn": {
+    "title": "로그인",
+    "subtitle": "다시 오셨네요! 기다리고 있었어요.",
+    "email": "이메일 주소",
+    "password": "비밀번호",
+    "forgot": "비밀번호를 잊으셨나요?",
+    "submit": "로그인"
+  },
+  "verify": {
+    "title": "인증 코드 확인",
+    "subtitle": "<bold>{{email}}</bold> 주소로 일회용 인증 코드를 보냈습니다",
+    "resendIn": "{{time}}초 후에 다시 보낼 수 있습니다.",
+    "resendReady": "다시 보낼 수 있습니다. <link>인증 코드 다시 보내기</link>",
+    "submit": "인증",
+    "digit": "{{index}}번째 숫자"
+  },
+  "forgotPassword": {
+    "title": "비밀번호를 잊으셨나요?",
+    "subtitle": "이메일 주소를 입력하면 비밀번호 재설정 링크를 보내드립니다.",
+    "email": "이메일 주소",
+    "submit": "재설정 링크 보내기",
+    "backToLogin": "로그인으로 돌아가기",
+    "sent": "<bold>{{email}}</bold> 주소로 재설정 링크를 보냈습니다. 받은편지함을 확인해 주세요."
+  },
+  "resetPassword": {
+    "title": "비밀번호 재설정",
+    "subtitle": "계정에 사용할 새 비밀번호를 설정하세요.",
+    "submit": "비밀번호 재설정",
+    "done": "비밀번호가 재설정되었습니다. 이제 새 비밀번호로 로그인할 수 있습니다.",
+    "requestLink": "새 재설정 링크 요청",
+    "continue": "계속"
+  },
+  "validation": {
+    "nameRequired": "이름을 입력해 주세요.",
+    "emailInvalid": "올바른 이메일 주소를 입력해 주세요.",
+    "passwordRequired": "비밀번호를 입력해 주세요.",
+    "passwordShort": "비밀번호는 {{min}}자 이상이어야 합니다.",
+    "passwordMismatch": "비밀번호가 일치하지 않습니다.",
+    "termsRequired": "이용약관에 동의해 주세요.",
+    "otpIncomplete": "인증 코드를 모두 입력해 주세요.",
+    "titleRequired": "이름을 입력해 주세요.",
+    "dobInvalid": "dd/mm/yy 형식으로 입력하세요(일/월/연도 끝 두 자리).",
+    "currentPasswordRequired": "현재 비밀번호를 입력해 주세요.",
+    "samePassword": "새 비밀번호는 기존 비밀번호와 달라야 합니다.",
+    "promptRequired": "원하는 목소리를 설명해 주세요.",
+    "voiceNameRequired": "목소리 이름을 입력해 주세요.",
+    "sampleRequired": "음성 샘플을 업로드하거나 녹음해 주세요.",
+    "descriptionRequired": "목소리를 설명해 주세요."
+  },
+  "errors": {
+    "network": "인터넷에 연결되어 있지 않습니다. 다시 시도해 주세요.",
+    "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다.",
+    "emailNotConfirmed": "로그인하기 전에 이메일 인증을 완료해 주세요.",
+    "emailTaken": "이 이메일로 등록된 계정이 이미 있습니다.",
+    "weakPassword": "더 안전한 비밀번호를 설정해 주세요.",
+    "otpInvalid": "인증 코드가 유효하지 않습니다. 다시 시도해 주세요.",
+    "recoveryLinkInvalid": "이 재설정 링크는 유효하지 않거나 만료되었습니다. 새 링크를 요청해 주세요.",
+    "rateLimited": "시도 횟수가 너무 많습니다. 잠시 기다려 주세요.",
+    "unknown": "문제가 발생했습니다. 다시 시도해 주세요.",
+    "currentPasswordWrong": "현재 비밀번호가 올바르지 않습니다.",
+    "uploadFailed": "파일을 업로드하지 못했습니다. 다시 시도해 주세요.",
+    "quotaExceeded": "현재 요금제의 사용 한도에 도달했습니다. 계속 만들려면 요금제를 업그레이드하세요.",
+    "serviceUnavailable": "현재 이 기능을 사용할 수 없습니다. 나중에 다시 시도해 주세요.",
+    "campaignExists": "같은 이름의 캠페인이 이미 있습니다.",
+    "fileType": "지원하지 않는 파일 형식입니다.",
+    "fileTooLarge": "파일이 너무 큽니다. 더 작은 파일을 선택해 주세요.",
+    "micPermission": "목소리를 녹음하려면 설정에서 마이크 접근을 허용하세요.",
+    "photoLibraryPermission": "동영상을 선택하려면 설정에서 사진 접근을 허용하세요.",
+    "shareUnavailable": "이 기기에서는 공유 기능을 사용할 수 없습니다.",
+    "transcriptUnavailable": "이 파일에는 전사 텍스트가 없습니다.",
+    "transcriptTimingUnavailable": "이 전사 텍스트에는 사용 가능한 시간 정보가 없습니다. 텍스트(.txt)를 선택해 다운로드하세요.",
+    "authRequired": "세션이 만료되었습니다. 다시 로그인해 주세요.",
+    "studioRequired": "이 기능은 Studio 요금제가 필요합니다.",
+    "notFound": "이 파일은 더 이상 존재하지 않습니다.",
+    "paidPlanRequired": "이 기능은 유료 요금제가 필요합니다.",
+    "jobFailed": "작업을 완료하지 못했습니다. 다시 시도해 주세요.",
+    "jobTimeout": "예상보다 시간이 오래 걸리고 있습니다. 몇 분 후 라이브러리를 확인해 주세요.",
+    "sampleLength": "1초 이상의 음성 샘플을 사용하세요.",
+    "renameNotAllowed": "현재 이 파일의 이름을 변경할 수 없습니다.",
+    "cancelled": "취소되었습니다.",
+    "purchasesUnavailable": "아직 구독을 이용할 수 없습니다. 나중에 다시 시도해 주세요.",
+    "purchaseFailed": "구매를 완료하지 못했습니다. 요금은 청구되지 않았습니다.",
+    "nothingToRestore": "이 스토어 계정의 이전 구매 내역을 찾지 못했습니다.",
+    "conversionFailed": "이 파일을 오디오로 변환하지 못했습니다. 다른 파일을 사용해 주세요.",
+    "scriptTooLong": "무료 요금제에서는 한 번에 최대 1,000자까지 생성할 수 있습니다. 대본을 줄이거나 업그레이드하세요.",
+    "samePassword": "새 비밀번호는 현재 비밀번호와 달라야 합니다.",
+    "passwordNotSet": "Google로 가입한 계정이므로 변경할 비밀번호가 없습니다.",
+    "googleSignInFailed": "Google 로그인이 완료되지 않았습니다. 다시 시도해 주세요.",
+    "appleSignInFailed": "Apple 로그인이 완료되지 않았습니다. 다시 시도해 주세요."
+  },
+  "tabs": {
+    "dashboard": "대시보드",
+    "library": "라이브러리",
+    "settings": "설정"
+  },
+  "dashboard": {
+    "title": "대시보드",
+    "greeting": "안녕하세요, {{name}}님",
+    "sections": {
+      "create": "만들기",
+      "transform": "변환"
+    },
+    "actionCard": {
+      "title": "텍스트 음성 변환",
+      "action": "음성 생성"
+    }
+  },
+  "library": {
+    "title": "라이브러리",
+    "search": "파일 검색...",
+    "empty": {
+      "title": "아직 파일이 없어요!",
+      "message": "대시보드에서 새 파일을 만들어 보세요."
+    },
+    "noResults": "검색 결과와 일치하는 파일이 없습니다.",
+    "groups": {
+      "today": "오늘",
+      "yesterday": "어제",
+      "thisWeek": "이번 주",
+      "earlier": "이전"
+    },
+    "actions": {
+      "title": "상세 정보",
+      "rename": "이름 변경",
+      "download": "다운로드",
+      "delete": "삭제",
+      "more": "{{title}} 추가 옵션",
+      "play": "{{title}} 재생",
+      "pause": "{{title}} 일시 정지"
+    },
+    "rename": {
+      "title": "이름 변경",
+      "placeholder": "파일 이름"
+    },
+    "delete": {
+      "title": "파일을 삭제할까요?",
+      "message": "\"{{title}}\" 파일이 영구적으로 삭제됩니다.",
+      "confirm": "삭제",
+      "cancel": "취소"
+    },
+    "retry": "다시 시도",
+    "untitled": "제목 없음"
+  },
+  "settings": {
+    "title": "설정",
+    "sections": {
+      "general": "일반",
+      "others": "기타"
+    },
+    "items": {
+      "personalInfo": "개인 정보",
+      "changePassword": "비밀번호 변경",
+      "subscription": "구독 관리",
+      "share": "친구에게 공유",
+      "contact": "문의하기",
+      "privacy": "개인정보 처리방침"
+    },
+    "signOut": "로그아웃",
+    "shareMessage": "저는 {{appName}}으로 AI 음성을 만들고 있어요. 직접 사용해 보세요: {{url}}",
+    "shareMessageNoLink": "저는 {{appName}}으로 AI 음성을 만들고 있어요."
+  },
+  "crash": {
+    "title": "문제가 발생했습니다",
+    "message": "앱에서 예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.",
+    "retry": "다시 시도"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "텍스트 음성 변환",
+      "subtitle": "입력하고 들어보세요",
+      "tag": "AI 음성"
+    },
+    "voiceClone": {
+      "title": "음성 복제",
+      "subtitle": "어떤 목소리든 복제",
+      "tag": "음성 복제"
+    },
+    "voiceDesign": {
+      "title": "음성 디자인",
+      "subtitle": "원하는 목소리를 설명하세요",
+      "tag": "음성 디자인"
+    },
+    "voiceChanger": {
+      "title": "보이스 체인저",
+      "subtitle": "내 목소리를 바꿔보세요",
+      "tag": "보이스 체인저"
+    },
+    "audioClean": {
+      "title": "오디오 정리",
+      "subtitle": "잡음을 제거하세요",
+      "tag": "오디오 정리"
+    },
+    "speechEditor": {
+      "title": "음성 편집기",
+      "subtitle": "잘못 말한 단어를 수정하세요",
+      "tag": "음성 편집기"
+    },
+    "speechToText": {
+      "title": "음성 텍스트 변환",
+      "subtitle": "오디오를 텍스트로",
+      "tag": "음성 텍스트 변환"
+    }
+  },
+  "trialOffer": {
+    "title": "지금 경험해 보세요",
+    "titleHighlight": "Voicekiller 무료 체험",
+    "noPaymentToday": "오늘은 결제되지 않습니다",
+    "cta": "$0.00로 체험하기"
+  },
+  "trialPaywall": {
+    "later": "나중에",
+    "stars": "별점 5점 만점에 5점",
+    "reviews": {
+      "textToSpeech": "“목소리가 너무 자연스러워서 청취자들이 AI인 줄 몰라요.”",
+      "acting": "“‘슬픈 작별처럼 말해줘’라고 입력하면 매번 감정을 완벽하게 살려요.”",
+      "voiceClone": "“1분 만에 제 목소리를 복제했어요. 이제 녹음 없이 영상을 만들어요.”",
+      "allInOne": "“오디오 정리, 음성 변경, 실수 수정까지. 앱 하나로 도구 네 개를 대체했어요.”"
+    },
+    "kicker": "5가지 도구에 따로 돈 내지 마세요",
+    "title": "<brand>하나의 플랫폼</brand>에 담은 최고의 <brand>AI 음성 도구</brand>",
+    "perMonth": "{{price}}/월",
+    "perYear": "{{price}}/년",
+    "monthlyNote": "{{days}}일 무료 · 언제든 해지 가능",
+    "yearlyNote": "{{days}}일 무료 · {{percent}}% 절약",
+    "trialNote": "{{days}}일 무료",
+    "cta": "{{days}}일 무료 체험",
+    "then": "이후 {{price}}",
+    "disclaimer": "오늘은 결제되지 않습니다. {{days}}일째 전에 해지하면 요금이 청구되지 않습니다."
+  },
+  "paywall": {
+    "title": "Studio 기능 이용하기",
+    "close": "닫기",
+    "features": {
+      "voices": "2,000개 이상의 목소리",
+      "clones": "무제한 음성 복제",
+      "audioClean": "오디오 정리",
+      "voiceChanger": "보이스 체인저",
+      "speechEditor": "AI 음성 편집기"
+    },
+    "yearly": "연간",
+    "monthly": "월간",
+    "minutes": "월 {{count}}분",
+    "save": "{{percent}}% 할인",
+    "continue": "계속",
+    "cancelAnytime": "언제든지 취소 가능",
+    "restore": "구매 복원",
+    "terms": "이용약관",
+    "privacy": "개인정보 보호"
+  },
+  "plan": {
+    "basic": "기본 요금제",
+    "studio": "Studio",
+    "buyStudio": "Studio 구매",
+    "usage": "사용량",
+    "usageOf": "/ {{limit}}분",
+    "usageThisMonth": "이번 달 사용량",
+    "usageMinutes": "{{used}} / {{limit}}분",
+    "remaining": "{{count}}분 남음"
+  },
+  "profile": {
+    "title": "개인 정보",
+    "userId": "사용자 ID",
+    "fullName": "이름",
+    "email": "이메일",
+    "dob": "생년월일",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "프로필 사진 변경",
+    "copyId": "사용자 ID 복사",
+    "deleteAccount": "계정 삭제",
+    "save": "변경 사항 저장",
+    "saved": "변경 사항이 저장되었습니다.",
+    "changeEmail": {
+      "title": "이메일 변경",
+      "subtitle": "새 이메일 주소로 확인 링크를 보내드립니다.",
+      "placeholder": "새 이메일 주소",
+      "submit": "링크 보내기",
+      "sent": "변경을 확인하려면 {{email}}의 받은편지함을 확인하세요."
+    },
+    "unsaved": {
+      "title": "변경 사항을 저장할까요?",
+      "message": "저장하지 않은 변경 사항은 사라집니다. 닫기 전에 저장할까요?",
+      "discard": "변경 사항 버리기",
+      "confirm": "확인"
+    },
+    "delete": {
+      "title": "계정 삭제",
+      "message": "계정을 삭제하면 데이터베이스에서 모든 개인 정보가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
+      "prompt": "확인하려면 \"{{word}}\"를 입력하세요",
+      "word": "DELETE",
+      "submit": "계정 삭제"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "현재 비밀번호 입력",
+    "title": "비밀번호 변경",
+    "current": "현재 비밀번호",
+    "new": "새 비밀번호",
+    "newPlaceholder": "새 비밀번호 입력(최소 {{min}}자)",
+    "confirm": "비밀번호 확인",
+    "confirmPlaceholder": "새 비밀번호 확인",
+    "submit": "비밀번호 변경",
+    "done": "비밀번호가 변경되었습니다."
+  },
+  "notFound": {
+    "title": "존재하지 않는 페이지입니다.",
+    "action": "홈으로 이동"
+  },
+  "textToSpeech": {
+    "title": "텍스트 음성 변환",
+    "fileName": "파일 이름(선택 사항)",
+    "campaign": "캠페인",
+    "scriptPlaceholder": "여기에 대본을 입력하거나 붙여넣으세요...",
+    "scriptLabel": "대본",
+    "scriptLimitExceeded": "이 목소리는 최대 {{max}}자까지 지원합니다. 대본을 줄이거나 다른 목소리를 선택하세요.",
+    "chooseVoice": "목소리 선택",
+    "voiceLabel": "목소리: {{name}}",
+    "emotions": "감정",
+    "addPause": "쉼 추가",
+    "settings": "설정",
+    "preview": "미리 듣기",
+    "stopPreview": "정지",
+    "generate": "생성",
+    "campaignSheet": {
+      "title": "캠페인",
+      "placeholder": "새 캠페인 이름...",
+      "create": "캠페인 만들기",
+      "default": "기본"
+    },
+    "pauseSheet": {
+      "title": "쉼 추가",
+      "seconds_one": "{{count}}초",
+      "seconds_other": "{{count}}초"
+    },
+    "settingsSheet": {
+      "title": "설정",
+      "audioFormat": "오디오 형식",
+      "voiceTuning": "목소리 조정",
+      "speed": "속도",
+      "delivery": "표현 모드",
+      "actingInstructions": "연기 지시",
+      "instruction": "지시",
+      "chooseInstruction": "지시 선택",
+      "ownInstructions": "직접 지시 입력",
+      "ownPlaceholder": "대본을 어떻게 연기할지 설명해 주세요..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "더 안정적으로",
+      "balanced": "균형 있게",
+      "creative": "더 창의적으로"
+    }
+  },
+  "emotions": {
+    "auto": "자동",
+    "happy": "기쁨",
+    "sad": "슬픔",
+    "angry": "분노",
+    "fearful": "두려움",
+    "disgusted": "혐오",
+    "surprised": "놀람",
+    "calm": "차분함",
+    "fluent": "유창함"
+  },
+  "voices": {
+    "title": "목소리 선택",
+    "search": "목소리 검색...",
+    "sources": {
+      "library": "라이브러리",
+      "cloned": "복제한 목소리",
+      "design": "디자인한 목소리",
+      "favorites": "즐겨찾기"
+    },
+    "openFilters": "필터",
+    "openFiltersCount": "필터 {{count}}개 적용 중",
+    "favorite": "{{name}} 즐겨찾기 추가",
+    "unfavorite": "{{name}} 즐겨찾기 해제",
+    "select": "{{name}} 선택",
+    "play": "{{name}} 샘플 재생",
+    "pause": "{{name}} 샘플 일시 정지",
+    "empty": "검색 결과와 일치하는 목소리가 없습니다.",
+    "emptyFavorites": "아직 즐겨찾는 목소리가 없습니다. 목소리의 하트를 누르면 여기에 저장됩니다.",
+    "filters": {
+      "title": "필터",
+      "model": "모델",
+      "gender": "성별",
+      "accent": "억양",
+      "language": "언어",
+      "apply": "필터 적용"
+    },
+    "genders": {
+      "female": "여성",
+      "male": "남성",
+      "neutral": "중성"
+    },
+    "models": {
+      "all": "모든 모델",
+      "expressive": "풍부한 표현",
+      "directable": "연기 지시 지원",
+      "directablePro": "연기 지시 지원 Pro"
+    }
+  },
+  "accents": {
+    "auto": "자동",
+    "ar-001": "AR - 아랍어",
+    "ar-EG": "AR - 이집트",
+    "cs-CZ": "CS - 체코어",
+    "de-DE": "DE - 독일어",
+    "el-GR": "EL - 그리스어",
+    "en-AU": "EN - 호주",
+    "en-CA": "EN - 캐나다",
+    "en-GB": "EN - 영국",
+    "en-IE": "EN - 아일랜드",
+    "en-IN": "EN - 인도",
+    "en-NZ": "EN - 뉴질랜드",
+    "en-US": "EN - 미국",
+    "en-ZA": "EN - 남아프리카",
+    "es-419": "ES - 라틴 아메리카",
+    "es-ES": "ES - 스페인",
+    "fr-CA": "FR - 캐나다",
+    "fr-FR": "FR - 프랑스",
+    "hi-IN": "HI - 힌디어",
+    "it-IT": "IT - 이탈리아어",
+    "ja-JP": "JA - 일본어",
+    "jv-ID": "JV - 자바어",
+    "ko-KR": "KO - 한국어",
+    "nl-NL": "NL - 네덜란드어",
+    "pl-PL": "PL - 폴란드어",
+    "pt-BR": "PT - 브라질",
+    "pt-PT": "PT - 포르투갈",
+    "sw-KE": "SW - 케냐 스와힐리어",
+    "ta-IN": "TA - 타밀어",
+    "te-IN": "TE - 텔루구어",
+    "vi-VN": "VI - 베트남어",
+    "zh-CN": "ZH - 표준 중국어"
+  },
+  "languages": {
+    "auto": "자동",
+    "ar": "아랍어",
+    "yue": "광둥어",
+    "zh": "중국어",
+    "cs": "체코어",
+    "nl": "네덜란드어",
+    "en": "영어",
+    "fi": "핀란드어",
+    "fr": "프랑스어",
+    "de": "독일어",
+    "el": "그리스어",
+    "he": "히브리어",
+    "hi": "힌디어",
+    "hu": "헝가리어",
+    "id": "인도네시아어",
+    "it": "이탈리아어",
+    "ja": "일본어",
+    "ko": "한국어",
+    "pl": "폴란드어",
+    "pt": "포르투갈어",
+    "ru": "러시아어",
+    "es": "스페인어",
+    "sv": "스웨덴어",
+    "tr": "튀르키예어",
+    "uk": "우크라이나어"
+  },
+  "instructions": {
+    "title": "연기 지시",
+    "tabs": {
+      "library": "라이브러리",
+      "mine": "내 지시"
+    },
+    "all": "전체({{count}})",
+    "categoryCount": "{{label}}({{count}})",
+    "categories": {
+      "emotions": "감정",
+      "characters": "캐릭터",
+      "situations": "상황",
+      "accents": "억양"
+    },
+    "search": "지시 검색...",
+    "noResults": "검색 결과와 일치하는 지시가 없습니다.",
+    "details": "{{name}} 상세 정보",
+    "select": "{{name}} 사용",
+    "play": "{{name}} 샘플 재생",
+    "pause": "{{name}} 샘플 일시 정지",
+    "notFound": "이 지시는 더 이상 존재하지 않습니다.",
+    "detail": {
+      "script": "대본",
+      "instructions": "연기 지시",
+      "sample": "오디오 샘플",
+      "playSample": "눌러서 오디오 샘플 재생",
+      "noSample": "아직 오디오 샘플이 없습니다",
+      "use": "이 지시 사용"
+    },
+    "mine": {
+      "title": "내 맞춤 지시",
+      "add": "새 지시",
+      "emptyTitle": "맞춤 지시 없음",
+      "emptyMessage": "나만의 연기 지시를 만들고 저장해 여러 프로젝트에서 사용하세요.",
+      "generate": "AI로 지시 생성",
+      "created": "생성일: {{date}}",
+      "remove": "{{name}} 삭제",
+      "removeTitle": "지시를 삭제할까요?",
+      "removeMessage": "\"{{name}}\" 지시가 영구적으로 삭제됩니다."
+    },
+    "create": {
+      "title": "새 연기 지시",
+      "name": "지시 이름",
+      "namePlaceholder": "예: '따뜻하고 친근하게', '전문적인 뉴스 진행'",
+      "prompt": "연기 지시 입력",
+      "promptPlaceholder": "다음에 맞는 지시를 만들어 주세요...",
+      "hint": "예를 들어 '로봇 목소리용 지시를 만들어 주세요'라고 입력하면 AI가 자동으로 생성합니다.",
+      "submit": "지시 생성"
+    }
+  },
+  "voiceClone": {
+    "title": "음성 복제",
+    "guide": "가이드",
+    "language": "언어",
+    "voiceName": "목소리 이름",
+    "voiceNamePlaceholder": "예: 차분한 내레이터",
+    "sources": {
+      "upload": "오디오 업로드",
+      "record": "오디오 녹음"
+    },
+    "upload": {
+      "title": "원본 오디오 업로드",
+      "hint": "오디오 또는 동영상. 처음 {{seconds}}초를 사용합니다.",
+      "action": "업로드"
+    },
+    "record": {
+      "title": "내 목소리 녹음",
+      "hint": "마이크를 선택하고 녹음을 누르세요.",
+      "action": "녹음",
+      "stop": "정지",
+      "again": "다시 녹음",
+      "recording": "녹음 중 {{time}}",
+      "microphone": "마이크",
+      "defaultMicrophone": "기본 마이크",
+      "fileName": "녹음.m4a"
+    },
+    "clip": {
+      "play": "{{name}} 재생",
+      "pause": "{{name}} 일시 정지"
+    },
+    "submit": "목소리 만들기",
+    "guideSheet": {
+      "title": "녹음 가이드",
+      "tips": [
+        "한 사람이 또렷하게 말하는 약 30초 분량의 음성을 사용하세요. 더 긴 클립은 처음 30초만 사용합니다.",
+        "음악이나 배경 소음이 없는 조용한 방에서 녹음하세요.",
+        "복제할 목소리에 원하는 말투로 자연스럽게 말하세요.",
+        "마이크와 입 사이의 거리를 일정하게 유지하세요."
+      ]
+    }
+  },
+  "results": {
+    "play": "{{name}} 재생",
+    "pause": "{{name}} 일시 정지",
+    "created": "생성일: {{date}}",
+    "rename": "{{name}} 이름 변경",
+    "renameTitle": "이름 변경",
+    "renameLabel": "이름 수정",
+    "renamePlaceholder": "이름",
+    "download": "{{name}} 다운로드",
+    "remove": "{{name}} 삭제",
+    "removeTitle": "파일을 삭제할까요?",
+    "removeMessage": "\"{{name}}\" 파일이 영구적으로 삭제됩니다.",
+    "viewAll": "모두 보기",
+    "empty": "아직 아무것도 없습니다.",
+    "enhanced": "음질 개선됨",
+    "recent": {
+      "voiceClone": "최근 복제한 목소리",
+      "voiceDesign": "최근 디자인한 목소리",
+      "voiceChanger": "최근 변환한 음성",
+      "audioClean": "최근 정리한 오디오",
+      "speechEditor": "최근 음성",
+      "speechToText": "최근 전사 결과"
+    },
+    "titles": {
+      "voiceClone": "내 복제 목소리",
+      "voiceDesign": "내 디자인 목소리",
+      "voiceChanger": "내 변환 음성",
+      "audioClean": "내 정리된 오디오",
+      "speechEditor": "내 음성",
+      "speechToText": "내 전사 결과"
+    },
+    "view": "{{name}} 보기"
+  },
+  "upload": {
+    "chooseSource": "가져올 위치 선택",
+    "files": "파일",
+    "gallery": "갤러리(동영상)",
+    "source": "원본 오디오 업로드",
+    "target": "대상 오디오 업로드",
+    "action": "업로드",
+    "change": "변경",
+    "remove": "{{name}} 제거",
+    "uploading": "업로드 중 {{percent}}%",
+    "maxSize": "최대 {{max}}MB"
+  },
+  "player": {
+    "play": "재생",
+    "pause": "일시 정지"
+  },
+  "voiceChanger": {
+    "title": "보이스 체인저",
+    "source": "원본 오디오",
+    "target": "변환할 목소리",
+    "submit": "변환 시작"
+  },
+  "voiceDesign": {
+    "title": "음성 디자인",
+    "guide": "가이드",
+    "language": "언어",
+    "name": "목소리 이름",
+    "namePlaceholder": "예: 차분한 내레이터",
+    "description": "목소리 설명",
+    "descriptionPlaceholder": "\"Warm, deep male voice with a slight British accent, measured pace, and authoritative tone.\"",
+    "descriptionHint": "설명은 영어로 작성해 주세요.",
+    "enhance": "AI로 설명 개선",
+    "submit": "목소리 만들기",
+    "variations": {
+      "title": "목소리 선택",
+      "subtitle": "생성된 {{count}}개의 목소리를 듣고 마음에 드는 것을 선택하세요",
+      "item": "목소리 버전 {{number}}",
+      "play": "버전 {{number}} 재생",
+      "pause": "버전 {{number}} 일시 정지",
+      "save": "목소리 저장"
+    },
+    "guideSheet": {
+      "title": "목소리 설명 가이드",
+      "tips": [
+        "누가 말하는지 설명하세요. 나이, 성별, 성격을 포함하면 좋습니다.",
+        "따뜻한, 허스키한, 밝은, 깊은 등 음색을 설명하세요.",
+        "약한 영국 억양, 차분한 속도 등 억양과 말하는 속도를 추가하세요.",
+        "오디오북용 차분한 내레이터처럼 분위기나 용도를 알려주세요."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "음성 편집기",
+    "submit": "시작",
+    "sheet": {
+      "title": "음성 편집기",
+      "audio": "오디오",
+      "transcription": "전사 텍스트",
+      "revert": "원본으로 되돌리기",
+      "generate": "오디오 생성",
+      "done": "완료"
+    },
+    "uploadHint": "오디오 또는 동영상, 최대 {{max}}MB. 처음 {{minutes}}분을 사용합니다."
+  },
+  "audioClean": {
+    "title": "오디오 정리",
+    "description": "음질 개선 기능으로 전문 마이크로 녹음한 듯한 소리를 만들 수 있습니다.",
+    "enhance": "잡음 제거 및 음질 개선",
+    "submit": "오디오 정리"
+  },
+  "speechToText": {
+    "title": "음성 텍스트 변환",
+    "language": "언어",
+    "translation": "번역 자막",
+    "noTranslation": "없음",
+    "submit": "전사 시작",
+    "sheet": {
+      "title": "결과",
+      "audio": "오디오",
+      "content": "내용",
+      "timingUnavailable": "시간 정보 없음",
+      "segment": "#{{number}}",
+      "edit": "{{number}}번째 줄 수정",
+      "done": "{{number}}번째 줄 수정 완료",
+      "download": "다운로드",
+      "formats": {
+        "srt": "자막(.srt)",
+        "vtt": "웹 자막(.vtt)",
+        "txt": "일반 텍스트(.txt)"
+      },
+      "finish": "완료"
+    }
+  },
+  "offline": {
+    "title": "인터넷 연결 없음",
+    "message": "Wi-Fi 또는 모바일 데이터를 확인하세요. 인터넷에 다시 연결되면 앱이 계속 작동합니다.",
+    "stillOffline": "아직 연결되어 있지 않습니다. Wi-Fi 또는 모바일 데이터를 확인한 후 다시 시도해 주세요.",
+    "retry": "다시 시도"
+  },
+  "support": {
+    "title": "문의하기",
+    "error": "채팅을 불러오지 못했습니다. 연결 상태를 확인한 후 다시 시도해 주세요."
+  },
+  "onboarding": {
+    "step": "{{step}}/{{total}}단계",
+    "next": "다음",
+    "playSample": "{{name}} 샘플 재생",
+    "stopSample": "{{name}} 샘플 정지",
+    "voices": {
+      "title": "진짜로 <brand>연기하는</brand> AI 목소리.",
+      "subtitle": "텍스트 음성 변환, 음성 복제 등 다양한 기능.",
+      "samples": {
+        "happy": "기쁨",
+        "angry": "분노",
+        "sarcastic": "빈정거림",
+        "excited": "신남",
+        "crying": "울음",
+        "pirate": "해적",
+        "scared": "겁먹음",
+        "laughing": "웃음",
+        "calm": "차분함",
+        "evilVillain": "사악한 악당",
+        "dramatic": "극적인 연기",
+        "confident": "자신감",
+        "nervous": "긴장",
+        "romantic": "로맨틱",
+        "sleepy": "졸림",
+        "energetic": "활기참",
+        "madScientist": "미친 과학자",
+        "horror": "공포",
+        "surprised": "놀람",
+        "awkward": "어색함",
+        "shocked": "충격",
+        "tired": "피곤함",
+        "santaClaus": "산타클로스",
+        "curious": "호기심",
+        "playful": "장난스러움",
+        "serious": "진지함",
+        "sad": "슬픔",
+        "rap": "랩",
+        "disappointed": "실망",
+        "sportsCommentator": "스포츠 해설가"
+      }
+    },
+    "direct": {
+      "title": "이제 직접 목소리 연기를 지시하세요.",
+      "subtitle": "감정을 고르고 재생해 보세요.",
+      "actingLabel": "연기 지시(눌러서 수정)",
+      "actingPlaceholder": "어떤 말투로 말할지 설명해 주세요",
+      "scriptLabel": "대본",
+      "script": "아, 다행이다. 왔구나. 안 오는 줄 알았어.",
+      "generate": "생성",
+      "generating": "생성 중…",
+      "playing": "재생 중",
+      "tags": {
+        "awkward": {
+          "label": "어색함",
+          "text": "머뭇거리는 간격과 확신 없는 억양으로 어색하게 말하기"
+        },
+        "crying": {
+          "label": "울음",
+          "text": "울면서 읽어 주세요"
+        },
+        "laugh": {
+          "label": "웃음",
+          "text": "즐거움이 목소리에서 느껴지도록 웃으면서 말하기."
+        },
+        "sarcasm": {
+          "label": "빈정거림",
+          "text": "무심하고 날카롭게 강조하며 빈정거리듯 말하기."
+        },
+        "relieved": {
+          "label": "안도감",
+          "text": "상대가 오지 않을까 걱정하다가 안도한 마음으로 말하기."
+        },
+        "excited": {
+          "label": "신남",
+          "text": "밝은 억양과 빠른 속도로 신나게 말하기."
+        }
+      }
+    },
+    "stop": "재생 정지",
+    "clone": {
+      "title": "<brand>몇 초 만에</brand> 목소리를 복제하세요.",
+      "subtitle": "실제 목소리를 듣고, 원하는 말을 하게 해보세요.",
+      "selectVoice": "{{name}} 목소리 선택",
+      "playReal": "{{name}} 실제 목소리 재생",
+      "stopReal": "{{name}} 실제 목소리 정지",
+      "lineLabel": "눌러서 수정",
+      "linePlaceholder": "원하는 말을 입력하세요",
+      "play": "복제 목소리 재생",
+      "cloning": "{{name}} 복제 중…",
+      "playing": "재생 중 · {{name}} 복제 목소리"
+    },
+    "change": {
+      "title": "목소리는 바꾸고, 말투는 그대로.",
+      "subtitle": "성대모사 영상에 딱 맞아요.",
+      "before": "변환 전",
+      "beforeCaption": "평소 내 목소리",
+      "after": "변환 후",
+      "turnInto": "변환 대상",
+      "play": "{{name}} 재생",
+      "stop": "{{name}} 정지"
+    },
+    "clean": {
+      "title": "음질이 별로인가요? <brand>한 번의 터치</brand>로 해결하세요.",
+      "subtitle": "잡음, 울림, 웅웅거리는 소리를 없애고 내 목소리만 남기세요.",
+      "play": "재생",
+      "stop": "정지",
+      "noisy": "잡음 있음",
+      "clean": "깨끗함",
+      "switch": "오디오 정리",
+      "hint": "재생 중에 전환해 보세요."
+    },
+    "edit": {
+      "title": "텍스트를 고쳐 말실수를 수정하세요.",
+      "subtitle": "단어를 바꾸면 내 목소리로 말해줍니다. 다시 녹음할 필요 없어요.",
+      "original": "원본",
+      "fixed": "수정됨",
+      "wordWrong": "{{word}}, 잘못된 단어입니다. 눌러서 수정하세요",
+      "wordFixed": "{{word}}. {{from}}에서 수정되었습니다. 눌러서 되돌리세요",
+      "hintWrong": "잘못된 단어를 눌러 수정하세요.",
+      "hintFixed": "수정되었습니다. 다시 누르면 되돌릴 수 있어요."
+    }
+  },
+  "review": {
+    "title": "{{appName}}, 마음에 드시나요?",
+    "yes": "네",
+    "no": "아니요"
+  }
+}

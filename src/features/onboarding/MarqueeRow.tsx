@@ -18,6 +18,7 @@ type Props = {
   // Scroll speed in dp per second.
   speed: number;
   activeId: string | null;
+  loadingId: string | null;
   onPress: (id: string) => void;
 };
 
@@ -30,13 +31,14 @@ export function MarqueeRow({
   index,
   speed,
   activeId,
+  loadingId,
   onPress,
 }: Props) {
   const colors = useColors();
   const { t } = useTranslation();
   const reduceMotion = useReducedMotion();
   const reverse = index % 2 === 1;
-  const paused = samples.some(s => s.id === activeId);
+  const paused = samples.some(s => s.id === activeId || s.id === loadingId);
 
   const copyWidth = useSharedValue(0);
   const offset = useSharedValue(0);
@@ -89,6 +91,7 @@ export function MarqueeRow({
               { name: label },
             )}
             sounding={active}
+            loading={sample.id === loadingId}
             look={pillLooks[(i + index) % pillLooks.length]}
             onPress={onPress}
             className="mr-2.5"

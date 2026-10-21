@@ -12,6 +12,7 @@ type Props = {
   // This row owns the player (highlighted, shows progress).
   active: boolean;
   playing: boolean;
+  loading: boolean;
   // Shown instead of meta while active (e.g. a live progress bar).
   progress?: ReactNode;
   onTogglePlay: () => void;
@@ -28,6 +29,7 @@ export const MediaRow = memo(function MediaRowInner({
   meta,
   active,
   playing,
+  loading,
   progress,
   onTogglePlay,
   onMore,
@@ -45,6 +47,7 @@ export const MediaRow = memo(function MediaRowInner({
     >
       <PlayButton
         playing={active && playing}
+        loading={active && loading}
         onPress={onTogglePlay}
         accessibilityLabel={playLabel}
       />

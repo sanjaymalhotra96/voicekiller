@@ -2,6 +2,7 @@ import { config } from '@/config';
 import {
   ActingInstruction,
   CustomInstruction,
+  isAutomaticInstruction,
   isInstructionCategory,
 } from '@/domain';
 import type { TableRow } from '@/lib/database.types';
@@ -9,23 +10,27 @@ import { invokeFunction } from '@/lib/functions';
 import { supabase } from '@/lib/supabase';
 import { isMissingTable, throwIfError } from '@/lib/supabaseResult';
 
-// Acting instructions API: the shared library (public.acting_instructions)
+// Acting instructions API: the shared library (public.instructions)
 // and the user's own (public.custom_instructions).
 // Screens use features/instructions/hooks.ts.
 
 const toActingInstruction = (
-  row: TableRow<'acting_instructions'>,
-): ActingInstruction | null =>
-  isInstructionCategory(row.category)
-    ? {
-        id: row.id,
-        name: row.name,
-        category: row.category,
-        instructions: row.instructions,
-        sampleScript: row.sample_script,
-        sampleAudioUrl: row.sample_audio_url,
-      }
-    : null;
+  row: TableRow<'instructions'>,
+): ActingInstruction | null => {
+  const normalizedCategory = row.category?.trim().toLowerCase() ?? '';
+  const category = isInstructionCategory(normalizedCategory) ? normalizedCategory : null;
+  if (!category && !isAutomaticInstruction(row)) {
+    return null;
+  }
+  return {
+    id: String(row.id),
+    name: row.name,
+    category,
+    instructions: row.instructions,
+    sampleScript: row.script,
+    sampleAudioUrl: row.audio_sample,
+  };
+};
 
 const toCustomInstruction = (
   row: TableRow<'custom_instructions'>,
@@ -46,9 +51,8 @@ export const instructionsService = {
   // The whole library (tens of rows); filtered and searched on device.
   async listLibrary(): Promise<ActingInstruction[]> {
     const { data, error } = await supabase
-      .from('acting_instructions')
-      .select('*')
-      .order('sort_order')
+      .from('instructions')
+      .select('id, name, category, instructions, script, audio_sample')
       .order('name');
     if (isMissingTable(error)) {
       return [];

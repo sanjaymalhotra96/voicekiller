@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Platform } from 'react-native';
 import type { SheetAction } from '@/components';
 import {
   useDeleteLibraryItem,
   useRenameLibraryItem,
 } from '@/features/library/hooks';
 import type { LibraryItem } from '@/features/library/types';
-import { confirmDestructive, openLink } from '@/utils';
+import { useAudioDownload } from '@/hooks/useAudioDownload';
+import { confirmDestructive } from '@/utils';
 
 type Options = {
   // Called before deleting, e.g. to stop playback of that file.
@@ -18,6 +20,8 @@ export function useLibraryItemActions({ onBeforeDelete }: Options = {}) {
   const { t } = useTranslation();
   const rename = useRenameLibraryItem();
   const remove = useDeleteLibraryItem();
+  const audioDownload = useAudioDownload();
+  const pendingDownload = useRef<LibraryItem | null>(null);
   const [menuItem, setMenuItem] = useState<LibraryItem | null>(null);
   const [renameItem, setRenameItem] = useState<LibraryItem | null>(null);
 
@@ -55,7 +59,14 @@ export function useLibraryItemActions({ onBeforeDelete }: Options = {}) {
       key: 'download',
       label: t('library.actions.download'),
       icon: 'download',
-      onPress: action(item => openLink(item.audioUrl)),
+      onPress: action(item => {
+        if (Platform.OS === 'ios') {
+          // Present the native share sheet only after the menu's Modal dismisses.
+          pendingDownload.current = item;
+        } else {
+          void audioDownload.download(item);
+        }
+      }),
     },
     {
       key: 'delete',
@@ -68,7 +79,16 @@ export function useLibraryItemActions({ onBeforeDelete }: Options = {}) {
 
   return {
     openMenu: setMenuItem,
-    menu: { visible: !!menuItem, onClose: closeMenu, actions: menuActions },
+    menu: {
+      visible: !!menuItem,
+      onClose: closeMenu,
+      onDismiss: () => {
+        const item = pendingDownload.current;
+        pendingDownload.current = null;
+        if (item) void audioDownload.download(item);
+      },
+      actions: menuActions,
+    },
     // Props for <RenameSheet>.
     renameSheet: {
       visible: !!renameItem,
@@ -81,6 +101,7 @@ export function useLibraryItemActions({ onBeforeDelete }: Options = {}) {
         setRenameItem(null);
       },
     },
-    error: rename.error ?? remove.error,
+    isDownloading: audioDownload.isPending,
+    error: audioDownload.error ?? rename.error ?? remove.error,
   };
 }

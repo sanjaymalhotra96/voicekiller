@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import type { AudioSample, FileRules } from '@/domain';
+import type { AudioSample, FileRules, MediaSource } from '@/domain';
 import { useFilePicker } from '@/hooks/useFilePicker';
 
 export type UploadSlotState =
@@ -14,8 +14,8 @@ export function useUploadSlot(rules: FileRules) {
   const picker = useFilePicker(rules);
   const [state, setState] = useState<UploadSlotState>({ status: 'idle' });
 
-  const pick = useCallback(async () => {
-    const file = await picker.pick();
+  const pick = useCallback(async (source: MediaSource = 'files') => {
+    const file = await picker.pick(source);
     if (file) {
       setState({ status: 'ready', file });
     }

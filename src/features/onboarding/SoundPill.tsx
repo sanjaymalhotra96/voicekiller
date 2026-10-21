@@ -1,11 +1,9 @@
 import React, { memo } from 'react';
 import { Pressable, View } from 'react-native';
-import { AppText, Icon } from '@/components';
-import { EqualizerBars } from '@/features/onboarding/EqualizerBars';
+import { AppText } from '@/components';
+import { SamplePlaybackIcon } from '@/features/onboarding/SamplePlaybackIcon';
 import { shadows, useColors } from '@/theme';
 import { cn } from '@/utils';
-
-const BAR_HEIGHTS = [12, 16, 10];
 
 // Idle looks, rotated along a row for visual rhythm (step 1).
 export const pillLooks = [
@@ -20,23 +18,21 @@ type Props = {
   id: string;
   label: string;
   accessibilityLabel: string;
-  // Its clip is playing: bars in an orange dot.
+  // Its clip is playing: a stop icon in an orange dot.
   sounding: boolean;
-  // Chosen (orange outline and glow); defaults to `sounding`.
-  selected?: boolean;
+  loading: boolean;
   look?: (typeof pillLooks)[number];
   onPress: (id: string) => void;
   className?: string;
 };
 
-// Rounded pill with a play dot and a label, for picking and hearing a
-// sound (step 1 samples, step 3 voices).
+// Rounded pill with a play dot and a label for step 1 samples.
 export const SoundPill = memo(function SoundPillInner({
   id,
   label,
   accessibilityLabel,
   sounding,
-  selected = sounding,
+  loading,
   look = pillLooks[0],
   onPress,
   className,
@@ -46,12 +42,17 @@ export const SoundPill = memo(function SoundPillInner({
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
-      accessibilityState={{ selected }}
+      accessibilityState={{
+        selected: sounding,
+        busy: loading,
+        disabled: loading,
+      }}
+      disabled={loading}
       onPress={() => onPress(id)}
-      style={selected ? shadows(colors).pillActive : undefined}
+      style={sounding ? shadows(colors).pillActive : undefined}
       className={cn(
         'h-pill flex-row items-center gap-2.5 rounded-full border-emphasis pl-2 pr-5 active:opacity-80',
-        selected ? 'border-primary bg-surface' : look.box,
+        sounding ? 'border-primary bg-surface' : look.box,
         className,
       )}
     >
@@ -61,11 +62,12 @@ export const SoundPill = memo(function SoundPillInner({
           sounding ? 'bg-primary' : look.dot,
         )}
       >
-        {sounding ? (
-          <EqualizerBars heights={BAR_HEIGHTS} color={colors.contrast} />
-        ) : (
-          <Icon name="play" size={14} color={colors.primary.dark} />
-        )}
+        <SamplePlaybackIcon
+          playing={sounding}
+          loading={loading}
+          size={14}
+          color={sounding ? colors.contrast : colors.primary.dark}
+        />
       </View>
       <AppText className="font-sans-semibold text-lg text-ink">{label}</AppText>
     </Pressable>

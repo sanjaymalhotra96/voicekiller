@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, View } from 'react-native';
 import {
@@ -30,6 +30,10 @@ export function InstructionLibraryTab() {
   const filters = useInstructionFilters(library.data ?? EMPTY);
   const selection = useInstructionSelection();
   const playback = usePlayback();
+  const playbackState = useMemo(
+    () => ({ id: playback.activeId, playing: playback.playing, loading: playback.loading }),
+    [playback.activeId, playback.playing, playback.loading],
+  );
 
   const { toggle, player } = playback;
   const playSample = useCallback(
@@ -52,6 +56,7 @@ export function InstructionLibraryTab() {
           selected={item.id === libraryId}
           active={active}
           playing={active && playback.playing}
+          loading={active && playback.loading}
           player={player}
           onTogglePlay={playSample}
           onInfo={openDetails}
@@ -62,6 +67,7 @@ export function InstructionLibraryTab() {
     [
       playback.activeId,
       playback.playing,
+      playback.loading,
       player,
       playSample,
       openDetails,
@@ -117,7 +123,7 @@ export function InstructionLibraryTab() {
         data={filters.visible}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        extraData={playback.activeId}
+        extraData={playbackState}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}

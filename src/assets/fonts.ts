@@ -19,7 +19,7 @@ export const fontAssets = {
   [fontFamily['sans-medium']]: PlusJakartaSans_500Medium,
   [fontFamily['sans-semibold']]: PlusJakartaSans_600SemiBold,
   [fontFamily['sans-bold']]: PlusJakartaSans_700Bold,
-  // Unlock Studio paywall only (features/subscription/PaywallScreen).
+  // Paywalls only (features/subscription).
   Figtree_400Regular,
   Figtree_500Medium,
   Figtree_600SemiBold,

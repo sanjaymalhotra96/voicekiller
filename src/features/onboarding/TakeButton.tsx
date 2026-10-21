@@ -1,13 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Pressable } from 'react-native';
-import { AppText, Icon, IconName } from '@/components';
-import { EqualizerBars } from '@/features/onboarding/EqualizerBars';
+import { Pressable } from 'react-native';
+import { AppText, IconName } from '@/components';
+import { SamplePlaybackIcon } from '@/features/onboarding/SamplePlaybackIcon';
 import type { TakePhase } from '@/features/onboarding/useGeneratedTake';
 import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
-
-const BAR_HEIGHTS = [14, 20, 11, 17];
 
 const boxes: Record<TakePhase, string> = {
   idle: 'bg-primary active:bg-primary-dark',
@@ -20,8 +18,6 @@ type Props = {
   // Button text for each phase ("Generate", "Generating…", "Playing").
   labels: Record<TakePhase, string>;
   idleIcon: IconName;
-  // Spoken while playing; defaults to "Stop playback".
-  stopLabel?: string;
   disabled?: boolean;
   onPress: () => void;
 };
@@ -31,7 +27,6 @@ export function TakeButton({
   phase,
   labels,
   idleIcon,
-  stopLabel,
   disabled = false,
   onPress,
 }: Props) {
@@ -41,9 +36,7 @@ export function TakeButton({
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={
-        phase === 'playing' ? stopLabel ?? t('onboarding.stop') : label
-      }
+      accessibilityLabel={phase === 'playing' ? t('onboarding.stop') : label}
       accessibilityState={{
         disabled: disabled || phase === 'loading',
         busy: phase === 'loading',
@@ -56,17 +49,13 @@ export function TakeButton({
         disabled && 'opacity-50',
       )}
     >
-      {phase === 'idle' ? (
-        <Icon name={idleIcon} size={iconSize.md} color={colors.contrast} />
-      ) : phase === 'loading' ? (
-        <ActivityIndicator size="small" color={colors.contrast} />
-      ) : (
-        <EqualizerBars
-          heights={BAR_HEIGHTS}
-          color={colors.primary.DEFAULT}
-          gap={3}
-        />
-      )}
+      <SamplePlaybackIcon
+        playing={phase === 'playing'}
+        loading={phase === 'loading'}
+        idleIcon={idleIcon}
+        size={iconSize.md}
+        color={colors.contrast}
+      />
       <AppText
         variant="button"
         numberOfLines={1}

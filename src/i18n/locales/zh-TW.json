@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "關閉",
+    "back": "返回",
+    "copied": "已複製",
+    "cancel": "取消",
+    "change": "變更",
+    "save": "儲存",
+    "beta": "測試版",
+    "delete": "刪除",
+    "showMore": "顯示更多",
+    "showLess": "顯示較少"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "電子郵件",
+    "continueWithGoogle": "使用 Google 繼續",
+    "continueWithEmail": "使用電子郵件繼續",
+    "haveAccount": "已經有帳號了嗎？<link>登入</link>"
+  },
+  "welcome": {
+    "title": "歡迎使用 <brand>{{appName}}</brand>",
+    "subtitle": "這是首款以表演指示為核心的 AI 語音工具。指定情緒，它就能演繹出來。"
+  },
+  "signUp": {
+    "title": "註冊",
+    "subtitle": "只要幾個簡單步驟，就能開始使用。",
+    "fullName": "你的全名",
+    "email": "電子郵件地址",
+    "password": "密碼",
+    "confirmPassword": "確認密碼",
+    "agree": "我同意<link>服務條款</link>",
+    "submit": "註冊",
+    "showPassword": "顯示密碼",
+    "hidePassword": "隱藏密碼"
+  },
+  "signIn": {
+    "title": "登入",
+    "subtitle": "歡迎回來！很高興再次見到你。",
+    "email": "電子郵件地址",
+    "password": "密碼",
+    "forgot": "忘記密碼？",
+    "submit": "登入"
+  },
+  "verify": {
+    "title": "驗證碼確認",
+    "subtitle": "我們已將一次性驗證碼寄至 <bold>{{email}}</bold>",
+    "resendIn": "{{time}} 秒後可重新傳送。",
+    "resendReady": "現在可以重新傳送。<link>重新傳送驗證碼</link>",
+    "submit": "驗證",
+    "digit": "第 {{index}} 位數字"
+  },
+  "forgotPassword": {
+    "title": "忘記密碼？",
+    "subtitle": "輸入你的電子郵件地址，我們會寄送重設密碼的連結。",
+    "email": "電子郵件地址",
+    "submit": "傳送重設連結",
+    "backToLogin": "返回登入",
+    "sent": "重設連結已寄至 <bold>{{email}}</bold>。請查看收件匣。"
+  },
+  "resetPassword": {
+    "title": "重設密碼",
+    "subtitle": "為你的帳號設定新密碼。",
+    "submit": "重設密碼",
+    "done": "密碼已重設。你現在可以使用新密碼登入。",
+    "requestLink": "索取新的重設連結",
+    "continue": "繼續"
+  },
+  "validation": {
+    "nameRequired": "請輸入你的姓名。",
+    "emailInvalid": "請輸入有效的電子郵件地址。",
+    "passwordRequired": "請輸入密碼。",
+    "passwordShort": "密碼至少需要 {{min}} 個字元。",
+    "passwordMismatch": "兩次輸入的密碼不一致。",
+    "termsRequired": "請同意服務條款。",
+    "otpIncomplete": "請輸入完整的驗證碼。",
+    "titleRequired": "請輸入名稱。",
+    "dobInvalid": "請使用 dd/mm/yy 格式。",
+    "currentPasswordRequired": "請輸入目前的密碼。",
+    "samePassword": "新密碼必須與原密碼不同。",
+    "promptRequired": "請描述你想要的聲音。",
+    "voiceNameRequired": "請輸入聲音名稱。",
+    "sampleRequired": "請上傳或錄製聲音樣本。",
+    "descriptionRequired": "請描述聲音。"
+  },
+  "errors": {
+    "network": "沒有網際網路連線。請再試一次。",
+    "invalidCredentials": "電子郵件或密碼不正確。",
+    "emailNotConfirmed": "請先驗證電子郵件地址，再登入。",
+    "emailTaken": "此電子郵件地址已註冊帳號。",
+    "weakPassword": "請設定更強的密碼。",
+    "otpInvalid": "驗證碼無效。請再試一次。",
+    "recoveryLinkInvalid": "此重設連結無效或已過期。請索取新連結。",
+    "rateLimited": "嘗試次數過多。請稍候。",
+    "unknown": "發生錯誤。請再試一次。",
+    "currentPasswordWrong": "目前的密碼不正確。",
+    "uploadFailed": "無法上傳檔案。請再試一次。",
+    "quotaExceeded": "你已達到方案的使用上限。請升級方案以繼續創作。",
+    "serviceUnavailable": "此功能目前無法使用。請稍後再試。",
+    "campaignExists": "你已經有同名的活動。",
+    "fileType": "不支援此檔案類型。",
+    "fileTooLarge": "此檔案太大。請選擇較小的檔案。",
+    "micPermission": "請在「設定」中允許存取麥克風，以錄製你的聲音。",
+    "photoLibraryPermission": "請在「設定」中允許存取「照片」，以選擇影片。",
+    "shareUnavailable": "此裝置無法使用分享功能。",
+    "transcriptUnavailable": "此檔案沒有可用的逐字稿。",
+    "transcriptTimingUnavailable": "此逐字稿沒有可用的時間資訊。請選擇「文字 (.txt)」下載。",
+    "authRequired": "你的登入階段已過期。請重新登入。",
+    "studioRequired": "此功能需要 Studio 方案。",
+    "notFound": "此檔案已不存在。",
+    "paidPlanRequired": "此功能需要付費方案。",
+    "jobFailed": "無法完成此操作。請再試一次。",
+    "jobTimeout": "處理時間比預期更長。請幾分鐘後查看資料庫。",
+    "sampleLength": "請使用至少 1 秒長的聲音樣本。",
+    "renameNotAllowed": "目前無法重新命名此檔案。",
+    "cancelled": "已取消。",
+    "purchasesUnavailable": "訂閱功能尚未開放。請稍後再試。",
+    "purchaseFailed": "無法完成購買。你尚未被收費。",
+    "nothingToRestore": "此商店帳號沒有先前的購買紀錄。",
+    "conversionFailed": "無法將此檔案轉換為音訊。請試試其他檔案。",
+    "scriptTooLong": "免費方案每次最多可產生 1,000 個字元的語音。請縮短文稿或升級方案。",
+    "samePassword": "新密碼必須與目前的密碼不同。",
+    "passwordNotSet": "你是使用 Google 註冊的，因此此帳號沒有可變更的密碼。",
+    "googleSignInFailed": "Google 登入未完成。請再試一次。",
+    "appleSignInFailed": "Apple 登入未完成。請再試一次。"
+  },
+  "tabs": {
+    "dashboard": "主控台",
+    "library": "資料庫",
+    "settings": "設定"
+  },
+  "dashboard": {
+    "title": "主控台",
+    "greeting": "嗨，{{name}}",
+    "sections": {
+      "create": "創作",
+      "transform": "轉換"
+    },
+    "actionCard": {
+      "title": "文字轉語音",
+      "action": "建立語音"
+    }
+  },
+  "library": {
+    "title": "資料庫",
+    "search": "搜尋檔案...",
+    "empty": {
+      "title": "你還沒有任何檔案！",
+      "message": "從主控台建立新檔案。"
+    },
+    "noResults": "找不到符合搜尋條件的檔案。",
+    "groups": {
+      "today": "今天",
+      "yesterday": "昨天",
+      "thisWeek": "本週",
+      "earlier": "更早"
+    },
+    "actions": {
+      "title": "詳細資訊",
+      "rename": "重新命名",
+      "download": "下載",
+      "delete": "刪除",
+      "more": "{{title}} 的更多選項",
+      "play": "播放 {{title}}",
+      "pause": "暫停 {{title}}"
+    },
+    "rename": {
+      "title": "重新命名",
+      "placeholder": "檔案名稱"
+    },
+    "delete": {
+      "title": "刪除檔案？",
+      "message": "「{{title}}」將被永久刪除。",
+      "confirm": "刪除",
+      "cancel": "取消"
+    },
+    "retry": "再試一次",
+    "untitled": "未命名"
+  },
+  "settings": {
+    "title": "設定",
+    "sections": {
+      "general": "一般",
+      "others": "其他"
+    },
+    "items": {
+      "personalInfo": "個人資料",
+      "changePassword": "變更密碼",
+      "subscription": "管理訂閱",
+      "share": "與朋友分享",
+      "contact": "聯絡我們",
+      "privacy": "隱私權政策"
+    },
+    "signOut": "登出",
+    "shareMessage": "我正在使用 {{appName}} 製作 AI 語音。試試看：{{url}}",
+    "shareMessageNoLink": "我正在使用 {{appName}} 製作 AI 語音。"
+  },
+  "crash": {
+    "title": "發生錯誤",
+    "message": "應用程式發生未預期的錯誤。請再試一次。",
+    "retry": "再試一次"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "文字轉語音",
+      "subtitle": "輸入文字，立即聆聽",
+      "tag": "AI 語音"
+    },
+    "voiceClone": {
+      "title": "聲音複製",
+      "subtitle": "複製任何聲音",
+      "tag": "聲音複製"
+    },
+    "voiceDesign": {
+      "title": "聲音設計",
+      "subtitle": "描述你想要的聲音",
+      "tag": "聲音設計"
+    },
+    "voiceChanger": {
+      "title": "變聲工具",
+      "subtitle": "變換你的聲音",
+      "tag": "變聲工具"
+    },
+    "audioClean": {
+      "title": "音訊淨化",
+      "subtitle": "去除雜音",
+      "tag": "音訊淨化"
+    },
+    "speechEditor": {
+      "title": "語音編輯器",
+      "subtitle": "修正說錯的字詞",
+      "tag": "語音編輯器"
+    },
+    "speechToText": {
+      "title": "語音轉文字",
+      "subtitle": "將音訊轉為文字",
+      "tag": "語音轉文字"
+    }
+  },
+  "trialOffer": {
+    "title": "邀請你體驗",
+    "titleHighlight": "免費試用 Voicekiller",
+    "noPaymentToday": "今天無需付款",
+    "cta": "以 US$0.00 試用"
+  },
+  "trialPaywall": {
+    "later": "稍後",
+    "stars": "5 星（滿分 5 星）",
+    "reviews": {
+      "textToSpeech": "「聲音太真實了，聽眾完全聽不出是 AI。」",
+      "acting": "「我輸入『像悲傷的道別那樣說』，每次情緒都拿捏得很到位。」",
+      "voiceClone": "「一分鐘就複製了我的聲音，現在拍影片不用再錄音。」",
+      "allInOne": "「清理音訊、變聲、修正錯誤，一個 App 取代了四個工具。」"
+    },
+    "kicker": "別再為 5 個不同的工具付費",
+    "title": "<brand>一個平台</brand>，匯集最好的 <brand>AI 語音工具</brand>",
+    "perMonth": "{{price}}/月",
+    "perYear": "{{price}}/年",
+    "monthlyNote": "免費 {{days}} 天 · 隨時取消",
+    "yearlyNote": "免費 {{days}} 天 · 省下 {{percent}}%",
+    "trialNote": "免費 {{days}} 天",
+    "cta": "免費試用 {{days}} 天",
+    "then": "之後 {{price}}",
+    "disclaimer": "今天不收費。在第 {{days}} 天前取消就不會被扣款。"
+  },
+  "paywall": {
+    "title": "解鎖 Studio",
+    "close": "關閉",
+    "features": {
+      "voices": "超過 2,000 種聲音",
+      "clones": "不限次數的聲音複製",
+      "audioClean": "音訊淨化",
+      "voiceChanger": "變聲工具",
+      "speechEditor": "AI 語音編輯器"
+    },
+    "yearly": "年繳",
+    "monthly": "月繳",
+    "minutes": "每月 {{count}} 分鐘",
+    "save": "省下 {{percent}}%",
+    "continue": "繼續",
+    "cancelAnytime": "隨時可取消",
+    "restore": "回復購買項目",
+    "terms": "條款",
+    "privacy": "隱私權"
+  },
+  "plan": {
+    "basic": "基本方案",
+    "studio": "Studio",
+    "buyStudio": "購買 Studio",
+    "usage": "使用量",
+    "usageOf": "/ {{limit}} 分鐘",
+    "usageThisMonth": "本月使用量",
+    "usageMinutes": "{{used}} / {{limit}} 分鐘",
+    "remaining": "剩餘 {{count}} 分鐘"
+  },
+  "profile": {
+    "title": "個人資料",
+    "userId": "使用者 ID",
+    "fullName": "你的全名",
+    "email": "你的電子郵件",
+    "dob": "出生日期",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "變更個人照片",
+    "copyId": "複製使用者 ID",
+    "deleteAccount": "刪除帳號",
+    "save": "儲存變更",
+    "saved": "你的變更已儲存。",
+    "changeEmail": {
+      "title": "變更電子郵件",
+      "subtitle": "我們會寄送確認連結至新地址。",
+      "placeholder": "新的電子郵件地址",
+      "submit": "傳送連結",
+      "sent": "請查看 {{email}}，以確認變更。"
+    },
+    "unsaved": {
+      "title": "儲存變更？",
+      "message": "未儲存的變更將會遺失。要在關閉前儲存嗎？",
+      "discard": "捨棄",
+      "confirm": "確認"
+    },
+    "delete": {
+      "title": "刪除帳號",
+      "message": "刪除帳號後，你在我們資料庫中的所有資訊都會被移除。此操作無法復原。",
+      "prompt": "請輸入「{{word}}」以確認",
+      "word": "DELETE",
+      "submit": "刪除帳號"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "輸入目前的密碼",
+    "title": "變更密碼",
+    "current": "目前的密碼",
+    "new": "新密碼",
+    "newPlaceholder": "輸入新密碼（至少 {{min}} 個字元）",
+    "confirm": "確認密碼",
+    "confirmPlaceholder": "確認新密碼",
+    "submit": "變更密碼",
+    "done": "你的密碼已變更。"
+  },
+  "notFound": {
+    "title": "此頁面不存在。",
+    "action": "返回首頁"
+  },
+  "textToSpeech": {
+    "title": "文字轉語音",
+    "fileName": "檔案名稱（選填）",
+    "campaign": "活動",
+    "scriptPlaceholder": "在此輸入或貼上文稿...",
+    "scriptLabel": "文稿",
+    "scriptLimitExceeded": "此聲音最多支援 {{max}} 個字元。請縮短文稿或選擇其他聲音。",
+    "chooseVoice": "選擇聲音",
+    "voiceLabel": "聲音：{{name}}",
+    "emotions": "情緒",
+    "addPause": "加入停頓",
+    "settings": "設定",
+    "preview": "試聽",
+    "stopPreview": "停止",
+    "generate": "產生",
+    "campaignSheet": {
+      "title": "活動",
+      "placeholder": "在此輸入新活動名稱...",
+      "create": "建立活動",
+      "default": "預設"
+    },
+    "pauseSheet": {
+      "title": "加入停頓",
+      "seconds_one": "{{count}} 秒",
+      "seconds_other": "{{count}} 秒"
+    },
+    "settingsSheet": {
+      "title": "設定",
+      "audioFormat": "音訊格式",
+      "voiceTuning": "聲音調整",
+      "speed": "速度",
+      "delivery": "演繹模式",
+      "actingInstructions": "表演指示",
+      "instruction": "指示",
+      "chooseInstruction": "選擇指示",
+      "ownInstructions": "輸入自己的指示",
+      "ownPlaceholder": "描述應如何演繹這段文稿..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "更穩定",
+      "balanced": "平衡",
+      "creative": "更有創意"
+    }
+  },
+  "emotions": {
+    "auto": "自動",
+    "happy": "開心",
+    "sad": "悲傷",
+    "angry": "憤怒",
+    "fearful": "恐懼",
+    "disgusted": "厭惡",
+    "surprised": "驚訝",
+    "calm": "平靜",
+    "fluent": "流暢"
+  },
+  "voices": {
+    "title": "選擇聲音",
+    "search": "搜尋聲音...",
+    "sources": {
+      "library": "資料庫",
+      "cloned": "已複製",
+      "design": "設計",
+      "favorites": "收藏"
+    },
+    "openFilters": "篩選條件",
+    "openFiltersCount": "篩選條件，已啟用 {{count}} 項",
+    "favorite": "將 {{name}} 加入收藏",
+    "unfavorite": "將 {{name}} 從收藏中移除",
+    "select": "選擇 {{name}}",
+    "play": "播放 {{name}} 的樣本",
+    "pause": "暫停 {{name}} 的樣本",
+    "empty": "找不到符合搜尋條件的聲音。",
+    "emptyFavorites": "尚未收藏任何聲音。點選聲音旁的愛心，即可將它保留在這裡。",
+    "filters": {
+      "title": "篩選條件",
+      "model": "模型",
+      "gender": "性別",
+      "accent": "口音",
+      "language": "語言",
+      "apply": "套用篩選條件"
+    },
+    "genders": {
+      "female": "女性",
+      "male": "男性",
+      "neutral": "中性"
+    },
+    "models": {
+      "all": "所有模型",
+      "expressive": "情感豐富",
+      "directable": "可指導",
+      "directablePro": "可指導 Pro"
+    }
+  },
+  "accents": {
+    "auto": "自動",
+    "ar-001": "AR - 阿拉伯口音",
+    "ar-EG": "AR - 埃及口音",
+    "cs-CZ": "CS - 捷克口音",
+    "de-DE": "DE - 德國口音",
+    "el-GR": "EL - 希臘口音",
+    "en-AU": "EN - 澳洲口音",
+    "en-CA": "EN - 加拿大口音",
+    "en-GB": "EN - 英國口音",
+    "en-IE": "EN - 愛爾蘭口音",
+    "en-IN": "EN - 印度口音",
+    "en-NZ": "EN - 紐西蘭口音",
+    "en-US": "EN - 美國口音",
+    "en-ZA": "EN - 南非口音",
+    "es-419": "ES - 拉丁美洲口音",
+    "es-ES": "ES - 西班牙口音",
+    "fr-CA": "FR - 加拿大口音",
+    "fr-FR": "FR - 法國口音",
+    "hi-IN": "HI - 印地語",
+    "it-IT": "IT - 義大利口音",
+    "ja-JP": "JA - 日本口音",
+    "jv-ID": "JV - 爪哇語",
+    "ko-KR": "KO - 韓國口音",
+    "nl-NL": "NL - 荷蘭口音",
+    "pl-PL": "PL - 波蘭口音",
+    "pt-BR": "PT - 巴西口音",
+    "pt-PT": "PT - 葡萄牙口音",
+    "sw-KE": "SW - 肯亞斯瓦希里語",
+    "ta-IN": "TA - 坦米爾語",
+    "te-IN": "TE - 泰盧固語",
+    "vi-VN": "VI - 越南口音",
+    "zh-CN": "ZH - 普通話"
+  },
+  "languages": {
+    "auto": "自動",
+    "ar": "阿拉伯語",
+    "yue": "粵語",
+    "zh": "中文",
+    "cs": "捷克語",
+    "nl": "荷蘭語",
+    "en": "英語",
+    "fi": "芬蘭語",
+    "fr": "法語",
+    "de": "德語",
+    "el": "希臘語",
+    "he": "希伯來語",
+    "hi": "印地語",
+    "hu": "匈牙利語",
+    "id": "印尼語",
+    "it": "義大利語",
+    "ja": "日語",
+    "ko": "韓語",
+    "pl": "波蘭語",
+    "pt": "葡萄牙語",
+    "ru": "俄語",
+    "es": "西班牙語",
+    "sv": "瑞典語",
+    "tr": "土耳其語",
+    "uk": "烏克蘭語"
+  },
+  "instructions": {
+    "title": "表演指示",
+    "tabs": {
+      "library": "資料庫",
+      "mine": "我的指示"
+    },
+    "all": "全部（{{count}}）",
+    "categoryCount": "{{label}}（{{count}}）",
+    "categories": {
+      "emotions": "情緒",
+      "characters": "角色",
+      "situations": "情境",
+      "accents": "口音"
+    },
+    "search": "搜尋指示...",
+    "noResults": "找不到符合搜尋條件的指示。",
+    "details": "{{name}} 的詳細資訊",
+    "select": "使用 {{name}}",
+    "play": "播放 {{name}} 的樣本",
+    "pause": "暫停 {{name}} 的樣本",
+    "notFound": "此指示已不存在。",
+    "detail": {
+      "script": "文稿",
+      "instructions": "表演指示",
+      "sample": "音訊樣本",
+      "playSample": "點選以播放音訊樣本",
+      "noSample": "尚無音訊樣本",
+      "use": "使用此指示"
+    },
+    "mine": {
+      "title": "我的自訂指示",
+      "add": "新增指示",
+      "emptyTitle": "尚無自訂指示",
+      "emptyMessage": "建立並儲存自己的表演指示，即可在不同專案中使用。",
+      "generate": "使用 AI 產生指示",
+      "created": "建立日期：{{date}}",
+      "remove": "刪除 {{name}}",
+      "removeTitle": "刪除指示？",
+      "removeMessage": "「{{name}}」將被永久刪除。"
+    },
+    "create": {
+      "title": "新增表演指示",
+      "name": "指示名稱",
+      "namePlaceholder": "例如：「溫暖親切」、「專業新聞播報」",
+      "prompt": "表演指示輸入",
+      "promptPlaceholder": "為……建立指示",
+      "hint": "例如，輸入「為機器人聲音建立指示」，AI 就會自動產生",
+      "submit": "產生指示"
+    }
+  },
+  "voiceClone": {
+    "title": "聲音複製",
+    "guide": "使用指南",
+    "language": "語言",
+    "voiceName": "聲音名稱",
+    "voiceNamePlaceholder": "例如：沉穩旁白",
+    "sources": {
+      "upload": "上傳音訊",
+      "record": "錄製音訊"
+    },
+    "upload": {
+      "title": "上傳來源音訊",
+      "hint": "音訊或影片。將使用前 {{seconds}} 秒。",
+      "action": "上傳"
+    },
+    "record": {
+      "title": "錄製你的聲音",
+      "hint": "選擇麥克風，然後按下「錄製」。",
+      "action": "錄製",
+      "stop": "停止",
+      "again": "重新錄製",
+      "recording": "錄製中 {{time}}",
+      "microphone": "麥克風",
+      "defaultMicrophone": "預設麥克風",
+      "fileName": "錄音.m4a"
+    },
+    "clip": {
+      "play": "播放 {{name}}",
+      "pause": "暫停 {{name}}"
+    },
+    "submit": "建立聲音",
+    "guideSheet": {
+      "title": "錄音指南",
+      "tips": [
+        "使用約 30 秒、由同一人清楚說話的錄音。較長的片段會裁切為前 30 秒。",
+        "在安靜的房間錄音，避免音樂或背景雜音。",
+        "自然地說話，使用你希望複製聲音呈現的語氣。",
+        "讓麥克風與嘴巴保持固定距離。"
+      ]
+    }
+  },
+  "results": {
+    "play": "播放 {{name}}",
+    "pause": "暫停 {{name}}",
+    "created": "建立日期：{{date}}",
+    "rename": "重新命名 {{name}}",
+    "renameTitle": "重新命名",
+    "renameLabel": "編輯名稱",
+    "renamePlaceholder": "名稱",
+    "download": "下載 {{name}}",
+    "remove": "刪除 {{name}}",
+    "removeTitle": "刪除檔案？",
+    "removeMessage": "「{{name}}」將被永久刪除。",
+    "viewAll": "查看全部",
+    "empty": "這裡還沒有內容。",
+    "enhanced": "已增強",
+    "recent": {
+      "voiceClone": "最近複製的聲音",
+      "voiceDesign": "最近設計的聲音",
+      "voiceChanger": "最近的變聲結果",
+      "audioClean": "最近淨化的音訊",
+      "speechEditor": "最近的語音",
+      "speechToText": "最近的轉錄"
+    },
+    "titles": {
+      "voiceClone": "我複製的聲音",
+      "voiceDesign": "我設計的聲音",
+      "voiceChanger": "我的變聲結果",
+      "audioClean": "我淨化的音訊",
+      "speechEditor": "我的語音",
+      "speechToText": "我的轉錄"
+    },
+    "view": "查看 {{name}}"
+  },
+  "upload": {
+    "chooseSource": "選擇來源",
+    "files": "檔案",
+    "gallery": "相簿（影片）",
+    "source": "上傳來源音訊",
+    "target": "上傳目標音訊",
+    "action": "上傳",
+    "change": "變更",
+    "remove": "移除 {{name}}",
+    "uploading": "上傳中 {{percent}}%",
+    "maxSize": "最大 {{max}} MB"
+  },
+  "player": {
+    "play": "播放",
+    "pause": "暫停"
+  },
+  "voiceChanger": {
+    "title": "變聲工具",
+    "source": "來源音訊",
+    "target": "目標聲音",
+    "submit": "開始轉換"
+  },
+  "voiceDesign": {
+    "title": "聲音設計",
+    "guide": "使用指南",
+    "language": "語言",
+    "name": "聲音名稱",
+    "namePlaceholder": "例如：沉穩旁白",
+    "description": "聲音描述",
+    "descriptionPlaceholder": "「溫暖低沉的男性聲音，帶有些微英國口音，語速平穩，語氣充滿權威感。」",
+    "descriptionHint": "請使用英文撰寫描述。",
+    "enhance": "使用 AI 改善描述",
+    "submit": "建立聲音",
+    "variations": {
+      "title": "選擇聲音",
+      "subtitle": "聆聽產生的 {{count}} 種版本，選擇你喜歡的聲音",
+      "item": "聲音版本 {{number}}",
+      "play": "播放版本 {{number}}",
+      "pause": "暫停版本 {{number}}",
+      "save": "儲存聲音"
+    },
+    "guideSheet": {
+      "title": "如何描述聲音",
+      "tips": [
+        "說明說話者的年齡、性別和個性。",
+        "描述音色：溫暖、沙啞、明亮、低沉。",
+        "加入口音和語速，例如：些微英國口音、平穩語速。",
+        "提及情緒或用途，例如：適合有聲書的沉穩旁白。"
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "語音編輯器",
+    "submit": "開始",
+    "sheet": {
+      "title": "語音編輯器",
+      "audio": "音訊",
+      "transcription": "逐字稿",
+      "revert": "還原為原始版本",
+      "generate": "產生音訊",
+      "done": "完成"
+    },
+    "uploadHint": "音訊或影片，最大 {{max}} MB。將使用前 {{minutes}} 分鐘。"
+  },
+  "audioClean": {
+    "title": "音訊淨化",
+    "description": "音質增強功能讓錄音聽起來像是使用專業麥克風錄製的。",
+    "enhance": "降噪並增強音質",
+    "submit": "淨化音訊"
+  },
+  "speechToText": {
+    "title": "語音轉文字",
+    "language": "語言",
+    "translation": "字幕翻譯",
+    "noTranslation": "無",
+    "submit": "開始轉錄",
+    "sheet": {
+      "title": "結果",
+      "audio": "音訊",
+      "content": "內容",
+      "timingUnavailable": "無可用的時間資訊",
+      "segment": "#{{number}}",
+      "edit": "編輯第 {{number}} 行",
+      "done": "完成編輯第 {{number}} 行",
+      "download": "下載",
+      "formats": {
+        "srt": "字幕 (.srt)",
+        "vtt": "網頁字幕 (.vtt)",
+        "txt": "純文字 (.txt)"
+      },
+      "finish": "完成"
+    }
+  },
+  "offline": {
+    "title": "沒有網際網路連線",
+    "message": "請檢查 Wi-Fi 或行動數據。恢復連線後，應用程式就會繼續運作。",
+    "stillOffline": "仍然沒有連線。請檢查 Wi-Fi 或行動數據，然後再試一次。",
+    "retry": "重試"
+  },
+  "support": {
+    "title": "聯絡我們",
+    "error": "無法載入聊天室。請檢查連線後再試一次。"
+  },
+  "onboarding": {
+    "step": "第 {{step}} 步，共 {{total}} 步",
+    "next": "下一步",
+    "playSample": "播放 {{name}} 的樣本",
+    "stopSample": "停止播放 {{name}} 的樣本",
+    "voices": {
+      "title": "真正懂得<brand>演繹情感</brand>的 AI 語音。",
+      "subtitle": "文字轉語音、聲音複製，以及更多功能。",
+      "samples": {
+        "happy": "開心",
+        "angry": "憤怒",
+        "sarcastic": "諷刺",
+        "excited": "興奮",
+        "crying": "哭泣",
+        "pirate": "海盜",
+        "scared": "害怕",
+        "laughing": "大笑",
+        "calm": "平靜",
+        "evilVillain": "邪惡反派",
+        "dramatic": "戲劇化",
+        "confident": "自信",
+        "nervous": "緊張",
+        "romantic": "浪漫",
+        "sleepy": "睏倦",
+        "energetic": "活力充沛",
+        "madScientist": "瘋狂科學家",
+        "horror": "恐怖",
+        "surprised": "驚訝",
+        "awkward": "尷尬",
+        "shocked": "震驚",
+        "tired": "疲憊",
+        "santaClaus": "聖誕老人",
+        "curious": "好奇",
+        "playful": "俏皮",
+        "serious": "嚴肅",
+        "sad": "悲傷",
+        "rap": "饒舌",
+        "disappointed": "失望",
+        "sportsCommentator": "體育主播"
+      }
+    },
+    "direct": {
+      "title": "現在，由你來指導聲音。",
+      "subtitle": "選擇情緒，按下播放。",
+      "actingLabel": "表演指示（點選以編輯）",
+      "actingPlaceholder": "描述應該如何說出這段話",
+      "scriptLabel": "文稿",
+      "script": "喔，太好了。你來了。我剛才還以為你不會來了。",
+      "generate": "產生",
+      "generating": "產生中…",
+      "playing": "播放中",
+      "tags": {
+        "awkward": {
+          "label": "尷尬",
+          "text": "以尷尬的方式演繹，節奏猶豫，語調不確定"
+        },
+        "crying": {
+          "label": "哭泣",
+          "text": "一邊哭一邊讀出這段話"
+        },
+        "laugh": {
+          "label": "笑聲",
+          "text": "帶著笑聲演繹，讓人聽得出愉悅。"
+        },
+        "sarcasm": {
+          "label": "諷刺",
+          "text": "以諷刺的語氣演繹，帶有冷淡而尖銳的重音。"
+        },
+        "relieved": {
+          "label": "鬆了一口氣",
+          "text": "鬆了一口氣——你原本擔心對方不會來。"
+        },
+        "excited": {
+          "label": "興奮",
+          "text": "以興奮的語氣演繹，語調明亮，節奏輕快。"
+        }
+      }
+    },
+    "stop": "停止播放",
+    "clone": {
+      "title": "<brand>幾秒內</brand>複製聲音。",
+      "subtitle": "先聽原本的聲音，再讓它說出任何話。",
+      "selectVoice": "選擇 {{name}} 的聲音",
+      "playReal": "播放 {{name}} 的真實聲音",
+      "stopReal": "停止播放 {{name}} 的真實聲音",
+      "lineLabel": "點選以編輯",
+      "linePlaceholder": "輸入任何內容",
+      "play": "播放複製的聲音",
+      "cloning": "正在複製 {{name}}…",
+      "playing": "播放中 · {{name}} 的複製聲音"
+    },
+    "change": {
+      "title": "變換聲音，保留你的風格。",
+      "subtitle": "最適合用於聲音模仿影片。",
+      "before": "變聲前",
+      "beforeCaption": "你原本的聲音",
+      "after": "變聲後",
+      "turnInto": "轉換成",
+      "play": "播放 {{name}}",
+      "stop": "停止播放 {{name}}"
+    },
+    "clean": {
+      "title": "音質不好？<brand>輕點一下</brand>就能修復。",
+      "subtitle": "去除雜音、回音和嗡嗡聲，只留下你的聲音。",
+      "play": "播放",
+      "stop": "停止",
+      "noisy": "有雜音",
+      "clean": "已淨化",
+      "switch": "淨化音訊",
+      "hint": "試著在播放時切換開關。"
+    },
+    "edit": {
+      "title": "編輯文字，就能修正口誤。",
+      "subtitle": "改個字，你的聲音就會說出來。不必重新錄音。",
+      "original": "原始版本",
+      "fixed": "已修正",
+      "wordWrong": "{{word}}，錯誤。點選以修正",
+      "wordFixed": "{{word}}。已從 {{from}} 修正。點選以復原",
+      "hintWrong": "點選錯誤即可修正。",
+      "hintFixed": "已修正。再次點選即可復原。"
+    }
+  },
+  "review": {
+    "title": "你喜歡 {{appName}} 嗎？",
+    "yes": "喜歡",
+    "no": "不喜歡"
+  }
+}

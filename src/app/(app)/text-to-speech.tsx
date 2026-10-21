@@ -2,7 +2,7 @@
 import { useFocusEffect, useRouter } from 'expo-router';
 import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { KeyboardAvoidingView, Platform, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, View } from 'react-native';
 import {
   Button,
   FormError,
@@ -12,14 +12,17 @@ import {
 } from '@/components';
 import {
   insertAtSelection,
+  GeneratedSpeech,
   PauseDuration,
   pauseTag,
+  speechRulesFor,
   TextSelection,
   textLimits,
 } from '@/domain';
 import { CampaignSheet } from '@/features/text-to-speech/CampaignSheet';
 import { EditorToolbar } from '@/features/text-to-speech/EditorToolbar';
 import { EmotionSheet } from '@/features/text-to-speech/EmotionSheet';
+import { GeneratedSpeechPlayer } from '@/features/text-to-speech/GeneratedSpeechPlayer';
 import {
   useDefaultVoice,
   useGenerateSpeech,
@@ -31,6 +34,7 @@ import { ScriptInput } from '@/features/text-to-speech/ScriptInput';
 import { SpeechSettingsSheet } from '@/features/text-to-speech/SpeechSettingsSheet';
 import { useSpeechDraft } from '@/features/text-to-speech/store';
 import { EditorSheet } from '@/features/text-to-speech/types';
+import { useDefaultInstruction } from '@/features/text-to-speech/useDefaultInstruction';
 import { VoicePickerSheet } from '@/features/voices/VoicePickerSheet';
 import { usePlayback, useStatusBarStyle, useUnmountSignal } from '@/hooks';
 
@@ -41,6 +45,7 @@ export default function TextToSpeechScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const [sheet, setSheet] = useState<EditorSheet | null>(null);
+  const [generatedSpeech, setGeneratedSpeech] = useState<GeneratedSpeech | null>(null);
   const closeSheet = useCallback(() => setSheet(null), []);
   const selectionRef = useRef<TextSelection>({ start: 0, end: 0 });
 
@@ -48,12 +53,16 @@ export default function TextToSpeechScreen() {
   const title = useSpeechDraft(state => state.title);
   const setTitle = useSpeechDraft(state => state.setTitle);
   const hasScript = useSpeechDraft(state => state.script.trim().length > 0);
+  const scriptOverLimit = useSpeechDraft(
+    state => state.script.length > speechRulesFor(state.voice).scriptLimit,
+  );
   const voiceId = useSpeechDraft(state => state.voice?.id ?? null);
   const setVoice = useSpeechDraft(state => state.setVoice);
   const campaignName = useSpeechDraft(state => state.campaignName);
 
   // First visit: preselect a voice; later visits keep the last used one.
   useDefaultVoice();
+  useDefaultInstruction();
   const preview = usePreviewSpeech();
   const generate = useGenerateSpeech();
   // Leaving the screen stops waiting for the file (the server still
@@ -82,12 +91,14 @@ export default function TextToSpeechScreen() {
   };
 
   const insertPause = (seconds: PauseDuration) => {
-    const { script, setScript } = useSpeechDraft.getState();
+    const { script, setScript, voice } = useSpeechDraft.getState();
+    const rules = speechRulesFor(voice);
+    if (!rules.pauses) return;
     const result = insertAtSelection(
       script,
       selectionRef.current,
       pauseTag(seconds),
-      textLimits.script,
+      rules.scriptLimit,
     );
     if (result) {
       setScript(result.text);
@@ -120,6 +131,7 @@ export default function TextToSpeechScreen() {
 
   const onGenerate = () => {
     const draft = useSpeechDraft.getState();
+    if (draft.script.length > speechRulesFor(draft.voice).scriptLimit) return;
     const request = toGenerateRequest(draft, defaultFileName());
     if (!request) {
       setSheet('voice');
@@ -128,10 +140,12 @@ export default function TextToSpeechScreen() {
     playback.stop();
     preview.reset();
     generate.mutate({ ...request, signal: unmountSignal() }, {
-      onSuccess: () => {
+      onSuccess: speech => {
         draft.clearScript();
         lastPreview.current = null;
-        router.navigate('/library');
+        Keyboard.dismiss();
+        setGeneratedSpeech(speech);
+        playback.toggle(speech);
       },
     });
   };
@@ -177,7 +191,10 @@ export default function TextToSpeechScreen() {
             variant="night"
             icon={previewing ? 'stop' : 'play'}
             label={previewing ? t('textToSpeech.stopPreview') : t('textToSpeech.preview')}
-            loading={preview.isPending}
+            loading={
+              preview.isPending ||
+              (playback.activeId === PREVIEW_ID && playback.loading)
+            }
             disabled={!hasScript || generate.isPending}
             onPress={onPreview}
             className="flex-1"
@@ -186,11 +203,26 @@ export default function TextToSpeechScreen() {
             icon="micSparkle"
             label={t('textToSpeech.generate')}
             loading={generate.isPending}
-            disabled={!hasScript}
+            disabled={!hasScript || scriptOverLimit}
             onPress={onGenerate}
             className="flex-1"
           />
         </View>
+        {generatedSpeech ? (
+          <GeneratedSpeechPlayer
+            key={generatedSpeech.id}
+            speech={generatedSpeech}
+            player={playback.player}
+            active={playback.activeId === generatedSpeech.id}
+            playing={playback.playing}
+            loading={playback.loading}
+            onTogglePlay={() => playback.toggle(generatedSpeech)}
+            onClose={() => {
+              if (playback.activeId === generatedSpeech.id) playback.stop();
+              setGeneratedSpeech(null);
+            }}
+          />
+        ) : null}
       </View>
 
       <VoicePickerSheet

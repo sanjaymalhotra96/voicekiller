@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import Purchases, { LOG_LEVEL } from 'react-native-purchases';
 import { config } from '@/config';
 import { log } from '@/lib/logger';
+import { syncMetaAttribution } from '@/lib/meta';
 
 // RevenueCat setup. Purchases belong to the Supabase user: the app user id
 // is the Supabase user id, so the web API (via RevenueCat's webhook) and
@@ -26,13 +27,12 @@ export async function setPurchasesUser(userId: string | undefined) {
       }
       Purchases.configure({ apiKey, appUserID: userId ?? null });
       configured = true;
-      return;
-    }
-    if (userId) {
+    } else if (userId) {
       await Purchases.logIn(userId);
     } else if (!(await Purchases.isAnonymous())) {
       await Purchases.logOut();
     }
+    await syncMetaAttribution(userId ?? null);
   } catch (error) {
     // Never block sign-in: purchases retry the next time they are used.
     log('purchases', 'could not set the RevenueCat user', error);

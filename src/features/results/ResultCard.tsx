@@ -1,5 +1,5 @@
 import type { AudioPlayer } from 'expo-audio';
-import React, { memo } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import {
@@ -18,12 +18,16 @@ type Props = {
   // This card owns the shared player (orange border, live progress).
   active: boolean;
   playing: boolean;
+  loading: boolean;
   player: AudioPlayer;
   onTogglePlay: (item: ResultItem) => void;
   // Omitted when the item cannot be renamed / deleted.
   onRename?: (item: ResultItem) => void;
   // Opens the file's text (Speech Editor, Speech to Text); replaces Rename.
   onView?: (item: ResultItem) => void;
+  // Speech to Text makes View the primary action and moves playback below.
+  viewPrimary?: boolean;
+  downloadControl?: ReactNode;
   // Omitted when the result is not offered as a download.
   onDownload?: (item: ResultItem) => void;
   onDelete?: (item: ResultItem) => void;
@@ -35,10 +39,13 @@ export const ResultCard = memo(function ResultCardInner({
   item,
   active,
   playing,
+  loading,
   player,
   onTogglePlay,
   onRename,
   onView,
+  viewPrimary = false,
+  downloadControl,
   onDownload,
   onDelete,
 }: Props) {
@@ -53,25 +60,42 @@ export const ResultCard = memo(function ResultCardInner({
         active ? 'border-primary' : 'border-night-line',
       )}
     >
-      <PlayButton
-        tone="night"
-        playing={active && playing}
-        disabled={!item.audioUrl}
-        onPress={() => onTogglePlay(item)}
-        accessibilityLabel={t(active && playing ? 'results.pause' : 'results.play', {
-          name,
-        })}
-      />
-      {active ? (
-        <View className="mt-3 w-full">
-          <PlaybackProgress player={player} fallbackDuration={0} tone="night" />
-        </View>
+      {viewPrimary && onView ? (
+        <IconButton
+          variant="ghost"
+          shape="circle"
+          icon="eye"
+          color={colors.primary.DEFAULT}
+          className="size-play bg-night-surface"
+          accessibilityLabel={t('results.view', { name })}
+          onPress={() => onView(item)}
+        />
       ) : (
-        <>
+        <PlayButton
+          tone="night"
+          playing={active && playing}
+          loading={active && loading}
+          disabled={!item.audioUrl}
+          onPress={() => onTogglePlay(item)}
+          accessibilityLabel={t(
+            active && playing ? 'results.pause' : 'results.play',
+            {
+              name,
+            },
+          )}
+        />
+      )}
+      {/* Keep the metadata's layout space while progress is shown over it. */}
+      <View className="mt-2 w-full">
+        <View
+          className={cn('items-center gap-1', active && 'opacity-0')}
+          accessibilityElementsHidden={active}
+          importantForAccessibility={active ? 'no-hide-descendants' : 'auto'}
+        >
           <AppText
             variant="label"
             numberOfLines={1}
-            className="mt-2 text-night-text"
+            className="text-night-text"
           >
             {name}
           </AppText>
@@ -93,10 +117,28 @@ export const ResultCard = memo(function ResultCardInner({
               {t('results.created', { date: formatDate(item.createdAt) })}
             </AppText>
           ) : null}
-        </>
-      )}
+        </View>
+        {active ? (
+          <View className="absolute inset-0 justify-center">
+            <PlaybackProgress player={player} fallbackDuration={0} tone="night" />
+          </View>
+        ) : null}
+      </View>
       <View className="mt-2 w-full flex-row justify-around border-t border-night-line pt-1">
-        {onView ? (
+        {viewPrimary ? (
+          <PlayButton
+            tone="night"
+            playing={active && playing}
+            loading={active && loading}
+            disabled={!item.audioUrl}
+            onPress={() => onTogglePlay(item)}
+            accessibilityLabel={t(
+              active && playing ? 'results.pause' : 'results.play',
+              { name },
+            )}
+            compact
+          />
+        ) : onView ? (
           <IconButton
             variant="ghost"
             icon="eye"
@@ -113,16 +155,17 @@ export const ResultCard = memo(function ResultCardInner({
             onPress={() => onRename(item)}
           />
         ) : null}
-        {onDownload ? (
-          <IconButton
-            variant="ghost"
-            icon="download"
-            color={colors.night.muted}
-            disabled={!item.audioUrl}
-            accessibilityLabel={t('results.download', { name })}
-            onPress={() => onDownload(item)}
-          />
-        ) : null}
+        {downloadControl ??
+          (onDownload ? (
+            <IconButton
+              variant="ghost"
+              icon="download"
+              color={colors.night.muted}
+              disabled={!item.audioUrl}
+              accessibilityLabel={t('results.download', { name })}
+              onPress={() => onDownload(item)}
+            />
+          ) : null)}
         {onDelete ? (
           <IconButton
             variant="ghost"

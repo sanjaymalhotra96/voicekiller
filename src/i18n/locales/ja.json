@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "閉じる",
+    "back": "戻る",
+    "copied": "コピーしました",
+    "cancel": "キャンセル",
+    "change": "変更",
+    "save": "保存",
+    "beta": "ベータ版",
+    "delete": "削除",
+    "showMore": "もっと見る",
+    "showLess": "表示を減らす"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "メール",
+    "continueWithGoogle": "Googleで続ける",
+    "continueWithEmail": "メールで続ける",
+    "haveAccount": "すでにアカウントをお持ちですか？<link>ログイン</link>"
+  },
+  "welcome": {
+    "title": "<brand>{{appName}}</brand>へようこそ",
+    "subtitle": "演技指示を中心に設計された初のAI音声ツール。表現したい感情を伝えると、声がそのとおりに演じます。"
+  },
+  "signUp": {
+    "title": "アカウント作成",
+    "subtitle": "いくつかの情報を入力するだけで始められます。",
+    "fullName": "氏名",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワードの確認",
+    "agree": "<link>利用規約</link>に同意します",
+    "submit": "アカウント作成",
+    "showPassword": "パスワードを表示",
+    "hidePassword": "パスワードを隠す"
+  },
+  "signIn": {
+    "title": "ログイン",
+    "subtitle": "おかえりなさい！またお会いできてうれしいです。",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "forgot": "パスワードをお忘れですか？",
+    "submit": "ログイン"
+  },
+  "verify": {
+    "title": "認証コードの確認",
+    "subtitle": "<bold>{{email}}</bold>にワンタイムパスワードを送信しました",
+    "resendIn": "{{time}}秒後に再送信できます。",
+    "resendReady": "再送信できます。<link>認証コードを再送信</link>",
+    "submit": "認証",
+    "digit": "{{index}}桁目"
+  },
+  "forgotPassword": {
+    "title": "パスワードをお忘れですか？",
+    "subtitle": "メールアドレスを入力してください。パスワード再設定用のリンクをお送りします。",
+    "email": "メールアドレス",
+    "submit": "再設定リンクを送信",
+    "backToLogin": "ログインに戻る",
+    "sent": "<bold>{{email}}</bold>に再設定リンクを送信しました。受信トレイをご確認ください。"
+  },
+  "resetPassword": {
+    "title": "パスワードを再設定",
+    "subtitle": "アカウントの新しいパスワードを設定してください。",
+    "submit": "パスワードを再設定",
+    "done": "パスワードを再設定しました。新しいパスワードでログインできます。",
+    "requestLink": "新しい再設定リンクをリクエスト",
+    "continue": "続ける"
+  },
+  "validation": {
+    "nameRequired": "氏名を入力してください。",
+    "emailInvalid": "有効なメールアドレスを入力してください。",
+    "passwordRequired": "パスワードを入力してください。",
+    "passwordShort": "パスワードは{{min}}文字以上で設定してください。",
+    "passwordMismatch": "パスワードが一致しません。",
+    "termsRequired": "利用規約に同意してください。",
+    "otpIncomplete": "認証コードをすべて入力してください。",
+    "titleRequired": "名前を入力してください。",
+    "dobInvalid": "dd/mm/yy（日/月/西暦下2桁）の形式で入力してください。",
+    "currentPasswordRequired": "現在のパスワードを入力してください。",
+    "samePassword": "新しいパスワードは以前のものと異なる必要があります。",
+    "promptRequired": "希望する声を説明してください。",
+    "voiceNameRequired": "声の名前を入力してください。",
+    "sampleRequired": "音声サンプルをアップロードまたは録音してください。",
+    "descriptionRequired": "声の特徴を説明してください。"
+  },
+  "errors": {
+    "network": "インターネットに接続されていません。もう一度お試しください。",
+    "invalidCredentials": "メールアドレスまたはパスワードが正しくありません。",
+    "emailNotConfirmed": "ログインする前にメール認証を完了してください。",
+    "emailTaken": "このメールアドレスのアカウントはすでに存在します。",
+    "weakPassword": "より安全なパスワードを設定してください。",
+    "otpInvalid": "認証コードが無効です。もう一度お試しください。",
+    "recoveryLinkInvalid": "この再設定リンクは無効か、有効期限が切れています。新しいリンクをリクエストしてください。",
+    "rateLimited": "試行回数が多すぎます。しばらくお待ちください。",
+    "unknown": "エラーが発生しました。もう一度お試しください。",
+    "currentPasswordWrong": "現在のパスワードが正しくありません。",
+    "uploadFailed": "ファイルをアップロードできませんでした。もう一度お試しください。",
+    "quotaExceeded": "プランの利用上限に達しました。作成を続けるにはプランをアップグレードしてください。",
+    "serviceUnavailable": "この機能は現在利用できません。しばらくしてからもう一度お試しください。",
+    "campaignExists": "同じ名前のキャンペーンがすでに存在します。",
+    "fileType": "このファイル形式には対応していません。",
+    "fileTooLarge": "ファイルが大きすぎます。より小さいファイルを選択してください。",
+    "micPermission": "音声を録音するには、設定でマイクへのアクセスを許可してください。",
+    "photoLibraryPermission": "動画を選択するには、設定で写真へのアクセスを許可してください。",
+    "shareUnavailable": "このデバイスでは共有を利用できません。",
+    "transcriptUnavailable": "このファイルには文字起こしがありません。",
+    "transcriptTimingUnavailable": "この文字起こしには使用可能な時間情報がありません。テキスト（.txt）を選んでダウンロードしてください。",
+    "authRequired": "セッションの有効期限が切れました。再度ログインしてください。",
+    "studioRequired": "この機能にはStudioプランが必要です。",
+    "notFound": "このファイルはすでに削除されています。",
+    "paidPlanRequired": "この機能には有料プランが必要です。",
+    "jobFailed": "処理を完了できませんでした。もう一度お試しください。",
+    "jobTimeout": "処理に通常より時間がかかっています。数分後にライブラリをご確認ください。",
+    "sampleLength": "1秒以上の音声サンプルを使用してください。",
+    "renameNotAllowed": "このファイルは現在名前を変更できません。",
+    "cancelled": "キャンセルしました。",
+    "purchasesUnavailable": "サブスクリプションはまだ利用できません。しばらくしてからもう一度お試しください。",
+    "purchaseFailed": "購入を完了できませんでした。料金は請求されていません。",
+    "nothingToRestore": "このストアアカウントの過去の購入が見つかりませんでした。",
+    "conversionFailed": "このファイルを音声に変換できませんでした。別のファイルをお試しください。",
+    "scriptTooLong": "無料プランでは一度に1,000文字まで生成できます。原稿を短くするか、アップグレードしてください。",
+    "samePassword": "新しいパスワードは現在のものと異なる必要があります。",
+    "passwordNotSet": "Googleで登録したアカウントのため、変更できるパスワードはありません。",
+    "googleSignInFailed": "Googleでのログインが完了しませんでした。もう一度お試しください。",
+    "appleSignInFailed": "Appleでのログインが完了しませんでした。もう一度お試しください。"
+  },
+  "tabs": {
+    "dashboard": "ダッシュボード",
+    "library": "ライブラリ",
+    "settings": "設定"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "greeting": "こんにちは、{{name}}さん",
+    "sections": {
+      "create": "作成",
+      "transform": "変換"
+    },
+    "actionCard": {
+      "title": "テキスト読み上げ",
+      "action": "音声を生成"
+    }
+  },
+  "library": {
+    "title": "ライブラリ",
+    "search": "ファイルを検索...",
+    "empty": {
+      "title": "ファイルはまだありません！",
+      "message": "ダッシュボードから新しいファイルを作成しましょう。"
+    },
+    "noResults": "検索に一致するファイルがありません。",
+    "groups": {
+      "today": "今日",
+      "yesterday": "昨日",
+      "thisWeek": "今週",
+      "earlier": "それ以前"
+    },
+    "actions": {
+      "title": "詳細",
+      "rename": "名前を変更",
+      "download": "ダウンロード",
+      "delete": "削除",
+      "more": "{{title}}のその他のオプション",
+      "play": "{{title}}を再生",
+      "pause": "{{title}}を一時停止"
+    },
+    "rename": {
+      "title": "名前を変更",
+      "placeholder": "ファイル名"
+    },
+    "delete": {
+      "title": "ファイルを削除しますか？",
+      "message": "「{{title}}」は完全に削除されます。",
+      "confirm": "削除",
+      "cancel": "キャンセル"
+    },
+    "retry": "再試行",
+    "untitled": "無題"
+  },
+  "settings": {
+    "title": "設定",
+    "sections": {
+      "general": "一般",
+      "others": "その他"
+    },
+    "items": {
+      "personalInfo": "個人情報",
+      "changePassword": "パスワードを変更",
+      "subscription": "サブスクリプションを管理",
+      "share": "友達に共有",
+      "contact": "お問い合わせ",
+      "privacy": "プライバシーポリシー"
+    },
+    "signOut": "ログアウト",
+    "shareMessage": "{{appName}}でAI音声を作っています。ぜひお試しください：{{url}}",
+    "shareMessageNoLink": "{{appName}}でAI音声を作っています。"
+  },
+  "crash": {
+    "title": "エラーが発生しました",
+    "message": "アプリで予期しないエラーが発生しました。もう一度お試しください。",
+    "retry": "再試行"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "テキスト読み上げ",
+      "subtitle": "入力して、聴いてみよう",
+      "tag": "AI音声"
+    },
+    "voiceClone": {
+      "title": "ボイスクローン",
+      "subtitle": "どんな声も再現",
+      "tag": "ボイスクローン"
+    },
+    "voiceDesign": {
+      "title": "ボイスデザイン",
+      "subtitle": "作りたい声を説明",
+      "tag": "ボイスデザイン"
+    },
+    "voiceChanger": {
+      "title": "ボイスチェンジャー",
+      "subtitle": "自分の声を変換",
+      "tag": "ボイスチェンジャー"
+    },
+    "audioClean": {
+      "title": "音声クリーニング",
+      "subtitle": "ノイズを除去",
+      "tag": "音声クリーニング"
+    },
+    "speechEditor": {
+      "title": "音声エディター",
+      "subtitle": "言い間違いを修正",
+      "tag": "音声エディター"
+    },
+    "speechToText": {
+      "title": "文字起こし",
+      "subtitle": "音声をテキスト化",
+      "tag": "文字起こし"
+    }
+  },
+  "trialOffer": {
+    "title": "ぜひお試しください",
+    "titleHighlight": "Voicekillerを無料で",
+    "noPaymentToday": "本日のお支払いはありません",
+    "cta": "$0.00で試す"
+  },
+  "trialPaywall": {
+    "later": "あとで",
+    "stars": "5つ星中5つ星",
+    "reviews": {
+      "textToSpeech": "「声がリアルすぎて、リスナーはAIだと気づきません。」",
+      "acting": "「『悲しい別れのように言って』と入力するだけで、毎回感情がぴったりです。」",
+      "voiceClone": "「1分で自分の声をクローン。今は録音せずに動画を作っています。」",
+      "allInOne": "「音声のクリーンアップ、声の変更、ミスの修正。4つのツールが1つのアプリに。」"
+    },
+    "kicker": "5つのツールに払うのはもう終わり",
+    "title": "<brand>ひとつのプラットフォーム</brand>で最高の<brand>AI音声ツール</brand>を",
+    "perMonth": "{{price}}/月",
+    "perYear": "{{price}}/年",
+    "monthlyNote": "{{days}}日間無料・いつでも解約可能",
+    "yearlyNote": "{{days}}日間無料・{{percent}}%お得",
+    "trialNote": "{{days}}日間無料",
+    "cta": "{{days}}日間無料でお試し",
+    "then": "その後 {{price}}",
+    "disclaimer": "本日のお支払いはありません。{{days}}日目より前に解約すれば請求されません。"
+  },
+  "paywall": {
+    "title": "Studioの機能を解放",
+    "close": "閉じる",
+    "features": {
+      "voices": "2,000種類以上の声",
+      "clones": "ボイスクローンを無制限に作成",
+      "audioClean": "音声クリーニング",
+      "voiceChanger": "ボイスチェンジャー",
+      "speechEditor": "AI音声エディター"
+    },
+    "yearly": "年額",
+    "monthly": "月額",
+    "minutes": "月{{count}}分",
+    "save": "{{percent}}%お得",
+    "continue": "続ける",
+    "cancelAnytime": "いつでも解約可能",
+    "restore": "購入を復元",
+    "terms": "利用規約",
+    "privacy": "プライバシー"
+  },
+  "plan": {
+    "basic": "ベーシックプラン",
+    "studio": "Studio",
+    "buyStudio": "Studioを購入",
+    "usage": "使用量",
+    "usageOf": "/ {{limit}}分",
+    "usageThisMonth": "今月の使用量",
+    "usageMinutes": "{{used}} / {{limit}}分",
+    "remaining": "残り{{count}}分"
+  },
+  "profile": {
+    "title": "個人情報",
+    "userId": "ユーザーID",
+    "fullName": "氏名",
+    "email": "メールアドレス",
+    "dob": "生年月日",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "プロフィール写真を変更",
+    "copyId": "ユーザーIDをコピー",
+    "deleteAccount": "アカウントを削除",
+    "save": "変更を保存",
+    "saved": "変更を保存しました。",
+    "changeEmail": {
+      "title": "メールアドレスを変更",
+      "subtitle": "新しいメールアドレスに確認リンクをお送りします。",
+      "placeholder": "新しいメールアドレス",
+      "submit": "リンクを送信",
+      "sent": "変更を確認するため、{{email}}の受信トレイをご確認ください。"
+    },
+    "unsaved": {
+      "title": "変更を保存しますか？",
+      "message": "保存していない変更は失われます。閉じる前に保存しますか？",
+      "discard": "破棄",
+      "confirm": "確認"
+    },
+    "delete": {
+      "title": "アカウントの削除",
+      "message": "アカウントを削除すると、データベースからすべての個人情報が削除されます。この操作は取り消せません。",
+      "prompt": "確認のため「{{word}}」と入力してください",
+      "word": "DELETE",
+      "submit": "アカウントを削除"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "現在のパスワードを入力",
+    "title": "パスワードを変更",
+    "current": "現在のパスワード",
+    "new": "新しいパスワード",
+    "newPlaceholder": "新しいパスワードを入力（{{min}}文字以上）",
+    "confirm": "パスワードの確認",
+    "confirmPlaceholder": "新しいパスワードを再入力",
+    "submit": "パスワードを変更",
+    "done": "パスワードを変更しました。"
+  },
+  "notFound": {
+    "title": "このページは存在しません。",
+    "action": "ホームに戻る"
+  },
+  "textToSpeech": {
+    "title": "テキスト読み上げ",
+    "fileName": "ファイル名（任意）",
+    "campaign": "キャンペーン",
+    "scriptPlaceholder": "ここに原稿を入力または貼り付け...",
+    "scriptLabel": "原稿",
+    "scriptLimitExceeded": "この声は{{max}}文字まで対応しています。原稿を短くするか、別の声を選択してください。",
+    "chooseVoice": "声を選ぶ",
+    "voiceLabel": "声：{{name}}",
+    "emotions": "感情",
+    "addPause": "間を追加",
+    "settings": "設定",
+    "preview": "試聴",
+    "stopPreview": "停止",
+    "generate": "生成",
+    "campaignSheet": {
+      "title": "キャンペーン",
+      "placeholder": "新しいキャンペーン名...",
+      "create": "キャンペーンを作成",
+      "default": "デフォルト"
+    },
+    "pauseSheet": {
+      "title": "間を追加",
+      "seconds_one": "{{count}}秒",
+      "seconds_other": "{{count}}秒"
+    },
+    "settingsSheet": {
+      "title": "設定",
+      "audioFormat": "音声形式",
+      "voiceTuning": "声の調整",
+      "speed": "速度",
+      "delivery": "表現モード",
+      "actingInstructions": "演技指示",
+      "instruction": "指示",
+      "chooseInstruction": "指示を選択",
+      "ownInstructions": "独自の指示を入力",
+      "ownPlaceholder": "原稿をどのように演じるか説明してください..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "安定性を重視",
+      "balanced": "バランス",
+      "creative": "創造性を重視"
+    }
+  },
+  "emotions": {
+    "auto": "自動",
+    "happy": "喜び",
+    "sad": "悲しみ",
+    "angry": "怒り",
+    "fearful": "恐怖",
+    "disgusted": "嫌悪",
+    "surprised": "驚き",
+    "calm": "穏やか",
+    "fluent": "流暢"
+  },
+  "voices": {
+    "title": "声を選択",
+    "search": "声を検索...",
+    "sources": {
+      "library": "ライブラリ",
+      "cloned": "クローン",
+      "design": "デザイン",
+      "favorites": "お気に入り"
+    },
+    "openFilters": "フィルター",
+    "openFiltersCount": "フィルター、{{count}}件適用中",
+    "favorite": "{{name}}をお気に入りに追加",
+    "unfavorite": "{{name}}をお気に入りから削除",
+    "select": "{{name}}を選択",
+    "play": "{{name}}のサンプルを再生",
+    "pause": "{{name}}のサンプルを一時停止",
+    "empty": "検索に一致する声がありません。",
+    "emptyFavorites": "お気に入りの声はまだありません。声のハートをタップすると、ここに保存できます。",
+    "filters": {
+      "title": "フィルター",
+      "model": "モデル",
+      "gender": "性別",
+      "accent": "アクセント",
+      "language": "言語",
+      "apply": "フィルターを適用"
+    },
+    "genders": {
+      "female": "女性",
+      "male": "男性",
+      "neutral": "中性"
+    },
+    "models": {
+      "all": "すべてのモデル",
+      "expressive": "表現力豊か",
+      "directable": "演技指示対応",
+      "directablePro": "演技指示対応 Pro"
+    }
+  },
+  "accents": {
+    "auto": "自動",
+    "ar-001": "AR - アラビア語",
+    "ar-EG": "AR - エジプト",
+    "cs-CZ": "CS - チェコ語",
+    "de-DE": "DE - ドイツ語",
+    "el-GR": "EL - ギリシャ語",
+    "en-AU": "EN - オーストラリア",
+    "en-CA": "EN - カナダ",
+    "en-GB": "EN - イギリス",
+    "en-IE": "EN - アイルランド",
+    "en-IN": "EN - インド",
+    "en-NZ": "EN - ニュージーランド",
+    "en-US": "EN - アメリカ",
+    "en-ZA": "EN - 南アフリカ",
+    "es-419": "ES - ラテンアメリカ",
+    "es-ES": "ES - スペイン",
+    "fr-CA": "FR - カナダ",
+    "fr-FR": "FR - フランス",
+    "hi-IN": "HI - ヒンディー語",
+    "it-IT": "IT - イタリア語",
+    "ja-JP": "JA - 日本語",
+    "jv-ID": "JV - ジャワ語",
+    "ko-KR": "KO - 韓国語",
+    "nl-NL": "NL - オランダ語",
+    "pl-PL": "PL - ポーランド語",
+    "pt-BR": "PT - ブラジル",
+    "pt-PT": "PT - ポルトガル",
+    "sw-KE": "SW - ケニアのスワヒリ語",
+    "ta-IN": "TA - タミル語",
+    "te-IN": "TE - テルグ語",
+    "vi-VN": "VI - ベトナム語",
+    "zh-CN": "ZH - 中国語（標準語）"
+  },
+  "languages": {
+    "auto": "自動",
+    "ar": "アラビア語",
+    "yue": "広東語",
+    "zh": "中国語",
+    "cs": "チェコ語",
+    "nl": "オランダ語",
+    "en": "英語",
+    "fi": "フィンランド語",
+    "fr": "フランス語",
+    "de": "ドイツ語",
+    "el": "ギリシャ語",
+    "he": "ヘブライ語",
+    "hi": "ヒンディー語",
+    "hu": "ハンガリー語",
+    "id": "インドネシア語",
+    "it": "イタリア語",
+    "ja": "日本語",
+    "ko": "韓国語",
+    "pl": "ポーランド語",
+    "pt": "ポルトガル語",
+    "ru": "ロシア語",
+    "es": "スペイン語",
+    "sv": "スウェーデン語",
+    "tr": "トルコ語",
+    "uk": "ウクライナ語"
+  },
+  "instructions": {
+    "title": "演技指示",
+    "tabs": {
+      "library": "ライブラリ",
+      "mine": "自分の指示"
+    },
+    "all": "すべて（{{count}}）",
+    "categoryCount": "{{label}}（{{count}}）",
+    "categories": {
+      "emotions": "感情",
+      "characters": "キャラクター",
+      "situations": "シチュエーション",
+      "accents": "アクセント"
+    },
+    "search": "指示を検索...",
+    "noResults": "検索に一致する指示がありません。",
+    "details": "{{name}}の詳細",
+    "select": "{{name}}を使う",
+    "play": "{{name}}のサンプルを再生",
+    "pause": "{{name}}のサンプルを一時停止",
+    "notFound": "この指示はすでに削除されています。",
+    "detail": {
+      "script": "原稿",
+      "instructions": "演技指示",
+      "sample": "音声サンプル",
+      "playSample": "タップして音声サンプルを再生",
+      "noSample": "音声サンプルはまだありません",
+      "use": "この指示を使う"
+    },
+    "mine": {
+      "title": "自分のカスタム指示",
+      "add": "新しい指示",
+      "emptyTitle": "カスタム指示はありません",
+      "emptyMessage": "独自の演技指示を作成して保存し、さまざまなプロジェクトで使いましょう。",
+      "generate": "AIで指示を生成",
+      "created": "作成日：{{date}}",
+      "remove": "{{name}}を削除",
+      "removeTitle": "指示を削除しますか？",
+      "removeMessage": "「{{name}}」は完全に削除されます。"
+    },
+    "create": {
+      "title": "新しい演技指示",
+      "name": "指示の名前",
+      "namePlaceholder": "例：「温かく親しみやすく」「プロのニュース読み」",
+      "prompt": "演技指示の入力",
+      "promptPlaceholder": "次のような指示を作成...",
+      "hint": "例えば「ロボットの声の指示を作成」と入力すると、AIが自動で生成します。",
+      "submit": "指示を生成"
+    }
+  },
+  "voiceClone": {
+    "title": "ボイスクローン",
+    "guide": "ガイド",
+    "language": "言語",
+    "voiceName": "声の名前",
+    "voiceNamePlaceholder": "例：落ち着いたナレーター",
+    "sources": {
+      "upload": "音声をアップロード",
+      "record": "音声を録音"
+    },
+    "upload": {
+      "title": "元の音声をアップロード",
+      "hint": "音声または動画。最初の{{seconds}}秒を使用します。",
+      "action": "アップロード"
+    },
+    "record": {
+      "title": "自分の声を録音",
+      "hint": "マイクを選択して「録音」を押してください。",
+      "action": "録音",
+      "stop": "停止",
+      "again": "録り直す",
+      "recording": "録音中 {{time}}",
+      "microphone": "マイク",
+      "defaultMicrophone": "デフォルトのマイク",
+      "fileName": "録音.m4a"
+    },
+    "clip": {
+      "play": "{{name}}を再生",
+      "pause": "{{name}}を一時停止"
+    },
+    "submit": "声を作成",
+    "guideSheet": {
+      "title": "録音ガイド",
+      "tips": [
+        "1人の話者がはっきり話している約30秒の音声を使用してください。長いクリップは最初の30秒に切り取られます。",
+        "音楽や背景のノイズがない静かな部屋で録音してください。",
+        "クローンに再現させたい話し方で、自然に話してください。",
+        "マイクと口の距離を一定に保ってください。"
+      ]
+    }
+  },
+  "results": {
+    "play": "{{name}}を再生",
+    "pause": "{{name}}を一時停止",
+    "created": "作成日：{{date}}",
+    "rename": "{{name}}の名前を変更",
+    "renameTitle": "名前を変更",
+    "renameLabel": "名前を編集",
+    "renamePlaceholder": "名前",
+    "download": "{{name}}をダウンロード",
+    "remove": "{{name}}を削除",
+    "removeTitle": "ファイルを削除しますか？",
+    "removeMessage": "「{{name}}」は完全に削除されます。",
+    "viewAll": "すべて表示",
+    "empty": "まだ何もありません。",
+    "enhanced": "音質改善済み",
+    "recent": {
+      "voiceClone": "最近のクローン",
+      "voiceDesign": "最近デザインした声",
+      "voiceChanger": "最近変換した音声",
+      "audioClean": "最近クリーニングした音声",
+      "speechEditor": "最近の音声",
+      "speechToText": "最近の文字起こし"
+    },
+    "titles": {
+      "voiceClone": "自分のクローン",
+      "voiceDesign": "自分でデザインした声",
+      "voiceChanger": "自分の変換音声",
+      "audioClean": "自分のクリーニング済み音声",
+      "speechEditor": "自分の音声",
+      "speechToText": "自分の文字起こし"
+    },
+    "view": "{{name}}を表示"
+  },
+  "upload": {
+    "chooseSource": "選択元",
+    "files": "ファイル",
+    "gallery": "ギャラリー（動画）",
+    "source": "元の音声をアップロード",
+    "target": "変換先の音声をアップロード",
+    "action": "アップロード",
+    "change": "変更",
+    "remove": "{{name}}を削除",
+    "uploading": "アップロード中 {{percent}}%",
+    "maxSize": "最大{{max}}MB"
+  },
+  "player": {
+    "play": "再生",
+    "pause": "一時停止"
+  },
+  "voiceChanger": {
+    "title": "ボイスチェンジャー",
+    "source": "元の音声",
+    "target": "変換先の声",
+    "submit": "変換を開始"
+  },
+  "voiceDesign": {
+    "title": "ボイスデザイン",
+    "guide": "ガイド",
+    "language": "言語",
+    "name": "声の名前",
+    "namePlaceholder": "例：落ち着いたナレーター",
+    "description": "声の説明",
+    "descriptionPlaceholder": "\"Warm, deep male voice with a slight British accent, measured pace, and authoritative tone.\"",
+    "descriptionHint": "説明は英語で入力してください。",
+    "enhance": "AIで説明を改善",
+    "submit": "声を作成",
+    "variations": {
+      "title": "声を選択",
+      "subtitle": "生成された{{count}}種類の声を聴いて、好みのものを選んでください",
+      "item": "声のバリエーション{{number}}",
+      "play": "バリエーション{{number}}を再生",
+      "pause": "バリエーション{{number}}を一時停止",
+      "save": "声を保存"
+    },
+    "guideSheet": {
+      "title": "声の説明のコツ",
+      "tips": [
+        "話者の年齢、性別、性格を説明してください。",
+        "温かい、かすれた、明るい、低く深いなど、声の特徴を説明してください。",
+        "軽いイギリス訛り、落ち着いたテンポなど、アクセントと話す速さを加えてください。",
+        "オーディオブック向けの落ち着いたナレーターなど、雰囲気や用途を伝えてください。"
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "音声エディター",
+    "submit": "開始",
+    "sheet": {
+      "title": "音声エディター",
+      "audio": "音声",
+      "transcription": "文字起こし",
+      "revert": "元に戻す",
+      "generate": "音声を生成",
+      "done": "完了"
+    },
+    "uploadHint": "音声または動画、最大{{max}}MB。最初の{{minutes}}分を使用します。"
+  },
+  "audioClean": {
+    "title": "音声クリーニング",
+    "description": "音質改善により、プロ用マイクで録音したような音に仕上がります。",
+    "enhance": "ノイズ除去と音質改善",
+    "submit": "音声クリーニング"
+  },
+  "speechToText": {
+    "title": "文字起こし",
+    "language": "言語",
+    "translation": "翻訳字幕",
+    "noTranslation": "なし",
+    "submit": "文字起こしを開始",
+    "sheet": {
+      "title": "結果",
+      "audio": "音声",
+      "content": "内容",
+      "timingUnavailable": "時間情報がありません",
+      "segment": "#{{number}}",
+      "edit": "{{number}}行目を編集",
+      "done": "{{number}}行目の編集を完了",
+      "download": "ダウンロード",
+      "formats": {
+        "srt": "字幕（.srt）",
+        "vtt": "ウェブ字幕（.vtt）",
+        "txt": "プレーンテキスト（.txt）"
+      },
+      "finish": "完了"
+    }
+  },
+  "offline": {
+    "title": "インターネット接続がありません",
+    "message": "Wi-Fiまたはモバイルデータをご確認ください。接続が回復するとアプリが再開します。",
+    "stillOffline": "まだ接続されていません。Wi-Fiまたはモバイルデータを確認して、もう一度お試しください。",
+    "retry": "再試行"
+  },
+  "support": {
+    "title": "お問い合わせ",
+    "error": "チャットを読み込めませんでした。接続を確認して、もう一度お試しください。"
+  },
+  "onboarding": {
+    "step": "ステップ{{step}} / {{total}}",
+    "next": "次へ",
+    "playSample": "{{name}}のサンプルを再生",
+    "stopSample": "{{name}}のサンプルを停止",
+    "voices": {
+      "title": "本当に<brand>演じる</brand>AI音声。",
+      "subtitle": "テキスト読み上げ、ボイスクローンなど、機能が充実。",
+      "samples": {
+        "happy": "喜び",
+        "angry": "怒り",
+        "sarcastic": "皮肉",
+        "excited": "興奮",
+        "crying": "泣き声",
+        "pirate": "海賊",
+        "scared": "怯え",
+        "laughing": "笑い声",
+        "calm": "穏やか",
+        "evilVillain": "悪役",
+        "dramatic": "ドラマチック",
+        "confident": "自信たっぷり",
+        "nervous": "緊張",
+        "romantic": "ロマンチック",
+        "sleepy": "眠そう",
+        "energetic": "エネルギッシュ",
+        "madScientist": "マッドサイエンティスト",
+        "horror": "ホラー",
+        "surprised": "驚き",
+        "awkward": "気まずさ",
+        "shocked": "ショック",
+        "tired": "疲れ",
+        "santaClaus": "サンタクロース",
+        "curious": "好奇心",
+        "playful": "お茶目",
+        "serious": "真剣",
+        "sad": "悲しみ",
+        "rap": "ラップ",
+        "disappointed": "落胆",
+        "sportsCommentator": "スポーツ実況"
+      }
+    },
+    "direct": {
+      "title": "今度はあなたが声を演出。",
+      "subtitle": "感情を選んで、再生してみよう。",
+      "actingLabel": "演技指示（タップして編集）",
+      "actingPlaceholder": "どのように話すか説明してください",
+      "scriptLabel": "原稿",
+      "script": "ああ、よかった。来てくれたんだ。もう来ないんじゃないかと思い始めてたよ。",
+      "generate": "生成",
+      "generating": "生成中…",
+      "playing": "再生中",
+      "tags": {
+        "awkward": {
+          "label": "気まずさ",
+          "text": "ためらいがちな間と自信のない抑揚で、気まずそうに話す"
+        },
+        "crying": {
+          "label": "泣き声",
+          "text": "泣きながら読んでください"
+        },
+        "laugh": {
+          "label": "笑い",
+          "text": "楽しさが声に表れるように、笑いながら話す。"
+        },
+        "sarcasm": {
+          "label": "皮肉",
+          "text": "冷ややかで鋭い強調を加えて、皮肉っぽく話す。"
+        },
+        "relieved": {
+          "label": "安堵",
+          "text": "来てくれないのではと心配していたので、ほっとした気持ちで話す。"
+        },
+        "excited": {
+          "label": "興奮",
+          "text": "明るい抑揚と速いテンポで、興奮した様子で話す。"
+        }
+      }
+    },
+    "stop": "再生を停止",
+    "clone": {
+      "title": "<brand>数秒で</brand>声をクローン。",
+      "subtitle": "本物の声を聴いたら、好きな言葉を話させてみよう。",
+      "selectVoice": "{{name}}の声を選択",
+      "playReal": "{{name}}の本物の声を再生",
+      "stopReal": "{{name}}の本物の声を停止",
+      "lineLabel": "タップして編集",
+      "linePlaceholder": "好きな言葉を入力",
+      "play": "クローンを再生",
+      "cloning": "{{name}}をクローン中…",
+      "playing": "再生中 · {{name}}のクローン"
+    },
+    "change": {
+      "title": "声を変えても、あなたらしい話し方はそのまま。",
+      "subtitle": "声のものまね動画にぴったり。",
+      "before": "変換前",
+      "beforeCaption": "普段の声",
+      "after": "変換後",
+      "turnInto": "変換先",
+      "play": "{{name}}を再生",
+      "stop": "{{name}}を停止"
+    },
+    "clean": {
+      "title": "音が悪くても、<brand>ワンタップ</brand>で改善。",
+      "subtitle": "ノイズ、反響、ハム音を除去。あなたの声だけを残します。",
+      "play": "再生",
+      "stop": "停止",
+      "noisy": "ノイズあり",
+      "clean": "ノイズなし",
+      "switch": "音声をクリーニング",
+      "hint": "再生中に切り替えてみてください。"
+    },
+    "edit": {
+      "title": "テキストを編集して、言い間違いを修正。",
+      "subtitle": "単語を変えると、あなたの声で読み上げます。録り直しは不要。",
+      "original": "元の音声",
+      "fixed": "修正済み",
+      "wordWrong": "{{word}}、誤りです。タップして修正",
+      "wordFixed": "{{word}}。{{from}}から修正済み。タップして元に戻す",
+      "hintWrong": "間違いをタップして修正。",
+      "hintFixed": "修正しました。もう一度タップすると元に戻ります。"
+    }
+  },
+  "review": {
+    "title": "{{appName}}は気に入りましたか？",
+    "yes": "はい",
+    "no": "いいえ"
+  }
+}

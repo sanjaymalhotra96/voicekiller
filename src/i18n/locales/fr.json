@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "Fermer",
+    "back": "Retour",
+    "copied": "Copié",
+    "cancel": "Annuler",
+    "change": "Modifier",
+    "save": "Enregistrer",
+    "beta": "Bêta",
+    "delete": "Supprimer",
+    "showMore": "Afficher plus",
+    "showLess": "Afficher moins"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "E-mail",
+    "continueWithGoogle": "Continuer avec Google",
+    "continueWithEmail": "Continuer avec une adresse e-mail",
+    "haveAccount": "Vous avez déjà un compte ? <link>Se connecter</link>"
+  },
+  "welcome": {
+    "title": "Bienvenue sur <brand>{{appName}}</brand>",
+    "subtitle": "Le premier outil vocal IA conçu autour de consignes d'interprétation : choisissez l'émotion, et la voix l'exprime."
+  },
+  "signUp": {
+    "title": "S'inscrire",
+    "subtitle": "Quelques informations suffisent pour commencer.",
+    "fullName": "Votre nom complet",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "agree": "J'accepte les <link>Conditions générales</link>",
+    "submit": "S'inscrire",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
+  },
+  "signIn": {
+    "title": "Se connecter",
+    "subtitle": "Bon retour parmi nous ! Vous nous avez manqué.",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "forgot": "Mot de passe oublié ?",
+    "submit": "Se connecter"
+  },
+  "verify": {
+    "title": "Vérification du code",
+    "subtitle": "Nous avons envoyé un code à <bold>{{email}}</bold>",
+    "resendIn": "Nouvel envoi possible dans {{time}} secondes.",
+    "resendReady": "Nouvel envoi possible. <link>Renvoyer le code</link>",
+    "submit": "Vérifier",
+    "digit": "Chiffre {{index}}"
+  },
+  "forgotPassword": {
+    "title": "Mot de passe oublié ?",
+    "subtitle": "Saisissez votre adresse e-mail. Nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "email": "Adresse e-mail",
+    "submit": "Envoyer le lien",
+    "backToLogin": "Retour à la connexion",
+    "sent": "Lien de réinitialisation envoyé à <bold>{{email}}</bold>. Consultez votre boîte de réception."
+  },
+  "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "subtitle": "Choisissez un nouveau mot de passe pour votre compte.",
+    "submit": "Réinitialiser le mot de passe",
+    "done": "Votre mot de passe a été réinitialisé. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "requestLink": "Demander un nouveau lien de réinitialisation",
+    "continue": "Continuer"
+  },
+  "validation": {
+    "nameRequired": "Veuillez saisir votre nom.",
+    "emailInvalid": "Veuillez saisir une adresse e-mail valide.",
+    "passwordRequired": "Veuillez saisir votre mot de passe.",
+    "passwordShort": "Le mot de passe doit contenir au moins {{min}} caractères.",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "termsRequired": "Veuillez accepter les Conditions générales.",
+    "otpIncomplete": "Veuillez saisir le code complet.",
+    "titleRequired": "Veuillez saisir un nom.",
+    "dobInvalid": "Utilisez le format dd/mm/yy.",
+    "currentPasswordRequired": "Veuillez saisir votre mot de passe actuel.",
+    "samePassword": "Le nouveau mot de passe doit être différent.",
+    "promptRequired": "Veuillez décrire la voix souhaitée.",
+    "voiceNameRequired": "Veuillez saisir un nom pour la voix.",
+    "sampleRequired": "Veuillez importer ou enregistrer un échantillon vocal.",
+    "descriptionRequired": "Veuillez décrire la voix."
+  },
+  "errors": {
+    "network": "Aucune connexion Internet. Veuillez réessayer.",
+    "invalidCredentials": "Adresse e-mail ou mot de passe incorrect.",
+    "emailNotConfirmed": "Veuillez vérifier votre adresse e-mail avant de vous connecter.",
+    "emailTaken": "Un compte existe déjà avec cette adresse e-mail.",
+    "weakPassword": "Veuillez choisir un mot de passe plus sécurisé.",
+    "otpInvalid": "Code invalide. Veuillez réessayer.",
+    "recoveryLinkInvalid": "Ce lien de réinitialisation est invalide ou a expiré. Veuillez en demander un nouveau.",
+    "rateLimited": "Trop de tentatives. Veuillez patienter un instant.",
+    "unknown": "Une erreur s'est produite. Veuillez réessayer.",
+    "currentPasswordWrong": "Le mot de passe actuel est incorrect.",
+    "uploadFailed": "Impossible d'importer le fichier. Veuillez réessayer.",
+    "quotaExceeded": "Vous avez atteint la limite de votre abonnement. Passez à une offre supérieure pour continuer à créer.",
+    "serviceUnavailable": "Cette fonctionnalité est actuellement indisponible. Veuillez réessayer plus tard.",
+    "campaignExists": "Une campagne porte déjà ce nom.",
+    "fileType": "Ce type de fichier n'est pas pris en charge.",
+    "fileTooLarge": "Ce fichier est trop volumineux. Choisissez-en un plus petit.",
+    "micPermission": "Autorisez l'accès au microphone dans les réglages pour enregistrer votre voix.",
+    "photoLibraryPermission": "Autorisez l'accès aux photos dans les réglages pour choisir une vidéo.",
+    "shareUnavailable": "Le partage n'est pas disponible sur cet appareil.",
+    "transcriptUnavailable": "Aucune transcription n'est disponible pour ce fichier.",
+    "transcriptTimingUnavailable": "Cette transcription n'a pas de minutage exploitable. Choisissez Texte (.txt) pour la télécharger.",
+    "authRequired": "Votre session a expiré. Veuillez vous reconnecter.",
+    "studioRequired": "Cette fonctionnalité nécessite l'offre Studio.",
+    "notFound": "Ce fichier n'existe plus.",
+    "paidPlanRequired": "Cette fonctionnalité nécessite un abonnement payant.",
+    "jobFailed": "Nous n'avons pas pu terminer l'opération. Veuillez réessayer.",
+    "jobTimeout": "Cette opération prend plus de temps que prévu. Consultez la bibliothèque dans quelques minutes.",
+    "sampleLength": "Utilisez un échantillon vocal d'au moins 1 seconde.",
+    "renameNotAllowed": "Impossible de renommer ce fichier pour le moment.",
+    "cancelled": "Annulé.",
+    "purchasesUnavailable": "Les abonnements ne sont pas encore disponibles. Veuillez réessayer plus tard.",
+    "purchaseFailed": "L'achat n'a pas pu être effectué. Aucun montant ne vous a été facturé.",
+    "nothingToRestore": "Aucun achat précédent n'a été trouvé pour ce compte de boutique.",
+    "conversionFailed": "Impossible de convertir ce fichier en audio. Essayez un autre fichier.",
+    "scriptTooLong": "Les offres gratuites permettent de générer jusqu'à 1 000 caractères à la fois. Raccourcissez le texte ou passez à une offre supérieure.",
+    "samePassword": "Votre nouveau mot de passe doit être différent de l'ancien.",
+    "passwordNotSet": "Vous vous êtes inscrit avec Google. Ce compte n'a donc aucun mot de passe à modifier.",
+    "googleSignInFailed": "La connexion avec Google n'a pas abouti. Veuillez réessayer.",
+    "appleSignInFailed": "La connexion avec Apple n'a pas abouti. Veuillez réessayer."
+  },
+  "tabs": {
+    "dashboard": "Tableau de bord",
+    "library": "Bibliothèque",
+    "settings": "Paramètres"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "greeting": "Bonjour {{name}}",
+    "sections": {
+      "create": "Créer",
+      "transform": "Transformer"
+    },
+    "actionCard": {
+      "title": "Synthèse vocale",
+      "action": "Créer une voix"
+    }
+  },
+  "library": {
+    "title": "Bibliothèque",
+    "search": "Rechercher des fichiers...",
+    "empty": {
+      "title": "Vous n'avez aucun fichier !",
+      "message": "Créez un fichier depuis le tableau de bord."
+    },
+    "noResults": "Aucun fichier ne correspond à votre recherche.",
+    "groups": {
+      "today": "Aujourd'hui",
+      "yesterday": "Hier",
+      "thisWeek": "Cette semaine",
+      "earlier": "Plus tôt"
+    },
+    "actions": {
+      "title": "Détails",
+      "rename": "Renommer",
+      "download": "Télécharger",
+      "delete": "Supprimer",
+      "more": "Plus d'options pour {{title}}",
+      "play": "Lire {{title}}",
+      "pause": "Mettre {{title}} en pause"
+    },
+    "rename": {
+      "title": "Renommer",
+      "placeholder": "Nom du fichier"
+    },
+    "delete": {
+      "title": "Supprimer le fichier ?",
+      "message": "« {{title}} » sera définitivement supprimé.",
+      "confirm": "Supprimer",
+      "cancel": "Annuler"
+    },
+    "retry": "Réessayer",
+    "untitled": "Sans titre"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "sections": {
+      "general": "Général",
+      "others": "Autres"
+    },
+    "items": {
+      "personalInfo": "Informations personnelles",
+      "changePassword": "Modifier le mot de passe",
+      "subscription": "Gérer l'abonnement",
+      "share": "Partager avec des amis",
+      "contact": "Nous contacter",
+      "privacy": "Politique de confidentialité"
+    },
+    "signOut": "Se déconnecter",
+    "shareMessage": "J'utilise {{appName}} pour créer des voix IA. Essayez : {{url}}",
+    "shareMessageNoLink": "J'utilise {{appName}} pour créer des voix IA."
+  },
+  "crash": {
+    "title": "Une erreur s'est produite",
+    "message": "L'application a rencontré une erreur inattendue. Veuillez réessayer.",
+    "retry": "Réessayer"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "Synthèse vocale",
+      "subtitle": "Écrivez, écoutez",
+      "tag": "Voix IA"
+    },
+    "voiceClone": {
+      "title": "Clonage vocal",
+      "subtitle": "Reproduisez n'importe quelle voix",
+      "tag": "Clonage vocal"
+    },
+    "voiceDesign": {
+      "title": "Création de voix",
+      "subtitle": "Décrivez une voix",
+      "tag": "Création de voix"
+    },
+    "voiceChanger": {
+      "title": "Modificateur de voix",
+      "subtitle": "Changez votre voix",
+      "tag": "Modificateur de voix"
+    },
+    "audioClean": {
+      "title": "Nettoyage audio",
+      "subtitle": "Supprimez les bruits",
+      "tag": "Nettoyage audio"
+    },
+    "speechEditor": {
+      "title": "Éditeur vocal",
+      "subtitle": "Corrigez les mots",
+      "tag": "Éditeur vocal"
+    },
+    "speechToText": {
+      "title": "Audio en texte",
+      "subtitle": "Transcrivez l'audio",
+      "tag": "Audio en texte"
+    }
+  },
+  "trialOffer": {
+    "title": "Nous aimerions vous faire essayer",
+    "titleHighlight": "Voicekiller gratuitement",
+    "noPaymentToday": "Aucun paiement aujourd'hui",
+    "cta": "Essayer pour $0.00"
+  },
+  "trialPaywall": {
+    "later": "Plus tard",
+    "stars": "5 étoiles sur 5",
+    "reviews": {
+      "textToSpeech": "« Les voix sont si réalistes que mon public ne devine pas que c’est de l’IA. »",
+      "acting": "« J’écris “dis-le comme un triste adieu” et l’émotion est parfaite à chaque fois. »",
+      "voiceClone": "« Ma voix clonée en une minute. Je fais des vidéos sans enregistrer. »",
+      "allInOne": "« Nettoyer l’audio, changer de voix, corriger les erreurs : une appli a remplacé quatre outils. »"
+    },
+    "kicker": "Arrêtez de payer 5 outils différents",
+    "title": "Les meilleurs <brand>outils vocaux IA</brand> sur <brand>une seule plateforme</brand>",
+    "perMonth": "{{price}}/mois",
+    "perYear": "{{price}}/an",
+    "monthlyNote": "{{days}} jours gratuits · annulez à tout moment",
+    "yearlyNote": "{{days}} jours gratuits · économisez {{percent}} %",
+    "trialNote": "{{days}} jours gratuits",
+    "cta": "Essayez GRATUITEMENT {{days}} jours",
+    "then": "puis {{price}}",
+    "disclaimer": "Aucun débit aujourd'hui. Annulez avant le jour {{days}} et vous ne serez pas facturé."
+  },
+  "paywall": {
+    "title": "Débloquer Studio",
+    "close": "Fermer",
+    "features": {
+      "voices": "Plus de 2 000 voix",
+      "clones": "Clonages vocaux illimités",
+      "audioClean": "Nettoyage audio",
+      "voiceChanger": "Modificateur de voix",
+      "speechEditor": "Éditeur vocal IA"
+    },
+    "yearly": "Annuel",
+    "monthly": "Mensuel",
+    "minutes": "{{count}} minutes/mois",
+    "save": "Économisez {{percent}} %",
+    "continue": "Continuer",
+    "cancelAnytime": "Annulez à tout moment",
+    "restore": "Restaurer les achats",
+    "terms": "Conditions",
+    "privacy": "Confidentialité"
+  },
+  "plan": {
+    "basic": "Offre Basic",
+    "studio": "Studio",
+    "buyStudio": "Acheter Studio",
+    "usage": "Utilisation",
+    "usageOf": "/ {{limit}} minutes",
+    "usageThisMonth": "Utilisation ce mois-ci",
+    "usageMinutes": "{{used}} / {{limit}} min",
+    "remaining": "{{count}} minutes restantes"
+  },
+  "profile": {
+    "title": "Informations personnelles",
+    "userId": "Identifiant utilisateur",
+    "fullName": "Votre nom complet",
+    "email": "Votre adresse e-mail",
+    "dob": "Date de naissance",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "Modifier la photo de profil",
+    "copyId": "Copier l'identifiant utilisateur",
+    "deleteAccount": "Supprimer le compte",
+    "save": "Enregistrer les modifications",
+    "saved": "Vos modifications ont été enregistrées.",
+    "changeEmail": {
+      "title": "Modifier l'adresse e-mail",
+      "subtitle": "Nous enverrons un lien de confirmation à la nouvelle adresse.",
+      "placeholder": "Nouvelle adresse e-mail",
+      "submit": "Envoyer le lien",
+      "sent": "Consultez {{email}} pour confirmer la modification."
+    },
+    "unsaved": {
+      "title": "Enregistrer les modifications ?",
+      "message": "Vos modifications non enregistrées seront perdues. Voulez-vous les enregistrer avant de fermer ?",
+      "discard": "Ignorer",
+      "confirm": "Confirmer"
+    },
+    "delete": {
+      "title": "Suppression du compte",
+      "message": "La suppression de votre compte effacera toutes vos informations de notre base de données. Cette action est irréversible.",
+      "prompt": "Pour confirmer, saisissez « {{word}} »",
+      "word": "DELETE",
+      "submit": "Supprimer le compte"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "Saisissez le mot de passe actuel",
+    "title": "Modifier le mot de passe",
+    "current": "Mot de passe actuel",
+    "new": "Nouveau mot de passe",
+    "newPlaceholder": "Saisissez un nouveau mot de passe ({{min}} caractères minimum)",
+    "confirm": "Confirmer le mot de passe",
+    "confirmPlaceholder": "Confirmez le nouveau mot de passe",
+    "submit": "Modifier le mot de passe",
+    "done": "Votre mot de passe a été modifié."
+  },
+  "notFound": {
+    "title": "Cette page n'existe pas.",
+    "action": "Retour à l'accueil"
+  },
+  "textToSpeech": {
+    "title": "Synthèse vocale",
+    "fileName": "Nom du fichier (facultatif)",
+    "campaign": "Campagne",
+    "scriptPlaceholder": "Saisissez ou collez votre texte ici...",
+    "scriptLabel": "Texte",
+    "scriptLimitExceeded": "Cette voix accepte jusqu'à {{max}} caractères. Raccourcissez votre texte ou choisissez une autre voix.",
+    "chooseVoice": "Choisir une voix",
+    "voiceLabel": "Voix : {{name}}",
+    "emotions": "Émotions",
+    "addPause": "Ajouter une pause",
+    "settings": "Paramètres",
+    "preview": "Écouter un aperçu",
+    "stopPreview": "Arrêter",
+    "generate": "Générer",
+    "campaignSheet": {
+      "title": "Campagne",
+      "placeholder": "Nom de la nouvelle campagne...",
+      "create": "Créer une campagne",
+      "default": "Par défaut"
+    },
+    "pauseSheet": {
+      "title": "Ajouter une pause",
+      "seconds_one": "{{count}} seconde",
+      "seconds_other": "{{count}} secondes"
+    },
+    "settingsSheet": {
+      "title": "Paramètres",
+      "audioFormat": "Format audio",
+      "voiceTuning": "Réglages de la voix",
+      "speed": "Vitesse",
+      "delivery": "Mode d'interprétation",
+      "actingInstructions": "Consignes d'interprétation",
+      "instruction": "Consigne",
+      "chooseInstruction": "Choisir une consigne",
+      "ownInstructions": "Rédiger vos propres consignes",
+      "ownPlaceholder": "Décrivez la manière dont le texte doit être interprété..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "Plus stable",
+      "balanced": "Équilibré",
+      "creative": "Plus créatif"
+    }
+  },
+  "emotions": {
+    "auto": "Auto",
+    "happy": "Joyeux",
+    "sad": "Triste",
+    "angry": "En colère",
+    "fearful": "Effrayé",
+    "disgusted": "Dégoûté",
+    "surprised": "Surpris",
+    "calm": "Calme",
+    "fluent": "Fluide"
+  },
+  "voices": {
+    "title": "Sélectionner une voix",
+    "search": "Rechercher des voix...",
+    "sources": {
+      "library": "Bibliothèque",
+      "cloned": "Clonées",
+      "design": "Créées",
+      "favorites": "Favoris"
+    },
+    "openFilters": "Filtres",
+    "openFiltersCount": "Filtres, {{count}} actifs",
+    "favorite": "Ajouter {{name}} aux favoris",
+    "unfavorite": "Retirer {{name}} des favoris",
+    "select": "Sélectionner {{name}}",
+    "play": "Écouter un extrait de {{name}}",
+    "pause": "Mettre l'extrait de {{name}} en pause",
+    "empty": "Aucune voix ne correspond à votre recherche.",
+    "emptyFavorites": "Vous n'avez pas encore de voix favorites. Touchez le cœur d'une voix pour l'ajouter ici.",
+    "filters": {
+      "title": "Filtres",
+      "model": "Modèle",
+      "gender": "Genre",
+      "accent": "Accent",
+      "language": "Langue",
+      "apply": "Appliquer les filtres"
+    },
+    "genders": {
+      "female": "Féminin",
+      "male": "Masculin",
+      "neutral": "Neutre"
+    },
+    "models": {
+      "all": "Tous les modèles",
+      "expressive": "Expressive",
+      "directable": "Directable",
+      "directablePro": "Directable Pro"
+    }
+  },
+  "accents": {
+    "auto": "Auto",
+    "ar-001": "AR - Arabe",
+    "ar-EG": "AR - Égyptien",
+    "cs-CZ": "CS - Tchèque",
+    "de-DE": "DE - Allemand",
+    "el-GR": "EL - Grec",
+    "en-AU": "EN - Australien",
+    "en-CA": "EN - Canadien",
+    "en-GB": "EN - Britannique",
+    "en-IE": "EN - Irlandais",
+    "en-IN": "EN - Indien",
+    "en-NZ": "EN - Néo-Zélandais",
+    "en-US": "EN - Américain",
+    "en-ZA": "EN - Sud-Africain",
+    "es-419": "ES - Latino-américain",
+    "es-ES": "ES - Espagnol",
+    "fr-CA": "FR - Canadien",
+    "fr-FR": "FR - Français",
+    "hi-IN": "HI - Hindi",
+    "it-IT": "IT - Italien",
+    "ja-JP": "JA - Japonais",
+    "jv-ID": "JV - Javanais",
+    "ko-KR": "KO - Coréen",
+    "nl-NL": "NL - Néerlandais",
+    "pl-PL": "PL - Polonais",
+    "pt-BR": "PT - Brésilien",
+    "pt-PT": "PT - Portugais",
+    "sw-KE": "SW - Swahili du Kenya",
+    "ta-IN": "TA - Tamoul",
+    "te-IN": "TE - Télougou",
+    "vi-VN": "VI - Vietnamien",
+    "zh-CN": "ZH - Mandarin"
+  },
+  "languages": {
+    "auto": "Auto",
+    "ar": "Arabe",
+    "yue": "Cantonais",
+    "zh": "Chinois",
+    "cs": "Tchèque",
+    "nl": "Néerlandais",
+    "en": "Anglais",
+    "fi": "Finnois",
+    "fr": "Français",
+    "de": "Allemand",
+    "el": "Grec",
+    "he": "Hébreu",
+    "hi": "Hindi",
+    "hu": "Hongrois",
+    "id": "Indonésien",
+    "it": "Italien",
+    "ja": "Japonais",
+    "ko": "Coréen",
+    "pl": "Polonais",
+    "pt": "Portugais",
+    "ru": "Russe",
+    "es": "Espagnol",
+    "sv": "Suédois",
+    "tr": "Turc",
+    "uk": "Ukrainien"
+  },
+  "instructions": {
+    "title": "Consigne d'interprétation",
+    "tabs": {
+      "library": "Bibliothèque",
+      "mine": "Mes consignes"
+    },
+    "all": "Tout ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "Émotions",
+      "characters": "Personnages",
+      "situations": "Situations",
+      "accents": "Accents"
+    },
+    "search": "Rechercher des consignes...",
+    "noResults": "Aucune consigne ne correspond à votre recherche.",
+    "details": "Détails de {{name}}",
+    "select": "Utiliser {{name}}",
+    "play": "Écouter l'extrait de {{name}}",
+    "pause": "Mettre l'extrait de {{name}} en pause",
+    "notFound": "Cette consigne n'existe plus.",
+    "detail": {
+      "script": "Texte",
+      "instructions": "Consignes d'interprétation",
+      "sample": "Extrait audio",
+      "playSample": "Appuyez pour écouter l'extrait audio",
+      "noSample": "Aucun extrait audio pour le moment",
+      "use": "Utiliser cette consigne"
+    },
+    "mine": {
+      "title": "Mes consignes personnalisées",
+      "add": "Nouvelle consigne",
+      "emptyTitle": "Aucune consigne personnalisée",
+      "emptyMessage": "Créez et enregistrez vos propres consignes d'interprétation pour les réutiliser dans vos projets.",
+      "generate": "Générer des consignes avec l'IA",
+      "created": "Créé le : {{date}}",
+      "remove": "Supprimer {{name}}",
+      "removeTitle": "Supprimer la consigne ?",
+      "removeMessage": "« {{name}} » sera définitivement supprimé."
+    },
+    "create": {
+      "title": "Nouvelle consigne d'interprétation",
+      "name": "Nom de la consigne",
+      "namePlaceholder": "Ex. « Chaleureux et amical », « Journal télévisé professionnel »",
+      "prompt": "Saisie des consignes d'interprétation",
+      "promptPlaceholder": "Créer des consignes pour...",
+      "hint": "Ex. : demandez des consignes pour une voix robotique et l'IA les générera automatiquement.",
+      "submit": "Générer les consignes"
+    }
+  },
+  "voiceClone": {
+    "title": "Clonage vocal",
+    "guide": "Guide",
+    "language": "Langue",
+    "voiceName": "Nom de la voix",
+    "voiceNamePlaceholder": "Ex. : narrateur calme",
+    "sources": {
+      "upload": "Importer un audio",
+      "record": "Enregistrer un audio"
+    },
+    "upload": {
+      "title": "Importer l'audio source",
+      "hint": "Audio ou vidéo. Les {{seconds}} premières secondes seront utilisées.",
+      "action": "Importer"
+    },
+    "record": {
+      "title": "Enregistrer votre voix",
+      "hint": "Sélectionnez votre microphone et appuyez sur Enregistrer.",
+      "action": "Enregistrer",
+      "stop": "Arrêter",
+      "again": "Réenregistrer",
+      "recording": "Enregistrement {{time}}",
+      "microphone": "Microphone",
+      "defaultMicrophone": "Microphone par défaut",
+      "fileName": "Recording.m4a"
+    },
+    "clip": {
+      "play": "Lire {{name}}",
+      "pause": "Mettre {{name}} en pause"
+    },
+    "submit": "Créer une voix",
+    "guideSheet": {
+      "title": "Guide d'enregistrement",
+      "tips": [
+        "Utilisez environ 30 secondes de parole claire provenant d'une seule personne. Les extraits plus longs sont limités aux 30 premières secondes.",
+        "Enregistrez dans une pièce calme, sans musique ni bruit de fond.",
+        "Parlez naturellement, avec le ton que vous souhaitez donner au clone.",
+        "Gardez le microphone à une distance constante de votre bouche."
+      ]
+    }
+  },
+  "results": {
+    "play": "Lire {{name}}",
+    "pause": "Mettre {{name}} en pause",
+    "created": "Créé le : {{date}}",
+    "rename": "Renommer {{name}}",
+    "renameTitle": "Renommer",
+    "renameLabel": "Modifier le nom",
+    "renamePlaceholder": "Nom",
+    "download": "Télécharger {{name}}",
+    "remove": "Supprimer {{name}}",
+    "removeTitle": "Supprimer le fichier ?",
+    "removeMessage": "« {{name}} » sera définitivement supprimé.",
+    "viewAll": "Tout afficher",
+    "empty": "Rien à afficher pour le moment.",
+    "enhanced": "Amélioré",
+    "recent": {
+      "voiceClone": "Clonages récents",
+      "voiceDesign": "Voix créées récemment",
+      "voiceChanger": "Modifications vocales récentes",
+      "audioClean": "Nettoyages audio récents",
+      "speechEditor": "Voix récentes",
+      "speechToText": "Transcriptions récentes"
+    },
+    "titles": {
+      "voiceClone": "Mes clonages",
+      "voiceDesign": "Mes voix créées",
+      "voiceChanger": "Mes modifications vocales",
+      "audioClean": "Mes nettoyages audio",
+      "speechEditor": "Mes fichiers vocaux",
+      "speechToText": "Mes transcriptions"
+    },
+    "view": "Afficher {{name}}"
+  },
+  "upload": {
+    "chooseSource": "Choisir dans",
+    "files": "Fichiers",
+    "gallery": "Galerie (vidéos)",
+    "source": "Importer l'audio source",
+    "target": "Importer l'audio cible",
+    "action": "Importer",
+    "change": "Modifier",
+    "remove": "Supprimer {{name}}",
+    "uploading": "Importation {{percent}} %",
+    "maxSize": "Max. {{max}} Mo"
+  },
+  "player": {
+    "play": "Lire",
+    "pause": "Pause"
+  },
+  "voiceChanger": {
+    "title": "Modificateur de voix",
+    "source": "Audio source",
+    "target": "Voix cible",
+    "submit": "Lancer la conversion"
+  },
+  "voiceDesign": {
+    "title": "Création de voix",
+    "guide": "Guide",
+    "language": "Langue",
+    "name": "Nom de la voix",
+    "namePlaceholder": "Ex. : narrateur calme",
+    "description": "Description de la voix",
+    "descriptionPlaceholder": "« Voix masculine chaleureuse et grave, avec un léger accent britannique, un débit mesuré et un ton assuré. »",
+    "descriptionHint": "Rédigez la description en anglais.",
+    "enhance": "Améliorer la description avec l'IA",
+    "submit": "Créer une voix",
+    "variations": {
+      "title": "Sélectionner une voix",
+      "subtitle": "Écoutez les {{count}} variantes générées et choisissez celle que vous préférez.",
+      "item": "Variante vocale {{number}}",
+      "play": "Écouter la variante {{number}}",
+      "pause": "Mettre la variante {{number}} en pause",
+      "save": "Enregistrer la voix"
+    },
+    "guideSheet": {
+      "title": "Comment décrire une voix",
+      "tips": [
+        "Précisez qui parle : l'âge, le genre et le personnage.",
+        "Décrivez la sonorité : chaleureuse, rauque, claire, grave.",
+        "Ajoutez l'accent et le débit, par exemple un léger accent britannique et un rythme mesuré.",
+        "Indiquez l'émotion ou l'usage, par exemple un narrateur calme pour les livres audio."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "Éditeur vocal",
+    "submit": "Commencer",
+    "sheet": {
+      "title": "Éditeur vocal",
+      "audio": "Audio",
+      "transcription": "Transcription",
+      "revert": "Rétablir l'original",
+      "generate": "Générer l'audio",
+      "done": "Terminé"
+    },
+    "uploadHint": "Audio ou vidéo, {{max}} Mo maximum. Les {{minutes}} premières minutes sont utilisées."
+  },
+  "audioClean": {
+    "title": "Nettoyage audio",
+    "description": "L'amélioration audio donne l'impression que le son a été enregistré avec un microphone professionnel.",
+    "enhance": "Réduire le bruit et améliorer",
+    "submit": "Nettoyage audio"
+  },
+  "speechToText": {
+    "title": "Audio en texte",
+    "language": "Langue",
+    "translation": "Sous-titres traduits",
+    "noTranslation": "Aucune",
+    "submit": "Lancer la transcription",
+    "sheet": {
+      "title": "Résultats",
+      "audio": "Audio",
+      "content": "Contenu",
+      "timingUnavailable": "Minutage indisponible",
+      "segment": "#{{number}}",
+      "edit": "Modifier la ligne {{number}}",
+      "done": "Terminer la modification de la ligne {{number}}",
+      "download": "Télécharger",
+      "formats": {
+        "srt": "Sous-titres (.srt)",
+        "vtt": "Sous-titres Web (.vtt)",
+        "txt": "Texte brut (.txt)"
+      },
+      "finish": "Terminé"
+    }
+  },
+  "offline": {
+    "title": "Aucune connexion Internet",
+    "message": "Vérifiez votre connexion Wi-Fi ou vos données mobiles. L'application reprendra dès que vous serez de nouveau connecté.",
+    "stillOffline": "Toujours aucune connexion. Vérifiez votre Wi-Fi ou vos données mobiles, puis réessayez.",
+    "retry": "Réessayer"
+  },
+  "support": {
+    "title": "Nous contacter",
+    "error": "Impossible de charger le chat. Vérifiez votre connexion et réessayez."
+  },
+  "onboarding": {
+    "step": "Étape {{step}} sur {{total}}",
+    "next": "Suivant",
+    "playSample": "Écouter l'extrait de {{name}}",
+    "stopSample": "Arrêter l'extrait de {{name}}",
+    "voices": {
+      "title": "Des voix IA qui savent vraiment <brand>jouer.</brand>",
+      "subtitle": "Synthèse vocale, clonage vocal et bien plus.",
+      "samples": {
+        "happy": "Joyeux",
+        "angry": "En colère",
+        "sarcastic": "Sarcastique",
+        "excited": "Enthousiaste",
+        "crying": "En pleurs",
+        "pirate": "Pirate",
+        "scared": "Effrayé",
+        "laughing": "Riant",
+        "calm": "Calme",
+        "evilVillain": "Méchant diabolique",
+        "dramatic": "Dramatique",
+        "confident": "Confiant",
+        "nervous": "Nerveux",
+        "romantic": "Romantique",
+        "sleepy": "Somnolent",
+        "energetic": "Énergique",
+        "madScientist": "Savant fou",
+        "horror": "Horreur",
+        "surprised": "Surpris",
+        "awkward": "Mal à l'aise",
+        "shocked": "Sous le choc",
+        "tired": "Fatigué",
+        "santaClaus": "Père Noël",
+        "curious": "Curieux",
+        "playful": "Joueur",
+        "serious": "Sérieux",
+        "sad": "Triste",
+        "rap": "Rap",
+        "disappointed": "Déçu",
+        "sportsCommentator": "Commentateur sportif"
+      }
+    },
+    "direct": {
+      "title": "À vous de diriger la voix.",
+      "subtitle": "Choisissez une émotion. Lancez la lecture.",
+      "actingLabel": "Consignes d'interprétation (touchez pour modifier)",
+      "actingPlaceholder": "Décrivez comment la phrase doit être prononcée",
+      "scriptLabel": "Texte",
+      "script": "Oh, super. Vous êtes là. Je commençais à croire que vous ne viendriez pas.",
+      "generate": "Générer",
+      "generating": "Génération en cours…",
+      "playing": "Lecture en cours",
+      "tags": {
+        "awkward": {
+          "label": "Mal à l'aise",
+          "text": "Interprétation maladroite, avec des hésitations et une intonation incertaine"
+        },
+        "crying": {
+          "label": "En pleurs",
+          "text": "Lisez ce texte en pleurant"
+        },
+        "laugh": {
+          "label": "Rire",
+          "text": "Interprétation rieuse, avec un amusement audible."
+        },
+        "sarcasm": {
+          "label": "Sarcasme",
+          "text": "Interprétation sarcastique, avec des accents secs et appuyés."
+        },
+        "relieved": {
+          "label": "Soulagé",
+          "text": "Avec soulagement : vous aviez peur que la personne ne vienne pas."
+        },
+        "excited": {
+          "label": "Enthousiaste",
+          "text": "Interprétation enthousiaste, avec une intonation vive et un débit rapide."
+        }
+      }
+    },
+    "stop": "Arrêter la lecture",
+    "clone": {
+      "title": "Clonez une voix <brand>en quelques secondes.</brand>",
+      "subtitle": "Écoutez la vraie voix. Puis faites-lui dire ce que vous voulez.",
+      "selectVoice": "Sélectionner la voix de {{name}}",
+      "playReal": "Écouter la vraie voix de {{name}}",
+      "stopReal": "Arrêter la vraie voix de {{name}}",
+      "lineLabel": "Touchez pour modifier",
+      "linePlaceholder": "Saisissez le texte de votre choix",
+      "play": "Écouter le clone",
+      "cloning": "Clonage de {{name}} en cours…",
+      "playing": "Lecture · Clone de {{name}}"
+    },
+    "change": {
+      "title": "Changez de voix. Gardez votre style.",
+      "subtitle": "Idéal pour les vidéos d'imitation vocale.",
+      "before": "Avant",
+      "beforeCaption": "Votre voix habituelle",
+      "after": "Après",
+      "turnInto": "Transformer en",
+      "play": "Lire {{name}}",
+      "stop": "Arrêter {{name}}"
+    },
+    "clean": {
+      "title": "Un mauvais son ? Corrigez-le <brand>en un geste.</brand>",
+      "subtitle": "Supprimez le bruit, l'écho et les bourdonnements. Ne gardez que votre voix.",
+      "play": "Lire",
+      "stop": "Arrêter",
+      "noisy": "Avec bruit",
+      "clean": "Nettoyé",
+      "switch": "Nettoyer l'audio",
+      "hint": "Essayez de basculer pendant la lecture."
+    },
+    "edit": {
+      "title": "Corrigez les erreurs en modifiant le texte.",
+      "subtitle": "Changez un mot. Votre voix le prononce. Pas besoin de réenregistrer.",
+      "original": "Original",
+      "fixed": "Corrigé",
+      "wordWrong": "{{word}}, erreur. Touchez pour corriger",
+      "wordFixed": "{{word}}. Corrigé à partir de {{from}}. Touchez pour annuler",
+      "hintWrong": "Touchez l'erreur pour la corriger.",
+      "hintFixed": "Corrigé. Touchez à nouveau pour annuler."
+    }
+  },
+  "review": {
+    "title": "Vous aimez {{appName}} ?",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}

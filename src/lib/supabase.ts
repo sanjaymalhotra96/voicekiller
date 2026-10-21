@@ -7,8 +7,8 @@ import { secureStorage } from '@/lib/storage';
 
 const { url, anonKey } = config.supabase;
 const missing = [
-  !url && 'EXPO_PUBLIC_SUPABASE_URL',
-  !anonKey && 'EXPO_PUBLIC_SUPABASE_ANON_KEY',
+  !url && 'SUPABASE_URL',
+  !anonKey && 'SUPABASE_ANON_KEY',
 ].filter(Boolean);
 if (missing.length > 0) {
   throw new Error(

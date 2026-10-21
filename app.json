@@ -2,7 +2,7 @@
   "expo": {
     "name": "Voice Killer",
     "slug": "voicekiller",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "orientation": "portrait",
     "platforms": [
       "ios",
@@ -11,12 +11,23 @@
     "newArchEnabled": true,
     "ios": {
       "bundleIdentifier": "com.voicekiller",
-      "icon": "./src/assets/app/icon.png",
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "entitlements": {
+        "com.apple.developer.applesignin": [
+          "Default"
+        ]
+      },
+      "icon": {
+        "light": "./src/assets/app/icon.png",
+        "dark": "./src/assets/app/icon-dark.png"
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.voicekiller",
-      "versionCode": 10,
+      "versionCode": 6,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/app/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -36,7 +47,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Voice Killer uses your photos to set your profile picture.",
+          "photosPermission": "Voice Killer uses your photos to set your profile picture and select videos for audio tools.",
           "cameraPermission": false,
           "microphonePermission": "Voice Killer uses the microphone to record a sample of your voice for cloning."
         }
@@ -49,23 +60,25 @@
           "image": "./src/assets/app/splash-logo.png",
           "imageWidth": 220,
           "resizeMode": "contain",
-          "backgroundColor": "#FFF9F6",
-          "dark": {
-            "image": "./src/assets/app/splash-logo.png",
-            "backgroundColor": "#121212"
-          }
+          "backgroundColor": "#FFF9F6"
         }
       ],
       "expo-sharing",
       "./plugins/withAndroidBuildProperties",
       "./plugins/withReleaseSigning",
       "./plugins/withAudioConversion",
-      "expo-web-browser",
-      "expo-apple-authentication"
+      "./plugins/withIconAppearance",
+      "expo-video"
     ],
     "scheme": "voicekiller",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "icon": "./src/assets/app/icon.png",
-    "backgroundColor": "#FFF9F6"
+    "backgroundColor": "#FFF9F6",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "144fae10-0b12-4cc3-8c0b-c7bddfac38d3"
+      }
+    }
   }
 }

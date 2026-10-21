@@ -19,6 +19,7 @@ type Props = {
   // This row's sample owns the shared player.
   active: boolean;
   playing: boolean;
+  loading: boolean;
   player: AudioPlayer;
   onTogglePlay: (voice: Voice) => void;
   // In the user's favourites.
@@ -34,6 +35,7 @@ export const VoiceRow = memo(function VoiceRowInner({
   selected,
   active,
   playing,
+  loading,
   player,
   onTogglePlay,
   favorite,
@@ -58,6 +60,7 @@ export const VoiceRow = memo(function VoiceRowInner({
       <GradientPlayButton
         active={active}
         playing={playing}
+        loading={loading}
         player={player}
         disabled={!voice.previewUrl}
         onPress={() => onTogglePlay(voice)}

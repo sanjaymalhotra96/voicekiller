@@ -1,36 +1,35 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
-import { AppText, Icon } from '@/components';
+import { AppText } from '@/components';
 import { EqualizerBars } from '@/features/onboarding/EqualizerBars';
+import { SamplePlaybackIcon } from '@/features/onboarding/SamplePlaybackIcon';
 import { Palette, useColors } from '@/theme';
 import { cn } from '@/utils';
 
-const BAR_HEIGHTS = [14, 18, 11];
-
 const tones = (c: Palette) =>
   ({
-  // Before: grey, dark play glyph.
-  neutral: {
-    box: 'border-line-neutral bg-field',
-    circle: 'bg-surface',
-    circleOn: 'bg-ink',
-    bars: c.surface,
-    glyph: c.ink.DEFAULT,
-    caption: 'font-sans text-ink-subtle',
-    wave: c.ink.inactive,
-  },
-  // After: orange highlight.
-  highlight: {
-    box: 'border-line bg-primary-wash',
-    circle: 'bg-primary',
-    circleOn: 'bg-primary-dark',
-    bars: c.contrast,
-    glyph: c.contrast,
-    caption: 'font-sans-semibold text-primary-deep',
-    wave: c.primary.DEFAULT,
-  },
-  }) as const;
+    // Before: grey, dark play glyph.
+    neutral: {
+      box: 'border-line-neutral bg-field',
+      circle: 'bg-surface',
+      circleOn: 'bg-ink',
+      glyphOn: c.surface,
+      glyph: c.ink.DEFAULT,
+      caption: 'font-sans text-ink-subtle',
+      wave: c.ink.inactive,
+    },
+    // After: orange highlight.
+    highlight: {
+      box: 'border-line bg-primary-wash',
+      circle: 'bg-primary',
+      circleOn: 'bg-primary-dark',
+      glyphOn: c.contrast,
+      glyph: c.contrast,
+      caption: 'font-sans-semibold text-primary-deep',
+      wave: c.primary.DEFAULT,
+    },
+  } as const);
 
 type Props = {
   tone: keyof ReturnType<typeof tones>;
@@ -40,13 +39,14 @@ type Props = {
   // Per-bar colours, overriding the tone's wave colour.
   waveColors?: readonly string[];
   playing: boolean;
+  loading: boolean;
   disabled?: boolean;
   onPress: () => void;
   className?: string;
 };
 
 // Before / After clip on the voice changer and speech editor steps: round play button,
-// titles, and a waveform that moves while the clip plays.
+// titles, and a separate waveform that moves while the clip plays.
 export function CompareRow({
   tone,
   title,
@@ -54,6 +54,7 @@ export function CompareRow({
   wave,
   waveColors,
   playing,
+  loading,
   disabled = false,
   onPress,
   className,
@@ -69,8 +70,12 @@ export function CompareRow({
         playing ? 'onboarding.change.stop' : 'onboarding.change.play',
         { name },
       )}
-      accessibilityState={{ selected: playing, disabled }}
-      disabled={disabled}
+      accessibilityState={{
+        selected: playing,
+        disabled: disabled || loading,
+        busy: loading,
+      }}
+      disabled={disabled || loading}
       onPress={onPress}
       className={cn(
         'h-compare-row flex-row items-center gap-3 rounded-panel border-emphasis pl-3 pr-4 active:opacity-80',
@@ -85,11 +90,11 @@ export function CompareRow({
           playing ? s.circleOn : s.circle,
         )}
       >
-        {playing ? (
-          <EqualizerBars heights={BAR_HEIGHTS} color={s.bars} />
-        ) : (
-          <Icon name="play" size={16} color={s.glyph} />
-        )}
+        <SamplePlaybackIcon
+          playing={playing}
+          loading={loading}
+          color={playing ? s.glyphOn : s.glyph}
+        />
       </View>
       <View className="gap-0.5">
         <AppText className="font-sans-bold text-lg text-ink">{title}</AppText>

@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "Kapat",
+    "back": "Geri",
+    "copied": "Kopyalandı",
+    "cancel": "İptal",
+    "change": "Değiştir",
+    "save": "Kaydet",
+    "beta": "Beta",
+    "delete": "Sil",
+    "showMore": "Daha fazla göster",
+    "showLess": "Daha az göster"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "E-posta",
+    "continueWithGoogle": "Google ile devam et",
+    "continueWithEmail": "E-posta ile devam et",
+    "haveAccount": "Zaten hesabın var mı? <link>Giriş yap</link>"
+  },
+  "welcome": {
+    "title": "<brand>{{appName}}</brand> uygulamasına hoş geldin",
+    "subtitle": "Oyunculuk talimatları üzerine kurulu ilk yapay zekâ ses aracı. Duyguyu söyle, o canlandırsın."
+  },
+  "signUp": {
+    "title": "Kaydol",
+    "subtitle": "Başlamak için birkaç kısa adım yeterli.",
+    "fullName": "Adın ve soyadın",
+    "email": "E-posta adresi",
+    "password": "Şifre",
+    "confirmPassword": "Şifreyi onayla",
+    "agree": "<link>Hüküm ve Koşulları</link> kabul ediyorum",
+    "submit": "Kaydol",
+    "showPassword": "Şifreyi göster",
+    "hidePassword": "Şifreyi gizle"
+  },
+  "signIn": {
+    "title": "Giriş yap",
+    "subtitle": "Tekrar hoş geldin! Seni özledik.",
+    "email": "E-posta adresi",
+    "password": "Şifre",
+    "forgot": "Şifreni mi unuttun?",
+    "submit": "Giriş yap"
+  },
+  "verify": {
+    "title": "Kod doğrulama",
+    "subtitle": "<bold>{{email}}</bold> adresine tek kullanımlık bir kod gönderdik",
+    "resendIn": "{{time}} saniye sonra tekrar gönderebilirsin.",
+    "resendReady": "Tekrar gönderebilirsin. <link>Kodu tekrar gönder</link>",
+    "submit": "Doğrula",
+    "digit": "{{index}}. rakam"
+  },
+  "forgotPassword": {
+    "title": "Şifreni mi unuttun?",
+    "subtitle": "E-posta adresini gir, şifreni sıfırlamak için sana bir bağlantı gönderelim.",
+    "email": "E-posta adresi",
+    "submit": "Sıfırlama bağlantısı gönder",
+    "backToLogin": "Giriş ekranına dön",
+    "sent": "Sıfırlama bağlantısı <bold>{{email}}</bold> adresine gönderildi. Gelen kutunu kontrol et."
+  },
+  "resetPassword": {
+    "title": "Şifreyi sıfırla",
+    "subtitle": "Hesabın için yeni bir şifre seç.",
+    "submit": "Şifreyi sıfırla",
+    "done": "Şifren sıfırlandı. Artık yeni şifrenle giriş yapabilirsin.",
+    "requestLink": "Yeni sıfırlama bağlantısı iste",
+    "continue": "Devam et"
+  },
+  "validation": {
+    "nameRequired": "Lütfen adını gir.",
+    "emailInvalid": "Lütfen geçerli bir e-posta adresi gir.",
+    "passwordRequired": "Lütfen şifreni gir.",
+    "passwordShort": "Şifre en az {{min}} karakter olmalı.",
+    "passwordMismatch": "Şifreler eşleşmiyor.",
+    "termsRequired": "Lütfen Hüküm ve Koşulları kabul et.",
+    "otpIncomplete": "Lütfen kodun tamamını gir.",
+    "titleRequired": "Lütfen bir ad gir.",
+    "dobInvalid": "dd/mm/yy biçimini kullan.",
+    "currentPasswordRequired": "Lütfen mevcut şifreni gir.",
+    "samePassword": "Yeni şifre farklı olmalı.",
+    "promptRequired": "Lütfen istediğin sesi tarif et.",
+    "voiceNameRequired": "Lütfen bir ses adı gir.",
+    "sampleRequired": "Lütfen bir ses örneği yükle veya kaydet.",
+    "descriptionRequired": "Lütfen sesi tarif et."
+  },
+  "errors": {
+    "network": "İnternet bağlantısı yok. Lütfen tekrar dene.",
+    "invalidCredentials": "E-posta veya şifre yanlış.",
+    "emailNotConfirmed": "Lütfen giriş yapmadan önce e-posta adresini doğrula.",
+    "emailTaken": "Bu e-posta adresiyle bir hesap zaten var.",
+    "weakPassword": "Lütfen daha güçlü bir şifre seç.",
+    "otpInvalid": "Tek kullanımlık kod geçersiz. Lütfen tekrar dene.",
+    "recoveryLinkInvalid": "Bu sıfırlama bağlantısı geçersiz veya süresi dolmuş. Lütfen yeni bir bağlantı iste.",
+    "rateLimited": "Çok fazla deneme yapıldı. Lütfen biraz bekle.",
+    "unknown": "Bir sorun oluştu. Lütfen tekrar dene.",
+    "currentPasswordWrong": "Mevcut şifre yanlış.",
+    "uploadFailed": "Dosya yüklenemedi. Lütfen tekrar dene.",
+    "quotaExceeded": "Planının kullanım sınırına ulaştın. Üretmeye devam etmek için planını yükselt.",
+    "serviceUnavailable": "Bu özellik şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.",
+    "campaignExists": "Bu ada sahip bir kampanyan zaten var.",
+    "fileType": "Bu dosya türü desteklenmiyor.",
+    "fileTooLarge": "Bu dosya çok büyük. Lütfen daha küçük bir dosya seç.",
+    "micPermission": "Sesini kaydetmek için Ayarlar'dan mikrofon erişimine izin ver.",
+    "photoLibraryPermission": "Bir video seçmek için Ayarlar'dan Fotoğraflar'a erişime izin ver.",
+    "shareUnavailable": "Bu cihazda paylaşım kullanılamıyor.",
+    "transcriptUnavailable": "Bu dosya için transkript bulunmuyor.",
+    "transcriptTimingUnavailable": "Bu transkriptte kullanılabilir zaman bilgisi yok. İndirmek için Metin (.txt) seçeneğini seç.",
+    "authRequired": "Oturumunun süresi doldu. Lütfen tekrar giriş yap.",
+    "studioRequired": "Bunun için Studio planı gerekiyor.",
+    "notFound": "Bu dosya artık mevcut değil.",
+    "paidPlanRequired": "Bunun için ücretli bir plan gerekiyor.",
+    "jobFailed": "Bu işlemi tamamlayamadık. Lütfen tekrar dene.",
+    "jobTimeout": "Bu işlem beklenenden uzun sürüyor. Birkaç dakika sonra Kütüphane'yi kontrol et.",
+    "sampleLength": "En az 1 saniyelik bir ses örneği kullan.",
+    "renameNotAllowed": "Bu dosya şu anda yeniden adlandırılamıyor.",
+    "cancelled": "İptal edildi.",
+    "purchasesUnavailable": "Abonelikler henüz kullanılamıyor. Lütfen daha sonra tekrar dene.",
+    "purchaseFailed": "Satın alma tamamlanamadı. Senden ücret alınmadı.",
+    "nothingToRestore": "Bu mağaza hesabında önceki bir satın alma bulunamadı.",
+    "conversionFailed": "Bu dosya sese dönüştürülemedi. Lütfen başka bir dosya dene.",
+    "scriptTooLong": "Ücretsiz planlarda tek seferde en fazla 1.000 karakter oluşturulabilir. Metni kısalt veya planını yükselt.",
+    "samePassword": "Yeni şifren mevcut şifrenden farklı olmalı.",
+    "passwordNotSet": "Google ile kaydolduğun için bu hesapta değiştirilecek bir şifre yok.",
+    "googleSignInFailed": "Google ile giriş tamamlanamadı. Lütfen tekrar dene.",
+    "appleSignInFailed": "Apple ile giriş tamamlanamadı. Lütfen tekrar dene."
+  },
+  "tabs": {
+    "dashboard": "Kontrol paneli",
+    "library": "Kütüphane",
+    "settings": "Ayarlar"
+  },
+  "dashboard": {
+    "title": "Kontrol paneli",
+    "greeting": "Merhaba, {{name}}",
+    "sections": {
+      "create": "Oluştur",
+      "transform": "Dönüştür"
+    },
+    "actionCard": {
+      "title": "Metinden sese",
+      "action": "Konuşma oluştur"
+    }
+  },
+  "library": {
+    "title": "Kütüphane",
+    "search": "Dosya ara...",
+    "empty": {
+      "title": "Henüz hiç dosyan yok!",
+      "message": "Kontrol panelinden yeni bir dosya oluştur."
+    },
+    "noResults": "Aramana uygun dosya bulunamadı.",
+    "groups": {
+      "today": "Bugün",
+      "yesterday": "Dün",
+      "thisWeek": "Bu hafta",
+      "earlier": "Daha önce"
+    },
+    "actions": {
+      "title": "Ayrıntılar",
+      "rename": "Yeniden adlandır",
+      "download": "İndir",
+      "delete": "Sil",
+      "more": "{{title}} için daha fazla seçenek",
+      "play": "{{title}} dosyasını oynat",
+      "pause": "{{title}} dosyasını duraklat"
+    },
+    "rename": {
+      "title": "Yeniden adlandır",
+      "placeholder": "Dosya adı"
+    },
+    "delete": {
+      "title": "Dosya silinsin mi?",
+      "message": "“{{title}}” kalıcı olarak silinecek.",
+      "confirm": "Sil",
+      "cancel": "İptal"
+    },
+    "retry": "Tekrar dene",
+    "untitled": "Adsız"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "sections": {
+      "general": "Genel",
+      "others": "Diğer"
+    },
+    "items": {
+      "personalInfo": "Kişisel bilgiler",
+      "changePassword": "Şifreyi değiştir",
+      "subscription": "Aboneliği yönet",
+      "share": "Arkadaşlarınla paylaş",
+      "contact": "Bize ulaş",
+      "privacy": "Gizlilik politikası"
+    },
+    "signOut": "Çıkış yap",
+    "shareMessage": "Yapay zekâ sesleri oluşturmak için {{appName}} kullanıyorum. Sen de dene: {{url}}",
+    "shareMessageNoLink": "Yapay zekâ sesleri oluşturmak için {{appName}} kullanıyorum."
+  },
+  "crash": {
+    "title": "Bir sorun oluştu",
+    "message": "Uygulamada beklenmeyen bir hata oluştu. Lütfen tekrar dene.",
+    "retry": "Tekrar dene"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "Metinden sese",
+      "subtitle": "Yaz ve dinle",
+      "tag": "Yapay zekâ konuşması"
+    },
+    "voiceClone": {
+      "title": "Ses klonlama",
+      "subtitle": "İstediğin sesi kopyala",
+      "tag": "Ses klonlama"
+    },
+    "voiceDesign": {
+      "title": "Ses tasarımı",
+      "subtitle": "Bir ses tarif et",
+      "tag": "Ses tasarımı"
+    },
+    "voiceChanger": {
+      "title": "Ses değiştirici",
+      "subtitle": "Sesini değiştir",
+      "tag": "Ses değiştirici"
+    },
+    "audioClean": {
+      "title": "Ses temizleme",
+      "subtitle": "Gürültüyü gider",
+      "tag": "Ses temizleme"
+    },
+    "speechEditor": {
+      "title": "Konuşma düzenleyici",
+      "subtitle": "Kelimeleri düzelt",
+      "tag": "Konuşma düzenleyici"
+    },
+    "speechToText": {
+      "title": "Sesten metne",
+      "subtitle": "Sesi yazıya dök",
+      "tag": "Sesten metne"
+    }
+  },
+  "trialOffer": {
+    "title": "Seni denemeye davet ediyoruz:",
+    "titleHighlight": "Ücretsiz Voicekiller",
+    "noPaymentToday": "Bugün ödeme yok",
+    "cta": "0,00 $ karşılığında dene"
+  },
+  "trialPaywall": {
+    "later": "Sonra",
+    "stars": "5 üzerinden 5 yıldız",
+    "reviews": {
+      "textToSpeech": "“Sesler o kadar gerçekçi ki dinleyicilerim yapay zekâ olduğunu anlamıyor.”",
+      "acting": "“‘Hüzünlü bir veda gibi söyle’ yazıyorum ve duyguyu her seferinde yakalıyor.”",
+      "voiceClone": "“Sesimi bir dakikada klonladım. Artık kayıt yapmadan video çekiyorum.”",
+      "allInOne": "“Sesi temizle, sesleri değiştir, hataları düzelt. Tek uygulama dört aracın yerini aldı.”"
+    },
+    "kicker": "5 farklı araca para ödemeyi bırakın",
+    "title": "En iyi <brand>yapay zekâ ses araçları</brand> <brand>tek platformda</brand>",
+    "perMonth": "{{price}}/ay",
+    "perYear": "{{price}}/yıl",
+    "monthlyNote": "{{days}} gün ücretsiz · istediğin zaman iptal et",
+    "yearlyNote": "{{days}} gün ücretsiz · %{{percent}} tasarruf",
+    "trialNote": "{{days}} gün ücretsiz",
+    "cta": "{{days}} gün ÜCRETSİZ dene",
+    "then": "sonra {{price}}",
+    "disclaimer": "Bugün ücret alınmaz. {{days}}. günden önce iptal edersen ödeme yapmazsın."
+  },
+  "paywall": {
+    "title": "Studio'nun kilidini aç",
+    "close": "Kapat",
+    "features": {
+      "voices": "2.000'den fazla ses",
+      "clones": "Sınırsız ses klonlama",
+      "audioClean": "Ses temizleme",
+      "voiceChanger": "Ses değiştirici",
+      "speechEditor": "Yapay zekâ konuşma düzenleyici"
+    },
+    "yearly": "Yıllık",
+    "monthly": "Aylık",
+    "minutes": "Ayda {{count}} dakika",
+    "save": "%{{percent}} tasarruf et",
+    "continue": "Devam et",
+    "cancelAnytime": "İstediğin zaman iptal et",
+    "restore": "Satın alımları geri yükle",
+    "terms": "Koşullar",
+    "privacy": "Gizlilik"
+  },
+  "plan": {
+    "basic": "Temel plan",
+    "studio": "Studio",
+    "buyStudio": "Studio satın al",
+    "usage": "Kullanım",
+    "usageOf": "/ {{limit}} dakika",
+    "usageThisMonth": "Bu ayki kullanım",
+    "usageMinutes": "{{used}} / {{limit}} dk",
+    "remaining": "{{count}} dakika kaldı"
+  },
+  "profile": {
+    "title": "Kişisel bilgiler",
+    "userId": "Kullanıcı kimliği",
+    "fullName": "Adın ve soyadın",
+    "email": "E-posta adresin",
+    "dob": "Doğum tarihi",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "Profil fotoğrafını değiştir",
+    "copyId": "Kullanıcı kimliğini kopyala",
+    "deleteAccount": "Hesabı sil",
+    "save": "Değişiklikleri kaydet",
+    "saved": "Değişikliklerin kaydedildi.",
+    "changeEmail": {
+      "title": "E-posta adresini değiştir",
+      "subtitle": "Yeni adrese bir onay bağlantısı göndereceğiz.",
+      "placeholder": "Yeni e-posta adresi",
+      "submit": "Bağlantı gönder",
+      "sent": "Değişikliği onaylamak için {{email}} adresini kontrol et."
+    },
+    "unsaved": {
+      "title": "Değişiklikler kaydedilsin mi?",
+      "message": "Kaydedilmemiş değişikliklerin kaybolacak. Kapatmadan önce kaydetmek ister misin?",
+      "discard": "Vazgeç",
+      "confirm": "Onayla"
+    },
+    "delete": {
+      "title": "Hesap silme",
+      "message": "Hesabını silmek, tüm bilgilerini veritabanımızdan kaldırır. Bu işlem geri alınamaz.",
+      "prompt": "Onaylamak için “{{word}}” yaz",
+      "word": "DELETE",
+      "submit": "Hesabı sil"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "Mevcut şifreni gir",
+    "title": "Şifreyi değiştir",
+    "current": "Mevcut şifre",
+    "new": "Yeni şifre",
+    "newPlaceholder": "Yeni şifreni gir (en az {{min}} karakter)",
+    "confirm": "Şifreyi onayla",
+    "confirmPlaceholder": "Yeni şifreyi onayla",
+    "submit": "Şifreyi değiştir",
+    "done": "Şifren değiştirildi."
+  },
+  "notFound": {
+    "title": "Bu sayfa mevcut değil.",
+    "action": "Ana sayfaya git"
+  },
+  "textToSpeech": {
+    "title": "Metinden sese",
+    "fileName": "Dosya adı (isteğe bağlı)",
+    "campaign": "Kampanya",
+    "scriptPlaceholder": "Metnini buraya yaz veya yapıştır...",
+    "scriptLabel": "Metin",
+    "scriptLimitExceeded": "Bu ses en fazla {{max}} karakter destekliyor. Metnini kısalt veya başka bir ses seç.",
+    "chooseVoice": "Ses seç",
+    "voiceLabel": "Ses: {{name}}",
+    "emotions": "Duygular",
+    "addPause": "Duraklama ekle",
+    "settings": "Ayarlar",
+    "preview": "Önizleme",
+    "stopPreview": "Durdur",
+    "generate": "Oluştur",
+    "campaignSheet": {
+      "title": "Kampanya",
+      "placeholder": "Yeni kampanya adını buraya yaz...",
+      "create": "Kampanya oluştur",
+      "default": "Varsayılan"
+    },
+    "pauseSheet": {
+      "title": "Duraklama ekle",
+      "seconds_one": "{{count}} saniye",
+      "seconds_other": "{{count}} saniye"
+    },
+    "settingsSheet": {
+      "title": "Ayarlar",
+      "audioFormat": "Ses biçimi",
+      "voiceTuning": "Ses ayarı",
+      "speed": "Hız",
+      "delivery": "Seslendirme modu",
+      "actingInstructions": "Oyunculuk talimatları",
+      "instruction": "Talimat",
+      "chooseInstruction": "Bir talimat seç",
+      "ownInstructions": "Kendi talimatlarını yaz",
+      "ownPlaceholder": "Metnin nasıl seslendirileceğini tarif et..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "Daha tutarlı",
+      "balanced": "Dengeli",
+      "creative": "Daha yaratıcı"
+    }
+  },
+  "emotions": {
+    "auto": "Otomatik",
+    "happy": "Mutlu",
+    "sad": "Üzgün",
+    "angry": "Öfkeli",
+    "fearful": "Korkulu",
+    "disgusted": "İğrenmiş",
+    "surprised": "Şaşırmış",
+    "calm": "Sakin",
+    "fluent": "Akıcı"
+  },
+  "voices": {
+    "title": "Ses seç",
+    "search": "Ses ara...",
+    "sources": {
+      "library": "Kütüphane",
+      "cloned": "Klonlananlar",
+      "design": "Tasarımlar",
+      "favorites": "Favoriler"
+    },
+    "openFilters": "Filtreler",
+    "openFiltersCount": "Filtreler, {{count}} etkin",
+    "favorite": "{{name}} sesini favorilere ekle",
+    "unfavorite": "{{name}} sesini favorilerden kaldır",
+    "select": "{{name}} sesini seç",
+    "play": "{{name}} örneğini oynat",
+    "pause": "{{name}} örneğini duraklat",
+    "empty": "Aramana uygun ses bulunamadı.",
+    "emptyFavorites": "Henüz favori sesin yok. Bir sesi buraya kaydetmek için yanındaki kalbe dokun.",
+    "filters": {
+      "title": "Filtreler",
+      "model": "Model",
+      "gender": "Cinsiyet",
+      "accent": "Aksan",
+      "language": "Dil",
+      "apply": "Filtreleri uygula"
+    },
+    "genders": {
+      "female": "Kadın",
+      "male": "Erkek",
+      "neutral": "Nötr"
+    },
+    "models": {
+      "all": "Tüm modeller",
+      "expressive": "İfadeli",
+      "directable": "Yönlendirilebilir",
+      "directablePro": "Yönlendirilebilir Pro"
+    }
+  },
+  "accents": {
+    "auto": "Otomatik",
+    "ar-001": "AR - Arapça",
+    "ar-EG": "AR - Mısır",
+    "cs-CZ": "CS - Çekçe",
+    "de-DE": "DE - Almanca",
+    "el-GR": "EL - Yunanca",
+    "en-AU": "EN - Avustralya",
+    "en-CA": "EN - Kanada",
+    "en-GB": "EN - Britanya",
+    "en-IE": "EN - İrlanda",
+    "en-IN": "EN - Hindistan",
+    "en-NZ": "EN - Yeni Zelanda",
+    "en-US": "EN - Amerika",
+    "en-ZA": "EN - Güney Afrika",
+    "es-419": "ES - Latin Amerika",
+    "es-ES": "ES - İspanya",
+    "fr-CA": "FR - Kanada",
+    "fr-FR": "FR - Fransa",
+    "hi-IN": "HI - Hintçe",
+    "it-IT": "IT - İtalyanca",
+    "ja-JP": "JA - Japonca",
+    "jv-ID": "JV - Cavaca",
+    "ko-KR": "KO - Korece",
+    "nl-NL": "NL - Felemenkçe",
+    "pl-PL": "PL - Lehçe",
+    "pt-BR": "PT - Brezilya",
+    "pt-PT": "PT - Portekiz",
+    "sw-KE": "SW - Kenya Svahilicesi",
+    "ta-IN": "TA - Tamilce",
+    "te-IN": "TE - Teluguca",
+    "vi-VN": "VI - Vietnamca",
+    "zh-CN": "ZH - Mandarin"
+  },
+  "languages": {
+    "auto": "Otomatik",
+    "ar": "Arapça",
+    "yue": "Kantonca",
+    "zh": "Çince",
+    "cs": "Çekçe",
+    "nl": "Felemenkçe",
+    "en": "İngilizce",
+    "fi": "Fince",
+    "fr": "Fransızca",
+    "de": "Almanca",
+    "el": "Yunanca",
+    "he": "İbranice",
+    "hi": "Hintçe",
+    "hu": "Macarca",
+    "id": "Endonezce",
+    "it": "İtalyanca",
+    "ja": "Japonca",
+    "ko": "Korece",
+    "pl": "Lehçe",
+    "pt": "Portekizce",
+    "ru": "Rusça",
+    "es": "İspanyolca",
+    "sv": "İsveççe",
+    "tr": "Türkçe",
+    "uk": "Ukraynaca"
+  },
+  "instructions": {
+    "title": "Oyunculuk talimatı",
+    "tabs": {
+      "library": "Kütüphane",
+      "mine": "Talimatlarım"
+    },
+    "all": "Tümü ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "Duygular",
+      "characters": "Karakterler",
+      "situations": "Durumlar",
+      "accents": "Aksanlar"
+    },
+    "search": "Talimat ara...",
+    "noResults": "Aramana uygun talimat bulunamadı.",
+    "details": "{{name}} ayrıntıları",
+    "select": "{{name}} talimatını kullan",
+    "play": "{{name}} örneğini oynat",
+    "pause": "{{name}} örneğini duraklat",
+    "notFound": "Bu talimat artık mevcut değil.",
+    "detail": {
+      "script": "Metin",
+      "instructions": "Oyunculuk talimatları",
+      "sample": "Ses örneği",
+      "playSample": "Ses örneğini oynatmak için tıkla",
+      "noSample": "Henüz ses örneği yok",
+      "use": "Bu talimatı kullan"
+    },
+    "mine": {
+      "title": "Özel talimatlarım",
+      "add": "Yeni talimat",
+      "emptyTitle": "Özel talimat yok",
+      "emptyMessage": "Projelerinde kullanmak için kendi oyunculuk talimatlarını oluştur ve kaydet.",
+      "generate": "Yapay zekâ ile talimat oluştur",
+      "created": "Oluşturulma: {{date}}",
+      "remove": "{{name}} talimatını sil",
+      "removeTitle": "Talimat silinsin mi?",
+      "removeMessage": "“{{name}}” kalıcı olarak silinecek."
+    },
+    "create": {
+      "title": "Yeni oyunculuk talimatı",
+      "name": "Talimat adı",
+      "namePlaceholder": "ör. “Sıcak ve samimi”, “Profesyonel haber sunumu”",
+      "prompt": "Oyunculuk talimatı açıklaması",
+      "promptPlaceholder": "Şunun için talimat oluştur: ...",
+      "hint": "Örneğin “Robot sesi için talimat oluştur” yaz, yapay zekâ otomatik olarak oluştursun",
+      "submit": "Talimat oluştur"
+    }
+  },
+  "voiceClone": {
+    "title": "Ses klonlama",
+    "guide": "Rehber",
+    "language": "Dil",
+    "voiceName": "Ses adı",
+    "voiceNamePlaceholder": "ör. Sakin anlatıcı",
+    "sources": {
+      "upload": "Ses yükle",
+      "record": "Ses kaydet"
+    },
+    "upload": {
+      "title": "Kaynak sesi yükle",
+      "hint": "Ses veya video. İlk {{seconds}} saniye kullanılır.",
+      "action": "Yükle"
+    },
+    "record": {
+      "title": "Sesini kaydet",
+      "hint": "Mikrofonunu seç ve Kaydet'e bas.",
+      "action": "Kaydet",
+      "stop": "Durdur",
+      "again": "Tekrar kaydet",
+      "recording": "Kaydediliyor {{time}}",
+      "microphone": "Mikrofon",
+      "defaultMicrophone": "Varsayılan mikrofon",
+      "fileName": "Kayıt.m4a"
+    },
+    "clip": {
+      "play": "{{name}} dosyasını oynat",
+      "pause": "{{name}} dosyasını duraklat"
+    },
+    "submit": "Ses oluştur",
+    "guideSheet": {
+      "title": "Kayıt rehberi",
+      "tips": [
+        "Tek bir kişinin yaklaşık 30 saniyelik net konuşmasını kullan. Daha uzun kayıtların yalnızca ilk 30 saniyesi alınır.",
+        "Müzik veya arka plan gürültüsü olmayan sessiz bir odada kayıt yap.",
+        "Klonun sahip olmasını istediğin tonla, doğal bir şekilde konuş.",
+        "Mikrofonu ağzından sabit bir uzaklıkta tut."
+      ]
+    }
+  },
+  "results": {
+    "play": "{{name}} dosyasını oynat",
+    "pause": "{{name}} dosyasını duraklat",
+    "created": "Oluşturulma: {{date}}",
+    "rename": "{{name}} dosyasını yeniden adlandır",
+    "renameTitle": "Yeniden adlandır",
+    "renameLabel": "Adı düzenle",
+    "renamePlaceholder": "Ad",
+    "download": "{{name}} dosyasını indir",
+    "remove": "{{name}} dosyasını sil",
+    "removeTitle": "Dosya silinsin mi?",
+    "removeMessage": "“{{name}}” kalıcı olarak silinecek.",
+    "viewAll": "Tümünü gör",
+    "empty": "Burada henüz bir şey yok.",
+    "enhanced": "İyileştirildi",
+    "recent": {
+      "voiceClone": "Son klonlar",
+      "voiceDesign": "Son tasarımlar",
+      "voiceChanger": "Son ses değişiklikleri",
+      "audioClean": "Son temizlenen sesler",
+      "speechEditor": "Son konuşmalar",
+      "speechToText": "Son transkriptler"
+    },
+    "titles": {
+      "voiceClone": "Klonlarım",
+      "voiceDesign": "Tasarımlarım",
+      "voiceChanger": "Ses değişikliklerim",
+      "audioClean": "Temizlenen seslerim",
+      "speechEditor": "Konuşmalarım",
+      "speechToText": "Transkriptlerim"
+    },
+    "view": "{{name}} dosyasını görüntüle"
+  },
+  "upload": {
+    "chooseSource": "Şuradan seç",
+    "files": "Dosyalar",
+    "gallery": "Galeri (videolar)",
+    "source": "Kaynak sesi yükle",
+    "target": "Hedef sesi yükle",
+    "action": "Yükle",
+    "change": "Değiştir",
+    "remove": "{{name}} dosyasını kaldır",
+    "uploading": "Yükleniyor %{{percent}}",
+    "maxSize": "En fazla {{max}} MB"
+  },
+  "player": {
+    "play": "Oynat",
+    "pause": "Duraklat"
+  },
+  "voiceChanger": {
+    "title": "Ses değiştirici",
+    "source": "Kaynak ses",
+    "target": "Hedef ses",
+    "submit": "Dönüştürmeyi başlat"
+  },
+  "voiceDesign": {
+    "title": "Ses tasarımı",
+    "guide": "Rehber",
+    "language": "Dil",
+    "name": "Ses adı",
+    "namePlaceholder": "ör. Sakin anlatıcı",
+    "description": "Ses açıklaması",
+    "descriptionPlaceholder": "“Hafif Britanya aksanlı, ölçülü tempolu, otoriter tonda, sıcak ve derin bir erkek sesi.”",
+    "descriptionHint": "Açıklamayı İngilizce yaz.",
+    "enhance": "Açıklamayı yapay zekâ ile iyileştir",
+    "submit": "Ses oluştur",
+    "variations": {
+      "title": "Ses seç",
+      "subtitle": "Oluşturulan {{count}} farklı sesi dinle ve beğendiğini seç",
+      "item": "Ses varyasyonu {{number}}",
+      "play": "{{number}}. varyasyonu oynat",
+      "pause": "{{number}}. varyasyonu duraklat",
+      "save": "Sesi kaydet"
+    },
+    "guideSheet": {
+      "title": "Bir sesi tarif etme",
+      "tips": [
+        "Kimin konuştuğunu belirt: yaş, cinsiyet ve karakter.",
+        "Sesin tınısını tarif et: sıcak, pürüzlü, parlak, derin.",
+        "Aksan ve tempo ekle, ör. hafif Britanya aksanı, ölçülü tempo.",
+        "Duyguyu veya kullanım amacını belirt, ör. sesli kitaplar için sakin anlatıcı."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "Konuşma düzenleyici",
+    "submit": "Başlat",
+    "sheet": {
+      "title": "Konuşma düzenleyici",
+      "audio": "Ses",
+      "transcription": "Transkript",
+      "revert": "Orijinale dön",
+      "generate": "Ses oluştur",
+      "done": "Bitti"
+    },
+    "uploadHint": "Ses veya video, en fazla {{max}} MB. İlk {{minutes}} dakika kullanılır."
+  },
+  "audioClean": {
+    "title": "Ses temizleme",
+    "description": "İyileştirme özelliği, kaydının profesyonel bir mikrofondan alınmış gibi duyulmasını sağlar.",
+    "enhance": "Gürültüyü gider ve iyileştir",
+    "submit": "Sesi temizle"
+  },
+  "speechToText": {
+    "title": "Sesten metne",
+    "language": "Dil",
+    "translation": "Altyazı çevirisi",
+    "noTranslation": "Yok",
+    "submit": "Yazıya dökmeyi başlat",
+    "sheet": {
+      "title": "Sonuçlar",
+      "audio": "Ses",
+      "content": "İçerik",
+      "timingUnavailable": "Zaman bilgisi yok",
+      "segment": "#{{number}}",
+      "edit": "{{number}}. satırı düzenle",
+      "done": "{{number}}. satırı düzenlemeyi bitir",
+      "download": "İndir",
+      "formats": {
+        "srt": "Altyazılar (.srt)",
+        "vtt": "Web altyazıları (.vtt)",
+        "txt": "Düz metin (.txt)"
+      },
+      "finish": "Bitti"
+    }
+  },
+  "offline": {
+    "title": "İnternet bağlantısı yok",
+    "message": "Wi-Fi veya mobil verini kontrol et. Tekrar çevrimiçi olduğunda uygulama devam edecek.",
+    "stillOffline": "Hâlâ bağlantı yok. Wi-Fi veya mobil verini kontrol edip tekrar dene.",
+    "retry": "Tekrar dene"
+  },
+  "support": {
+    "title": "Bize ulaş",
+    "error": "Sohbet yüklenemedi. Bağlantını kontrol edip tekrar dene."
+  },
+  "onboarding": {
+    "step": "Adım {{step}} / {{total}}",
+    "next": "İleri",
+    "playSample": "{{name}} örneğini oynat",
+    "stopSample": "{{name}} örneğini durdur",
+    "voices": {
+      "title": "Gerçekten <brand>rol yapan</brand> yapay zekâ sesleri.",
+      "subtitle": "Metinden sese, ses klonlama ve daha fazlası.",
+      "samples": {
+        "happy": "Mutlu",
+        "angry": "Öfkeli",
+        "sarcastic": "Alaycı",
+        "excited": "Heyecanlı",
+        "crying": "Ağlayan",
+        "pirate": "Korsan",
+        "scared": "Korkmuş",
+        "laughing": "Gülen",
+        "calm": "Sakin",
+        "evilVillain": "Kötü karakter",
+        "dramatic": "Dramatik",
+        "confident": "Özgüvenli",
+        "nervous": "Gergin",
+        "romantic": "Romantik",
+        "sleepy": "Uykulu",
+        "energetic": "Enerjik",
+        "madScientist": "Çılgın bilim insanı",
+        "horror": "Korku",
+        "surprised": "Şaşırmış",
+        "awkward": "Çekingen",
+        "shocked": "Şoke olmuş",
+        "tired": "Yorgun",
+        "santaClaus": "Noel Baba",
+        "curious": "Meraklı",
+        "playful": "Şakacı",
+        "serious": "Ciddi",
+        "sad": "Üzgün",
+        "rap": "Rap",
+        "disappointed": "Hayal kırıklığına uğramış",
+        "sportsCommentator": "Spor spikeri"
+      }
+    },
+    "direct": {
+      "title": "Artık sesi sen yönetiyorsun.",
+      "subtitle": "Bir duygu seç. Oynat'a bas.",
+      "actingLabel": "Oyunculuk talimatları (düzenlemek için dokun)",
+      "actingPlaceholder": "Nasıl söylenmesi gerektiğini tarif et",
+      "scriptLabel": "Metin",
+      "script": "Ah, harika. Geldin. Gelmeyeceğini düşünmeye başlamıştım.",
+      "generate": "Oluştur",
+      "generating": "Oluşturuluyor…",
+      "playing": "Oynatılıyor",
+      "tags": {
+        "awkward": {
+          "label": "Çekingen",
+          "text": "Tereddütlü duraklamalar ve kararsız tonlamayla çekingen bir şekilde seslendir"
+        },
+        "crying": {
+          "label": "Ağlayan",
+          "text": "Bunu ağlayarak oku"
+        },
+        "laugh": {
+          "label": "Gülüş",
+          "text": "Eğlendiğin sesinden belli olacak şekilde gülerek seslendir."
+        },
+        "sarcasm": {
+          "label": "Alay",
+          "text": "Soğuk ve keskin vurgularla alaycı bir şekilde seslendir."
+        },
+        "relieved": {
+          "label": "Rahatlamış",
+          "text": "Rahatlamış bir şekilde — gelmeyeceğinden endişe ediyordun."
+        },
+        "excited": {
+          "label": "Heyecanlı",
+          "text": "Canlı bir tonlama ve hızlı tempoyla heyecanlı bir şekilde seslendir."
+        }
+      }
+    },
+    "stop": "Oynatmayı durdur",
+    "clone": {
+      "title": "Bir sesi <brand>saniyeler içinde klonla.</brand>",
+      "subtitle": "Gerçek sesi dinle. Sonra ona istediğini söylet.",
+      "selectVoice": "{{name}} sesini seç",
+      "playReal": "Gerçek {{name}} sesini oynat",
+      "stopReal": "Gerçek {{name}} sesini durdur",
+      "lineLabel": "Düzenlemek için dokun",
+      "linePlaceholder": "İstediğini yaz",
+      "play": "Klonu oynat",
+      "cloning": "{{name}} klonlanıyor…",
+      "playing": "Oynatılıyor · {{name}} klonu"
+    },
+    "change": {
+      "title": "Sesini değiştir. Tarzını koru.",
+      "subtitle": "Ses taklidi videoları için ideal.",
+      "before": "Önce",
+      "beforeCaption": "Normal sesin",
+      "after": "Sonra",
+      "turnInto": "Şuna dönüştür",
+      "play": "{{name}} sesini oynat",
+      "stop": "{{name}} sesini durdur"
+    },
+    "clean": {
+      "title": "Ses kötü mü? <brand>Tek dokunuşla düzelt.</brand>",
+      "subtitle": "Gürültüyü, yankıyı ve uğultuyu gider. Geriye sadece sesin kalsın.",
+      "play": "Oynat",
+      "stop": "Durdur",
+      "noisy": "Gürültülü",
+      "clean": "Temiz",
+      "switch": "Sesi temizle",
+      "hint": "Oynatılırken anahtarı değiştirmeyi dene."
+    },
+    "edit": {
+      "title": "Metni düzenleyerek hataları düzelt.",
+      "subtitle": "Bir kelimeyi değiştir. Kendi sesinle söylensin. Yeniden kayıt gerekmez.",
+      "original": "Orijinal",
+      "fixed": "Düzeltilmiş",
+      "wordWrong": "{{word}}, hata. Düzeltmek için dokun",
+      "wordFixed": "{{from}} yerine {{word}} olarak düzeltildi. Geri almak için dokun",
+      "hintWrong": "Düzeltmek için hataya dokun.",
+      "hintFixed": "Düzeltildi. Geri almak için tekrar dokun."
+    }
+  },
+  "review": {
+    "title": "{{appName}} uygulamasını beğendin mi?",
+    "yes": "Evet",
+    "no": "Hayır"
+  }
+}

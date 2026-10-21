@@ -21,6 +21,8 @@ const screenLayout = safeAreaLayout({
   '(tabs)': null, // the tabs wrap their own screens
   'acting-instructions': null, // nested stack wraps its own screens
   paywall: null, // edge-to-edge orange header; pads itself
+  'trial-paywall': null, // edge-to-edge reviews; pads itself
+  'trial-offer': null, // pads itself, like the paywall
   'personal-info': safeAreaPresets.form,
   'change-password': safeAreaPresets.form,
   // Full-width chat: the screen pads only its header.
@@ -65,6 +67,15 @@ export default function AppLayout() {
       <Stack.Screen
         name="paywall"
         options={{ presentation: 'fullScreenModal' }}
+      />
+      <Stack.Screen
+        name="trial-paywall"
+        options={{ presentation: 'fullScreenModal' }}
+      />
+      {/* After signup: no swipe back to the dashboard under it. */}
+      <Stack.Screen
+        name="trial-offer"
+        options={{ animation: 'fade', gestureEnabled: false }}
       />
     </Stack>
   );

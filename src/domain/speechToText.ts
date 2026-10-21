@@ -19,11 +19,26 @@ export const translationLanguageIds = Object.keys(
 ) as TranslationLanguageId[];
 
 export type TranscriptSegment = {
-  // Seconds from the start of the audio.
-  start: number;
-  end: number;
+  // Seconds from the start of the audio; null when timing is unavailable.
+  start: number | null;
+  end: number | null;
   text: string;
 };
+
+type TimedTranscriptSegment = TranscriptSegment & {
+  start: number;
+  end: number;
+};
+
+export const isTimedTranscriptSegment = (
+  segment: TranscriptSegment,
+): segment is TimedTranscriptSegment =>
+  segment.start !== null &&
+  segment.end !== null &&
+  Number.isFinite(segment.start) &&
+  Number.isFinite(segment.end) &&
+  segment.start >= 0 &&
+  segment.end > segment.start;
 
 export const transcriptFormats = ['srt', 'vtt', 'txt'] as const;
 export type TranscriptFormat = (typeof transcriptFormats)[number];
@@ -44,7 +59,7 @@ export function formatTimestamp(seconds: number, separator: ',' | '.' = ',') {
   return `${pad(h)}:${pad(m)}:${pad(s)}${separator}${pad(totalMs % 1000, 3)}`;
 }
 
-function toSrt(segments: readonly TranscriptSegment[]) {
+function toSrt(segments: readonly TimedTranscriptSegment[]) {
   return segments
     .map(
       (segment, index) =>
@@ -55,7 +70,7 @@ function toSrt(segments: readonly TranscriptSegment[]) {
     .join('\n');
 }
 
-function toVtt(segments: readonly TranscriptSegment[]) {
+function toVtt(segments: readonly TimedTranscriptSegment[]) {
   const cues = segments
     .map(
       segment =>
@@ -75,13 +90,17 @@ export function exportTranscript(
   segments: readonly TranscriptSegment[],
   format: TranscriptFormat,
 ) {
+  if (format === 'txt') return toPlainText(segments);
+  if (!segments.every(isTimedTranscriptSegment)) {
+    throw new Error(
+      'Subtitle export requires valid timestamps for every segment.',
+    );
+  }
   switch (format) {
     case 'srt':
       return toSrt(segments);
     case 'vtt':
       return toVtt(segments);
-    case 'txt':
-      return toPlainText(segments);
   }
 }
 

@@ -3,20 +3,20 @@ import { apiAudio } from '@/lib/api';
 import { AppError } from '@/lib/errors';
 import { log } from '@/lib/logger';
 
-// Onboarding demos, called before sign-in with fixed keys from .env
+// Onboarding demos, called before sign-in with fixed keys from Expo config
 // instead of a user token. Each returns a uri to play: a saved file, or
 // the server's link to a ready-made sample.
 
 function keyOrThrow(key: string, envName: string) {
   if (!key) {
-    log('api', `${envName} is not set in .env`);
+    log('api', `${envName} is not set in Expo config`);
     throw new AppError('serviceUnavailable', `${envName} missing`);
   }
   return key;
 }
 
 // POST /api/app-onboard/acting
-//   Authorization: Bearer <EXPO_PUBLIC_ONBOARDING_ACTING_KEY>
+//   Authorization: Bearer <ONBOARDING_ACTING_KEY>
 //   { instructions: string }  ->  audio/mpeg
 // The server reads its own fixed demo script with the given acting
 // instructions.
@@ -28,14 +28,14 @@ export function generateOnboardingActing(
     body: { instructions },
     token: keyOrThrow(
       config.onboarding.actingKey,
-      'EXPO_PUBLIC_ONBOARDING_ACTING_KEY',
+      'ONBOARDING_ACTING_KEY',
     ),
     signal,
   });
 }
 
 // POST /api/app-onboard/clone
-//   Authorization: Bearer <EXPO_PUBLIC_ONBOARDING_CLONE_KEY>
+//   Authorization: Bearer <ONBOARDING_CLONE_KEY>
 //   { script: string, voiceid: string }  ->  audio/mpeg
 // `voiceid` is one of the preset clones (features/onboarding/cloneDemo).
 export function generateOnboardingClone(
@@ -47,7 +47,7 @@ export function generateOnboardingClone(
     body: { script, voiceid: voiceId },
     token: keyOrThrow(
       config.onboarding.cloneKey,
-      'EXPO_PUBLIC_ONBOARDING_CLONE_KEY',
+      'ONBOARDING_CLONE_KEY',
     ),
     signal,
   });

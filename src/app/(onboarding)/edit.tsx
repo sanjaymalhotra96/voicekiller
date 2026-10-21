@@ -1,7 +1,7 @@
 // Route: /edit (onboarding step 6)
 import React, { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { AppText, Icon } from '@/components';
 import { CompareRow } from '@/features/onboarding/CompareRow';
 import {
@@ -17,7 +17,7 @@ import {
 import { OnboardingCard } from '@/features/onboarding/OnboardingCard';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
 import { completeOnboarding } from '@/features/onboarding/store';
-import { useClipPlayer } from '@/features/onboarding/useClipPlayer';
+import { useOnboardingPlayer } from '@/features/onboarding/useOnboardingPlayer';
 import { useStatusBarStyle } from '@/hooks';
 import { iconSize, useColors } from '@/theme';
 import { cn } from '@/utils';
@@ -25,16 +25,16 @@ import { cn } from '@/utils';
 const ORIGINAL_ID = 'original';
 const FIXED_ID = 'fixed';
 
-// Step 6: "Fix mistakes by editing text." Tap the wrong word in the
+// Step 6: "Fix mistakes by editing text." Tap anywhere in the
 // transcript to fix it, then hear the original and the edited take.
 export default function OnboardingEditScreen() {
   const colors = useColors();
   const { t } = useTranslation();
   useStatusBarStyle('light-content');
   const [fixed, setFixed] = useState(false);
-  const { playingId, playOrStop, stop } = useClipPlayer();
+  const { playingId, loadingId, playOrStop, stop } = useOnboardingPlayer();
 
-  const onWord = () => {
+  const onTranscriptPress = () => {
     stop();
     setFixed(value => !value);
   };
@@ -47,14 +47,7 @@ export default function OnboardingEditScreen() {
 
   // Nested Text keeps the words flowing as one paragraph.
   const word = fixed ? (
-    <Text
-      accessibilityRole="button"
-      accessibilityLabel={t('onboarding.edit.wordFixed', {
-        word: editorRightWord,
-        from: editorWrongWord,
-      })}
-      onPress={onWord}
-    >
+    <Text>
       <Text className="font-sans-medium text-ink-subtle line-through">
         {editorWrongWord}
       </Text>{' '}
@@ -64,11 +57,6 @@ export default function OnboardingEditScreen() {
     </Text>
   ) : (
     <Text
-      accessibilityRole="button"
-      accessibilityLabel={t('onboarding.edit.wordWrong', {
-        word: editorWrongWord,
-      })}
-      onPress={onWord}
       className="bg-primary-soft font-sans-bold text-primary-deep underline"
       style={{ textDecorationColor: colors.primary.dark }}
     >
@@ -91,10 +79,23 @@ export default function OnboardingEditScreen() {
           wave={editorWave}
           waveColors={editorOriginalColors(colors)}
           playing={playingId === ORIGINAL_ID}
-          onPress={() => playOrStop(ORIGINAL_ID, editorOriginalUrl)}
+          loading={loadingId === ORIGINAL_ID}
+          onPress={() =>
+            playOrStop({ id: ORIGINAL_ID, audioUrl: editorOriginalUrl })
+          }
         />
 
-        <View className="mt-3.5 rounded-panel border-emphasis border-dashed border-line bg-primary-wash px-4 pb-3.5 pt-4">
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t(
+            fixed ? 'onboarding.edit.wordFixed' : 'onboarding.edit.wordWrong',
+            fixed
+              ? { word: editorRightWord, from: editorWrongWord }
+              : { word: editorWrongWord },
+          )}
+          onPress={onTranscriptPress}
+          className="mt-3.5 rounded-panel border-emphasis border-dashed border-line bg-primary-wash px-4 pb-3.5 pt-4"
+        >
           <Text className="font-sans-semibold text-xl leading-8 text-ink">
             “
             {editorParts.map((part, i) => (
@@ -121,7 +122,7 @@ export default function OnboardingEditScreen() {
               )}
             </AppText>
           </View>
-        </View>
+        </Pressable>
 
         <CompareRow
           tone="highlight"
@@ -129,8 +130,9 @@ export default function OnboardingEditScreen() {
           wave={editorWave}
           waveColors={editorFixedColors(colors)}
           playing={playingId === FIXED_ID}
+          loading={loadingId === FIXED_ID}
           disabled={!fixed}
-          onPress={() => playOrStop(FIXED_ID, editorFixedUrl)}
+          onPress={() => playOrStop({ id: FIXED_ID, audioUrl: editorFixedUrl })}
           className="mt-3.5"
         />
       </OnboardingCard>

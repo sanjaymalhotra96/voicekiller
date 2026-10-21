@@ -10,6 +10,7 @@ type Props = {
   item: LibraryItem;
   active: boolean;
   playing: boolean;
+  loading: boolean;
   // Shared player; only the active row subscribes to its position.
   player: AudioPlayer;
   onTogglePlay: (item: LibraryItem) => void;
@@ -22,6 +23,7 @@ export const LibraryListItem = memo(function LibraryListItemInner({
   item,
   active,
   playing,
+  loading,
   player,
   onTogglePlay,
   onMore,
@@ -33,6 +35,7 @@ export const LibraryListItem = memo(function LibraryListItemInner({
       title={item.title || t('library.untitled')}
       active={active}
       playing={playing}
+      loading={loading}
       progress={
         active ? (
           <PlaybackProgress

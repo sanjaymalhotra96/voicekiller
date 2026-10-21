@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { recordSuccessfulOperation } from '@/features/review/prompt';
 import { queryKeys } from '@/lib/queryKeys';
 import { clonesService } from '@/services/voiceClone';
 
@@ -8,6 +9,9 @@ export function useCreateClone() {
   const client = useQueryClient();
   return useMutation({
     mutationFn: clonesService.create,
-    onSuccess: () => client.invalidateQueries({ queryKey: queryKeys.voices.all }),
+    onSuccess: () => {
+      recordSuccessfulOperation();
+      return client.invalidateQueries({ queryKey: queryKeys.voices.all });
+    },
   });
 }

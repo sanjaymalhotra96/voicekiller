@@ -1,4 +1,3 @@
-import { useMutation } from '@tanstack/react-query';
 import React, { ReactNode, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, ListRenderItem, View } from 'react-native';
@@ -8,18 +7,16 @@ import {
   BottomSheet,
   Button,
   FormError,
-  OptionList,
 } from '@/components';
 import {
-  exportTranscript,
   isRtlLanguage,
-  TranscriptFormat,
+  isTimedTranscriptSegment,
   transcriptFormats,
-  transcriptMimeTypes,
   TranscriptSegment,
 } from '@/domain';
 import { SegmentRow } from '@/features/speech-to-text/SegmentRow';
-import { shareTextFile } from '@/lib/shareFile';
+import { TranscriptDownloadMenu } from '@/features/speech-to-text/TranscriptDownloadMenu';
+import { useTranscriptDownload } from '@/features/speech-to-text/useTranscriptDownload';
 import { config } from '@/config';
 import { layout } from '@/theme';
 import { cn } from '@/utils';
@@ -90,15 +87,7 @@ function TranscriptContent({
   const [segments, setSegments] = useState<TranscriptSegment[]>(
     session.segments,
   );
-  const [menuOpen, setMenuOpen] = useState(false);
-  const share = useMutation({
-    mutationFn: (format: TranscriptFormat) =>
-      shareTextFile(
-        `${fileName}.${format}`,
-        exportTranscript(segments, format),
-        transcriptMimeTypes[format],
-      ),
-  });
+  const share = useTranscriptDownload();
 
   const updateSegment = useCallback(
     (index: number, text: string) =>
@@ -110,13 +99,11 @@ function TranscriptContent({
     [],
   );
 
-  const formatOptions = useMemo(
-    () =>
-      transcriptFormats.map(key => ({
-        key,
-        label: t(`speechToText.sheet.formats.${key}`),
-      })),
-    [t],
+  const hasTimings =
+    segments.length > 0 && segments.every(isTimedTranscriptSegment);
+  const formats = useMemo(
+    () => transcriptFormats.filter(key => key === 'txt' || hasTimings),
+    [hasTimings],
   );
 
   const lastIndex = segments.length - 1;
@@ -154,26 +141,14 @@ function TranscriptContent({
 
   const footer = (
     <View className="gap-5 pt-5">
-      {menuOpen ? (
-        <OptionList
-          options={formatOptions}
-          onSelect={format => {
-            setMenuOpen(false);
-            share.mutate(format);
-          }}
-        />
-      ) : null}
-
       <FormError error={share.error} />
 
       <View className="flex-row gap-5">
-        <Button
-          variant="neutral"
-          icon={menuOpen ? 'chevronUp' : 'chevronDown'}
-          label={t('speechToText.sheet.download')}
+        <TranscriptDownloadMenu
+          formats={formats}
           loading={share.isPending}
-          onPress={() => setMenuOpen(open => !open)}
-          className="flex-1 flex-row-reverse"
+          disabled={segments.length === 0}
+          onSelect={format => share.mutate({ format, segments, fileName })}
         />
         <Button
           label={t('speechToText.sheet.finish')}

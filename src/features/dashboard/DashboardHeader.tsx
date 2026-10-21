@@ -1,6 +1,7 @@
+import { Link } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { icons } from '@/assets';
 import { AppText, Avatar } from '@/components';
 import { useAccount } from '@/features/account/hooks';
@@ -30,12 +31,21 @@ export function DashboardHeader() {
           {t('dashboard.greeting', { name: user.firstName })}
         </AppText>
       </View>
-      <Avatar
-        name={user.fullName}
-        uri={user.avatarUrl}
-        // Only paid plans get a badge ("STUDIO").
-        badge={plan === 'studio' ? t('plan.studio') : undefined}
-      />
+      <Link href="/personal-info" asChild>
+        <Pressable
+          accessibilityRole="link"
+          accessibilityLabel={t('settings.items.personalInfo')}
+          hitSlop={8}
+          className="active:opacity-70"
+        >
+          <Avatar
+            name={user.fullName}
+            uri={user.avatarUrl}
+            // Only paid plans get a badge ("STUDIO").
+            badge={plan === 'studio' ? t('plan.studio') : undefined}
+          />
+        </Pressable>
+      </Link>
     </View>
   );
 }

@@ -18,15 +18,27 @@ export type SheetAction = {
 type Props = {
   visible: boolean;
   onClose: () => void;
+  onDismiss?: () => void;
   title: string;
   actions: SheetAction[];
 };
 
 // Bottom sheet with a list of actions (Rename / Download / Delete).
-export function ActionSheet({ visible, onClose, title, actions }: Props) {
+export function ActionSheet({
+  visible,
+  onClose,
+  onDismiss,
+  title,
+  actions,
+}: Props) {
   const colors = useColors();
   return (
-    <BottomSheet visible={visible} onClose={onClose} title={title}>
+    <BottomSheet
+      visible={visible}
+      onClose={onClose}
+      onDismiss={onDismiss}
+      title={title}
+    >
       <View className="-mx-4">
         {actions.map(action => {
           const color = action.destructive

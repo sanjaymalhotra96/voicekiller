@@ -1,6 +1,8 @@
 // Local media files and the upload rules each tool enforces.
 
-// A local audio/video file: picked from Files or just recorded.
+export type MediaSource = 'files' | 'gallery';
+
+// A local audio/video file: picked from Files, Gallery, or just recorded.
 export type AudioSample = {
   uri: string;
   name: string;
@@ -45,8 +47,8 @@ export const fileRules = {
   editor: { ...anyMedia, maxBytes: 20 * MB },
   // Speech to Text: max 1000 MB. Full length, never cut.
   transcription: { ...anyMedia, maxBytes: 1000 * MB },
-  // Audio Clean: 200 MB (not in the API docs yet).
-  media: { ...anyMedia, maxBytes: 200 * MB },
+  // Audio Clean: 500 MB (not in the API docs yet).
+  media: { ...anyMedia, maxBytes: 500 * MB },
 } as const satisfies Record<string, FileRules>;
 
 type FileError = 'fileType' | 'fileTooLarge';

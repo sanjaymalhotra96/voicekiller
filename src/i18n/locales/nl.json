@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "Sluiten",
+    "back": "Terug",
+    "copied": "Gekopieerd",
+    "cancel": "Annuleren",
+    "change": "Wijzigen",
+    "save": "Opslaan",
+    "beta": "Bèta",
+    "delete": "Verwijderen",
+    "showMore": "Meer tonen",
+    "showLess": "Minder tonen"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "E-mail",
+    "continueWithGoogle": "Doorgaan met Google",
+    "continueWithEmail": "Doorgaan met e-mail",
+    "haveAccount": "Heb je al een account? <link>Log in</link>"
+  },
+  "welcome": {
+    "title": "Welkom bij <brand>{{appName}}</brand>",
+    "subtitle": "De eerste AI-stemtool die draait om acteerinstructies. Jij geeft de emotie aan, de stem speelt die uit."
+  },
+  "signUp": {
+    "title": "Registreren",
+    "subtitle": "Nog een paar korte stappen en je kunt beginnen.",
+    "fullName": "Je volledige naam",
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "confirmPassword": "Wachtwoord bevestigen",
+    "agree": "Ik ga akkoord met de <link>algemene voorwaarden</link>",
+    "submit": "Registreren",
+    "showPassword": "Wachtwoord tonen",
+    "hidePassword": "Wachtwoord verbergen"
+  },
+  "signIn": {
+    "title": "Inloggen",
+    "subtitle": "Welkom terug! We hebben je gemist.",
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "forgot": "Wachtwoord vergeten?",
+    "submit": "Inloggen"
+  },
+  "verify": {
+    "title": "Code verifiëren",
+    "subtitle": "We hebben een eenmalige code gestuurd naar <bold>{{email}}</bold>",
+    "resendIn": "Opnieuw versturen kan over {{time}} seconden.",
+    "resendReady": "Opnieuw versturen is mogelijk. <link>Code opnieuw versturen</link>",
+    "submit": "Verifiëren",
+    "digit": "Cijfer {{index}}"
+  },
+  "forgotPassword": {
+    "title": "Wachtwoord vergeten?",
+    "subtitle": "Vul je e-mailadres in en we sturen je een link om je wachtwoord opnieuw in te stellen.",
+    "email": "E-mailadres",
+    "submit": "Herstellink versturen",
+    "backToLogin": "Terug naar inloggen",
+    "sent": "Herstellink verstuurd naar <bold>{{email}}</bold>. Controleer je inbox."
+  },
+  "resetPassword": {
+    "title": "Wachtwoord opnieuw instellen",
+    "subtitle": "Kies een nieuw wachtwoord voor je account.",
+    "submit": "Wachtwoord opnieuw instellen",
+    "done": "Je wachtwoord is opnieuw ingesteld. Je kunt nu inloggen met je nieuwe wachtwoord.",
+    "requestLink": "Nieuwe herstellink aanvragen",
+    "continue": "Doorgaan"
+  },
+  "validation": {
+    "nameRequired": "Vul je naam in.",
+    "emailInvalid": "Vul een geldig e-mailadres in.",
+    "passwordRequired": "Vul je wachtwoord in.",
+    "passwordShort": "Het wachtwoord moet minstens {{min}} tekens bevatten.",
+    "passwordMismatch": "De wachtwoorden komen niet overeen.",
+    "termsRequired": "Accepteer de algemene voorwaarden.",
+    "otpIncomplete": "Vul de volledige code in.",
+    "titleRequired": "Vul een naam in.",
+    "dobInvalid": "Gebruik het formaat dd/mm/yy.",
+    "currentPasswordRequired": "Vul je huidige wachtwoord in.",
+    "samePassword": "Het nieuwe wachtwoord moet anders zijn.",
+    "promptRequired": "Beschrijf de stem die je wilt.",
+    "voiceNameRequired": "Vul een naam voor de stem in.",
+    "sampleRequired": "Upload een stemfragment of neem er een op.",
+    "descriptionRequired": "Beschrijf de stem."
+  },
+  "errors": {
+    "network": "Geen internetverbinding. Probeer het opnieuw.",
+    "invalidCredentials": "Onjuist e-mailadres of wachtwoord.",
+    "emailNotConfirmed": "Verifieer je e-mailadres voordat je inlogt.",
+    "emailTaken": "Er bestaat al een account met dit e-mailadres.",
+    "weakPassword": "Kies een sterker wachtwoord.",
+    "otpInvalid": "Ongeldige eenmalige code. Probeer het opnieuw.",
+    "recoveryLinkInvalid": "Deze herstellink is ongeldig of verlopen. Vraag een nieuwe aan.",
+    "rateLimited": "Te veel pogingen. Wacht even.",
+    "unknown": "Er is iets misgegaan. Probeer het opnieuw.",
+    "currentPasswordWrong": "Het huidige wachtwoord is onjuist.",
+    "uploadFailed": "Het bestand kon niet worden geüpload. Probeer het opnieuw.",
+    "quotaExceeded": "Je hebt de limiet van je abonnement bereikt. Upgrade je abonnement om verder te creëren.",
+    "serviceUnavailable": "Deze functie is momenteel niet beschikbaar. Probeer het later opnieuw.",
+    "campaignExists": "Je hebt al een campagne met die naam.",
+    "fileType": "Dit bestandstype wordt niet ondersteund.",
+    "fileTooLarge": "Dit bestand is te groot. Kies een kleiner bestand.",
+    "micPermission": "Sta microfoontoegang toe in Instellingen om je stem op te nemen.",
+    "photoLibraryPermission": "Sta toegang tot Foto's toe in Instellingen om een video te kiezen.",
+    "shareUnavailable": "Delen is niet beschikbaar op dit apparaat.",
+    "transcriptUnavailable": "Er is geen transcript beschikbaar voor dit bestand.",
+    "transcriptTimingUnavailable": "Dit transcript bevat geen bruikbare tijdcodes. Kies Tekst (.txt) om het te downloaden.",
+    "authRequired": "Je sessie is verlopen. Log opnieuw in.",
+    "studioRequired": "Hiervoor heb je het Studio-abonnement nodig.",
+    "notFound": "Dit bestand bestaat niet meer.",
+    "paidPlanRequired": "Hiervoor heb je een betaald abonnement nodig.",
+    "jobFailed": "We konden dit niet afronden. Probeer het opnieuw.",
+    "jobTimeout": "Dit duurt langer dan verwacht. Kijk over een paar minuten in de Bibliotheek.",
+    "sampleLength": "Gebruik een stemfragment van minstens 1 seconde.",
+    "renameNotAllowed": "De naam van dit bestand kan nu niet worden gewijzigd.",
+    "cancelled": "Geannuleerd.",
+    "purchasesUnavailable": "Abonnementen zijn nog niet beschikbaar. Probeer het later opnieuw.",
+    "purchaseFailed": "De aankoop kon niet worden afgerond. Er is niets in rekening gebracht.",
+    "nothingToRestore": "Er is geen eerdere aankoop gevonden voor dit winkelaccount.",
+    "conversionFailed": "Dit bestand kon niet worden omgezet naar audio. Probeer een ander bestand.",
+    "scriptTooLong": "Met een gratis abonnement kun je maximaal 1.000 tekens per keer genereren. Kort het script in of upgrade.",
+    "samePassword": "Je nieuwe wachtwoord moet anders zijn dan je huidige wachtwoord.",
+    "passwordNotSet": "Je hebt je geregistreerd via Google, dus dit account heeft geen wachtwoord dat je kunt wijzigen.",
+    "googleSignInFailed": "Inloggen met Google is niet afgerond. Probeer het opnieuw.",
+    "appleSignInFailed": "Inloggen met Apple is niet afgerond. Probeer het opnieuw."
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "library": "Bibliotheek",
+    "settings": "Instellingen"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "greeting": "Hoi, {{name}}",
+    "sections": {
+      "create": "Maken",
+      "transform": "Omzetten"
+    },
+    "actionCard": {
+      "title": "Tekst naar spraak",
+      "action": "Spraak maken"
+    }
+  },
+  "library": {
+    "title": "Bibliotheek",
+    "search": "Bestanden zoeken...",
+    "empty": {
+      "title": "Je hebt nog geen bestanden!",
+      "message": "Maak een nieuw bestand via het dashboard."
+    },
+    "noResults": "Geen bestanden gevonden voor je zoekopdracht.",
+    "groups": {
+      "today": "Vandaag",
+      "yesterday": "Gisteren",
+      "thisWeek": "Deze week",
+      "earlier": "Eerder"
+    },
+    "actions": {
+      "title": "Details",
+      "rename": "Naam wijzigen",
+      "download": "Downloaden",
+      "delete": "Verwijderen",
+      "more": "Meer opties voor {{title}}",
+      "play": "{{title}} afspelen",
+      "pause": "{{title}} pauzeren"
+    },
+    "rename": {
+      "title": "Naam wijzigen",
+      "placeholder": "Bestandsnaam"
+    },
+    "delete": {
+      "title": "Bestand verwijderen?",
+      "message": "‘{{title}}’ wordt definitief verwijderd.",
+      "confirm": "Verwijderen",
+      "cancel": "Annuleren"
+    },
+    "retry": "Opnieuw proberen",
+    "untitled": "Naamloos"
+  },
+  "settings": {
+    "title": "Instellingen",
+    "sections": {
+      "general": "Algemeen",
+      "others": "Overig"
+    },
+    "items": {
+      "personalInfo": "Persoonlijke gegevens",
+      "changePassword": "Wachtwoord wijzigen",
+      "subscription": "Abonnement beheren",
+      "share": "Delen met vrienden",
+      "contact": "Contact opnemen",
+      "privacy": "Privacybeleid"
+    },
+    "signOut": "Uitloggen",
+    "shareMessage": "Ik gebruik {{appName}} om AI-stemmen te maken. Probeer het: {{url}}",
+    "shareMessageNoLink": "Ik gebruik {{appName}} om AI-stemmen te maken."
+  },
+  "crash": {
+    "title": "Er is iets misgegaan",
+    "message": "Er is een onverwachte fout opgetreden in de app. Probeer het opnieuw.",
+    "retry": "Opnieuw proberen"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "Tekst naar spraak",
+      "subtitle": "Typ het en luister",
+      "tag": "AI-spraak"
+    },
+    "voiceClone": {
+      "title": "Stem klonen",
+      "subtitle": "Kopieer elke stem",
+      "tag": "Stem klonen"
+    },
+    "voiceDesign": {
+      "title": "Stem ontwerpen",
+      "subtitle": "Beschrijf een stem",
+      "tag": "Stem ontwerpen"
+    },
+    "voiceChanger": {
+      "title": "Stemvervormer",
+      "subtitle": "Verander je stem",
+      "tag": "Stemvervormer"
+    },
+    "audioClean": {
+      "title": "Audio opschonen",
+      "subtitle": "Verwijder ruis",
+      "tag": "Audio opschonen"
+    },
+    "speechEditor": {
+      "title": "Spraakeditor",
+      "subtitle": "Verbeter de woorden",
+      "tag": "Spraakeditor"
+    },
+    "speechToText": {
+      "title": "Spraak naar tekst",
+      "subtitle": "Zet audio om in tekst",
+      "tag": "Spraak naar tekst"
+    }
+  },
+  "trialOffer": {
+    "title": "We nodigen je uit om",
+    "titleHighlight": "Voicekiller gratis te proberen",
+    "noPaymentToday": "Vandaag betaal je niets",
+    "cta": "Probeer voor $ 0,00"
+  },
+  "trialPaywall": {
+    "later": "Later",
+    "stars": "5 van 5 sterren",
+    "reviews": {
+      "textToSpeech": "‘De stemmen klinken zo echt. Mijn luisteraars horen niet dat het AI is.’",
+      "acting": "‘Ik typ “zeg het als een treurig afscheid” en de emotie klopt elke keer.’",
+      "voiceClone": "‘Mijn stem in een minuut gekloond. Nu maak ik video’s zonder op te nemen.’",
+      "allInOne": "‘Audio opschonen, stemmen wisselen, fouten herstellen. Eén app verving vier tools.’"
+    },
+    "kicker": "Stop met betalen voor 5 verschillende tools",
+    "title": "De beste <brand>AI-spraaktools</brand> op <brand>één platform</brand>",
+    "perMonth": "{{price}}/maand",
+    "perYear": "{{price}}/jaar",
+    "monthlyNote": "{{days}} dagen gratis · altijd opzegbaar",
+    "yearlyNote": "{{days}} dagen gratis · bespaar {{percent}}%",
+    "trialNote": "{{days}} dagen gratis",
+    "cta": "Probeer {{days}} dagen GRATIS",
+    "then": "daarna {{price}}",
+    "disclaimer": "Vandaag geen kosten. Zeg op vóór dag {{days}} en je betaalt niets."
+  },
+  "paywall": {
+    "title": "Ontgrendel Studio",
+    "close": "Sluiten",
+    "features": {
+      "voices": "Meer dan 2.000 stemmen",
+      "clones": "Onbeperkt stemmen klonen",
+      "audioClean": "Audio opschonen",
+      "voiceChanger": "Stemvervormer",
+      "speechEditor": "AI-spraakeditor"
+    },
+    "yearly": "Jaarlijks",
+    "monthly": "Maandelijks",
+    "minutes": "{{count}} minuten/maand",
+    "save": "Bespaar {{percent}}%",
+    "continue": "Doorgaan",
+    "cancelAnytime": "Altijd opzegbaar",
+    "restore": "Aankopen herstellen",
+    "terms": "Voorwaarden",
+    "privacy": "Privacy"
+  },
+  "plan": {
+    "basic": "Basisabonnement",
+    "studio": "Studio",
+    "buyStudio": "Studio kopen",
+    "usage": "Gebruik",
+    "usageOf": "/ {{limit}} minuten",
+    "usageThisMonth": "Gebruik deze maand",
+    "usageMinutes": "{{used}} / {{limit}} min",
+    "remaining": "Nog {{count}} minuten over"
+  },
+  "profile": {
+    "title": "Persoonlijke gegevens",
+    "userId": "Gebruikers-ID",
+    "fullName": "Je volledige naam",
+    "email": "Je e-mailadres",
+    "dob": "Geboortedatum",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "Profielfoto wijzigen",
+    "copyId": "Gebruikers-ID kopiëren",
+    "deleteAccount": "Account verwijderen",
+    "save": "Wijzigingen opslaan",
+    "saved": "Je wijzigingen zijn opgeslagen.",
+    "changeEmail": {
+      "title": "E-mailadres wijzigen",
+      "subtitle": "We sturen een bevestigingslink naar het nieuwe adres.",
+      "placeholder": "Nieuw e-mailadres",
+      "submit": "Link versturen",
+      "sent": "Controleer {{email}} om de wijziging te bevestigen."
+    },
+    "unsaved": {
+      "title": "Wijzigingen opslaan?",
+      "message": "Je niet-opgeslagen wijzigingen gaan verloren. Wil je ze opslaan voordat je sluit?",
+      "discard": "Verwerpen",
+      "confirm": "Bevestigen"
+    },
+    "delete": {
+      "title": "Account verwijderen",
+      "message": "Als je je account verwijdert, worden al je gegevens uit onze database verwijderd. Dit kan niet ongedaan worden gemaakt.",
+      "prompt": "Typ ‘{{word}}’ om dit te bevestigen",
+      "word": "DELETE",
+      "submit": "Account verwijderen"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "Vul je huidige wachtwoord in",
+    "title": "Wachtwoord wijzigen",
+    "current": "Huidig wachtwoord",
+    "new": "Nieuw wachtwoord",
+    "newPlaceholder": "Vul een nieuw wachtwoord in (min. {{min}} tekens)",
+    "confirm": "Wachtwoord bevestigen",
+    "confirmPlaceholder": "Bevestig het nieuwe wachtwoord",
+    "submit": "Wachtwoord wijzigen",
+    "done": "Je wachtwoord is gewijzigd."
+  },
+  "notFound": {
+    "title": "Deze pagina bestaat niet.",
+    "action": "Naar de startpagina"
+  },
+  "textToSpeech": {
+    "title": "Tekst naar spraak",
+    "fileName": "Bestandsnaam (optioneel)",
+    "campaign": "Campagne",
+    "scriptPlaceholder": "Typ of plak je script hier...",
+    "scriptLabel": "Script",
+    "scriptLimitExceeded": "Deze stem ondersteunt maximaal {{max}} tekens. Kort je script in of kies een andere stem.",
+    "chooseVoice": "Stem kiezen",
+    "voiceLabel": "Stem: {{name}}",
+    "emotions": "Emoties",
+    "addPause": "Pauze toevoegen",
+    "settings": "Instellingen",
+    "preview": "Voorbeeld beluisteren",
+    "stopPreview": "Stoppen",
+    "generate": "Genereren",
+    "campaignSheet": {
+      "title": "Campagne",
+      "placeholder": "Naam van de nieuwe campagne...",
+      "create": "Campagne maken",
+      "default": "Standaard"
+    },
+    "pauseSheet": {
+      "title": "Pauze toevoegen",
+      "seconds_one": "{{count}} seconde",
+      "seconds_other": "{{count}} seconden"
+    },
+    "settingsSheet": {
+      "title": "Instellingen",
+      "audioFormat": "Audioformaat",
+      "voiceTuning": "Stemafstelling",
+      "speed": "Snelheid",
+      "delivery": "Voordrachtmodus",
+      "actingInstructions": "Acteerinstructies",
+      "instruction": "Instructie",
+      "chooseInstruction": "Kies een instructie",
+      "ownInstructions": "Typ je eigen instructies",
+      "ownPlaceholder": "Beschrijf hoe het script moet worden uitgesproken..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "Stabieler",
+      "balanced": "Gebalanceerd",
+      "creative": "Creatiever"
+    }
+  },
+  "emotions": {
+    "auto": "Automatisch",
+    "happy": "Blij",
+    "sad": "Verdrietig",
+    "angry": "Boos",
+    "fearful": "Angstig",
+    "disgusted": "Walgend",
+    "surprised": "Verrast",
+    "calm": "Kalm",
+    "fluent": "Vloeiend"
+  },
+  "voices": {
+    "title": "Stem selecteren",
+    "search": "Stemmen zoeken...",
+    "sources": {
+      "library": "Bibliotheek",
+      "cloned": "Gekloond",
+      "design": "Ontworpen",
+      "favorites": "Favorieten"
+    },
+    "openFilters": "Filters",
+    "openFiltersCount": "Filters, {{count}} actief",
+    "favorite": "{{name}} toevoegen aan favorieten",
+    "unfavorite": "{{name}} verwijderen uit favorieten",
+    "select": "{{name}} selecteren",
+    "play": "Voorbeeld van {{name}} afspelen",
+    "pause": "Voorbeeld van {{name}} pauzeren",
+    "empty": "Geen stemmen gevonden voor je zoekopdracht.",
+    "emptyFavorites": "Je hebt nog geen favoriete stemmen. Tik op het hartje bij een stem om die hier te bewaren.",
+    "filters": {
+      "title": "Filters",
+      "model": "Model",
+      "gender": "Geslacht",
+      "accent": "Accent",
+      "language": "Taal",
+      "apply": "Filters toepassen"
+    },
+    "genders": {
+      "female": "Vrouwelijk",
+      "male": "Mannelijk",
+      "neutral": "Neutraal"
+    },
+    "models": {
+      "all": "Alle modellen",
+      "expressive": "Expressief",
+      "directable": "Regisseerbaar",
+      "directablePro": "Regisseerbaar Pro"
+    }
+  },
+  "accents": {
+    "auto": "Automatisch",
+    "ar-001": "AR - Arabisch",
+    "ar-EG": "AR - Egyptisch",
+    "cs-CZ": "CS - Tsjechisch",
+    "de-DE": "DE - Duits",
+    "el-GR": "EL - Grieks",
+    "en-AU": "EN - Australisch",
+    "en-CA": "EN - Canadees",
+    "en-GB": "EN - Brits",
+    "en-IE": "EN - Iers",
+    "en-IN": "EN - Indiaas",
+    "en-NZ": "EN - Nieuw-Zeelands",
+    "en-US": "EN - Amerikaans",
+    "en-ZA": "EN - Zuid-Afrikaans",
+    "es-419": "ES - Latijns-Amerikaans",
+    "es-ES": "ES - Spaans",
+    "fr-CA": "FR - Canadees",
+    "fr-FR": "FR - Frans",
+    "hi-IN": "HI - Hindi",
+    "it-IT": "IT - Italiaans",
+    "ja-JP": "JA - Japans",
+    "jv-ID": "JV - Javaans",
+    "ko-KR": "KO - Koreaans",
+    "nl-NL": "NL - Nederlands",
+    "pl-PL": "PL - Pools",
+    "pt-BR": "PT - Braziliaans",
+    "pt-PT": "PT - Portugees",
+    "sw-KE": "SW - Keniaans Swahili",
+    "ta-IN": "TA - Tamil",
+    "te-IN": "TE - Telugu",
+    "vi-VN": "VI - Vietnamees",
+    "zh-CN": "ZH - Mandarijn"
+  },
+  "languages": {
+    "auto": "Automatisch",
+    "ar": "Arabisch",
+    "yue": "Kantonees",
+    "zh": "Chinees",
+    "cs": "Tsjechisch",
+    "nl": "Nederlands",
+    "en": "Engels",
+    "fi": "Fins",
+    "fr": "Frans",
+    "de": "Duits",
+    "el": "Grieks",
+    "he": "Hebreeuws",
+    "hi": "Hindi",
+    "hu": "Hongaars",
+    "id": "Indonesisch",
+    "it": "Italiaans",
+    "ja": "Japans",
+    "ko": "Koreaans",
+    "pl": "Pools",
+    "pt": "Portugees",
+    "ru": "Russisch",
+    "es": "Spaans",
+    "sv": "Zweeds",
+    "tr": "Turks",
+    "uk": "Oekraïens"
+  },
+  "instructions": {
+    "title": "Acteerinstructie",
+    "tabs": {
+      "library": "Bibliotheek",
+      "mine": "Mijn instructies"
+    },
+    "all": "Alle ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "Emoties",
+      "characters": "Personages",
+      "situations": "Situaties",
+      "accents": "Accenten"
+    },
+    "search": "Instructies zoeken...",
+    "noResults": "Geen instructies gevonden voor je zoekopdracht.",
+    "details": "Details van {{name}}",
+    "select": "{{name}} gebruiken",
+    "play": "Voorbeeld van {{name}} afspelen",
+    "pause": "Voorbeeld van {{name}} pauzeren",
+    "notFound": "Deze instructie bestaat niet meer.",
+    "detail": {
+      "script": "Script",
+      "instructions": "Acteerinstructies",
+      "sample": "Audiofragment",
+      "playSample": "Klik om het audiofragment af te spelen",
+      "noSample": "Nog geen audiofragment",
+      "use": "Deze instructie gebruiken"
+    },
+    "mine": {
+      "title": "Mijn eigen instructies",
+      "add": "Nieuwe instructie",
+      "emptyTitle": "Geen eigen instructies",
+      "emptyMessage": "Maak en bewaar je eigen acteerinstructies om in al je projecten te gebruiken.",
+      "generate": "Instructies genereren met AI",
+      "created": "Gemaakt: {{date}}",
+      "remove": "{{name}} verwijderen",
+      "removeTitle": "Instructie verwijderen?",
+      "removeMessage": "‘{{name}}’ wordt definitief verwijderd."
+    },
+    "create": {
+      "title": "Nieuwe acteerinstructie",
+      "name": "Naam van de instructie",
+      "namePlaceholder": "bijv. ‘Warm en vriendelijk’, ‘Professioneel nieuws’",
+      "prompt": "Invoer voor acteerinstructies",
+      "promptPlaceholder": "Maak instructies voor ...",
+      "hint": "Bijv. ‘Maak instructies voor een robotstem’ en AI genereert ze automatisch",
+      "submit": "Instructies genereren"
+    }
+  },
+  "voiceClone": {
+    "title": "Stem klonen",
+    "guide": "Handleiding",
+    "language": "Taal",
+    "voiceName": "Naam van de stem",
+    "voiceNamePlaceholder": "bijv. Rustige verteller",
+    "sources": {
+      "upload": "Audio uploaden",
+      "record": "Audio opnemen"
+    },
+    "upload": {
+      "title": "Bronaudio uploaden",
+      "hint": "Audio of video. De eerste {{seconds}} seconden worden gebruikt.",
+      "action": "Uploaden"
+    },
+    "record": {
+      "title": "Neem je stem op",
+      "hint": "Selecteer je microfoon en druk op Opnemen.",
+      "action": "Opnemen",
+      "stop": "Stoppen",
+      "again": "Opnieuw opnemen",
+      "recording": "Opnemen {{time}}",
+      "microphone": "Microfoon",
+      "defaultMicrophone": "Standaardmicrofoon",
+      "fileName": "Opname.m4a"
+    },
+    "clip": {
+      "play": "{{name}} afspelen",
+      "pause": "{{name}} pauzeren"
+    },
+    "submit": "Stem maken",
+    "guideSheet": {
+      "title": "Opnamehandleiding",
+      "tips": [
+        "Gebruik ongeveer 30 seconden duidelijke spraak van één spreker. Langere fragmenten worden ingekort tot de eerste 30 seconden.",
+        "Neem op in een stille ruimte, zonder muziek of achtergrondgeluid.",
+        "Spreek natuurlijk, met de toon die je de gekloonde stem wilt geven.",
+        "Houd de microfoon op een vaste afstand van je mond."
+      ]
+    }
+  },
+  "results": {
+    "play": "{{name}} afspelen",
+    "pause": "{{name}} pauzeren",
+    "created": "Gemaakt: {{date}}",
+    "rename": "Naam van {{name}} wijzigen",
+    "renameTitle": "Naam wijzigen",
+    "renameLabel": "Naam bewerken",
+    "renamePlaceholder": "Naam",
+    "download": "{{name}} downloaden",
+    "remove": "{{name}} verwijderen",
+    "removeTitle": "Bestand verwijderen?",
+    "removeMessage": "‘{{name}}’ wordt definitief verwijderd.",
+    "viewAll": "Alles bekijken",
+    "empty": "Hier staat nog niets.",
+    "enhanced": "Verbeterd",
+    "recent": {
+      "voiceClone": "Recent gekloonde stemmen",
+      "voiceDesign": "Recent ontworpen stemmen",
+      "voiceChanger": "Recent veranderde stemmen",
+      "audioClean": "Recent opgeschoonde audio",
+      "speechEditor": "Recente spraak",
+      "speechToText": "Recente transcripties"
+    },
+    "titles": {
+      "voiceClone": "Mijn gekloonde stemmen",
+      "voiceDesign": "Mijn ontworpen stemmen",
+      "voiceChanger": "Mijn veranderde stemmen",
+      "audioClean": "Mijn opgeschoonde audio",
+      "speechEditor": "Mijn spraak",
+      "speechToText": "Mijn transcripties"
+    },
+    "view": "{{name}} bekijken"
+  },
+  "upload": {
+    "chooseSource": "Kiezen uit",
+    "files": "Bestanden",
+    "gallery": "Galerij (video's)",
+    "source": "Bronaudio uploaden",
+    "target": "Doelaudio uploaden",
+    "action": "Uploaden",
+    "change": "Wijzigen",
+    "remove": "{{name}} verwijderen",
+    "uploading": "Uploaden {{percent}}%",
+    "maxSize": "Max. {{max}} MB"
+  },
+  "player": {
+    "play": "Afspelen",
+    "pause": "Pauzeren"
+  },
+  "voiceChanger": {
+    "title": "Stemvervormer",
+    "source": "Bronaudio",
+    "target": "Doelstem",
+    "submit": "Omzetting starten"
+  },
+  "voiceDesign": {
+    "title": "Stem ontwerpen",
+    "guide": "Handleiding",
+    "language": "Taal",
+    "name": "Naam van de stem",
+    "namePlaceholder": "bijv. Rustige verteller",
+    "description": "Stembeschrijving",
+    "descriptionPlaceholder": "‘Warme, diepe mannenstem met een licht Brits accent, een rustig tempo en een gezaghebbende toon.’",
+    "descriptionHint": "Schrijf de beschrijving in het Engels.",
+    "enhance": "Beschrijving verbeteren met AI",
+    "submit": "Stem maken",
+    "variations": {
+      "title": "Stem selecteren",
+      "subtitle": "Luister naar de {{count}} gegenereerde varianten en kies je favoriet",
+      "item": "Stemvariant {{number}}",
+      "play": "Variant {{number}} afspelen",
+      "pause": "Variant {{number}} pauzeren",
+      "save": "Stem opslaan"
+    },
+    "guideSheet": {
+      "title": "Een stem beschrijven",
+      "tips": [
+        "Geef aan wie er spreekt: leeftijd, geslacht en karakter.",
+        "Beschrijf de klank: warm, schor, helder, diep.",
+        "Voeg een accent en tempo toe, bijv. een licht Brits accent en een rustig tempo.",
+        "Noem de sfeer of het gebruik, bijv. een rustige verteller voor luisterboeken."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "Spraakeditor",
+    "submit": "Starten",
+    "sheet": {
+      "title": "Spraakeditor",
+      "audio": "Audio",
+      "transcription": "Transcriptie",
+      "revert": "Origineel herstellen",
+      "generate": "Audio genereren",
+      "done": "Klaar"
+    },
+    "uploadHint": "Audio of video, max. {{max}} MB. De eerste {{minutes}} minuten worden gebruikt."
+  },
+  "audioClean": {
+    "title": "Audio opschonen",
+    "description": "De verbeterfunctie laat je opname klinken alsof die met een professionele microfoon is gemaakt.",
+    "enhance": "Ruis verwijderen en verbeteren",
+    "submit": "Audio opschonen"
+  },
+  "speechToText": {
+    "title": "Spraak naar tekst",
+    "language": "Taal",
+    "translation": "Ondertitels vertalen",
+    "noTranslation": "Geen",
+    "submit": "Transcriptie starten",
+    "sheet": {
+      "title": "Resultaten",
+      "audio": "Audio",
+      "content": "Inhoud",
+      "timingUnavailable": "Tijdcodes niet beschikbaar",
+      "segment": "#{{number}}",
+      "edit": "Regel {{number}} bewerken",
+      "done": "Bewerken van regel {{number}} afronden",
+      "download": "Downloaden",
+      "formats": {
+        "srt": "Ondertitels (.srt)",
+        "vtt": "Webondertitels (.vtt)",
+        "txt": "Platte tekst (.txt)"
+      },
+      "finish": "Klaar"
+    }
+  },
+  "offline": {
+    "title": "Geen internetverbinding",
+    "message": "Controleer je wifi of mobiele data. De app gaat verder zodra je weer online bent.",
+    "stillOffline": "Nog steeds geen verbinding. Controleer je wifi of mobiele data en probeer het opnieuw.",
+    "retry": "Opnieuw proberen"
+  },
+  "support": {
+    "title": "Contact opnemen",
+    "error": "De chat kon niet worden geladen. Controleer je verbinding en probeer het opnieuw."
+  },
+  "onboarding": {
+    "step": "Stap {{step}} van {{total}}",
+    "next": "Volgende",
+    "playSample": "Voorbeeld van {{name}} afspelen",
+    "stopSample": "Voorbeeld van {{name}} stoppen",
+    "voices": {
+      "title": "AI-stemmen die echt <brand>acteren.</brand>",
+      "subtitle": "Tekst naar spraak, stemmen klonen en meer.",
+      "samples": {
+        "happy": "Blij",
+        "angry": "Boos",
+        "sarcastic": "Sarcastisch",
+        "excited": "Enthousiast",
+        "crying": "Huilend",
+        "pirate": "Piraat",
+        "scared": "Bang",
+        "laughing": "Lachend",
+        "calm": "Kalm",
+        "evilVillain": "Boosaardige schurk",
+        "dramatic": "Dramatisch",
+        "confident": "Zelfverzekerd",
+        "nervous": "Nerveus",
+        "romantic": "Romantisch",
+        "sleepy": "Slaperig",
+        "energetic": "Energiek",
+        "madScientist": "Gekke wetenschapper",
+        "horror": "Horror",
+        "surprised": "Verrast",
+        "awkward": "Ongemakkelijk",
+        "shocked": "Geschokt",
+        "tired": "Moe",
+        "santaClaus": "Kerstman",
+        "curious": "Nieuwsgierig",
+        "playful": "Speels",
+        "serious": "Serieus",
+        "sad": "Verdrietig",
+        "rap": "Rap",
+        "disappointed": "Teleurgesteld",
+        "sportsCommentator": "Sportcommentator"
+      }
+    },
+    "direct": {
+      "title": "Nu regisseer jij de stem.",
+      "subtitle": "Kies een gevoel. Druk op afspelen.",
+      "actingLabel": "Acteerinstructies (tik om te bewerken)",
+      "actingPlaceholder": "Beschrijf hoe het moet klinken",
+      "scriptLabel": "Script",
+      "script": "O, fijn. Je bent er. Ik begon al te denken dat je niet zou komen.",
+      "generate": "Genereren",
+      "generating": "Genereren…",
+      "playing": "Afspelen",
+      "tags": {
+        "awkward": {
+          "label": "Ongemakkelijk",
+          "text": "Ongemakkelijke voordracht met aarzelende timing en onzekere intonatie"
+        },
+        "crying": {
+          "label": "Huilend",
+          "text": "Lees dit huilend voor"
+        },
+        "laugh": {
+          "label": "Lachen",
+          "text": "Lachende voordracht met hoorbaar plezier."
+        },
+        "sarcasm": {
+          "label": "Sarcasme",
+          "text": "Sarcastische voordracht met droge, scherpe nadruk."
+        },
+        "relieved": {
+          "label": "Opgelucht",
+          "text": "Opgelucht — je was bang dat de ander niet zou komen."
+        },
+        "excited": {
+          "label": "Enthousiast",
+          "text": "Enthousiaste voordracht met levendige intonatie en een hoog tempo."
+        }
+      }
+    },
+    "stop": "Afspelen stoppen",
+    "clone": {
+      "title": "Kloon een stem <brand>in seconden.</brand>",
+      "subtitle": "Hoor de echte stem. Laat die daarna alles zeggen wat je wilt.",
+      "selectVoice": "Stem van {{name}} selecteren",
+      "playReal": "Echte stem van {{name}} afspelen",
+      "stopReal": "Echte stem van {{name}} stoppen",
+      "lineLabel": "Tik om te bewerken",
+      "linePlaceholder": "Typ wat je wilt",
+      "play": "Gekloonde stem afspelen",
+      "cloning": "{{name}} klonen…",
+      "playing": "Afspelen · gekloonde stem van {{name}}"
+    },
+    "change": {
+      "title": "Verander je stem. Behoud je stijl.",
+      "subtitle": "Ideaal voor video's met stemimitaties.",
+      "before": "Voor",
+      "beforeCaption": "Je normale stem",
+      "after": "Na",
+      "turnInto": "Veranderen in",
+      "play": "{{name}} afspelen",
+      "stop": "{{name}} stoppen"
+    },
+    "clean": {
+      "title": "Slecht geluid? Opgelost met <brand>één tik.</brand>",
+      "subtitle": "Verwijder ruis, echo en brom. Houd alleen je stem over.",
+      "play": "Afspelen",
+      "stop": "Stoppen",
+      "noisy": "Met ruis",
+      "clean": "Schoon",
+      "switch": "Audio opschonen",
+      "hint": "Probeer te schakelen tijdens het afspelen."
+    },
+    "edit": {
+      "title": "Verbeter fouten door tekst te bewerken.",
+      "subtitle": "Verander een woord. Je stem spreekt het uit. Opnieuw opnemen hoeft niet.",
+      "original": "Origineel",
+      "fixed": "Verbeterd",
+      "wordWrong": "{{word}}, fout. Tik om te verbeteren",
+      "wordFixed": "{{word}}. Verbeterd van {{from}}. Tik om ongedaan te maken",
+      "hintWrong": "Tik op de fout om die te verbeteren.",
+      "hintFixed": "Verbeterd. Tik opnieuw om ongedaan te maken."
+    }
+  },
+  "review": {
+    "title": "Vind je {{appName}} leuk?",
+    "yes": "Ja",
+    "no": "Nee"
+  }
+}

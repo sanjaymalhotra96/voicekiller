@@ -86,6 +86,7 @@ function VariationList({
               <GradientPlayButton
                 active={active}
                 playing={active && playback.playing}
+                loading={active && playback.loading}
                 player={playback.player}
                 disabled={!variation.previewUrl}
                 onPress={() =>

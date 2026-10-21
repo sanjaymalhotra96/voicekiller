@@ -1,5 +1,6 @@
 import type { LibraryItem, LibrarySource } from '@/domain';
 import { apiRequest, studioOnly } from '@/lib/api';
+import { registerUserScope } from '@/lib/userScope';
 import { asNumber, asText } from '@/utils';
 
 // Where each tool keeps its Library files, and how a row becomes a file.
@@ -42,6 +43,9 @@ const withAudio = <T extends { audioUrl: string }>(item: T) =>
 // history. It is downloaded on a Library visit's first page and the same
 // answer is paged through for the rest of that visit.
 let denoiseCache: { userId: string; rows: Promise<Row[]> } | null = null;
+registerUserScope(() => {
+  denoiseCache = null;
+});
 
 function denoiseHistory(userId: string, fresh: boolean): Promise<Row[]> {
   if (fresh || denoiseCache?.userId !== userId) {

@@ -2,12 +2,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { useEffect, useRef } from 'react';
 import Purchases, { CustomerInfo } from 'react-native-purchases';
-import { isFirstSignIn, planForTier } from '@/domain';
+import { planForTier } from '@/domain';
 import { useSession } from '@/features/auth/AuthProvider';
 import { AppErrorCode, toAppError } from '@/lib/errors';
 import { queryKeys } from '@/lib/queryKeys';
 import { purchasesReady } from '@/lib/purchases';
-import { secureStorage } from '@/lib/storage';
+import { profileService } from '@/services/profile';
 import {
   Subscription,
   subscriptionService,
@@ -41,6 +41,19 @@ function useSubscription() {
 // The user's paid tier from RevenueCat, or null (free, or not set up).
 export const useSubscriptionTier = () => useSubscription().data?.tier ?? null;
 
+// Supabase account_type ('free' or a paid type), fetched fresh each time
+// a screen opens: the trial offer and paywall use it to decide whether an
+// already-paid account skips straight to the dashboard.
+export function useAccountType() {
+  const userId = useSession().session?.user.id;
+  return useQuery({
+    queryKey: [...queryKeys.account.all, 'type', userId],
+    queryFn: () => profileService.getAccountType(userId as string),
+    enabled: !!userId,
+    staleTime: 0,
+  });
+}
+
 // After a purchase the plan and its minutes change on the server too.
 const useRefreshAfterPurchase = () => {
   const client = useQueryClient();
@@ -56,7 +69,8 @@ export const useStudioPlans = () =>
   useQuery({
     queryKey: queryKeys.studioPlans,
     queryFn: subscriptionService.getPlans,
-    staleTime: Infinity,
+    // Refresh on reopening so dashboard changes do not stay cached all session.
+    staleTime: 0,
   });
 
 // Buys a package. Resolves true when bought, false when cancelled.
@@ -138,27 +152,4 @@ export function useUpgradeOnPlanLimit() {
       }),
     [client, router],
   );
-}
-
-// Opens the paywall once, over the Dashboard, right after a new account's
-// first sign-in (email sign-up, or a first Google/Apple sign-in).
-// Remembered per user on this device, so it never comes back on its own.
-export function useSignUpPaywall() {
-  const router = useRouter();
-  const { session } = useSession();
-  const userId = session?.user.id;
-  const createdAt = session?.user.created_at;
-  const lastSignInAt = session?.user.last_sign_in_at;
-
-  useEffect(() => {
-    if (!userId || !isFirstSignIn(createdAt, lastSignInAt)) {
-      return;
-    }
-    const shownKey = `paywall.signUpShown.${userId}`;
-    if (secureStorage.getBoolean(shownKey)) {
-      return;
-    }
-    secureStorage.set(shownKey, true);
-    router.push('/paywall');
-  }, [router, userId, createdAt, lastSignInAt]);
 }

@@ -1,24 +1,23 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import { AudioClip, Button, MediaPanel, MediaPanelHeader } from '@/components';
+import { AudioClip, MediaPanel, MediaPanelHeader } from '@/components';
+import { MediaSourceMenu } from '@/components/media/MediaSourceMenu';
 import { config } from '@/config';
-import type { AudioSample } from '@/domain';
+import type { AudioSample, MediaSource } from '@/domain';
 
 type Props = {
   sample: AudioSample | null;
-  onPick: () => void;
+  onPick: (source: MediaSource) => void;
 };
 
 // "Upload Source Audio": pick a file; once picked, preview it in place.
 export function UploadPanel({ sample, onPick }: Props) {
   const { t } = useTranslation();
   const uploadButton = (
-    <Button
-      size="sm"
-      variant="light"
+    <MediaSourceMenu
       label={t('voiceClone.upload.action')}
-      onPress={onPick}
+      onPick={onPick}
     />
   );
 

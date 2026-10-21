@@ -6,11 +6,12 @@ import { instructionsService } from '@/services/instructions';
 
 // The shared library: small and rarely changes, so it is cached long and
 // filtered on the device.
-export const useActingInstructions = () =>
+export const useActingInstructions = (enabled = true) =>
   useQuery({
     queryKey: queryKeys.instructions.library(),
     queryFn: instructionsService.listLibrary,
     staleTime: config.instructions.staleTimeMs,
+    enabled,
   });
 
 export const useCustomInstructions = () =>

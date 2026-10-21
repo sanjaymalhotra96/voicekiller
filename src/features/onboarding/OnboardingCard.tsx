@@ -14,7 +14,7 @@ const cards = (c: Palette) =>
       box: 'border border-line-subtle bg-surface',
       shadow: shadows(c).softCard,
     },
-  }) as const;
+  } as const);
 
 // White card holding a step's demo.
 export function OnboardingCard({
@@ -43,7 +43,7 @@ const labelTones = (c: Palette) =>
   ({
     accent: { text: 'text-primary-deep', icon: c.primary.deep },
     muted: { text: 'text-ink-subtle', icon: c.ink.subtle },
-  }) as const;
+  } as const);
 
 // Small uppercase label over a field or section inside the card.
 export function CardLabel({

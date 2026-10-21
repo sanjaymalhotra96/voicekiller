@@ -7,7 +7,6 @@ import { images } from '@/assets';
 import { FeatureCard, ActionCard, Section } from '@/components';
 import { DashboardHeader } from '@/features/dashboard/DashboardHeader';
 import { dashboardSections } from '@/features/dashboard/sections';
-import { useSignUpPaywall } from '@/features/subscription/hooks';
 import { ToolId, tools } from '@/features/tools/tools';
 
 // Screen of each tool (src/app/(app)/<route>.tsx).
@@ -24,9 +23,6 @@ const toolRoutes: Record<ToolId, Href> = {
 export default function DashboardScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  // A brand-new account lands here with Unlock Studio on top.
-  useSignUpPaywall();
-
   const openTool = (id: ToolId) => router.push(toolRoutes[id]);
 
   const card = (id: ToolId, layout: 'tile' | 'row') => (

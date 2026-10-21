@@ -7,9 +7,9 @@ import type { LibraryItem } from '@/domain';
 import type { ResultTool } from '@/features/results/types';
 import { EditorSheet } from '@/features/speech-editor/EditorSheet';
 import { TranscriptSheet } from '@/features/speech-to-text/TranscriptSheet';
+import { savedTranscriptQuery } from '@/features/speech-to-text/useTranscriptDownload';
 import { queryKeys } from '@/lib/queryKeys';
 import { speechEditorService } from '@/services/speechEditor';
-import { speechToTextService } from '@/services/speechToText';
 import { useColors } from '@/theme';
 
 type Props = {
@@ -35,16 +35,7 @@ export function ResultViewer({ tool, file, onClose }: Props) {
 type ViewerProps = Omit<Props, 'tool'>;
 
 function TranscriptViewer({ file, onClose }: ViewerProps) {
-  const session = useQuery({
-    queryKey: queryKeys.results.view(file?.id),
-    queryFn: () =>
-      speechToTextService.open({
-        rowId: file!.rowId,
-        audioUrl: file!.audioUrl,
-        transcriptUrl: file!.metadata.transcriptUrl,
-      }),
-    enabled: !!file,
-  });
+  const session = useQuery(savedTranscriptQuery(file));
   return (
     <TranscriptSheet
       visible={!!file}

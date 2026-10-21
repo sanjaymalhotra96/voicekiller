@@ -1,5 +1,4 @@
 // Route: /clean (onboarding step 5)
-import { useRouter } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -23,14 +22,13 @@ import { cn } from '@/utils';
 // crossfades between the noisy original and the cleaned version.
 export default function OnboardingCleanScreen() {
   const colors = useColors();
-  const router = useRouter();
   const { t } = useTranslation();
   const pair = useCrossfadePair(noisyAudioUrl, cleanAudioUrl);
   const clean = pair.useB;
 
-  const onNext = () => {
-    pair.pause();
-    router.push('/edit');
+  const onNext = (go: (name: string) => void) => {
+    pair.stop();
+    go('edit');
   };
 
   return (
@@ -59,15 +57,14 @@ export default function OnboardingCleanScreen() {
         </View>
 
         <TakeButton
-          phase={pair.playing ? 'playing' : 'idle'}
+          phase={pair.loading ? 'loading' : pair.playing ? 'playing' : 'idle'}
           labels={{
             idle: t('onboarding.clean.play'),
             loading: t('onboarding.clean.play'),
-            playing: t('onboarding.clean.pause'),
+            playing: t('onboarding.clean.stop'),
           }}
-          stopLabel={t('onboarding.clean.pause')}
           idleIcon="play"
-          onPress={pair.playing ? pair.pause : pair.play}
+          onPress={pair.playing ? pair.stop : pair.play}
         />
 
         <CleanSwitch clean={clean} onChange={pair.setUseB} />

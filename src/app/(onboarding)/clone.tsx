@@ -1,12 +1,10 @@
 // Route: /clone (onboarding step 3)
-import { useRouter } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { FormError, TextArea } from '@/components';
 import { textLimits } from '@/domain';
 import {
-  clonePresets,
   cloneTakeKey,
   cloneVoices,
   defaultCloneScript,
@@ -16,31 +14,39 @@ import {
   OnboardingCard,
 } from '@/features/onboarding/OnboardingCard';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
-import { SoundPill } from '@/features/onboarding/SoundPill';
 import { TakeButton } from '@/features/onboarding/TakeButton';
 import { useGeneratedTake } from '@/features/onboarding/useGeneratedTake';
+import { VoiceSampleOption } from '@/features/onboarding/VoiceSampleOption';
 import { generateOnboardingClone } from '@/services/onboarding';
 
 // Real-voice clips share the player with clone takes, under their own ids.
 const realId = (voiceId: string) => `real:${voiceId}`;
 
-// Step 3: "Clone a voice in seconds." Tap a voice to hear the real person,
-// then type a line and hear their clone say it.
+// Step 3: "Clone a voice in seconds." Select a voice or preview its sample,
+// then type a line and hear the selected clone say it.
 export default function OnboardingCloneScreen() {
-  const router = useRouter();
   const { t } = useTranslation();
   const [voice, setVoice] = useState(cloneVoices[0]);
   const [script, setScript] = useState(defaultCloneScript);
-  const { phase, playingId, error, play, playClip, reset } =
-    useGeneratedTake(clonePresets);
+  const { phase, playingId, loadingId, error, play, playClip, reset } =
+    useGeneratedTake();
 
   const onVoice = useCallback(
+    (id: string) => {
+      const next = cloneVoices.find(item => item.id === id);
+      if (!next || next.id === voice.id) return;
+      reset();
+      setVoice(next);
+    },
+    [reset, voice.id],
+  );
+
+  const onPreview = useCallback(
     (id: string) => {
       const next = cloneVoices.find(item => item.id === id);
       if (!next) {
         return;
       }
-      setVoice(next);
       if (playingId === realId(id)) {
         reset();
       } else {
@@ -69,9 +75,9 @@ export default function OnboardingCloneScreen() {
     );
   };
 
-  const onNext = () => {
+  const onNext = (go: (name: string) => void) => {
     reset();
-    router.push('/change');
+    go('change');
   };
 
   const name = voice.name;
@@ -86,28 +92,33 @@ export default function OnboardingCloneScreen() {
         {cloneVoices.map(item => {
           const sounding = playingId === realId(item.id);
           return (
-            <SoundPill
+            <VoiceSampleOption
               key={item.id}
               id={item.id}
-              label={item.name}
-              accessibilityLabel={t(
+              name={item.name}
+              loading={loadingId === realId(item.id)}
+              selectionLabel={t('onboarding.clone.selectVoice', {
+                name: item.name,
+              })}
+              previewLabel={t(
                 sounding
                   ? 'onboarding.clone.stopReal'
                   : 'onboarding.clone.playReal',
                 { name: item.name },
               )}
-              sounding={sounding}
+              playing={sounding}
               selected={item.id === voice.id}
-              onPress={onVoice}
+              onSelect={onVoice}
+              onPreview={onPreview}
             />
           );
         })}
       </View>
 
       <OnboardingCard tone="canvas" className="mt-5">
-        <CardLabel>{t('onboarding.clone.lineLabel', { name })}</CardLabel>
+        <CardLabel>{t('onboarding.clone.lineLabel')}</CardLabel>
         <TextArea
-          accessibilityLabel={t('onboarding.clone.lineLabel', { name })}
+          accessibilityLabel={t('onboarding.clone.lineLabel')}
           value={script}
           onChangeText={onEdit}
           maxLength={textLimits.onboardingCloneScript}

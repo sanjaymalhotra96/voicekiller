@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "关闭",
+    "back": "返回",
+    "copied": "已复制",
+    "cancel": "取消",
+    "change": "更改",
+    "save": "保存",
+    "beta": "测试版",
+    "delete": "删除",
+    "showMore": "显示更多",
+    "showLess": "收起"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "电子邮箱",
+    "continueWithGoogle": "使用 Google 继续",
+    "continueWithEmail": "使用邮箱继续",
+    "haveAccount": "已有账号？<link>登录</link>"
+  },
+  "welcome": {
+    "title": "欢迎使用 <brand>{{appName}}</brand>",
+    "subtitle": "这是首款以表演指令为核心的 AI 语音工具。告诉它你想要的情绪，它就能演绎出来。"
+  },
+  "signUp": {
+    "title": "注册",
+    "subtitle": "只需填写几项信息，即可开始使用。",
+    "fullName": "你的姓名",
+    "email": "电子邮箱地址",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "agree": "我同意<link>条款与条件</link>",
+    "submit": "注册",
+    "showPassword": "显示密码",
+    "hidePassword": "隐藏密码"
+  },
+  "signIn": {
+    "title": "登录",
+    "subtitle": "欢迎回来！我们很想念你。",
+    "email": "电子邮箱地址",
+    "password": "密码",
+    "forgot": "忘记密码？",
+    "submit": "登录"
+  },
+  "verify": {
+    "title": "验证码验证",
+    "subtitle": "我们已向 <bold>{{email}}</bold> 发送一次性验证码",
+    "resendIn": "{{time}} 秒后可重新发送。",
+    "resendReady": "现在可以重新发送。<link>重新发送验证码</link>",
+    "submit": "验证",
+    "digit": "第 {{index}} 位数字"
+  },
+  "forgotPassword": {
+    "title": "忘记密码？",
+    "subtitle": "输入你的电子邮箱地址，我们将发送重置密码的链接。",
+    "email": "电子邮箱地址",
+    "submit": "发送重置链接",
+    "backToLogin": "返回登录",
+    "sent": "重置链接已发送至 <bold>{{email}}</bold>。请查看收件箱。"
+  },
+  "resetPassword": {
+    "title": "重置密码",
+    "subtitle": "为你的账号设置新密码。",
+    "submit": "重置密码",
+    "done": "密码已重置。现在可以使用新密码登录。",
+    "requestLink": "获取新的重置链接",
+    "continue": "继续"
+  },
+  "validation": {
+    "nameRequired": "请输入你的姓名。",
+    "emailInvalid": "请输入有效的电子邮箱地址。",
+    "passwordRequired": "请输入密码。",
+    "passwordShort": "密码长度至少为 {{min}} 个字符。",
+    "passwordMismatch": "两次输入的密码不一致。",
+    "termsRequired": "请接受条款与条件。",
+    "otpIncomplete": "请输入完整的验证码。",
+    "titleRequired": "请输入名称。",
+    "dobInvalid": "请使用 dd/mm/yy 格式（日/月/两位年份）。",
+    "currentPasswordRequired": "请输入当前密码。",
+    "samePassword": "新密码必须与原密码不同。",
+    "promptRequired": "请描述你想要的声音。",
+    "voiceNameRequired": "请输入声音名称。",
+    "sampleRequired": "请上传或录制声音样本。",
+    "descriptionRequired": "请描述声音。"
+  },
+  "errors": {
+    "network": "无网络连接，请重试。",
+    "invalidCredentials": "邮箱或密码错误。",
+    "emailNotConfirmed": "请先验证邮箱再登录。",
+    "emailTaken": "该邮箱已注册账号。",
+    "weakPassword": "请设置安全性更高的密码。",
+    "otpInvalid": "验证码无效，请重试。",
+    "recoveryLinkInvalid": "此重置链接无效或已过期，请获取新链接。",
+    "rateLimited": "尝试次数过多，请稍候。",
+    "unknown": "出了点问题，请重试。",
+    "currentPasswordWrong": "当前密码错误。",
+    "uploadFailed": "无法上传文件，请重试。",
+    "quotaExceeded": "你已达到当前套餐的使用上限。升级套餐即可继续创作。",
+    "serviceUnavailable": "此功能暂时不可用，请稍后重试。",
+    "campaignExists": "你已有同名的活动。",
+    "fileType": "不支持此文件类型。",
+    "fileTooLarge": "文件过大，请选择较小的文件。",
+    "micPermission": "请在“设置”中允许访问麦克风，以录制你的声音。",
+    "photoLibraryPermission": "请在“设置”中允许访问照片，以选择视频。",
+    "shareUnavailable": "此设备不支持分享。",
+    "transcriptUnavailable": "此文件暂无转录文本。",
+    "transcriptTimingUnavailable": "此转录文本没有可用的时间信息。请选择“纯文本 (.txt)”下载。",
+    "authRequired": "登录已过期，请重新登录。",
+    "studioRequired": "此功能需要 Studio 套餐。",
+    "notFound": "此文件已不存在。",
+    "paidPlanRequired": "此功能需要付费套餐。",
+    "jobFailed": "无法完成操作，请重试。",
+    "jobTimeout": "处理时间比预期更长，请几分钟后查看素材库。",
+    "sampleLength": "请使用至少 1 秒长的声音样本。",
+    "renameNotAllowed": "暂时无法重命名此文件。",
+    "cancelled": "已取消。",
+    "purchasesUnavailable": "订阅暂未开放，请稍后重试。",
+    "purchaseFailed": "无法完成购买，未向你收取任何费用。",
+    "nothingToRestore": "未找到此商店账号的历史购买记录。",
+    "conversionFailed": "无法将此文件转换为音频，请尝试其他文件。",
+    "scriptTooLong": "免费套餐每次最多可生成 1,000 个字符。请缩短文本或升级套餐。",
+    "samePassword": "新密码必须与当前密码不同。",
+    "passwordNotSet": "你通过 Google 注册，此账号没有可更改的密码。",
+    "googleSignInFailed": "Google 登录未完成，请重试。",
+    "appleSignInFailed": "Apple 登录未完成，请重试。"
+  },
+  "tabs": {
+    "dashboard": "工作台",
+    "library": "素材库",
+    "settings": "设置"
+  },
+  "dashboard": {
+    "title": "工作台",
+    "greeting": "你好，{{name}}",
+    "sections": {
+      "create": "创作",
+      "transform": "转换"
+    },
+    "actionCard": {
+      "title": "文字转语音",
+      "action": "生成语音"
+    }
+  },
+  "library": {
+    "title": "素材库",
+    "search": "搜索文件...",
+    "empty": {
+      "title": "你还没有任何文件！",
+      "message": "前往工作台创建新文件。"
+    },
+    "noResults": "未找到符合搜索条件的文件。",
+    "groups": {
+      "today": "今天",
+      "yesterday": "昨天",
+      "thisWeek": "本周",
+      "earlier": "更早"
+    },
+    "actions": {
+      "title": "详情",
+      "rename": "重命名",
+      "download": "下载",
+      "delete": "删除",
+      "more": "{{title}} 的更多选项",
+      "play": "播放 {{title}}",
+      "pause": "暂停 {{title}}"
+    },
+    "rename": {
+      "title": "重命名",
+      "placeholder": "文件名"
+    },
+    "delete": {
+      "title": "删除文件？",
+      "message": "“{{title}}”将被永久删除。",
+      "confirm": "删除",
+      "cancel": "取消"
+    },
+    "retry": "重试",
+    "untitled": "未命名"
+  },
+  "settings": {
+    "title": "设置",
+    "sections": {
+      "general": "通用",
+      "others": "其他"
+    },
+    "items": {
+      "personalInfo": "个人信息",
+      "changePassword": "更改密码",
+      "subscription": "管理订阅",
+      "share": "分享给朋友",
+      "contact": "联系我们",
+      "privacy": "隐私政策"
+    },
+    "signOut": "退出登录",
+    "shareMessage": "我正在使用 {{appName}} 创建 AI 语音。试试看：{{url}}",
+    "shareMessageNoLink": "我正在使用 {{appName}} 创建 AI 语音。"
+  },
+  "crash": {
+    "title": "出了点问题",
+    "message": "应用遇到意外错误，请重试。",
+    "retry": "重试"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "文字转语音",
+      "subtitle": "输入文字，即刻聆听",
+      "tag": "AI 语音"
+    },
+    "voiceClone": {
+      "title": "声音克隆",
+      "subtitle": "复制任何声音",
+      "tag": "声音克隆"
+    },
+    "voiceDesign": {
+      "title": "声音设计",
+      "subtitle": "描述你想要的声音",
+      "tag": "声音设计"
+    },
+    "voiceChanger": {
+      "title": "变声器",
+      "subtitle": "转换你的声音",
+      "tag": "变声器"
+    },
+    "audioClean": {
+      "title": "音频降噪",
+      "subtitle": "去除噪声",
+      "tag": "音频降噪"
+    },
+    "speechEditor": {
+      "title": "语音编辑器",
+      "subtitle": "修改说错的词",
+      "tag": "语音编辑器"
+    },
+    "speechToText": {
+      "title": "语音转文字",
+      "subtitle": "将音频转成文字",
+      "tag": "语音转文字"
+    }
+  },
+  "trialOffer": {
+    "title": "我们诚邀你",
+    "titleHighlight": "免费试用 Voicekiller",
+    "noPaymentToday": "今天无需付款",
+    "cta": "$0.00 试用"
+  },
+  "trialPaywall": {
+    "later": "稍后",
+    "stars": "5 星（满分 5 星）",
+    "reviews": {
+      "textToSpeech": "“声音太真实了，听众根本听不出是 AI。”",
+      "acting": "“我输入‘像悲伤的告别那样说’，每次情绪都拿捏得很准。”",
+      "voiceClone": "“一分钟就克隆了我的声音，现在拍视频不用再录音。”",
+      "allInOne": "“清理音频、变声、修正错误，一个应用取代了四个工具。”"
+    },
+    "kicker": "别再为 5 个不同的工具付费",
+    "title": "<brand>一个平台</brand>，汇集最好的 <brand>AI 语音工具</brand>",
+    "perMonth": "{{price}}/月",
+    "perYear": "{{price}}/年",
+    "monthlyNote": "免费 {{days}} 天 · 随时取消",
+    "yearlyNote": "免费 {{days}} 天 · 节省 {{percent}}%",
+    "trialNote": "免费 {{days}} 天",
+    "cta": "免费试用 {{days}} 天",
+    "then": "之后 {{price}}",
+    "disclaimer": "今天不收费。在第 {{days}} 天前取消即不会被扣费。"
+  },
+  "paywall": {
+    "title": "解锁 Studio",
+    "close": "关闭",
+    "features": {
+      "voices": "2,000 多种声音",
+      "clones": "无限声音克隆",
+      "audioClean": "音频降噪",
+      "voiceChanger": "变声器",
+      "speechEditor": "AI 语音编辑器"
+    },
+    "yearly": "按年",
+    "monthly": "按月",
+    "minutes": "每月 {{count}} 分钟",
+    "save": "节省 {{percent}}%",
+    "continue": "继续",
+    "cancelAnytime": "随时取消",
+    "restore": "恢复购买",
+    "terms": "条款",
+    "privacy": "隐私"
+  },
+  "plan": {
+    "basic": "基础套餐",
+    "studio": "Studio",
+    "buyStudio": "购买 Studio",
+    "usage": "用量",
+    "usageOf": "/ {{limit}} 分钟",
+    "usageThisMonth": "本月用量",
+    "usageMinutes": "{{used}} / {{limit}} 分钟",
+    "remaining": "剩余 {{count}} 分钟"
+  },
+  "profile": {
+    "title": "个人信息",
+    "userId": "用户 ID",
+    "fullName": "你的姓名",
+    "email": "你的邮箱",
+    "dob": "出生日期",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "更换头像",
+    "copyId": "复制用户 ID",
+    "deleteAccount": "删除账号",
+    "save": "保存更改",
+    "saved": "更改已保存。",
+    "changeEmail": {
+      "title": "更改邮箱",
+      "subtitle": "我们将向新邮箱发送确认链接。",
+      "placeholder": "新邮箱地址",
+      "submit": "发送链接",
+      "sent": "请查看 {{email}} 中的邮件以确认更改。"
+    },
+    "unsaved": {
+      "title": "保存更改？",
+      "message": "未保存的更改将丢失。是否在关闭前保存？",
+      "discard": "放弃更改",
+      "confirm": "确认"
+    },
+    "delete": {
+      "title": "删除账号",
+      "message": "删除账号后，你在我们数据库中的所有信息都会被移除。此操作无法撤销。",
+      "prompt": "请输入“{{word}}”以确认",
+      "word": "DELETE",
+      "submit": "删除账号"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "输入当前密码",
+    "title": "更改密码",
+    "current": "当前密码",
+    "new": "新密码",
+    "newPlaceholder": "输入新密码（至少 {{min}} 个字符）",
+    "confirm": "确认密码",
+    "confirmPlaceholder": "再次输入新密码",
+    "submit": "更改密码",
+    "done": "密码已更改。"
+  },
+  "notFound": {
+    "title": "此页面不存在。",
+    "action": "返回首页"
+  },
+  "textToSpeech": {
+    "title": "文字转语音",
+    "fileName": "文件名（可选）",
+    "campaign": "活动",
+    "scriptPlaceholder": "在此输入或粘贴文本...",
+    "scriptLabel": "文本",
+    "scriptLimitExceeded": "此声音最多支持 {{max}} 个字符。请缩短文本或选择其他声音。",
+    "chooseVoice": "选择声音",
+    "voiceLabel": "声音：{{name}}",
+    "emotions": "情绪",
+    "addPause": "添加停顿",
+    "settings": "设置",
+    "preview": "试听",
+    "stopPreview": "停止",
+    "generate": "生成",
+    "campaignSheet": {
+      "title": "活动",
+      "placeholder": "输入新活动名称...",
+      "create": "创建活动",
+      "default": "默认"
+    },
+    "pauseSheet": {
+      "title": "添加停顿",
+      "seconds_one": "{{count}} 秒",
+      "seconds_other": "{{count}} 秒"
+    },
+    "settingsSheet": {
+      "title": "设置",
+      "audioFormat": "音频格式",
+      "voiceTuning": "声音调节",
+      "speed": "语速",
+      "delivery": "演绎模式",
+      "actingInstructions": "表演指令",
+      "instruction": "指令",
+      "chooseInstruction": "选择指令",
+      "ownInstructions": "输入自定义指令",
+      "ownPlaceholder": "描述这段文本应该如何演绎..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "更稳定",
+      "balanced": "均衡",
+      "creative": "更有创意"
+    }
+  },
+  "emotions": {
+    "auto": "自动",
+    "happy": "开心",
+    "sad": "悲伤",
+    "angry": "愤怒",
+    "fearful": "害怕",
+    "disgusted": "厌恶",
+    "surprised": "惊讶",
+    "calm": "平静",
+    "fluent": "流畅"
+  },
+  "voices": {
+    "title": "选择声音",
+    "search": "搜索声音...",
+    "sources": {
+      "library": "声音库",
+      "cloned": "克隆声音",
+      "design": "设计声音",
+      "favorites": "收藏"
+    },
+    "openFilters": "筛选",
+    "openFiltersCount": "筛选，已启用 {{count}} 项",
+    "favorite": "收藏 {{name}}",
+    "unfavorite": "取消收藏 {{name}}",
+    "select": "选择 {{name}}",
+    "play": "播放 {{name}} 的样本",
+    "pause": "暂停 {{name}} 的样本",
+    "empty": "未找到符合搜索条件的声音。",
+    "emptyFavorites": "还没有收藏的声音。点击声音旁的爱心即可将其保存在这里。",
+    "filters": {
+      "title": "筛选",
+      "model": "模型",
+      "gender": "性别",
+      "accent": "口音",
+      "language": "语言",
+      "apply": "应用筛选"
+    },
+    "genders": {
+      "female": "女声",
+      "male": "男声",
+      "neutral": "中性"
+    },
+    "models": {
+      "all": "所有模型",
+      "expressive": "情感丰富",
+      "directable": "支持表演指令",
+      "directablePro": "支持表演指令 Pro"
+    }
+  },
+  "accents": {
+    "auto": "自动",
+    "ar-001": "AR - 阿拉伯语",
+    "ar-EG": "AR - 埃及口音",
+    "cs-CZ": "CS - 捷克语",
+    "de-DE": "DE - 德语",
+    "el-GR": "EL - 希腊语",
+    "en-AU": "EN - 澳大利亚口音",
+    "en-CA": "EN - 加拿大口音",
+    "en-GB": "EN - 英国口音",
+    "en-IE": "EN - 爱尔兰口音",
+    "en-IN": "EN - 印度口音",
+    "en-NZ": "EN - 新西兰口音",
+    "en-US": "EN - 美国口音",
+    "en-ZA": "EN - 南非口音",
+    "es-419": "ES - 拉丁美洲口音",
+    "es-ES": "ES - 西班牙口音",
+    "fr-CA": "FR - 加拿大口音",
+    "fr-FR": "FR - 法国口音",
+    "hi-IN": "HI - 印地语",
+    "it-IT": "IT - 意大利语",
+    "ja-JP": "JA - 日语",
+    "jv-ID": "JV - 爪哇语",
+    "ko-KR": "KO - 韩语",
+    "nl-NL": "NL - 荷兰语",
+    "pl-PL": "PL - 波兰语",
+    "pt-BR": "PT - 巴西口音",
+    "pt-PT": "PT - 葡萄牙口音",
+    "sw-KE": "SW - 肯尼亚斯瓦希里语",
+    "ta-IN": "TA - 泰米尔语",
+    "te-IN": "TE - 泰卢固语",
+    "vi-VN": "VI - 越南语",
+    "zh-CN": "ZH - 普通话"
+  },
+  "languages": {
+    "auto": "自动",
+    "ar": "阿拉伯语",
+    "yue": "粤语",
+    "zh": "中文",
+    "cs": "捷克语",
+    "nl": "荷兰语",
+    "en": "英语",
+    "fi": "芬兰语",
+    "fr": "法语",
+    "de": "德语",
+    "el": "希腊语",
+    "he": "希伯来语",
+    "hi": "印地语",
+    "hu": "匈牙利语",
+    "id": "印度尼西亚语",
+    "it": "意大利语",
+    "ja": "日语",
+    "ko": "韩语",
+    "pl": "波兰语",
+    "pt": "葡萄牙语",
+    "ru": "俄语",
+    "es": "西班牙语",
+    "sv": "瑞典语",
+    "tr": "土耳其语",
+    "uk": "乌克兰语"
+  },
+  "instructions": {
+    "title": "表演指令",
+    "tabs": {
+      "library": "指令库",
+      "mine": "我的指令"
+    },
+    "all": "全部 ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "情绪",
+      "characters": "角色",
+      "situations": "情境",
+      "accents": "口音"
+    },
+    "search": "搜索指令...",
+    "noResults": "未找到符合搜索条件的指令。",
+    "details": "{{name}} 的详情",
+    "select": "使用 {{name}}",
+    "play": "播放 {{name}} 的样本",
+    "pause": "暂停 {{name}} 的样本",
+    "notFound": "此指令已不存在。",
+    "detail": {
+      "script": "文本",
+      "instructions": "表演指令",
+      "sample": "音频样本",
+      "playSample": "点击播放音频样本",
+      "noSample": "暂无音频样本",
+      "use": "使用此指令"
+    },
+    "mine": {
+      "title": "我的自定义指令",
+      "add": "新建指令",
+      "emptyTitle": "暂无自定义指令",
+      "emptyMessage": "创建并保存自己的表演指令，在各个项目中重复使用。",
+      "generate": "用 AI 生成指令",
+      "created": "创建于：{{date}}",
+      "remove": "删除 {{name}}",
+      "removeTitle": "删除指令？",
+      "removeMessage": "“{{name}}”将被永久删除。"
+    },
+    "create": {
+      "title": "新建表演指令",
+      "name": "指令名称",
+      "namePlaceholder": "例如：“温暖友好”“专业新闻播报”",
+      "prompt": "输入表演指令",
+      "promptPlaceholder": "为……创建指令",
+      "hint": "例如，输入“为机器人声音创建指令”，AI 就会自动生成。",
+      "submit": "生成指令"
+    }
+  },
+  "voiceClone": {
+    "title": "声音克隆",
+    "guide": "指南",
+    "language": "语言",
+    "voiceName": "声音名称",
+    "voiceNamePlaceholder": "例如：沉稳的旁白",
+    "sources": {
+      "upload": "上传音频",
+      "record": "录制音频"
+    },
+    "upload": {
+      "title": "上传源音频",
+      "hint": "支持音频或视频，仅使用前 {{seconds}} 秒。",
+      "action": "上传"
+    },
+    "record": {
+      "title": "录制你的声音",
+      "hint": "选择麦克风，然后点击“录制”。",
+      "action": "录制",
+      "stop": "停止",
+      "again": "重新录制",
+      "recording": "录制中 {{time}}",
+      "microphone": "麦克风",
+      "defaultMicrophone": "默认麦克风",
+      "fileName": "录音.m4a"
+    },
+    "clip": {
+      "play": "播放 {{name}}",
+      "pause": "暂停 {{name}}"
+    },
+    "submit": "创建声音",
+    "guideSheet": {
+      "title": "录音指南",
+      "tips": [
+        "使用约 30 秒的清晰单人语音。较长的片段将截取前 30 秒。",
+        "在安静的房间录制，避免音乐和背景噪声。",
+        "自然地说话，使用你希望克隆声音呈现的语气。",
+        "让麦克风与嘴巴保持固定距离。"
+      ]
+    }
+  },
+  "results": {
+    "play": "播放 {{name}}",
+    "pause": "暂停 {{name}}",
+    "created": "创建于：{{date}}",
+    "rename": "重命名 {{name}}",
+    "renameTitle": "重命名",
+    "renameLabel": "修改名称",
+    "renamePlaceholder": "名称",
+    "download": "下载 {{name}}",
+    "remove": "删除 {{name}}",
+    "removeTitle": "删除文件？",
+    "removeMessage": "“{{name}}”将被永久删除。",
+    "viewAll": "查看全部",
+    "empty": "这里还没有内容。",
+    "enhanced": "已增强",
+    "recent": {
+      "voiceClone": "最近克隆的声音",
+      "voiceDesign": "最近设计的声音",
+      "voiceChanger": "最近的变声作品",
+      "audioClean": "最近降噪的音频",
+      "speechEditor": "最近的语音",
+      "speechToText": "最近的转录"
+    },
+    "titles": {
+      "voiceClone": "我的克隆声音",
+      "voiceDesign": "我的设计声音",
+      "voiceChanger": "我的变声作品",
+      "audioClean": "我的降噪音频",
+      "speechEditor": "我的语音",
+      "speechToText": "我的转录"
+    },
+    "view": "查看 {{name}}"
+  },
+  "upload": {
+    "chooseSource": "选择来源",
+    "files": "文件",
+    "gallery": "相册（视频）",
+    "source": "上传源音频",
+    "target": "上传目标音频",
+    "action": "上传",
+    "change": "更改",
+    "remove": "移除 {{name}}",
+    "uploading": "上传中 {{percent}}%",
+    "maxSize": "最大 {{max}} MB"
+  },
+  "player": {
+    "play": "播放",
+    "pause": "暂停"
+  },
+  "voiceChanger": {
+    "title": "变声器",
+    "source": "源音频",
+    "target": "目标声音",
+    "submit": "开始转换"
+  },
+  "voiceDesign": {
+    "title": "声音设计",
+    "guide": "指南",
+    "language": "语言",
+    "name": "声音名称",
+    "namePlaceholder": "例如：沉稳的旁白",
+    "description": "声音描述",
+    "descriptionPlaceholder": "\"Warm, deep male voice with a slight British accent, measured pace, and authoritative tone.\"",
+    "descriptionHint": "请用英语填写描述。",
+    "enhance": "用 AI 优化描述",
+    "submit": "创建声音",
+    "variations": {
+      "title": "选择声音",
+      "subtitle": "试听生成的 {{count}} 个版本，选择你喜欢的声音",
+      "item": "声音版本 {{number}}",
+      "play": "播放版本 {{number}}",
+      "pause": "暂停版本 {{number}}",
+      "save": "保存声音"
+    },
+    "guideSheet": {
+      "title": "如何描述声音",
+      "tips": [
+        "说明说话者的年龄、性别和性格。",
+        "描述音色：温暖、沙哑、明亮或低沉。",
+        "补充口音和语速，例如轻微英国口音、语速平稳。",
+        "说明情绪或用途，例如适合有声书的沉稳旁白。"
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "语音编辑器",
+    "submit": "开始",
+    "sheet": {
+      "title": "语音编辑器",
+      "audio": "音频",
+      "transcription": "转录文本",
+      "revert": "恢复原始内容",
+      "generate": "生成音频",
+      "done": "完成"
+    },
+    "uploadHint": "支持音频或视频，最大 {{max}} MB。仅使用前 {{minutes}} 分钟。"
+  },
+  "audioClean": {
+    "title": "音频降噪",
+    "description": "音质增强可让音频听起来如同使用专业麦克风录制。",
+    "enhance": "降噪并增强",
+    "submit": "音频降噪"
+  },
+  "speechToText": {
+    "title": "语音转文字",
+    "language": "语言",
+    "translation": "翻译字幕",
+    "noTranslation": "不翻译",
+    "submit": "开始转录",
+    "sheet": {
+      "title": "结果",
+      "audio": "音频",
+      "content": "内容",
+      "timingUnavailable": "无可用时间信息",
+      "segment": "#{{number}}",
+      "edit": "编辑第 {{number}} 行",
+      "done": "完成编辑第 {{number}} 行",
+      "download": "下载",
+      "formats": {
+        "srt": "字幕 (.srt)",
+        "vtt": "网页字幕 (.vtt)",
+        "txt": "纯文本 (.txt)"
+      },
+      "finish": "完成"
+    }
+  },
+  "offline": {
+    "title": "无网络连接",
+    "message": "请检查 Wi-Fi 或移动数据。恢复网络连接后，应用将继续运行。",
+    "stillOffline": "仍未连接到网络。请检查 Wi-Fi 或移动数据后重试。",
+    "retry": "重试"
+  },
+  "support": {
+    "title": "联系我们",
+    "error": "无法加载聊天，请检查网络连接后重试。"
+  },
+  "onboarding": {
+    "step": "第 {{step}} 步，共 {{total}} 步",
+    "next": "下一步",
+    "playSample": "播放 {{name}} 的样本",
+    "stopSample": "停止播放 {{name}} 的样本",
+    "voices": {
+      "title": "真正懂得<brand>表演</brand>的 AI 声音。",
+      "subtitle": "文字转语音、声音克隆，还有更多功能。",
+      "samples": {
+        "happy": "开心",
+        "angry": "愤怒",
+        "sarcastic": "讽刺",
+        "excited": "兴奋",
+        "crying": "哭泣",
+        "pirate": "海盗",
+        "scared": "害怕",
+        "laughing": "大笑",
+        "calm": "平静",
+        "evilVillain": "邪恶反派",
+        "dramatic": "戏剧化",
+        "confident": "自信",
+        "nervous": "紧张",
+        "romantic": "浪漫",
+        "sleepy": "困倦",
+        "energetic": "活力十足",
+        "madScientist": "疯狂科学家",
+        "horror": "恐怖",
+        "surprised": "惊讶",
+        "awkward": "尴尬",
+        "shocked": "震惊",
+        "tired": "疲惫",
+        "santaClaus": "圣诞老人",
+        "curious": "好奇",
+        "playful": "俏皮",
+        "serious": "严肃",
+        "sad": "悲伤",
+        "rap": "说唱",
+        "disappointed": "失望",
+        "sportsCommentator": "体育解说员"
+      }
+    },
+    "direct": {
+      "title": "现在，由你来指导声音表演。",
+      "subtitle": "选一种情绪，点击播放。",
+      "actingLabel": "表演指令（点击编辑）",
+      "actingPlaceholder": "描述这段话应该怎么说",
+      "scriptLabel": "文本",
+      "script": "哦，太好了。你来了。我还以为你不来了呢。",
+      "generate": "生成",
+      "generating": "生成中…",
+      "playing": "播放中",
+      "tags": {
+        "awkward": {
+          "label": "尴尬",
+          "text": "以尴尬的语气演绎，停顿犹豫，语调不确定"
+        },
+        "crying": {
+          "label": "哭泣",
+          "text": "一边哭一边读这段话"
+        },
+        "laugh": {
+          "label": "笑声",
+          "text": "笑着演绎，让人能明显听出愉悦。"
+        },
+        "sarcasm": {
+          "label": "讽刺",
+          "text": "以讽刺的语气演绎，重点处冷淡而尖锐。"
+        },
+        "relieved": {
+          "label": "如释重负",
+          "text": "如释重负——你之前担心对方不会来。"
+        },
+        "excited": {
+          "label": "兴奋",
+          "text": "兴奋地演绎，语调明快，节奏较快。"
+        }
+      }
+    },
+    "stop": "停止播放",
+    "clone": {
+      "title": "<brand>几秒内</brand>克隆一个声音。",
+      "subtitle": "先听真实的声音，再让它说出你想说的话。",
+      "selectVoice": "选择 {{name}} 的声音",
+      "playReal": "播放 {{name}} 的真实声音",
+      "stopReal": "停止播放 {{name}} 的真实声音",
+      "lineLabel": "点击编辑",
+      "linePlaceholder": "输入任意内容",
+      "play": "播放克隆声音",
+      "cloning": "正在克隆 {{name}}…",
+      "playing": "播放中 · {{name}} 的克隆声音"
+    },
+    "change": {
+      "title": "改变声音，保留你的风格。",
+      "subtitle": "非常适合制作声音模仿视频。",
+      "before": "变声前",
+      "beforeCaption": "你的原声",
+      "after": "变声后",
+      "turnInto": "转换为",
+      "play": "播放 {{name}}",
+      "stop": "停止播放 {{name}}"
+    },
+    "clean": {
+      "title": "音质不好？<brand>一键</brand>搞定。",
+      "subtitle": "去除噪声、回声和嗡鸣，只留下你的声音。",
+      "play": "播放",
+      "stop": "停止",
+      "noisy": "有噪声",
+      "clean": "已降噪",
+      "switch": "音频降噪",
+      "hint": "试着在播放时切换开关。"
+    },
+    "edit": {
+      "title": "编辑文字，修正语音错误。",
+      "subtitle": "改一个词，你的声音就会说出来。无需重新录制。",
+      "original": "原始版本",
+      "fixed": "已修正",
+      "wordWrong": "{{word}}，有误。点击修正",
+      "wordFixed": "{{word}}。已将 {{from}} 修正为此词。点击撤销",
+      "hintWrong": "点击错误即可修正。",
+      "hintFixed": "已修正，再次点击可撤销。"
+    }
+  },
+  "review": {
+    "title": "你喜欢 {{appName}} 吗？",
+    "yes": "喜欢",
+    "no": "不喜欢"
+  }
+}

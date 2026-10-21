@@ -1,7 +1,8 @@
 import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
+import { usePlaybackControls } from '@/hooks/usePlaybackControls';
 import { ProgressBar } from '@/components/media/ProgressBar';
 import { Icon } from '@/components/ui/Icon';
 import { iconSize, layout, useColors } from '@/theme';
@@ -17,18 +18,19 @@ export function AudioPlayerCard({ uri }: Props) {
   const colors = useColors();
   const { t } = useTranslation();
   const player = useAudioPlayer(uri);
-  const { playing, currentTime, duration, didJustFinish } =
+  const { playing, loading, play, pause } = usePlaybackControls(player);
+  const { currentTime, duration, didJustFinish } =
     useAudioPlayerStatus(player);
 
   const toggle = () => {
     if (playing) {
-      player.pause();
+      pause();
       return;
     }
     if (didJustFinish || (duration > 0 && currentTime >= duration)) {
       player.seekTo(0);
     }
-    player.play();
+    play();
   };
 
   return (
@@ -37,15 +39,21 @@ export function AudioPlayerCard({ uri }: Props) {
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={playing ? t('player.pause') : t('player.play')}
+        accessibilityState={{ busy: loading, disabled: loading }}
+        disabled={loading}
         hitSlop={layout.hitSlop}
         onPress={toggle}
         className="size-play-lg items-center justify-center self-center rounded-full border border-line bg-surface active:opacity-70"
       >
-        <Icon
-          name={playing ? 'pause' : 'play'}
-          size={iconSize.md}
-          color={colors.primary.DEFAULT}
-        />
+        {loading ? (
+          <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        ) : (
+          <Icon
+            name={playing ? 'pause' : 'play'}
+            size={iconSize.md}
+            color={colors.primary.DEFAULT}
+          />
+        )}
       </Pressable>
     </View>
   );

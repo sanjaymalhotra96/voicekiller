@@ -3,13 +3,15 @@ import { useTranslation } from 'react-i18next';
 import type { ResultsQuery } from '@/features/results/hooks';
 import type { ResultItem } from '@/features/results/types';
 import { usePlayback } from '@/hooks/usePlayback';
-import { confirmDestructive, openLink } from '@/utils';
+import { useAudioDownload } from '@/hooks/useAudioDownload';
+import { confirmDestructive } from '@/utils';
 
 // Play / rename / download / delete for a grid of results. One shared
 // player per grid; callbacks are stable so memoised cards skip re-renders.
 export function useResultActions(query: Pick<ResultsQuery, 'rename' | 'remove'>) {
   const { t } = useTranslation();
   const playback = usePlayback();
+  const audioDownload = useAudioDownload();
   const [renaming, setRenaming] = useState<ResultItem | null>(null);
   const { toggle, stop } = playback;
   const { rename, remove } = query;
@@ -18,12 +20,6 @@ export function useResultActions(query: Pick<ResultsQuery, 'rename' | 'remove'>)
     (item: ResultItem) => toggle({ id: item.id, audioUrl: item.audioUrl }),
     [toggle],
   );
-
-  const download = useCallback((item: ResultItem) => {
-    if (item.audioUrl) {
-      openLink(item.audioUrl);
-    }
-  }, []);
 
   const confirmDelete = useCallback(
     (item: ResultItem) =>
@@ -43,7 +39,9 @@ export function useResultActions(query: Pick<ResultsQuery, 'rename' | 'remove'>)
   return {
     playback,
     togglePlay,
-    download,
+    download: audioDownload.download,
+    downloadError: audioDownload.error,
+    isDownloading: audioDownload.isPending,
     confirmDelete,
     startRename: setRenaming,
     // Props for <RenameSheet>.

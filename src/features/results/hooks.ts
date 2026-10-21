@@ -14,6 +14,7 @@ import {
   unrenamableTools,
   viewableTools,
 } from '@/features/results/types';
+import { recordSuccessfulOperation } from '@/features/review/prompt';
 import { queryKeys } from '@/lib/queryKeys';
 import { OwnVoiceSource, ownVoicesService } from '@/services/ownVoices';
 
@@ -136,17 +137,23 @@ export function useLibraryResults(tool: ResultTool): ResultsQuery {
 // ---- Jobs that add a Library file ------------------------------------
 
 // Runs a tool job; the new file shows up in Library, in the tool's
-// "Recent ..." section and in the usage meter.
+// "Recent ..." section and in the usage meter. `countsForReview: false` for
+// a step that is not the result yet (Speech Editor's upload).
 export function useLibraryJob<Vars, Result>(
   mutationFn: (vars: Vars) => Promise<Result>,
+  { countsForReview = true } = {},
 ) {
   const client = useQueryClient();
   return useMutation({
     mutationFn,
-    onSuccess: () =>
-      Promise.all([
+    onSuccess: () => {
+      if (countsForReview) {
+        recordSuccessfulOperation();
+      }
+      return Promise.all([
         client.invalidateQueries({ queryKey: queryKeys.library.all }),
         client.invalidateQueries({ queryKey: queryKeys.account.all }),
-      ]),
+      ]);
+    },
   });
 }

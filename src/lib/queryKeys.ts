@@ -1,4 +1,4 @@
-import type { LibraryFilter, VoiceQuery } from '@/domain';
+import type { LibrarySource, VoiceQuery } from '@/domain';
 
 // Every TanStack Query key in one place, so invalidation never misses.
 export const queryKeys = {
@@ -9,7 +9,7 @@ export const queryKeys = {
   },
   library: {
     all: ['library'] as const,
-    list: (params: { filter: LibraryFilter; search: string }) =>
+    list: (params: { filter: LibrarySource; search: string }) =>
       [...queryKeys.library.all, 'list', params] as const,
   },
   voices: {

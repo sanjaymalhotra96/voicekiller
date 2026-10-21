@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "סגירה",
+    "back": "חזרה",
+    "copied": "הועתק",
+    "cancel": "ביטול",
+    "change": "שינוי",
+    "save": "שמירה",
+    "beta": "בטא",
+    "delete": "מחיקה",
+    "showMore": "הצגת עוד",
+    "showLess": "הצגת פחות"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "אימייל",
+    "continueWithGoogle": "המשך עם Google",
+    "continueWithEmail": "המשך עם אימייל",
+    "haveAccount": "כבר יש לכם חשבון? <link>התחברות</link>"
+  },
+  "welcome": {
+    "title": "ברוכים הבאים ל־<brand>{{appName}}</brand>",
+    "subtitle": "זהו כלי הקול הראשון מבוסס הבינה המלאכותית שנבנה סביב הוראות משחק. בוחרים את הרגש, והקול מבצע אותו."
+  },
+  "signUp": {
+    "title": "הרשמה",
+    "subtitle": "רק כמה פרטים קצרים כדי להתחיל.",
+    "fullName": "שם מלא",
+    "email": "כתובת אימייל",
+    "password": "סיסמה",
+    "confirmPassword": "אישור סיסמה",
+    "agree": "אני מסכים/ה ל<link>תנאי השימוש</link>",
+    "submit": "הרשמה",
+    "showPassword": "הצגת הסיסמה",
+    "hidePassword": "הסתרת הסיסמה"
+  },
+  "signIn": {
+    "title": "התחברות",
+    "subtitle": "ברוכים השבים! התגעגענו אליכם.",
+    "email": "כתובת אימייל",
+    "password": "סיסמה",
+    "forgot": "שכחתם את הסיסמה?",
+    "submit": "התחברות"
+  },
+  "verify": {
+    "title": "אימות קוד",
+    "subtitle": "שלחנו קוד חד־פעמי אל <bold>{{email}}</bold>",
+    "resendIn": "אפשר לשלוח שוב בעוד {{time}} שניות.",
+    "resendReady": "אפשר לשלוח שוב. <link>שליחה חוזרת של הקוד</link>",
+    "submit": "אימות",
+    "digit": "ספרה {{index}}"
+  },
+  "forgotPassword": {
+    "title": "שכחתם את הסיסמה?",
+    "subtitle": "הזינו את כתובת האימייל שלכם ונשלח קישור לאיפוס הסיסמה.",
+    "email": "כתובת אימייל",
+    "submit": "שליחת קישור לאיפוס",
+    "backToLogin": "חזרה להתחברות",
+    "sent": "קישור לאיפוס נשלח אל <bold>{{email}}</bold>. בדקו את תיבת הדואר הנכנס."
+  },
+  "resetPassword": {
+    "title": "איפוס סיסמה",
+    "subtitle": "בחרו סיסמה חדשה לחשבון שלכם.",
+    "submit": "איפוס סיסמה",
+    "done": "הסיסמה אופסה. כעת אפשר להתחבר עם הסיסמה החדשה.",
+    "requestLink": "בקשת קישור חדש לאיפוס",
+    "continue": "המשך"
+  },
+  "validation": {
+    "nameRequired": "יש להזין שם.",
+    "emailInvalid": "יש להזין כתובת אימייל תקינה.",
+    "passwordRequired": "יש להזין סיסמה.",
+    "passwordShort": "הסיסמה חייבת להכיל לפחות {{min}} תווים.",
+    "passwordMismatch": "הסיסמאות אינן תואמות.",
+    "termsRequired": "יש לאשר את תנאי השימוש.",
+    "otpIncomplete": "יש להזין את הקוד במלואו.",
+    "titleRequired": "יש להזין שם.",
+    "dobInvalid": "יש להשתמש בתבנית dd/mm/yy (יום/חודש/שנה בשתי ספרות).",
+    "currentPasswordRequired": "יש להזין את הסיסמה הנוכחית.",
+    "samePassword": "הסיסמה החדשה חייבת להיות שונה.",
+    "promptRequired": "יש לתאר את הקול הרצוי.",
+    "voiceNameRequired": "יש להזין שם לקול.",
+    "sampleRequired": "יש להעלות או להקליט דגימת קול.",
+    "descriptionRequired": "יש לתאר את הקול."
+  },
+  "errors": {
+    "network": "אין חיבור לאינטרנט. נסו שוב.",
+    "invalidCredentials": "כתובת האימייל או הסיסמה שגויה.",
+    "emailNotConfirmed": "יש לאמת את כתובת האימייל לפני ההתחברות.",
+    "emailTaken": "כבר קיים חשבון עם כתובת האימייל הזו.",
+    "weakPassword": "יש לבחור סיסמה חזקה יותר.",
+    "otpInvalid": "הקוד החד־פעמי אינו תקין. נסו שוב.",
+    "recoveryLinkInvalid": "קישור האיפוס אינו תקין או שפג תוקפו. יש לבקש קישור חדש.",
+    "rateLimited": "יותר מדי ניסיונות. המתינו רגע.",
+    "unknown": "משהו השתבש. נסו שוב.",
+    "currentPasswordWrong": "הסיסמה הנוכחית שגויה.",
+    "uploadFailed": "לא ניתן להעלות את הקובץ. נסו שוב.",
+    "quotaExceeded": "הגעתם למגבלת התוכנית שלכם. שדרגו את התוכנית כדי להמשיך ליצור.",
+    "serviceUnavailable": "התכונה אינה זמינה כרגע. נסו שוב מאוחר יותר.",
+    "campaignExists": "כבר יש לכם קמפיין בשם הזה.",
+    "fileType": "סוג הקובץ הזה אינו נתמך.",
+    "fileTooLarge": "הקובץ גדול מדי. בחרו קובץ קטן יותר.",
+    "micPermission": "כדי להקליט את הקול שלכם, אפשרו גישה למיקרופון בהגדרות.",
+    "photoLibraryPermission": "כדי לבחור סרטון, אפשרו גישה לתמונות בהגדרות.",
+    "shareUnavailable": "שיתוף אינו זמין במכשיר הזה.",
+    "transcriptUnavailable": "אין תמלול זמין לקובץ הזה.",
+    "transcriptTimingUnavailable": "אין בתמלול הזה נתוני תזמון שניתן להשתמש בהם. בחרו טקסט (.txt) כדי להוריד אותו.",
+    "authRequired": "פג תוקף ההתחברות שלכם. יש להתחבר שוב.",
+    "studioRequired": "נדרשת תוכנית Studio.",
+    "notFound": "הקובץ הזה כבר לא קיים.",
+    "paidPlanRequired": "נדרשת תוכנית בתשלום.",
+    "jobFailed": "לא הצלחנו להשלים את הפעולה. נסו שוב.",
+    "jobTimeout": "הפעולה נמשכת יותר מהצפוי. בדקו את הספרייה בעוד כמה דקות.",
+    "sampleLength": "יש להשתמש בדגימת קול באורך שנייה אחת לפחות.",
+    "renameNotAllowed": "לא ניתן לשנות את שם הקובץ כרגע.",
+    "cancelled": "בוטל.",
+    "purchasesUnavailable": "מינויים עדיין אינם זמינים. נסו שוב מאוחר יותר.",
+    "purchaseFailed": "לא ניתן להשלים את הרכישה. לא חויבתם.",
+    "nothingToRestore": "לא נמצאו רכישות קודמות בחשבון החנות הזה.",
+    "conversionFailed": "לא ניתן להמיר את הקובץ לאודיו. נסו קובץ אחר.",
+    "scriptTooLong": "בתוכניות החינמיות אפשר להפיק עד 1,000 תווים בכל פעם. קצרו את הטקסט או שדרגו את התוכנית.",
+    "samePassword": "הסיסמה החדשה חייבת להיות שונה מהסיסמה הנוכחית.",
+    "passwordNotSet": "נרשמתם עם Google, ולכן לחשבון הזה אין סיסמה שאפשר לשנות.",
+    "googleSignInFailed": "ההתחברות עם Google לא הושלמה. נסו שוב.",
+    "appleSignInFailed": "ההתחברות עם Apple לא הושלמה. נסו שוב."
+  },
+  "tabs": {
+    "dashboard": "לוח בקרה",
+    "library": "ספרייה",
+    "settings": "הגדרות"
+  },
+  "dashboard": {
+    "title": "לוח בקרה",
+    "greeting": "היי, {{name}}",
+    "sections": {
+      "create": "יצירה",
+      "transform": "המרה"
+    },
+    "actionCard": {
+      "title": "טקסט לדיבור",
+      "action": "יצירת דיבור"
+    }
+  },
+  "library": {
+    "title": "ספרייה",
+    "search": "חיפוש קבצים...",
+    "empty": {
+      "title": "עדיין אין לכם קבצים!",
+      "message": "צרו קובץ חדש מלוח הבקרה."
+    },
+    "noResults": "אין קבצים שתואמים לחיפוש.",
+    "groups": {
+      "today": "היום",
+      "yesterday": "אתמול",
+      "thisWeek": "השבוע",
+      "earlier": "מוקדם יותר"
+    },
+    "actions": {
+      "title": "פרטים",
+      "rename": "שינוי שם",
+      "download": "הורדה",
+      "delete": "מחיקה",
+      "more": "אפשרויות נוספות עבור {{title}}",
+      "play": "השמעת {{title}}",
+      "pause": "השהיית {{title}}"
+    },
+    "rename": {
+      "title": "שינוי שם",
+      "placeholder": "שם הקובץ"
+    },
+    "delete": {
+      "title": "למחוק את הקובץ?",
+      "message": "הקובץ \"{{title}}\" יימחק לצמיתות.",
+      "confirm": "מחיקה",
+      "cancel": "ביטול"
+    },
+    "retry": "ניסיון חוזר",
+    "untitled": "ללא כותרת"
+  },
+  "settings": {
+    "title": "הגדרות",
+    "sections": {
+      "general": "כללי",
+      "others": "אחר"
+    },
+    "items": {
+      "personalInfo": "פרטים אישיים",
+      "changePassword": "שינוי סיסמה",
+      "subscription": "ניהול מינוי",
+      "share": "שיתוף עם חברים",
+      "contact": "יצירת קשר",
+      "privacy": "מדיניות פרטיות"
+    },
+    "signOut": "התנתקות",
+    "shareMessage": "אני משתמש/ת ב־{{appName}} כדי ליצור קולות בבינה מלאכותית. נסו גם: {{url}}",
+    "shareMessageNoLink": "אני משתמש/ת ב־{{appName}} כדי ליצור קולות בבינה מלאכותית."
+  },
+  "crash": {
+    "title": "משהו השתבש",
+    "message": "אירעה שגיאה לא צפויה באפליקציה. נסו שוב.",
+    "retry": "ניסיון חוזר"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "טקסט לדיבור",
+      "subtitle": "כותבים ומקשיבים",
+      "tag": "דיבור בבינה מלאכותית"
+    },
+    "voiceClone": {
+      "title": "שכפול קול",
+      "subtitle": "שכפלו כל קול",
+      "tag": "שכפול קול"
+    },
+    "voiceDesign": {
+      "title": "עיצוב קול",
+      "subtitle": "תארו קול",
+      "tag": "עיצוב קול"
+    },
+    "voiceChanger": {
+      "title": "מחליף קול",
+      "subtitle": "החליפו את הקול שלכם",
+      "tag": "מחליף קול"
+    },
+    "audioClean": {
+      "title": "ניקוי אודיו",
+      "subtitle": "הסירו רעשים",
+      "tag": "ניקוי אודיו"
+    },
+    "speechEditor": {
+      "title": "עורך דיבור",
+      "subtitle": "תקנו את המילים",
+      "tag": "עורך דיבור"
+    },
+    "speechToText": {
+      "title": "דיבור לטקסט",
+      "subtitle": "תמללו אודיו",
+      "tag": "דיבור לטקסט"
+    }
+  },
+  "trialOffer": {
+    "title": "אנחנו מזמינים אתכם לנסות את",
+    "titleHighlight": "Voicekiller בחינם",
+    "noPaymentToday": "אין חיוב היום",
+    "cta": "ניסיון ב־$0.00"
+  },
+  "trialPaywall": {
+    "later": "אחר כך",
+    "stars": "5 מתוך 5 כוכבים",
+    "reviews": {
+      "textToSpeech": "„הקולות נשמעים כל כך אמיתיים שהמאזינים שלי לא מזהים שזה AI.”",
+      "acting": "„אני מקליד ‚תגיד את זה כמו פרידה עצובה’ והוא קולע לרגש בכל פעם.”",
+      "voiceClone": "„שכפלתי את הקול שלי בדקה. עכשיו אני מכין סרטונים בלי להקליט.”",
+      "allInOne": "„ניקוי אודיו, החלפת קולות, תיקון טעויות. אפליקציה אחת החליפה ארבעה כלים.”"
+    },
+    "kicker": "מספיק לשלם על 5 כלים שונים",
+    "title": "<brand>כלי הדיבור הטובים ביותר מבוססי AI</brand> ב<brand>פלטפורמה אחת</brand>",
+    "perMonth": "{{price}}/חודש",
+    "perYear": "{{price}}/שנה",
+    "monthlyNote": "{{days}} ימים בחינם · ביטול בכל עת",
+    "yearlyNote": "{{days}} ימים בחינם · חיסכון של {{percent}}%",
+    "trialNote": "{{days}} ימים בחינם",
+    "cta": "נסו בחינם ל-{{days}} ימים",
+    "then": "ואז {{price}}",
+    "disclaimer": "אין חיוב היום. בטלו לפני היום ה-{{days}} ולא תחויבו."
+  },
+  "paywall": {
+    "title": "פתיחת תכונות Studio",
+    "close": "סגירה",
+    "features": {
+      "voices": "יותר מ־2,000 קולות",
+      "clones": "שכפולי קול ללא הגבלה",
+      "audioClean": "ניקוי אודיו",
+      "voiceChanger": "מחליף קול",
+      "speechEditor": "עורך דיבור בבינה מלאכותית"
+    },
+    "yearly": "שנתי",
+    "monthly": "חודשי",
+    "minutes": "{{count}} דקות בחודש",
+    "save": "חיסכון של {{percent}}%",
+    "continue": "המשך",
+    "cancelAnytime": "אפשר לבטל בכל עת",
+    "restore": "שחזור רכישות",
+    "terms": "תנאים",
+    "privacy": "פרטיות"
+  },
+  "plan": {
+    "basic": "תוכנית בסיסית",
+    "studio": "Studio",
+    "buyStudio": "רכישת Studio",
+    "usage": "שימוש",
+    "usageOf": "/ {{limit}} דקות",
+    "usageThisMonth": "השימוש החודש",
+    "usageMinutes": "{{used}} / {{limit}} דקות",
+    "remaining": "נותרו {{count}} דקות"
+  },
+  "profile": {
+    "title": "פרטים אישיים",
+    "userId": "מזהה משתמש",
+    "fullName": "שם מלא",
+    "email": "כתובת האימייל שלכם",
+    "dob": "תאריך לידה",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "שינוי תמונת פרופיל",
+    "copyId": "העתקת מזהה משתמש",
+    "deleteAccount": "מחיקת חשבון",
+    "save": "שמירת שינויים",
+    "saved": "השינויים נשמרו.",
+    "changeEmail": {
+      "title": "שינוי כתובת אימייל",
+      "subtitle": "נשלח קישור אישור לכתובת החדשה.",
+      "placeholder": "כתובת אימייל חדשה",
+      "submit": "שליחת קישור",
+      "sent": "בדקו את תיבת הדואר של {{email}} כדי לאשר את השינוי."
+    },
+    "unsaved": {
+      "title": "לשמור שינויים?",
+      "message": "שינויים שלא נשמרו יאבדו. לשמור את השינויים לפני הסגירה?",
+      "discard": "ביטול השינויים",
+      "confirm": "אישור"
+    },
+    "delete": {
+      "title": "מחיקת החשבון",
+      "message": "מחיקת החשבון תסיר את כל המידע שלכם ממסד הנתונים שלנו. לא ניתן לבטל את הפעולה.",
+      "prompt": "כדי לאשר, הקלידו \"{{word}}\"",
+      "word": "DELETE",
+      "submit": "מחיקת חשבון"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "הזנת הסיסמה הנוכחית",
+    "title": "שינוי סיסמה",
+    "current": "סיסמה נוכחית",
+    "new": "סיסמה חדשה",
+    "newPlaceholder": "הזנת סיסמה חדשה (לפחות {{min}} תווים)",
+    "confirm": "אישור סיסמה",
+    "confirmPlaceholder": "אישור הסיסמה החדשה",
+    "submit": "שינוי סיסמה",
+    "done": "הסיסמה שונתה."
+  },
+  "notFound": {
+    "title": "הדף הזה אינו קיים.",
+    "action": "חזרה לדף הבית"
+  },
+  "textToSpeech": {
+    "title": "טקסט לדיבור",
+    "fileName": "שם הקובץ (לא חובה)",
+    "campaign": "קמפיין",
+    "scriptPlaceholder": "הקלידו או הדביקו כאן את הטקסט...",
+    "scriptLabel": "טקסט",
+    "scriptLimitExceeded": "הקול הזה תומך בעד {{max}} תווים. קצרו את הטקסט או בחרו קול אחר.",
+    "chooseVoice": "בחירת קול",
+    "voiceLabel": "קול: {{name}}",
+    "emotions": "רגשות",
+    "addPause": "הוספת הפסקה",
+    "settings": "הגדרות",
+    "preview": "האזנה מקדימה",
+    "stopPreview": "עצירה",
+    "generate": "יצירה",
+    "campaignSheet": {
+      "title": "קמפיין",
+      "placeholder": "שם הקמפיין החדש...",
+      "create": "יצירת קמפיין",
+      "default": "ברירת מחדל"
+    },
+    "pauseSheet": {
+      "title": "הוספת הפסקה",
+      "seconds_one": "{{count}} שנייה",
+      "seconds_other": "{{count}} שניות"
+    },
+    "settingsSheet": {
+      "title": "הגדרות",
+      "audioFormat": "פורמט אודיו",
+      "voiceTuning": "כוונון הקול",
+      "speed": "מהירות",
+      "delivery": "סגנון ביצוע",
+      "actingInstructions": "הוראות משחק",
+      "instruction": "הוראה",
+      "chooseInstruction": "בחירת הוראה",
+      "ownInstructions": "כתבו הוראות משלכם",
+      "ownPlaceholder": "תארו איך צריך לבצע את הטקסט..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "יציב יותר",
+      "balanced": "מאוזן",
+      "creative": "יצירתי יותר"
+    }
+  },
+  "emotions": {
+    "auto": "אוטומטי",
+    "happy": "שמח",
+    "sad": "עצוב",
+    "angry": "כועס",
+    "fearful": "מפוחד",
+    "disgusted": "נגעל",
+    "surprised": "מופתע",
+    "calm": "רגוע",
+    "fluent": "שוטף"
+  },
+  "voices": {
+    "title": "בחירת קול",
+    "search": "חיפוש קולות...",
+    "sources": {
+      "library": "ספרייה",
+      "cloned": "משוכפלים",
+      "design": "מעוצבים",
+      "favorites": "מועדפים"
+    },
+    "openFilters": "מסננים",
+    "openFiltersCount": "מסננים, {{count}} פעילים",
+    "favorite": "הוספת {{name}} למועדפים",
+    "unfavorite": "הסרת {{name}} מהמועדפים",
+    "select": "בחירת {{name}}",
+    "play": "השמעת דגימה של {{name}}",
+    "pause": "השהיית דגימה של {{name}}",
+    "empty": "אין קולות שתואמים לחיפוש.",
+    "emptyFavorites": "עדיין אין קולות מועדפים. לחצו על הלב לצד קול כדי לשמור אותו כאן.",
+    "filters": {
+      "title": "מסננים",
+      "model": "מודל",
+      "gender": "מגדר",
+      "accent": "מבטא",
+      "language": "שפה",
+      "apply": "החלת מסננים"
+    },
+    "genders": {
+      "female": "נשי",
+      "male": "גברי",
+      "neutral": "ניטרלי"
+    },
+    "models": {
+      "all": "כל המודלים",
+      "expressive": "מלא הבעה",
+      "directable": "ניתן לבימוי",
+      "directablePro": "ניתן לבימוי Pro"
+    }
+  },
+  "accents": {
+    "auto": "אוטומטי",
+    "ar-001": "AR - ערבית",
+    "ar-EG": "AR - מצרי",
+    "cs-CZ": "CS - צ'כית",
+    "de-DE": "DE - גרמנית",
+    "el-GR": "EL - יוונית",
+    "en-AU": "EN - אוסטרלי",
+    "en-CA": "EN - קנדי",
+    "en-GB": "EN - בריטי",
+    "en-IE": "EN - אירי",
+    "en-IN": "EN - הודי",
+    "en-NZ": "EN - ניו זילנדי",
+    "en-US": "EN - אמריקאי",
+    "en-ZA": "EN - דרום אפריקאי",
+    "es-419": "ES - אמריקה הלטינית",
+    "es-ES": "ES - ספרדי",
+    "fr-CA": "FR - קנדי",
+    "fr-FR": "FR - צרפתי",
+    "hi-IN": "HI - הינדי",
+    "it-IT": "IT - איטלקית",
+    "ja-JP": "JA - יפנית",
+    "jv-ID": "JV - ג'אווה",
+    "ko-KR": "KO - קוריאנית",
+    "nl-NL": "NL - הולנדית",
+    "pl-PL": "PL - פולנית",
+    "pt-BR": "PT - ברזילאי",
+    "pt-PT": "PT - פורטוגלי",
+    "sw-KE": "SW - סוואהילי קנייתית",
+    "ta-IN": "TA - טמילית",
+    "te-IN": "TE - טלוגו",
+    "vi-VN": "VI - וייטנאמית",
+    "zh-CN": "ZH - מנדרינית"
+  },
+  "languages": {
+    "auto": "אוטומטי",
+    "ar": "ערבית",
+    "yue": "קנטונזית",
+    "zh": "סינית",
+    "cs": "צ'כית",
+    "nl": "הולנדית",
+    "en": "אנגלית",
+    "fi": "פינית",
+    "fr": "צרפתית",
+    "de": "גרמנית",
+    "el": "יוונית",
+    "he": "עברית",
+    "hi": "הינדי",
+    "hu": "הונגרית",
+    "id": "אינדונזית",
+    "it": "איטלקית",
+    "ja": "יפנית",
+    "ko": "קוריאנית",
+    "pl": "פולנית",
+    "pt": "פורטוגזית",
+    "ru": "רוסית",
+    "es": "ספרדית",
+    "sv": "שוודית",
+    "tr": "טורקית",
+    "uk": "אוקראינית"
+  },
+  "instructions": {
+    "title": "הוראת משחק",
+    "tabs": {
+      "library": "ספרייה",
+      "mine": "ההוראות שלי"
+    },
+    "all": "הכול ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "רגשות",
+      "characters": "דמויות",
+      "situations": "מצבים",
+      "accents": "מבטאים"
+    },
+    "search": "חיפוש הוראות...",
+    "noResults": "אין הוראות שתואמות לחיפוש.",
+    "details": "פרטים על {{name}}",
+    "select": "שימוש ב־{{name}}",
+    "play": "השמעת דגימה של {{name}}",
+    "pause": "השהיית דגימה של {{name}}",
+    "notFound": "ההוראה הזו כבר לא קיימת.",
+    "detail": {
+      "script": "טקסט",
+      "instructions": "הוראות משחק",
+      "sample": "דגימת אודיו",
+      "playSample": "לחצו להשמעת דגימת האודיו",
+      "noSample": "עדיין אין דגימת אודיו",
+      "use": "שימוש בהוראה הזו"
+    },
+    "mine": {
+      "title": "ההוראות המותאמות שלי",
+      "add": "הוראה חדשה",
+      "emptyTitle": "אין הוראות מותאמות אישית",
+      "emptyMessage": "צרו ושמרו הוראות משחק משלכם לשימוש בפרויקטים השונים שלכם.",
+      "generate": "יצירת הוראות עם בינה מלאכותית",
+      "created": "נוצר בתאריך: {{date}}",
+      "remove": "מחיקת {{name}}",
+      "removeTitle": "למחוק את ההוראה?",
+      "removeMessage": "ההוראה \"{{name}}\" תימחק לצמיתות."
+    },
+    "create": {
+      "title": "הוראת משחק חדשה",
+      "name": "שם ההוראה",
+      "namePlaceholder": "למשל: ״חם וידידותי״, ״הגשת חדשות מקצועית״",
+      "prompt": "הזנת הוראות משחק",
+      "promptPlaceholder": "צרו הוראות עבור...",
+      "hint": "למשל, כתבו ״צרו הוראות לקול רובוטי״ והבינה המלאכותית תיצור אותן אוטומטית.",
+      "submit": "יצירת הוראות"
+    }
+  },
+  "voiceClone": {
+    "title": "שכפול קול",
+    "guide": "מדריך",
+    "language": "שפה",
+    "voiceName": "שם הקול",
+    "voiceNamePlaceholder": "למשל: קריין רגוע",
+    "sources": {
+      "upload": "העלאת אודיו",
+      "record": "הקלטת אודיו"
+    },
+    "upload": {
+      "title": "העלאת אודיו המקור",
+      "hint": "אודיו או וידאו. ייעשה שימוש ב־{{seconds}} השניות הראשונות.",
+      "action": "העלאה"
+    },
+    "record": {
+      "title": "הקליטו את הקול שלכם",
+      "hint": "בחרו מיקרופון ולחצו על הקלטה.",
+      "action": "הקלטה",
+      "stop": "עצירה",
+      "again": "הקלטה מחדש",
+      "recording": "מקליט {{time}}",
+      "microphone": "מיקרופון",
+      "defaultMicrophone": "מיקרופון ברירת מחדל",
+      "fileName": "הקלטה.m4a"
+    },
+    "clip": {
+      "play": "השמעת {{name}}",
+      "pause": "השהיית {{name}}"
+    },
+    "submit": "יצירת קול",
+    "guideSheet": {
+      "title": "מדריך הקלטה",
+      "tips": [
+        "השתמשו בכ־30 שניות של דיבור ברור של דובר אחד. קטעים ארוכים יותר נחתכים ל־30 השניות הראשונות.",
+        "הקליטו בחדר שקט, ללא מוזיקה או רעשי רקע.",
+        "דברו בטבעיות, בטון שתרצו לשמוע בקול המשוכפל.",
+        "שמרו על מרחק קבוע בין המיקרופון לפה."
+      ]
+    }
+  },
+  "results": {
+    "play": "השמעת {{name}}",
+    "pause": "השהיית {{name}}",
+    "created": "נוצר בתאריך: {{date}}",
+    "rename": "שינוי השם של {{name}}",
+    "renameTitle": "שינוי שם",
+    "renameLabel": "עריכת השם",
+    "renamePlaceholder": "שם",
+    "download": "הורדת {{name}}",
+    "remove": "מחיקת {{name}}",
+    "removeTitle": "למחוק את הקובץ?",
+    "removeMessage": "הקובץ \"{{name}}\" יימחק לצמיתות.",
+    "viewAll": "הצגת הכול",
+    "empty": "עדיין אין כאן כלום.",
+    "enhanced": "משופר",
+    "recent": {
+      "voiceClone": "שכפולים אחרונים",
+      "voiceDesign": "קולות שעוצבו לאחרונה",
+      "voiceChanger": "המרות קול אחרונות",
+      "audioClean": "ניקויי אודיו אחרונים",
+      "speechEditor": "קטעי דיבור אחרונים",
+      "speechToText": "תמלולים אחרונים"
+    },
+    "titles": {
+      "voiceClone": "השכפולים שלי",
+      "voiceDesign": "הקולות שעיצבתי",
+      "voiceChanger": "המרות הקול שלי",
+      "audioClean": "האודיו שניקיתי",
+      "speechEditor": "קטעי הדיבור שלי",
+      "speechToText": "התמלולים שלי"
+    },
+    "view": "הצגת {{name}}"
+  },
+  "upload": {
+    "chooseSource": "בחירת מקור",
+    "files": "קבצים",
+    "gallery": "גלריה (סרטונים)",
+    "source": "העלאת אודיו המקור",
+    "target": "העלאת אודיו היעד",
+    "action": "העלאה",
+    "change": "שינוי",
+    "remove": "הסרת {{name}}",
+    "uploading": "מעלה {{percent}}%",
+    "maxSize": "עד {{max}}MB"
+  },
+  "player": {
+    "play": "השמעה",
+    "pause": "השהיה"
+  },
+  "voiceChanger": {
+    "title": "מחליף קול",
+    "source": "אודיו המקור",
+    "target": "קול היעד",
+    "submit": "התחלת המרה"
+  },
+  "voiceDesign": {
+    "title": "עיצוב קול",
+    "guide": "מדריך",
+    "language": "שפה",
+    "name": "שם הקול",
+    "namePlaceholder": "למשל: קריין רגוע",
+    "description": "תיאור הקול",
+    "descriptionPlaceholder": "\"Warm, deep male voice with a slight British accent, measured pace, and authoritative tone.\"",
+    "descriptionHint": "יש לכתוב את התיאור באנגלית.",
+    "enhance": "שיפור התיאור בעזרת בינה מלאכותית",
+    "submit": "יצירת קול",
+    "variations": {
+      "title": "בחירת קול",
+      "subtitle": "האזינו ל־{{count}} הגרסאות שנוצרו ובחרו את זו שאהבתם",
+      "item": "גרסת קול {{number}}",
+      "play": "השמעת גרסה {{number}}",
+      "pause": "השהיית גרסה {{number}}",
+      "save": "שמירת קול"
+    },
+    "guideSheet": {
+      "title": "איך לתאר קול",
+      "tips": [
+        "תארו מי מדבר: גיל, מגדר ואופי.",
+        "תארו את הצליל: חם, מחוספס, בהיר או עמוק.",
+        "הוסיפו מבטא וקצב, למשל מבטא בריטי קל וקצב מדוד.",
+        "ציינו את האווירה או השימוש, למשל קריין רגוע לספרי שמע."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "עורך דיבור",
+    "submit": "התחלה",
+    "sheet": {
+      "title": "עורך דיבור",
+      "audio": "אודיו",
+      "transcription": "תמלול",
+      "revert": "חזרה למקור",
+      "generate": "יצירת אודיו",
+      "done": "סיום"
+    },
+    "uploadHint": "אודיו או וידאו, עד {{max}}MB. ייעשה שימוש ב־{{minutes}} הדקות הראשונות."
+  },
+  "audioClean": {
+    "title": "ניקוי אודיו",
+    "description": "שיפור האודיו גורם להקלטה להישמע כאילו הוקלטה במיקרופון מקצועי.",
+    "enhance": "הסרת רעשים ושיפור",
+    "submit": "ניקוי אודיו"
+  },
+  "speechToText": {
+    "title": "דיבור לטקסט",
+    "language": "שפה",
+    "translation": "תרגום כתוביות",
+    "noTranslation": "ללא",
+    "submit": "התחלת תמלול",
+    "sheet": {
+      "title": "תוצאות",
+      "audio": "אודיו",
+      "content": "תוכן",
+      "timingUnavailable": "התזמון אינו זמין",
+      "segment": "#{{number}}",
+      "edit": "עריכת שורה {{number}}",
+      "done": "סיום עריכת שורה {{number}}",
+      "download": "הורדה",
+      "formats": {
+        "srt": "כתוביות (.srt)",
+        "vtt": "כתוביות לאינטרנט (.vtt)",
+        "txt": "טקסט פשוט (.txt)"
+      },
+      "finish": "סיום"
+    }
+  },
+  "offline": {
+    "title": "אין חיבור לאינטרנט",
+    "message": "בדקו את חיבור ה־Wi-Fi או את הנתונים הסלולריים. האפליקציה תמשיך לפעול ברגע שהחיבור יחזור.",
+    "stillOffline": "עדיין אין חיבור. בדקו את חיבור ה־Wi-Fi או את הנתונים הסלולריים ונסו שוב.",
+    "retry": "ניסיון חוזר"
+  },
+  "support": {
+    "title": "יצירת קשר",
+    "error": "לא ניתן לטעון את הצ'אט. בדקו את החיבור ונסו שוב."
+  },
+  "onboarding": {
+    "step": "שלב {{step}} מתוך {{total}}",
+    "next": "הבא",
+    "playSample": "השמעת דגימה של {{name}}",
+    "stopSample": "עצירת דגימה של {{name}}",
+    "voices": {
+      "title": "קולות בינה מלאכותית שבאמת <brand>משחקים.</brand>",
+      "subtitle": "טקסט לדיבור, שכפול קול ועוד.",
+      "samples": {
+        "happy": "שמח",
+        "angry": "כועס",
+        "sarcastic": "סרקסטי",
+        "excited": "נרגש",
+        "crying": "בוכה",
+        "pirate": "פיראט",
+        "scared": "מפוחד",
+        "laughing": "צוחק",
+        "calm": "רגוע",
+        "evilVillain": "נבל מרושע",
+        "dramatic": "דרמטי",
+        "confident": "בטוח בעצמו",
+        "nervous": "לחוץ",
+        "romantic": "רומנטי",
+        "sleepy": "ישנוני",
+        "energetic": "אנרגטי",
+        "madScientist": "מדען מטורף",
+        "horror": "אימה",
+        "surprised": "מופתע",
+        "awkward": "נבוך",
+        "shocked": "המום",
+        "tired": "עייף",
+        "santaClaus": "סנטה קלאוס",
+        "curious": "סקרן",
+        "playful": "שובב",
+        "serious": "רציני",
+        "sad": "עצוב",
+        "rap": "ראפ",
+        "disappointed": "מאוכזב",
+        "sportsCommentator": "שדרן ספורט"
+      }
+    },
+    "direct": {
+      "title": "עכשיו אתם מביימים את הקול.",
+      "subtitle": "בחרו רגש ולחצו על השמעה.",
+      "actingLabel": "הוראות משחק (לחצו לעריכה)",
+      "actingPlaceholder": "תארו איך צריך לומר את הטקסט",
+      "scriptLabel": "טקסט",
+      "script": "אה, יופי. הגעת. כבר התחלתי לחשוב שלא תבוא.",
+      "generate": "יצירה",
+      "generating": "יוצר…",
+      "playing": "משמיע",
+      "tags": {
+        "awkward": {
+          "label": "נבוך",
+          "text": "ביצוע נבוך עם תזמון מהוסס והנגנה לא בטוחה"
+        },
+        "crying": {
+          "label": "בוכה",
+          "text": "קראו את הטקסט תוך כדי בכי"
+        },
+        "laugh": {
+          "label": "צחוק",
+          "text": "ביצוע צוחק שבו השעשוע נשמע בקול."
+        },
+        "sarcasm": {
+          "label": "סרקזם",
+          "text": "ביצוע סרקסטי עם הדגשה יבשה וחדה."
+        },
+        "relieved": {
+          "label": "הקלה",
+          "text": "תחושת הקלה — חששתם שהאדם השני לא יגיע."
+        },
+        "excited": {
+          "label": "נרגש",
+          "text": "ביצוע נרגש עם הנגנה מלאת חיים וקצב מהיר."
+        }
+      }
+    },
+    "stop": "עצירת השמעה",
+    "clone": {
+      "title": "שכפלו קול <brand>בתוך שניות.</brand>",
+      "subtitle": "האזינו לקול האמיתי, ואז גרמו לו לומר כל מה שתרצו.",
+      "selectVoice": "בחירת הקול של {{name}}",
+      "playReal": "השמעת הקול האמיתי של {{name}}",
+      "stopReal": "עצירת הקול האמיתי של {{name}}",
+      "lineLabel": "לחצו לעריכה",
+      "linePlaceholder": "הקלידו מה שתרצו",
+      "play": "השמעת הקול המשוכפל",
+      "cloning": "משכפל את {{name}}…",
+      "playing": "משמיע · הקול המשוכפל של {{name}}"
+    },
+    "change": {
+      "title": "שנו את הקול. שמרו על הסגנון שלכם.",
+      "subtitle": "אידיאלי לסרטוני חיקוי קולות.",
+      "before": "לפני",
+      "beforeCaption": "הקול הרגיל שלכם",
+      "after": "אחרי",
+      "turnInto": "המרה ל־",
+      "play": "השמעת {{name}}",
+      "stop": "עצירת {{name}}"
+    },
+    "clean": {
+      "title": "אודיו באיכות ירודה? מתקנים <brand>בלחיצה אחת.</brand>",
+      "subtitle": "הסירו רעשים, הד וזמזום. השאירו רק את הקול שלכם.",
+      "play": "השמעה",
+      "stop": "עצירה",
+      "noisy": "רועש",
+      "clean": "נקי",
+      "switch": "ניקוי אודיו",
+      "hint": "נסו להחליף מצב בזמן ההשמעה."
+    },
+    "edit": {
+      "title": "תקנו טעויות באמצעות עריכת הטקסט.",
+      "subtitle": "שנו מילה, והקול שלכם יאמר אותה. בלי להקליט מחדש.",
+      "original": "מקור",
+      "fixed": "מתוקן",
+      "wordWrong": "{{word}}, טעות. לחצו לתיקון",
+      "wordFixed": "{{word}}. תוקן מ־{{from}}. לחצו לביטול התיקון",
+      "hintWrong": "לחצו על הטעות כדי לתקן אותה.",
+      "hintFixed": "תוקן. לחצו שוב כדי לבטל את התיקון."
+    }
+  },
+  "review": {
+    "title": "אוהבים את {{appName}}?",
+    "yes": "כן",
+    "no": "לא"
+  }
+}

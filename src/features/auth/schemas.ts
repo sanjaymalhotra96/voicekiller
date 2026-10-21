@@ -27,6 +27,13 @@ export const signInSchema = z.object({
 
 export const forgotPasswordSchema = z.object({ email });
 
+export const resetPasswordSchema = z
+  .object({ password: newPassword, confirmPassword: z.string() })
+  .refine(data => data.password === data.confirmPassword, {
+    path: ['confirmPassword'],
+    error: 'validation.passwordMismatch',
+  });
+
 export const otpSchema = z
   .string()
   .length(config.auth.otpLength, { error: 'validation.otpIncomplete' });
@@ -34,3 +41,4 @@ export const otpSchema = z
 export type SignUpValues = z.infer<typeof signUpSchema>;
 export type SignInValues = z.infer<typeof signInSchema>;
 export type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
+export type ResetPasswordValues = z.infer<typeof resetPasswordSchema>;

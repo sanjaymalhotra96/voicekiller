@@ -1,3 +1,4 @@
+import type { User } from '@supabase/supabase-js';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import {
   CryptoDigestAlgorithm,
@@ -7,9 +8,12 @@ import {
 import { openAuthSessionAsync } from 'expo-web-browser';
 import { Platform } from 'react-native';
 import { config } from '@/config';
+import { callbackParams } from '@/lib/authCallback';
 import { AppError } from '@/lib/errors';
+import { requestMetaTrackingPermission, trackSignup } from '@/lib/meta';
 import { throwIfError } from '@/lib/supabaseResult';
 import { supabase } from '@/lib/supabase';
+import { profileService } from '@/services/profile';
 
 type SignUpInput = {
   fullName: string;
@@ -21,6 +25,16 @@ type SignInInput = {
   email: string;
   password: string;
 };
+
+async function completeRegistration(
+  user: User | null,
+  method: 'email' | 'google' | 'apple',
+) {
+  const created = await profileService.createIfMissing(user);
+  if (created && user) {
+    void trackSignup(user.id, method);
+  }
+}
 
 // Every auth call the app makes. Screens use the hooks in
 // features/auth/hooks.ts, never this object directly.
@@ -37,27 +51,21 @@ type AuthService = {
   signInWithApple(): Promise<boolean>;
 };
 
-// The values Supabase puts on the way back, in the query (?code=) or the
-// fragment (#access_token=...), depending on the auth flow.
-function callbackParams(url: string) {
-  const params = new URLSearchParams();
-  for (const part of [url.split('?')[1]?.split('#')[0], url.split('#')[1]]) {
-    new URLSearchParams(part ?? '').forEach((value, key) =>
-      params.set(key, value),
-    );
-  }
-  return params;
-}
-
 export const authService: AuthService = {
   async signUp({ fullName, email, password }) {
-    throwIfError(
+    await requestMetaTrackingPermission();
+    const { data } = throwIfError(
       await supabase.auth.signUp({
         email,
         password,
         options: { data: { full_name: fullName } },
       }),
     );
+    // With email confirmation enabled, wait for verifyOtp's session so
+    // the insert runs as the authenticated user under the existing RLS.
+    if (data.session) {
+      await completeRegistration(data.user, 'email');
+    }
   },
   async signIn({ email, password }) {
     throwIfError(await supabase.auth.signInWithPassword({ email, password }));
@@ -66,9 +74,10 @@ export const authService: AuthService = {
     throwIfError(await supabase.auth.signOut());
   },
   async verifyOtp(email, token) {
-    throwIfError(
+    const { data } = throwIfError(
       await supabase.auth.verifyOtp({ email, token, type: 'signup' }),
     );
+    await completeRegistration(data.user, 'email');
   },
   async resendOtp(email) {
     throwIfError(await supabase.auth.resend({ email, type: 'signup' }));
@@ -78,6 +87,7 @@ export const authService: AuthService = {
   // a code or tokens, which become the session. AuthProvider then sees
   // the new session and the app opens.
   async signInWithGoogle() {
+    await requestMetaTrackingPermission();
     const redirectTo = config.auth.oauthRedirect;
     const { data } = throwIfError(
       await supabase.auth.signInWithOAuth({
@@ -96,18 +106,22 @@ export const authService: AuthService = {
     const code = params.get('code');
     const accessToken = params.get('access_token');
     const refreshToken = params.get('refresh_token');
+    let user: User | null;
     if (code) {
-      throwIfError(await supabase.auth.exchangeCodeForSession(code));
+      user = throwIfError(
+        await supabase.auth.exchangeCodeForSession(code),
+      ).data.user;
     } else if (accessToken && refreshToken) {
-      throwIfError(
+      user = throwIfError(
         await supabase.auth.setSession({
           access_token: accessToken,
           refresh_token: refreshToken,
         }),
-      );
+      ).data.user;
     } else {
       throw new AppError('googleSignInFailed', params.get('error_description'));
     }
+    await completeRegistration(user, 'google');
     return true;
   },
   // Native Sign in with Apple (iOS). Apple's sheet returns an identity
@@ -118,6 +132,7 @@ export const authService: AuthService = {
     if (Platform.OS !== 'ios') {
       throw new AppError('appleSignInFailed', 'iOS only');
     }
+    await requestMetaTrackingPermission();
     const nonce = randomUUID();
     const hashedNonce = await digestStringAsync(
       CryptoDigestAlgorithm.SHA256,
@@ -141,13 +156,14 @@ export const authService: AuthService = {
     if (!credential.identityToken) {
       throw new AppError('appleSignInFailed', 'no identity token');
     }
-    throwIfError(
+    const { data } = throwIfError(
       await supabase.auth.signInWithIdToken({
         provider: 'apple',
         token: credential.identityToken,
         nonce,
       }),
     );
+    let user = data.user;
     // Apple shares the name only on the very first sign-in and never puts
     // it in the token, so save it now (same field as email sign-up).
     const fullName = [
@@ -157,10 +173,11 @@ export const authService: AuthService = {
       .filter(Boolean)
       .join(' ');
     if (fullName) {
-      throwIfError(
+      user = throwIfError(
         await supabase.auth.updateUser({ data: { full_name: fullName } }),
-      );
+      ).data.user;
     }
+    await completeRegistration(user, 'apple');
     return true;
   },
   async sendPasswordReset(email) {

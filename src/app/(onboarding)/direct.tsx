@@ -1,5 +1,4 @@
 // Route: /direct (onboarding step 2)
-import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -22,7 +21,6 @@ import { generateOnboardingActing } from '@/services/onboarding';
 // Step 2: "Now you direct the voice." Pick a feeling (or write one), hit
 // Generate, and hear the demo line acted that way.
 export default function OnboardingDirectScreen() {
-  const router = useRouter();
   const { t } = useTranslation();
   useStatusBarStyle('light-content');
   const tags = useMemo(
@@ -60,9 +58,9 @@ export default function OnboardingDirectScreen() {
     }
   };
 
-  const onNext = () => {
+  const onNext = (go: (name: string) => void) => {
     reset();
-    router.push('/clone');
+    go('clone');
   };
 
   return (
@@ -76,13 +74,13 @@ export default function OnboardingDirectScreen() {
       <OnboardingCard tone="primary">
         <CardLabel icon="edit">{t('onboarding.direct.actingLabel')}</CardLabel>
         <TextArea
-          tone="warm"
+          tone="outline"
           accessibilityLabel={t('onboarding.direct.actingLabel')}
           value={instructions}
           onChangeText={onEdit}
           maxLength={textLimits.onboardingInstructions}
           placeholder={t('onboarding.direct.actingPlaceholder')}
-          boxClassName="h-24"
+          boxClassName="h-24 border-2"
           className="mt-2"
         />
 
@@ -93,12 +91,12 @@ export default function OnboardingDirectScreen() {
           className="mt-3"
         />
 
-        <CardLabel tone="muted" className="mt-4">
+        <CardLabel icon="lock" tone="muted" className="mt-4">
           {t('onboarding.direct.scriptLabel')}
         </CardLabel>
         {/* The server reads this fixed line; only the acting changes. */}
-        <View className="mt-2 rounded-xl bg-field px-4 py-3">
-          <AppText className="font-sans-medium text-lg leading-7 text-ink">
+        <View className="mt-2 rounded-r-xl border-l-2 border-line-neutral bg-muted px-4 py-3">
+          <AppText className="font-sans text-base leading-6 text-ink-muted">
             {t('onboarding.direct.script')}
           </AppText>
         </View>

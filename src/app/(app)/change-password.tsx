@@ -39,6 +39,7 @@ export default function ChangePasswordScreen() {
         password
         tone="outline"
         label={t('changePassword.current')}
+        placeholder={t('changePassword.currentPlaceholder')}
         autoComplete="current-password"
         textContentType="password"
         returnKeyType="next"

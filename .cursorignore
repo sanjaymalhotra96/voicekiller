@@ -1,0 +1,7 @@
+# Block Cursor Agent, Tab, Inline Edit, and @-mentions from secrets.
+.env
+.env.*
+.env.local
+
+credentials.json
+upload.keystore

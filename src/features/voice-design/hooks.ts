@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { recordSuccessfulOperation } from '@/features/review/prompt';
 import { queryKeys } from '@/lib/queryKeys';
 import { voiceDesignService } from '@/services/voiceDesign';
 
@@ -15,6 +16,9 @@ export function useSaveDesign() {
   const client = useQueryClient();
   return useMutation({
     mutationFn: voiceDesignService.save,
-    onSuccess: () => client.invalidateQueries({ queryKey: queryKeys.voices.all }),
+    onSuccess: () => {
+      recordSuccessfulOperation();
+      return client.invalidateQueries({ queryKey: queryKeys.voices.all });
+    },
   });
 }

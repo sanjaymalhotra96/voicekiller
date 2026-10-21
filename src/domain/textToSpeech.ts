@@ -1,6 +1,22 @@
+import { textLimits } from '@/domain/limits';
+import { modelOf } from '@/domain/voices';
 import type { SpeedLimits, Voice } from '@/domain/voices';
 
 // Text to Speech: settings, emotions, pauses and script helpers.
+
+// Cloned and designed voices use the Expressive editor limits.
+export function speechRulesFor(voice: Pick<Voice, 'provider' | 'source'> | null) {
+  const model = voice?.source === 'library' ? modelOf(voice.provider) : 'expressive';
+  return {
+    pauses: model === 'expressive',
+    scriptLimit:
+      model === 'directablePro'
+        ? textLimits.directableProScript
+        : model === 'directable'
+        ? textLimits.directableScript
+        : textLimits.script,
+  };
+}
 
 export const emotionIds = [
   'auto',
@@ -96,4 +112,10 @@ export type GenerateSpeechRequest = SpeechRequest & {
   title: string;
   // Campaign name; "default" when none was chosen.
   campaignName: string;
+};
+
+export type GeneratedSpeech = {
+  id: string;
+  title: string;
+  audioUrl: string;
 };

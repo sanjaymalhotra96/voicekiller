@@ -1,6 +1,7 @@
 import { AudioPlayer, useAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useStopOnBlur } from '@/hooks';
+import { usePlaybackControls } from '@/hooks/usePlaybackControls';
 
 const FADE_MS = 220;
 const FADE_STEPS = 8;
@@ -22,10 +23,22 @@ const safely = (fn: () => void) => {
 export function useCrossfadePair(urlA: string, urlB: string) {
   const a = useAudioPlayer({ uri: urlA });
   const b = useAudioPlayer({ uri: urlB });
-  const [playing, setPlaying] = useState(false);
+  const {
+    play: playA,
+    pause: pauseA,
+    playing: playingA,
+    loading: loadingA,
+  } = usePlaybackControls(a);
+  const {
+    play: playB,
+    pause: pauseB,
+    playing: playingB,
+    loading: loadingB,
+  } = usePlaybackControls(b);
   const [useB, setUseBState] = useState(false);
   const useBRef = useRef(false);
   const fade = useRef<ReturnType<typeof setInterval> | null>(null);
+  const restart = useRef(false);
 
   const setVolumes = useCallback(
     (bLevel: number) => {
@@ -45,12 +58,11 @@ export function useCrossfadePair(urlA: string, urlB: string) {
   useEffect(() => {
     const subscription = a.addListener('playbackStatusUpdate', status => {
       if (status.didJustFinish) {
-        safely(() => b.pause());
-        setPlaying(false);
+        pauseB();
       }
     });
     return () => safely(() => subscription.remove());
-  }, [a, b]);
+  }, [a, pauseB]);
 
   useEffect(
     () => () => {
@@ -67,26 +79,27 @@ export function useCrossfadePair(urlA: string, urlB: string) {
 
   const play = useCallback(() => {
     safely(() => {
-      // Finished: start over together.
-      if (a.duration > 0 && a.currentTime >= a.duration - 0.05) {
+      // Stopped or finished: start over together.
+      if (
+        restart.current ||
+        (a.duration > 0 && a.currentTime >= a.duration - 0.05)
+      ) {
+        restart.current = false;
         a.seekTo(0);
         b.seekTo(0);
       } else {
         align(a, b);
       }
-      a.play();
-      b.play();
+      playA();
+      playB();
     });
-    setPlaying(true);
-  }, [a, b, align]);
+  }, [a, b, align, playA, playB]);
 
-  const pause = useCallback(() => {
-    safely(() => {
-      a.pause();
-      b.pause();
-    });
-    setPlaying(false);
-  }, [a, b]);
+  const stop = useCallback(() => {
+    restart.current = true;
+    pauseA();
+    pauseB();
+  }, [pauseA, pauseB]);
 
   const setUseB = useCallback(
     (next: boolean) => {
@@ -110,7 +123,14 @@ export function useCrossfadePair(urlA: string, urlB: string) {
   );
 
   // Leaving the step (Next, back, swipe) silences both tracks.
-  useStopOnBlur(pause);
+  useStopOnBlur(stop);
 
-  return { playing, useB, play, pause, setUseB };
+  return {
+    playing: useB ? playingB : playingA,
+    loading: useB ? loadingB : loadingA,
+    useB,
+    play,
+    stop,
+    setUseB,
+  };
 }

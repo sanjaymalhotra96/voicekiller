@@ -1,0 +1,858 @@
+{
+  "common": {
+    "appName": "Voice Killer",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "copied": "Đã sao chép",
+    "cancel": "Hủy",
+    "change": "Thay đổi",
+    "save": "Lưu",
+    "beta": "Beta",
+    "delete": "Xóa",
+    "showMore": "Xem thêm",
+    "showLess": "Thu gọn"
+  },
+  "auth": {
+    "google": "Google",
+    "apple": "Apple",
+    "email": "Email",
+    "continueWithGoogle": "Tiếp tục với Google",
+    "continueWithEmail": "Tiếp tục bằng email",
+    "haveAccount": "Đã có tài khoản? <link>Đăng nhập</link>"
+  },
+  "welcome": {
+    "title": "Chào mừng đến với <brand>{{appName}}</brand>",
+    "subtitle": "Đây là công cụ giọng nói AI đầu tiên được xây dựng xoay quanh chỉ dẫn diễn xuất. Bạn chọn cảm xúc, giọng nói sẽ thể hiện theo."
+  },
+  "signUp": {
+    "title": "Đăng ký",
+    "subtitle": "Chỉ cần vài thông tin để bắt đầu.",
+    "fullName": "Họ và tên của bạn",
+    "email": "Địa chỉ email",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "agree": "Tôi đồng ý với <link>Điều khoản và điều kiện</link>",
+    "submit": "Đăng ký",
+    "showPassword": "Hiện mật khẩu",
+    "hidePassword": "Ẩn mật khẩu"
+  },
+  "signIn": {
+    "title": "Đăng nhập",
+    "subtitle": "Chào mừng bạn trở lại! Chúng tôi rất nhớ bạn.",
+    "email": "Địa chỉ email",
+    "password": "Mật khẩu",
+    "forgot": "Quên mật khẩu?",
+    "submit": "Đăng nhập"
+  },
+  "verify": {
+    "title": "Xác minh mã",
+    "subtitle": "Chúng tôi đã gửi mã OTP đến <bold>{{email}}</bold>",
+    "resendIn": "Có thể gửi lại sau {{time}} giây.",
+    "resendReady": "Có thể gửi lại ngay. <link>Gửi lại mã OTP</link>",
+    "submit": "Xác minh",
+    "digit": "Chữ số {{index}}"
+  },
+  "forgotPassword": {
+    "title": "Quên mật khẩu?",
+    "subtitle": "Nhập địa chỉ email, chúng tôi sẽ gửi liên kết đặt lại mật khẩu cho bạn.",
+    "email": "Địa chỉ email",
+    "submit": "Gửi liên kết đặt lại",
+    "backToLogin": "Quay lại đăng nhập",
+    "sent": "Đã gửi liên kết đặt lại đến <bold>{{email}}</bold>. Hãy kiểm tra hộp thư đến."
+  },
+  "resetPassword": {
+    "title": "Đặt lại mật khẩu",
+    "subtitle": "Chọn mật khẩu mới cho tài khoản của bạn.",
+    "submit": "Đặt lại mật khẩu",
+    "done": "Mật khẩu đã được đặt lại. Bạn có thể đăng nhập bằng mật khẩu mới.",
+    "requestLink": "Yêu cầu liên kết đặt lại mới",
+    "continue": "Tiếp tục"
+  },
+  "validation": {
+    "nameRequired": "Vui lòng nhập tên của bạn.",
+    "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ.",
+    "passwordRequired": "Vui lòng nhập mật khẩu.",
+    "passwordShort": "Mật khẩu phải có ít nhất {{min}} ký tự.",
+    "passwordMismatch": "Mật khẩu không khớp.",
+    "termsRequired": "Vui lòng chấp nhận Điều khoản và điều kiện.",
+    "otpIncomplete": "Vui lòng nhập đầy đủ mã.",
+    "titleRequired": "Vui lòng nhập tên.",
+    "dobInvalid": "Dùng định dạng dd/mm/yy (ngày/tháng/năm gồm hai chữ số).",
+    "currentPasswordRequired": "Vui lòng nhập mật khẩu hiện tại.",
+    "samePassword": "Mật khẩu mới phải khác mật khẩu cũ.",
+    "promptRequired": "Vui lòng mô tả giọng nói bạn muốn.",
+    "voiceNameRequired": "Vui lòng nhập tên giọng nói.",
+    "sampleRequired": "Vui lòng tải lên hoặc ghi âm một mẫu giọng nói.",
+    "descriptionRequired": "Vui lòng mô tả giọng nói."
+  },
+  "errors": {
+    "network": "Không có kết nối internet. Vui lòng thử lại.",
+    "invalidCredentials": "Email hoặc mật khẩu không đúng.",
+    "emailNotConfirmed": "Vui lòng xác minh email trước khi đăng nhập.",
+    "emailTaken": "Đã có tài khoản sử dụng email này.",
+    "weakPassword": "Vui lòng chọn mật khẩu mạnh hơn.",
+    "otpInvalid": "Mã OTP không hợp lệ. Vui lòng thử lại.",
+    "recoveryLinkInvalid": "Liên kết đặt lại này không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu liên kết mới.",
+    "rateLimited": "Bạn đã thử quá nhiều lần. Vui lòng đợi một chút.",
+    "unknown": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "currentPasswordWrong": "Mật khẩu hiện tại không đúng.",
+    "uploadFailed": "Không thể tải tệp lên. Vui lòng thử lại.",
+    "quotaExceeded": "Bạn đã đạt giới hạn của gói hiện tại. Hãy nâng cấp gói để tiếp tục sáng tạo.",
+    "serviceUnavailable": "Tính năng này hiện không khả dụng. Vui lòng thử lại sau.",
+    "campaignExists": "Bạn đã có chiến dịch trùng tên này.",
+    "fileType": "Loại tệp này không được hỗ trợ.",
+    "fileTooLarge": "Tệp quá lớn. Vui lòng chọn tệp nhỏ hơn.",
+    "micPermission": "Cho phép truy cập micrô trong Cài đặt để ghi âm giọng nói của bạn.",
+    "photoLibraryPermission": "Cho phép truy cập Ảnh trong Cài đặt để chọn video.",
+    "shareUnavailable": "Thiết bị này không hỗ trợ chia sẻ.",
+    "transcriptUnavailable": "Không có bản chép lời cho tệp này.",
+    "transcriptTimingUnavailable": "Bản chép lời này không có mốc thời gian dùng được. Chọn Văn bản (.txt) để tải xuống.",
+    "authRequired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+    "studioRequired": "Tính năng này yêu cầu gói Studio.",
+    "notFound": "Tệp này không còn tồn tại.",
+    "paidPlanRequired": "Tính năng này yêu cầu gói trả phí.",
+    "jobFailed": "Chúng tôi không thể hoàn tất thao tác. Vui lòng thử lại.",
+    "jobTimeout": "Quá trình này đang lâu hơn dự kiến. Hãy kiểm tra Thư viện sau vài phút.",
+    "sampleLength": "Sử dụng mẫu giọng nói dài ít nhất 1 giây.",
+    "renameNotAllowed": "Hiện không thể đổi tên tệp này.",
+    "cancelled": "Đã hủy.",
+    "purchasesUnavailable": "Hiện chưa thể đăng ký gói. Vui lòng thử lại sau.",
+    "purchaseFailed": "Không thể hoàn tất giao dịch mua. Bạn chưa bị tính phí.",
+    "nothingToRestore": "Không tìm thấy giao dịch mua trước đây cho tài khoản cửa hàng này.",
+    "conversionFailed": "Không thể chuyển tệp này thành âm thanh. Vui lòng thử tệp khác.",
+    "scriptTooLong": "Gói miễn phí cho phép tạo tối đa 1.000 ký tự mỗi lần. Hãy rút ngắn kịch bản hoặc nâng cấp gói.",
+    "samePassword": "Mật khẩu mới phải khác mật khẩu hiện tại.",
+    "passwordNotSet": "Bạn đã đăng ký bằng Google nên tài khoản này không có mật khẩu để thay đổi.",
+    "googleSignInFailed": "Đăng nhập bằng Google chưa hoàn tất. Vui lòng thử lại.",
+    "appleSignInFailed": "Đăng nhập bằng Apple chưa hoàn tất. Vui lòng thử lại."
+  },
+  "tabs": {
+    "dashboard": "Bảng điều khiển",
+    "library": "Thư viện",
+    "settings": "Cài đặt"
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "greeting": "Chào {{name}}",
+    "sections": {
+      "create": "Tạo",
+      "transform": "Chuyển đổi"
+    },
+    "actionCard": {
+      "title": "Văn bản thành giọng nói",
+      "action": "Tạo giọng nói"
+    }
+  },
+  "library": {
+    "title": "Thư viện",
+    "search": "Tìm tệp...",
+    "empty": {
+      "title": "Bạn chưa có tệp nào!",
+      "message": "Tạo tệp mới từ bảng điều khiển."
+    },
+    "noResults": "Không có tệp nào khớp với tìm kiếm.",
+    "groups": {
+      "today": "Hôm nay",
+      "yesterday": "Hôm qua",
+      "thisWeek": "Tuần này",
+      "earlier": "Trước đó"
+    },
+    "actions": {
+      "title": "Chi tiết",
+      "rename": "Đổi tên",
+      "download": "Tải xuống",
+      "delete": "Xóa",
+      "more": "Tùy chọn khác cho {{title}}",
+      "play": "Phát {{title}}",
+      "pause": "Tạm dừng {{title}}"
+    },
+    "rename": {
+      "title": "Đổi tên",
+      "placeholder": "Tên tệp"
+    },
+    "delete": {
+      "title": "Xóa tệp?",
+      "message": "\"{{title}}\" sẽ bị xóa vĩnh viễn.",
+      "confirm": "Xóa",
+      "cancel": "Hủy"
+    },
+    "retry": "Thử lại",
+    "untitled": "Chưa có tiêu đề"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "sections": {
+      "general": "Chung",
+      "others": "Khác"
+    },
+    "items": {
+      "personalInfo": "Thông tin cá nhân",
+      "changePassword": "Đổi mật khẩu",
+      "subscription": "Quản lý gói đăng ký",
+      "share": "Chia sẻ với bạn bè",
+      "contact": "Liên hệ",
+      "privacy": "Chính sách quyền riêng tư"
+    },
+    "signOut": "Đăng xuất",
+    "shareMessage": "Tôi đang dùng {{appName}} để tạo giọng nói AI. Hãy dùng thử: {{url}}",
+    "shareMessageNoLink": "Tôi đang dùng {{appName}} để tạo giọng nói AI."
+  },
+  "crash": {
+    "title": "Đã xảy ra lỗi",
+    "message": "Ứng dụng gặp lỗi không mong muốn. Vui lòng thử lại.",
+    "retry": "Thử lại"
+  },
+  "tools": {
+    "textToSpeech": {
+      "title": "Văn bản thành giọng nói",
+      "subtitle": "Nhập văn bản, nghe giọng đọc",
+      "tag": "Giọng nói AI"
+    },
+    "voiceClone": {
+      "title": "Nhân bản giọng nói",
+      "subtitle": "Sao chép mọi giọng nói",
+      "tag": "Nhân bản giọng nói"
+    },
+    "voiceDesign": {
+      "title": "Thiết kế giọng nói",
+      "subtitle": "Mô tả giọng nói bạn muốn",
+      "tag": "Thiết kế giọng nói"
+    },
+    "voiceChanger": {
+      "title": "Đổi giọng",
+      "subtitle": "Thay đổi giọng nói của bạn",
+      "tag": "Đổi giọng"
+    },
+    "audioClean": {
+      "title": "Làm sạch âm thanh",
+      "subtitle": "Loại bỏ tiếng ồn",
+      "tag": "Làm sạch âm thanh"
+    },
+    "speechEditor": {
+      "title": "Chỉnh sửa lời nói",
+      "subtitle": "Sửa từ nói sai",
+      "tag": "Chỉnh sửa lời nói"
+    },
+    "speechToText": {
+      "title": "Giọng nói thành văn bản",
+      "subtitle": "Chép lời từ âm thanh",
+      "tag": "Giọng nói thành văn bản"
+    }
+  },
+  "trialOffer": {
+    "title": "Mời bạn trải nghiệm",
+    "titleHighlight": "Voicekiller miễn phí",
+    "noPaymentToday": "Hôm nay không cần thanh toán",
+    "cta": "Dùng thử với $0.00"
+  },
+  "trialPaywall": {
+    "later": "Để sau",
+    "stars": "5 trên 5 sao",
+    "reviews": {
+      "textToSpeech": "“Giọng nói chân thật đến mức khán giả không nhận ra đó là AI.”",
+      "acting": "“Tôi gõ ‘nói như một lời tạm biệt buồn’ và lần nào cảm xúc cũng chuẩn.”",
+      "voiceClone": "“Nhân bản giọng mình chỉ trong một phút. Giờ tôi làm video mà không cần thu âm.”",
+      "allInOne": "“Lọc âm thanh, đổi giọng, sửa lỗi. Một ứng dụng thay cho bốn công cụ.”"
+    },
+    "kicker": "Đừng trả tiền cho 5 công cụ khác nhau nữa",
+    "title": "Những <brand>công cụ giọng nói AI</brand> tốt nhất trên <brand>một nền tảng</brand>",
+    "perMonth": "{{price}}/tháng",
+    "perYear": "{{price}}/năm",
+    "monthlyNote": "{{days}} ngày miễn phí · hủy bất cứ lúc nào",
+    "yearlyNote": "{{days}} ngày miễn phí · tiết kiệm {{percent}}%",
+    "trialNote": "{{days}} ngày miễn phí",
+    "cta": "Dùng thử MIỄN PHÍ {{days}} ngày",
+    "then": "sau đó {{price}}",
+    "disclaimer": "Hôm nay không bị trừ tiền. Hủy trước ngày thứ {{days}} và bạn sẽ không bị tính phí."
+  },
+  "paywall": {
+    "title": "Mở khóa Studio",
+    "close": "Đóng",
+    "features": {
+      "voices": "Hơn 2.000 giọng nói",
+      "clones": "Nhân bản giọng nói không giới hạn",
+      "audioClean": "Làm sạch âm thanh",
+      "voiceChanger": "Đổi giọng",
+      "speechEditor": "Chỉnh sửa lời nói bằng AI"
+    },
+    "yearly": "Hằng năm",
+    "monthly": "Hằng tháng",
+    "minutes": "{{count}} phút/tháng",
+    "save": "Tiết kiệm {{percent}}%",
+    "continue": "Tiếp tục",
+    "cancelAnytime": "Hủy bất cứ lúc nào",
+    "restore": "Khôi phục giao dịch mua",
+    "terms": "Điều khoản",
+    "privacy": "Quyền riêng tư"
+  },
+  "plan": {
+    "basic": "Gói cơ bản",
+    "studio": "Studio",
+    "buyStudio": "Mua Studio",
+    "usage": "Mức sử dụng",
+    "usageOf": "/ {{limit}} phút",
+    "usageThisMonth": "Mức sử dụng tháng này",
+    "usageMinutes": "{{used}} / {{limit}} phút",
+    "remaining": "Còn {{count}} phút"
+  },
+  "profile": {
+    "title": "Thông tin cá nhân",
+    "userId": "ID người dùng",
+    "fullName": "Họ và tên của bạn",
+    "email": "Email của bạn",
+    "dob": "Ngày sinh",
+    "dobPlaceholder": "dd/mm/yy",
+    "changePhoto": "Đổi ảnh hồ sơ",
+    "copyId": "Sao chép ID người dùng",
+    "deleteAccount": "Xóa tài khoản",
+    "save": "Lưu thay đổi",
+    "saved": "Đã lưu thay đổi.",
+    "changeEmail": {
+      "title": "Đổi email",
+      "subtitle": "Chúng tôi sẽ gửi liên kết xác nhận đến địa chỉ mới.",
+      "placeholder": "Địa chỉ email mới",
+      "submit": "Gửi liên kết",
+      "sent": "Kiểm tra email {{email}} để xác nhận thay đổi."
+    },
+    "unsaved": {
+      "title": "Lưu thay đổi?",
+      "message": "Các thay đổi chưa lưu sẽ bị mất. Lưu trước khi đóng?",
+      "discard": "Bỏ thay đổi",
+      "confirm": "Xác nhận"
+    },
+    "delete": {
+      "title": "Xóa tài khoản",
+      "message": "Xóa tài khoản sẽ xóa toàn bộ thông tin của bạn khỏi cơ sở dữ liệu của chúng tôi. Không thể hoàn tác thao tác này.",
+      "prompt": "Để xác nhận, nhập \"{{word}}\"",
+      "word": "DELETE",
+      "submit": "Xóa tài khoản"
+    }
+  },
+  "changePassword": {
+    "currentPlaceholder": "Nhập mật khẩu hiện tại",
+    "title": "Đổi mật khẩu",
+    "current": "Mật khẩu hiện tại",
+    "new": "Mật khẩu mới",
+    "newPlaceholder": "Nhập mật khẩu mới (ít nhất {{min}} ký tự)",
+    "confirm": "Xác nhận mật khẩu",
+    "confirmPlaceholder": "Xác nhận mật khẩu mới",
+    "submit": "Đổi mật khẩu",
+    "done": "Mật khẩu đã được thay đổi."
+  },
+  "notFound": {
+    "title": "Trang này không tồn tại.",
+    "action": "Về trang chủ"
+  },
+  "textToSpeech": {
+    "title": "Văn bản thành giọng nói",
+    "fileName": "Tên tệp (không bắt buộc)",
+    "campaign": "Chiến dịch",
+    "scriptPlaceholder": "Nhập hoặc dán kịch bản tại đây...",
+    "scriptLabel": "Kịch bản",
+    "scriptLimitExceeded": "Giọng này hỗ trợ tối đa {{max}} ký tự. Hãy rút ngắn kịch bản hoặc chọn giọng khác.",
+    "chooseVoice": "Chọn giọng",
+    "voiceLabel": "Giọng: {{name}}",
+    "emotions": "Cảm xúc",
+    "addPause": "Thêm khoảng nghỉ",
+    "settings": "Cài đặt",
+    "preview": "Nghe thử",
+    "stopPreview": "Dừng",
+    "generate": "Tạo",
+    "campaignSheet": {
+      "title": "Chiến dịch",
+      "placeholder": "Tên chiến dịch mới...",
+      "create": "Tạo chiến dịch",
+      "default": "Mặc định"
+    },
+    "pauseSheet": {
+      "title": "Thêm khoảng nghỉ",
+      "seconds_one": "{{count}} giây",
+      "seconds_other": "{{count}} giây"
+    },
+    "settingsSheet": {
+      "title": "Cài đặt",
+      "audioFormat": "Định dạng âm thanh",
+      "voiceTuning": "Tinh chỉnh giọng nói",
+      "speed": "Tốc độ",
+      "delivery": "Chế độ thể hiện",
+      "actingInstructions": "Chỉ dẫn diễn xuất",
+      "instruction": "Chỉ dẫn",
+      "chooseInstruction": "Chọn chỉ dẫn",
+      "ownInstructions": "Nhập chỉ dẫn của riêng bạn",
+      "ownPlaceholder": "Mô tả cách thể hiện kịch bản..."
+    },
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV"
+    },
+    "delivery": {
+      "stable": "Ổn định hơn",
+      "balanced": "Cân bằng",
+      "creative": "Sáng tạo hơn"
+    }
+  },
+  "emotions": {
+    "auto": "Tự động",
+    "happy": "Vui vẻ",
+    "sad": "Buồn",
+    "angry": "Giận dữ",
+    "fearful": "Sợ hãi",
+    "disgusted": "Ghê tởm",
+    "surprised": "Ngạc nhiên",
+    "calm": "Bình tĩnh",
+    "fluent": "Lưu loát"
+  },
+  "voices": {
+    "title": "Chọn giọng",
+    "search": "Tìm giọng nói...",
+    "sources": {
+      "library": "Thư viện",
+      "cloned": "Đã nhân bản",
+      "design": "Đã thiết kế",
+      "favorites": "Yêu thích"
+    },
+    "openFilters": "Bộ lọc",
+    "openFiltersCount": "Bộ lọc, đang áp dụng {{count}}",
+    "favorite": "Thêm {{name}} vào yêu thích",
+    "unfavorite": "Bỏ {{name}} khỏi yêu thích",
+    "select": "Chọn {{name}}",
+    "play": "Phát mẫu {{name}}",
+    "pause": "Tạm dừng mẫu {{name}}",
+    "empty": "Không có giọng nói nào khớp với tìm kiếm.",
+    "emptyFavorites": "Chưa có giọng nói yêu thích. Nhấn vào trái tim cạnh một giọng nói để lưu tại đây.",
+    "filters": {
+      "title": "Bộ lọc",
+      "model": "Mô hình",
+      "gender": "Giới tính",
+      "accent": "Giọng vùng miền",
+      "language": "Ngôn ngữ",
+      "apply": "Áp dụng bộ lọc"
+    },
+    "genders": {
+      "female": "Nữ",
+      "male": "Nam",
+      "neutral": "Trung tính"
+    },
+    "models": {
+      "all": "Tất cả mô hình",
+      "expressive": "Biểu cảm",
+      "directable": "Hỗ trợ chỉ dẫn diễn xuất",
+      "directablePro": "Hỗ trợ chỉ dẫn diễn xuất Pro"
+    }
+  },
+  "accents": {
+    "auto": "Tự động",
+    "ar-001": "AR - Tiếng Ả Rập",
+    "ar-EG": "AR - Ai Cập",
+    "cs-CZ": "CS - Tiếng Séc",
+    "de-DE": "DE - Tiếng Đức",
+    "el-GR": "EL - Tiếng Hy Lạp",
+    "en-AU": "EN - Úc",
+    "en-CA": "EN - Canada",
+    "en-GB": "EN - Anh",
+    "en-IE": "EN - Ireland",
+    "en-IN": "EN - Ấn Độ",
+    "en-NZ": "EN - New Zealand",
+    "en-US": "EN - Mỹ",
+    "en-ZA": "EN - Nam Phi",
+    "es-419": "ES - Mỹ Latinh",
+    "es-ES": "ES - Tây Ban Nha",
+    "fr-CA": "FR - Canada",
+    "fr-FR": "FR - Pháp",
+    "hi-IN": "HI - Tiếng Hindi",
+    "it-IT": "IT - Tiếng Ý",
+    "ja-JP": "JA - Tiếng Nhật",
+    "jv-ID": "JV - Tiếng Java",
+    "ko-KR": "KO - Tiếng Hàn",
+    "nl-NL": "NL - Tiếng Hà Lan",
+    "pl-PL": "PL - Tiếng Ba Lan",
+    "pt-BR": "PT - Brazil",
+    "pt-PT": "PT - Bồ Đào Nha",
+    "sw-KE": "SW - Tiếng Swahili Kenya",
+    "ta-IN": "TA - Tiếng Tamil",
+    "te-IN": "TE - Tiếng Telugu",
+    "vi-VN": "VI - Tiếng Việt",
+    "zh-CN": "ZH - Tiếng Quan Thoại"
+  },
+  "languages": {
+    "auto": "Tự động",
+    "ar": "Tiếng Ả Rập",
+    "yue": "Tiếng Quảng Đông",
+    "zh": "Tiếng Trung",
+    "cs": "Tiếng Séc",
+    "nl": "Tiếng Hà Lan",
+    "en": "Tiếng Anh",
+    "fi": "Tiếng Phần Lan",
+    "fr": "Tiếng Pháp",
+    "de": "Tiếng Đức",
+    "el": "Tiếng Hy Lạp",
+    "he": "Tiếng Do Thái",
+    "hi": "Tiếng Hindi",
+    "hu": "Tiếng Hungary",
+    "id": "Tiếng Indonesia",
+    "it": "Tiếng Ý",
+    "ja": "Tiếng Nhật",
+    "ko": "Tiếng Hàn",
+    "pl": "Tiếng Ba Lan",
+    "pt": "Tiếng Bồ Đào Nha",
+    "ru": "Tiếng Nga",
+    "es": "Tiếng Tây Ban Nha",
+    "sv": "Tiếng Thụy Điển",
+    "tr": "Tiếng Thổ Nhĩ Kỳ",
+    "uk": "Tiếng Ukraina"
+  },
+  "instructions": {
+    "title": "Chỉ dẫn diễn xuất",
+    "tabs": {
+      "library": "Thư viện",
+      "mine": "Chỉ dẫn của tôi"
+    },
+    "all": "Tất cả ({{count}})",
+    "categoryCount": "{{label}} ({{count}})",
+    "categories": {
+      "emotions": "Cảm xúc",
+      "characters": "Nhân vật",
+      "situations": "Tình huống",
+      "accents": "Giọng vùng miền"
+    },
+    "search": "Tìm chỉ dẫn...",
+    "noResults": "Không có chỉ dẫn nào khớp với tìm kiếm.",
+    "details": "Chi tiết về {{name}}",
+    "select": "Dùng {{name}}",
+    "play": "Phát mẫu {{name}}",
+    "pause": "Tạm dừng mẫu {{name}}",
+    "notFound": "Chỉ dẫn này không còn tồn tại.",
+    "detail": {
+      "script": "Kịch bản",
+      "instructions": "Chỉ dẫn diễn xuất",
+      "sample": "Mẫu âm thanh",
+      "playSample": "Nhấn để phát mẫu âm thanh",
+      "noSample": "Chưa có mẫu âm thanh",
+      "use": "Dùng chỉ dẫn này"
+    },
+    "mine": {
+      "title": "Chỉ dẫn tùy chỉnh của tôi",
+      "add": "Chỉ dẫn mới",
+      "emptyTitle": "Chưa có chỉ dẫn tùy chỉnh",
+      "emptyMessage": "Tạo và lưu chỉ dẫn diễn xuất của riêng bạn để dùng trong các dự án.",
+      "generate": "Tạo chỉ dẫn bằng AI",
+      "created": "Ngày tạo: {{date}}",
+      "remove": "Xóa {{name}}",
+      "removeTitle": "Xóa chỉ dẫn?",
+      "removeMessage": "\"{{name}}\" sẽ bị xóa vĩnh viễn."
+    },
+    "create": {
+      "title": "Chỉ dẫn diễn xuất mới",
+      "name": "Tên chỉ dẫn",
+      "namePlaceholder": "Ví dụ: “Ấm áp và thân thiện”, “Dẫn bản tin chuyên nghiệp”",
+      "prompt": "Nhập chỉ dẫn diễn xuất",
+      "promptPlaceholder": "Tạo chỉ dẫn cho...",
+      "hint": "Ví dụ: Nhập “Tạo chỉ dẫn cho giọng robot” và AI sẽ tự động tạo chỉ dẫn.",
+      "submit": "Tạo chỉ dẫn"
+    }
+  },
+  "voiceClone": {
+    "title": "Nhân bản giọng nói",
+    "guide": "Hướng dẫn",
+    "language": "Ngôn ngữ",
+    "voiceName": "Tên giọng nói",
+    "voiceNamePlaceholder": "Ví dụ: Người kể chuyện điềm tĩnh",
+    "sources": {
+      "upload": "Tải âm thanh lên",
+      "record": "Ghi âm"
+    },
+    "upload": {
+      "title": "Tải âm thanh nguồn lên",
+      "hint": "Âm thanh hoặc video. Sử dụng {{seconds}} giây đầu tiên.",
+      "action": "Tải lên"
+    },
+    "record": {
+      "title": "Ghi âm giọng nói của bạn",
+      "hint": "Chọn micrô và nhấn Ghi âm.",
+      "action": "Ghi âm",
+      "stop": "Dừng",
+      "again": "Ghi âm lại",
+      "recording": "Đang ghi âm {{time}}",
+      "microphone": "Micrô",
+      "defaultMicrophone": "Micrô mặc định",
+      "fileName": "Ghi âm.m4a"
+    },
+    "clip": {
+      "play": "Phát {{name}}",
+      "pause": "Tạm dừng {{name}}"
+    },
+    "submit": "Tạo giọng nói",
+    "guideSheet": {
+      "title": "Hướng dẫn ghi âm",
+      "tips": [
+        "Dùng khoảng 30 giây lời nói rõ ràng của một người. Đoạn dài hơn sẽ được cắt lấy 30 giây đầu tiên.",
+        "Ghi âm trong phòng yên tĩnh, không có nhạc hoặc tiếng ồn nền.",
+        "Nói tự nhiên với giọng điệu bạn muốn giọng nhân bản thể hiện.",
+        "Giữ khoảng cách ổn định giữa micrô và miệng."
+      ]
+    }
+  },
+  "results": {
+    "play": "Phát {{name}}",
+    "pause": "Tạm dừng {{name}}",
+    "created": "Ngày tạo: {{date}}",
+    "rename": "Đổi tên {{name}}",
+    "renameTitle": "Đổi tên",
+    "renameLabel": "Sửa tên",
+    "renamePlaceholder": "Tên",
+    "download": "Tải xuống {{name}}",
+    "remove": "Xóa {{name}}",
+    "removeTitle": "Xóa tệp?",
+    "removeMessage": "\"{{name}}\" sẽ bị xóa vĩnh viễn.",
+    "viewAll": "Xem tất cả",
+    "empty": "Chưa có gì ở đây.",
+    "enhanced": "Đã nâng cao chất lượng",
+    "recent": {
+      "voiceClone": "Giọng nhân bản gần đây",
+      "voiceDesign": "Giọng thiết kế gần đây",
+      "voiceChanger": "Giọng chuyển đổi gần đây",
+      "audioClean": "Âm thanh làm sạch gần đây",
+      "speechEditor": "Lời nói gần đây",
+      "speechToText": "Bản chép lời gần đây"
+    },
+    "titles": {
+      "voiceClone": "Giọng nhân bản của tôi",
+      "voiceDesign": "Giọng thiết kế của tôi",
+      "voiceChanger": "Giọng chuyển đổi của tôi",
+      "audioClean": "Âm thanh đã làm sạch của tôi",
+      "speechEditor": "Lời nói của tôi",
+      "speechToText": "Bản chép lời của tôi"
+    },
+    "view": "Xem {{name}}"
+  },
+  "upload": {
+    "chooseSource": "Chọn từ",
+    "files": "Tệp",
+    "gallery": "Thư viện ảnh (video)",
+    "source": "Tải âm thanh nguồn lên",
+    "target": "Tải âm thanh đích lên",
+    "action": "Tải lên",
+    "change": "Thay đổi",
+    "remove": "Xóa {{name}}",
+    "uploading": "Đang tải lên {{percent}}%",
+    "maxSize": "Tối đa {{max}}MB"
+  },
+  "player": {
+    "play": "Phát",
+    "pause": "Tạm dừng"
+  },
+  "voiceChanger": {
+    "title": "Đổi giọng",
+    "source": "Âm thanh nguồn",
+    "target": "Giọng đích",
+    "submit": "Bắt đầu chuyển đổi"
+  },
+  "voiceDesign": {
+    "title": "Thiết kế giọng nói",
+    "guide": "Hướng dẫn",
+    "language": "Ngôn ngữ",
+    "name": "Tên giọng nói",
+    "namePlaceholder": "Ví dụ: Người kể chuyện điềm tĩnh",
+    "description": "Mô tả giọng nói",
+    "descriptionPlaceholder": "\"Warm, deep male voice with a slight British accent, measured pace, and authoritative tone.\"",
+    "descriptionHint": "Viết mô tả bằng tiếng Anh.",
+    "enhance": "Cải thiện mô tả bằng AI",
+    "submit": "Tạo giọng nói",
+    "variations": {
+      "title": "Chọn giọng",
+      "subtitle": "Nghe {{count}} phiên bản đã tạo và chọn phiên bản bạn thích",
+      "item": "Phiên bản giọng nói {{number}}",
+      "play": "Phát phiên bản {{number}}",
+      "pause": "Tạm dừng phiên bản {{number}}",
+      "save": "Lưu giọng nói"
+    },
+    "guideSheet": {
+      "title": "Cách mô tả giọng nói",
+      "tips": [
+        "Cho biết người nói là ai: tuổi, giới tính và tính cách.",
+        "Mô tả âm sắc: ấm áp, khàn, sáng hoặc trầm.",
+        "Thêm giọng vùng miền và nhịp nói, ví dụ giọng Anh nhẹ và nhịp nói từ tốn.",
+        "Nêu cảm xúc hoặc mục đích sử dụng, ví dụ người kể chuyện điềm tĩnh cho sách nói."
+      ]
+    }
+  },
+  "speechEditor": {
+    "title": "Chỉnh sửa lời nói",
+    "submit": "Bắt đầu",
+    "sheet": {
+      "title": "Chỉnh sửa lời nói",
+      "audio": "Âm thanh",
+      "transcription": "Bản chép lời",
+      "revert": "Khôi phục bản gốc",
+      "generate": "Tạo âm thanh",
+      "done": "Xong"
+    },
+    "uploadHint": "Âm thanh hoặc video, tối đa {{max}}MB. Sử dụng {{minutes}} phút đầu tiên."
+  },
+  "audioClean": {
+    "title": "Làm sạch âm thanh",
+    "description": "Tính năng nâng cao chất lượng giúp âm thanh nghe như được thu bằng micrô chuyên nghiệp.",
+    "enhance": "Khử nhiễu và nâng cao chất lượng",
+    "submit": "Làm sạch âm thanh"
+  },
+  "speechToText": {
+    "title": "Giọng nói thành văn bản",
+    "language": "Ngôn ngữ",
+    "translation": "Phụ đề dịch",
+    "noTranslation": "Không",
+    "submit": "Bắt đầu chép lời",
+    "sheet": {
+      "title": "Kết quả",
+      "audio": "Âm thanh",
+      "content": "Nội dung",
+      "timingUnavailable": "Không có mốc thời gian",
+      "segment": "#{{number}}",
+      "edit": "Sửa dòng {{number}}",
+      "done": "Hoàn tất sửa dòng {{number}}",
+      "download": "Tải xuống",
+      "formats": {
+        "srt": "Phụ đề (.srt)",
+        "vtt": "Phụ đề web (.vtt)",
+        "txt": "Văn bản thuần (.txt)"
+      },
+      "finish": "Xong"
+    }
+  },
+  "offline": {
+    "title": "Không có kết nối internet",
+    "message": "Kiểm tra Wi-Fi hoặc dữ liệu di động. Ứng dụng sẽ tiếp tục khi bạn có kết nối trở lại.",
+    "stillOffline": "Vẫn chưa có kết nối. Hãy kiểm tra Wi-Fi hoặc dữ liệu di động và thử lại.",
+    "retry": "Thử lại"
+  },
+  "support": {
+    "title": "Liên hệ",
+    "error": "Không thể tải cuộc trò chuyện. Kiểm tra kết nối và thử lại."
+  },
+  "onboarding": {
+    "step": "Bước {{step}}/{{total}}",
+    "next": "Tiếp theo",
+    "playSample": "Phát mẫu {{name}}",
+    "stopSample": "Dừng mẫu {{name}}",
+    "voices": {
+      "title": "Giọng nói AI thực sự biết <brand>diễn xuất.</brand>",
+      "subtitle": "Văn bản thành giọng nói, nhân bản giọng nói và hơn thế nữa.",
+      "samples": {
+        "happy": "Vui vẻ",
+        "angry": "Giận dữ",
+        "sarcastic": "Mỉa mai",
+        "excited": "Hào hứng",
+        "crying": "Khóc",
+        "pirate": "Cướp biển",
+        "scared": "Sợ hãi",
+        "laughing": "Cười",
+        "calm": "Bình tĩnh",
+        "evilVillain": "Kẻ phản diện độc ác",
+        "dramatic": "Kịch tính",
+        "confident": "Tự tin",
+        "nervous": "Lo lắng",
+        "romantic": "Lãng mạn",
+        "sleepy": "Buồn ngủ",
+        "energetic": "Tràn đầy năng lượng",
+        "madScientist": "Nhà khoa học điên",
+        "horror": "Kinh dị",
+        "surprised": "Ngạc nhiên",
+        "awkward": "Ngượng ngùng",
+        "shocked": "Sốc",
+        "tired": "Mệt mỏi",
+        "santaClaus": "Ông già Noel",
+        "curious": "Tò mò",
+        "playful": "Tinh nghịch",
+        "serious": "Nghiêm túc",
+        "sad": "Buồn",
+        "rap": "Rap",
+        "disappointed": "Thất vọng",
+        "sportsCommentator": "Bình luận viên thể thao"
+      }
+    },
+    "direct": {
+      "title": "Giờ bạn là người chỉ đạo giọng nói.",
+      "subtitle": "Chọn cảm xúc. Nhấn phát.",
+      "actingLabel": "Chỉ dẫn diễn xuất (nhấn để sửa)",
+      "actingPlaceholder": "Mô tả cách thể hiện lời nói",
+      "scriptLabel": "Kịch bản",
+      "script": "Ồ, tốt quá. Bạn đến rồi. Tôi đang bắt đầu nghĩ là bạn sẽ không đến.",
+      "generate": "Tạo",
+      "generating": "Đang tạo…",
+      "playing": "Đang phát",
+      "tags": {
+        "awkward": {
+          "label": "Ngượng ngùng",
+          "text": "Thể hiện sự ngượng ngùng với nhịp nói ngập ngừng và ngữ điệu thiếu chắc chắn"
+        },
+        "crying": {
+          "label": "Khóc",
+          "text": "Vừa đọc vừa khóc"
+        },
+        "laugh": {
+          "label": "Cười",
+          "text": "Vừa nói vừa cười, để người nghe cảm nhận rõ sự vui thích."
+        },
+        "sarcasm": {
+          "label": "Mỉa mai",
+          "text": "Thể hiện giọng mỉa mai với cách nhấn lạnh lùng, sắc bén."
+        },
+        "relieved": {
+          "label": "Nhẹ nhõm",
+          "text": "Thể hiện sự nhẹ nhõm vì trước đó bạn lo người kia sẽ không đến."
+        },
+        "excited": {
+          "label": "Hào hứng",
+          "text": "Thể hiện sự hào hứng với ngữ điệu tươi sáng và nhịp nói nhanh."
+        }
+      }
+    },
+    "stop": "Dừng phát",
+    "clone": {
+      "title": "Nhân bản giọng nói <brand>trong vài giây.</brand>",
+      "subtitle": "Nghe giọng thật, rồi khiến giọng đó nói bất cứ điều gì.",
+      "selectVoice": "Chọn giọng {{name}}",
+      "playReal": "Phát giọng thật của {{name}}",
+      "stopReal": "Dừng giọng thật của {{name}}",
+      "lineLabel": "Nhấn để sửa",
+      "linePlaceholder": "Nhập bất cứ điều gì",
+      "play": "Phát giọng nhân bản",
+      "cloning": "Đang nhân bản {{name}}…",
+      "playing": "Đang phát · giọng nhân bản {{name}}"
+    },
+    "change": {
+      "title": "Đổi giọng nói. Giữ phong cách của bạn.",
+      "subtitle": "Lý tưởng cho video bắt chước giọng nói.",
+      "before": "Trước",
+      "beforeCaption": "Giọng bình thường của bạn",
+      "after": "Sau",
+      "turnInto": "Chuyển thành",
+      "play": "Phát {{name}}",
+      "stop": "Dừng {{name}}"
+    },
+    "clean": {
+      "title": "Âm thanh kém? Sửa ngay với <brand>một lần chạm.</brand>",
+      "subtitle": "Loại bỏ tiếng ồn, tiếng vang và tiếng ù. Chỉ giữ lại giọng nói của bạn.",
+      "play": "Phát",
+      "stop": "Dừng",
+      "noisy": "Có nhiễu",
+      "clean": "Đã làm sạch",
+      "switch": "Làm sạch âm thanh",
+      "hint": "Thử bật tắt khi đang phát."
+    },
+    "edit": {
+      "title": "Sửa lỗi bằng cách chỉnh văn bản.",
+      "subtitle": "Đổi một từ, giọng của bạn sẽ đọc từ đó. Không cần ghi âm lại.",
+      "original": "Bản gốc",
+      "fixed": "Đã sửa",
+      "wordWrong": "{{word}}, từ sai. Nhấn để sửa",
+      "wordFixed": "{{word}}. Đã sửa từ {{from}}. Nhấn để hoàn tác",
+      "hintWrong": "Nhấn vào lỗi để sửa.",
+      "hintFixed": "Đã sửa. Nhấn lần nữa để hoàn tác."
+    }
+  },
+  "review": {
+    "title": "Bạn có thích {{appName}} không?",
+    "yes": "Có",
+    "no": "Không"
+  }
+}

@@ -60,6 +60,14 @@
     "backToLogin": "Back to login",
     "sent": "Reset link sent to <bold>{{email}}</bold>. Check your inbox."
   },
+  "resetPassword": {
+    "title": "Reset Password",
+    "subtitle": "Choose a new password for your account.",
+    "submit": "Reset Password",
+    "done": "Your password has been reset. You can now sign in with your new password.",
+    "requestLink": "Request a new reset link",
+    "continue": "Continue"
+  },
   "validation": {
     "nameRequired": "Please enter your name.",
     "emailInvalid": "Please enter a valid email address.",
@@ -84,6 +92,7 @@
     "emailTaken": "An account with this email already exists.",
     "weakPassword": "Please choose a stronger password.",
     "otpInvalid": "Invalid OTP. Please try again.",
+    "recoveryLinkInvalid": "This reset link is invalid or has expired. Please request a new one.",
     "rateLimited": "Too many attempts. Please wait a moment.",
     "unknown": "Something went wrong. Please try again.",
     "currentPasswordWrong": "Current password is incorrect.",
@@ -94,7 +103,10 @@
     "fileType": "This file type is not supported.",
     "fileTooLarge": "This file is too large. Please pick a smaller one.",
     "micPermission": "Allow microphone access in Settings to record your voice.",
+    "photoLibraryPermission": "Allow access to Photos in Settings to choose a video.",
     "shareUnavailable": "Sharing is not available on this device.",
+    "transcriptUnavailable": "No transcript is available for this file.",
+    "transcriptTimingUnavailable": "This transcript has no usable timing. Choose Text (.txt) to download it.",
     "authRequired": "Your session has expired. Please sign in again.",
     "studioRequired": "This needs the Studio plan.",
     "notFound": "This file no longer exists.",
@@ -134,7 +146,6 @@
   "library": {
     "title": "Library",
     "search": "Search files...",
-    "all": "All",
     "empty": {
       "title": "You don't have any files!",
       "message": "Create new file from the dashboard."
@@ -228,6 +239,32 @@
       "tag": "Speech to Text"
     }
   },
+  "trialOffer": {
+    "title": "We want you to try",
+    "titleHighlight": "Voicekiller for Free",
+    "noPaymentToday": "No payment due today",
+    "cta": "Try for $0.00"
+  },
+  "trialPaywall": {
+    "later": "Later",
+    "stars": "5 out of 5 stars",
+    "reviews": {
+      "textToSpeech": "“The voices sound so real. My listeners can’t tell it’s AI.”",
+      "acting": "“I type ‘say it like a sad goodbye’ and it nails the emotion every time.”",
+      "voiceClone": "“Cloned my voice in a minute. Now I make videos without recording.”",
+      "allInOne": "“Clean audio, change voices, fix mistakes. One app replaced four tools.”"
+    },
+    "kicker": "Stop paying for 5 different tools",
+    "title": "The best <brand>AI speech tools</brand> in <brand>one platform</brand>",
+    "perMonth": "{{price}}/month",
+    "perYear": "{{price}}/year",
+    "monthlyNote": "{{days}} days free · cancel anytime",
+    "yearlyNote": "{{days}} days free · save {{percent}}%",
+    "trialNote": "{{days}} days free",
+    "cta": "Try FREE for {{days}} days",
+    "then": "then {{price}}",
+    "disclaimer": "No charge today. Cancel anytime before day {{days}} and you won't be billed."
+  },
   "paywall": {
     "title": "Unlock Studio",
     "close": "Close",
@@ -292,6 +329,7 @@
     }
   },
   "changePassword": {
+    "currentPlaceholder": "Enter Current Password",
     "title": "Change Password",
     "current": "Current Password",
     "new": "New Password",
@@ -311,6 +349,7 @@
     "campaign": "Campaign",
     "scriptPlaceholder": "Type or paste your script here...",
     "scriptLabel": "Script",
+    "scriptLimitExceeded": "This voice supports up to {{max}} characters. Shorten your script or choose another voice.",
     "chooseVoice": "Choose voice",
     "voiceLabel": "Voice: {{name}}",
     "emotions": "Emotions",
@@ -587,6 +626,9 @@
     "view": "View {{name}}"
   },
   "upload": {
+    "chooseSource": "Choose from",
+    "files": "Files",
+    "gallery": "Gallery (videos)",
     "source": "Upload Source Audio",
     "target": "Upload Target Audio",
     "action": "Upload",
@@ -663,6 +705,7 @@
       "title": "Results",
       "audio": "Audio",
       "content": "Content",
+      "timingUnavailable": "Timing unavailable",
       "segment": "#{{number}}",
       "edit": "Edit line {{number}}",
       "done": "Done editing line {{number}}",
@@ -729,7 +772,7 @@
     "direct": {
       "title": "Now you direct the voice.",
       "subtitle": "Pick a feeling. Hit play.",
-      "actingLabel": "Acting instructions",
+      "actingLabel": "Acting instructions (tap to edit)",
       "actingPlaceholder": "Describe how it should be said",
       "scriptLabel": "Script",
       "script": "Oh, great. You’re here. I was starting to think you weren’t coming.",
@@ -767,9 +810,10 @@
     "clone": {
       "title": "Clone a voice <brand>in seconds.</brand>",
       "subtitle": "Hear the real voice. Then make it say anything.",
+      "selectVoice": "Select {{name}} voice",
       "playReal": "Play real {{name}} voice",
       "stopReal": "Stop real {{name}} voice",
-      "lineLabel": "Make {{name}} say",
+      "lineLabel": "Tap to edit",
       "linePlaceholder": "Type anything",
       "play": "Play the clone",
       "cloning": "Cloning {{name}}…",
@@ -789,7 +833,7 @@
       "title": "Bad audio? Fixed in <brand>one tap.</brand>",
       "subtitle": "Remove noise, echo, and hum. Keep only your voice.",
       "play": "Play",
-      "pause": "Pause",
+      "stop": "Stop",
       "noisy": "Noisy",
       "clean": "Clean",
       "switch": "Clean audio",
@@ -805,5 +849,10 @@
       "hintWrong": "Tap the mistake to fix it.",
       "hintFixed": "Fixed. Tap again to undo."
     }
+  },
+  "review": {
+    "title": "Do you like {{appName}}?",
+    "yes": "Yes",
+    "no": "No"
   }
 }

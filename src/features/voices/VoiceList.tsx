@@ -36,6 +36,10 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
   const favorites = useFavoriteVoices();
   const favoriteIds = favorites.ids;
   const playback = usePlayback();
+  const playbackState = useMemo(
+    () => ({ id: playback.activeId, playing: playback.playing, loading: playback.loading }),
+    [playback.activeId, playback.playing, playback.loading],
+  );
 
   const items = useMemo(
     () => voices.data?.pages.flatMap(page => page.items) ?? [],
@@ -58,6 +62,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
           selected={item.id === selectedId}
           active={active}
           playing={active && playback.playing}
+          loading={active && playback.loading}
           player={player}
           onTogglePlay={playVoice}
           favorite={favoriteIds.has(item.id)}
@@ -69,6 +74,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
     [
       playback.activeId,
       playback.playing,
+      playback.loading,
       player,
       playVoice,
       toggleFavorite,
@@ -109,7 +115,7 @@ export function VoiceList({ query, selectedId, onSelect }: Props) {
         data={items}
         keyExtractor={voice => voice.id}
         renderItem={renderItem}
-        extraData={playback.activeId}
+        extraData={playbackState}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         // iOS: rows under the keyboard stay reachable.

@@ -6,7 +6,6 @@
 //                              in icons/index.ts and used via <Icon name>.
 //   icons/auth, icons/brand    multi-colour brand artwork, used directly.
 //   images/<feature>/<name>    illustrations for one feature.
-//   audio/<feature>/<name>     bundled sound clips, registered in `audio`.
 //
 // SVGs are imported as components: <icons.google width={24} height={24} />
 import type { FC } from 'react';
@@ -59,16 +58,10 @@ export const images = {
   settingsUsageClock: SettingsUsageClock,
 } satisfies Record<string, SvgIcon>;
 
-// Bundled audio (expo-audio sources), grouped by the feature that plays it.
-export const audio = {
-  // Onboarding "Clone a voice": the real voices...
-  onboardingCloneMusk: require('@/assets/audio/onboarding/onboarding-clone-musk.wav'),
-  onboardingCloneTrump: require('@/assets/audio/onboarding/onboarding-clone-trump.wav'),
-  onboardingCloneObama: require('@/assets/audio/onboarding/onboarding-clone-obama.wav'),
-  onboardingCloneRonaldo: require('@/assets/audio/onboarding/onboarding-clone-ronaldo.wav'),
-  // ...and the Musk clone reading the default line, so the first play
-  // needs no request.
-  onboardingCloneMuskPreset: require('@/assets/audio/onboarding/onboarding-clone-musk-preset.wav'),
-} satisfies Record<string, number>;
+// Looping videos (H.264 MP4: iOS cannot play WebM), for expo-video.
+export const videos = {
+  // Trial offer, after signup.
+  trialOffer: require('@/assets/videos/video.mp4') as number,
+};
 
 export { fontAssets } from '@/assets/fonts';

@@ -1,14 +1,15 @@
 import { useAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { usePlaybackControls } from '@/hooks/usePlaybackControls';
 
 // Anything with audio: a Library file, a voice sample, a preview. A number
 // is a bundled clip (require('...wav')).
-type Playable = { id: string; audioUrl: string | number | null };
+export type Playable = { id: string; audioUrl: string | number | null };
 
 // One shared player for a list (one native player, however many rows): tapping another item switches tracks,
 // tapping the active item toggles play/pause.
 //
-// Only `activeId` and `playing` are state here, so the list re-renders when
+// Only active/play/loading state is tracked here, so the list re-renders when
 // those change, not on every position tick. The moving position is read by
 // <PlaybackProgress> inside the active row alone.
 //
@@ -18,7 +19,7 @@ type Playable = { id: string; audioUrl: string | number | null };
 export function usePlayback() {
   const player = useAudioPlayer(null);
   const [activeId, setActiveIdState] = useState<string | null>(null);
-  const [playing, setPlaying] = useState(false);
+  const { playing, loading, play, pause } = usePlaybackControls(player);
   const activeIdRef = useRef<string | null>(null);
 
   const setActiveId = useCallback((id: string | null) => {
@@ -28,8 +29,6 @@ export function usePlayback() {
 
   useEffect(() => {
     const subscription = player.addListener('playbackStatusUpdate', status => {
-      // Same value -> React skips the re-render.
-      setPlaying(status.playing);
       if (status.didJustFinish) {
         setActiveId(null);
       }
@@ -49,9 +48,9 @@ export function usePlayback() {
     (item: Playable) => {
       if (item.id === activeIdRef.current) {
         if (player.playing) {
-          player.pause();
+          pause();
         } else {
-          player.play();
+          play();
         }
         return;
       }
@@ -63,20 +62,16 @@ export function usePlayback() {
           ? item.audioUrl
           : { uri: item.audioUrl },
       );
-      player.play();
+      play();
       setActiveId(item.id);
     },
-    [player, setActiveId],
+    [player, setActiveId, play, pause],
   );
 
   const stop = useCallback(() => {
-    try {
-      player.pause();
-    } catch {
-      // Already released (screen closing).
-    }
+    pause();
     setActiveId(null);
-  }, [player, setActiveId]);
+  }, [pause, setActiveId]);
 
-  return { player, activeId, playing, toggle, stop };
+  return { player, activeId, playing, loading, toggle, stop };
 }

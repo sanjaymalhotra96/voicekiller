@@ -6,6 +6,7 @@ import Purchases, {
 import { highestTier, SubscriptionTier } from '@/domain';
 import { AppError } from '@/lib/errors';
 import { log } from '@/lib/logger';
+import { syncMetaAttribution } from '@/lib/meta';
 import { purchasesReady } from '@/lib/purchases';
 
 // In-app subscriptions through RevenueCat. Screens use
@@ -87,6 +88,9 @@ export const subscriptionService = {
         type: pack.packageType,
         product: pack.product.identifier,
         period: pack.product.subscriptionPeriod,
+        price: pack.product.price,
+        priceString: pack.product.priceString,
+        currency: pack.product.currencyCode,
       })),
     });
     if (!yearly && !monthly) {
@@ -105,6 +109,10 @@ export const subscriptionService = {
   async purchase(pack: PurchasesPackage): Promise<boolean> {
     ensureReady();
     try {
+      // Include Meta attribution with the receipt. RevenueCat sends
+      // StartTrial only when the store confirms a real trial purchase.
+      // Never also emit StartTrial here: that would count it twice.
+      await syncMetaAttribution(await Purchases.getAppUserID());
       await Purchases.purchasePackage(pack);
       return true;
     } catch (error) {

@@ -8,7 +8,7 @@ import { supabase } from '@/lib/supabase';
 // which Library reads (services/library.ts).
 //
 // POST /api/denoise  multipart { file, denoiseOnly: "true" | "false" }
-//   (max 200 MB) -> { success, url }. Waits for the cleaning (up to ~10
+//   (max 500 MB) -> { success, url }. Waits for the cleaning (up to ~10
 //   minutes), then saves the file and bills the original duration.
 //   denoiseOnly "false" adds studio enhance: studio, studio_max,
 //   studio_lifetime and pro_max plans only (other plans get 401).

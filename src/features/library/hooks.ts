@@ -4,14 +4,13 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import type { LibraryCursor, LibraryFilter, LibraryItem } from '@/domain';
+import type { LibraryCursor, LibraryItem, LibrarySource } from '@/domain';
 import { queryKeys } from '@/lib/queryKeys';
 import { libraryService, LibraryPage } from '@/services/library';
 
-// Pages of files, newest first, from the selected tool's table (or all
-// of them merged); search runs in the database.
+// Pages of files, newest first, from the selected tool only.
 export const useLibraryItems = (params: {
-  filter: LibraryFilter;
+  filter: LibrarySource;
   search: string;
 }) =>
   useInfiniteQuery({

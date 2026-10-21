@@ -21,27 +21,20 @@ function dateGroup(date: Date, now = new Date()): DateGroup {
   return 'earlier';
 }
 
-// Items must already be sorted newest first. `maxPerGroup` keeps only
-// the newest few files of each date group (the All tab overview).
+// Items must already be sorted newest first. Keep every loaded file.
 export function toLibraryRows(
   items: LibraryItem[],
-  maxPerGroup = Infinity,
   now = new Date(),
 ) {
   const rows: LibraryRow[] = [];
   let current: DateGroup | null = null;
-  let inGroup = 0;
   for (const item of items) {
     const group = dateGroup(item.createdAt, now);
     if (group !== current) {
       rows.push({ type: 'header', key: `header-${group}`, group });
       current = group;
-      inGroup = 0;
     }
-    if (inGroup < maxPerGroup) {
-      rows.push({ type: 'item', key: item.id, item });
-      inGroup += 1;
-    }
+    rows.push({ type: 'item', key: item.id, item });
   }
   return rows;
 }

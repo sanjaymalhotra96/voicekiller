@@ -13,33 +13,30 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      acting_instructions: {
+      instructions: {
         Row: {
-          id: string;
+          id: number;
           name: string;
-          category: string;
+          category: string | null;
           instructions: string;
-          sample_script: string;
-          sample_audio_url: string | null;
-          sort_order: number;
+          script: string;
+          audio_sample: string | null;
         };
         Insert: {
-          id?: string;
+          id?: number;
           name: string;
-          category: string;
+          category: string | null;
           instructions: string;
-          sample_script?: string;
-          sample_audio_url?: string | null;
-          sort_order?: number;
+          script?: string;
+          audio_sample?: string | null;
         };
         Update: {
-          id?: string;
+          id?: number;
           name?: string;
-          category?: string;
+          category?: string | null;
           instructions?: string;
-          sample_script?: string;
-          sample_audio_url?: string | null;
-          sort_order?: number;
+          script?: string;
+          audio_sample?: string | null;
         };
         Relationships: [];
       };
@@ -67,24 +64,30 @@ export type Database = {
         };
         Relationships: [];
       };
-      // One row per account (read only in the app).
+      // Created once after signup; plan changes are handled by the server.
       users: {
         Row: {
           id: string;
-          email: string | null;
-          account_type: string | null;
+          f_name: string | null;
+          l_name: string | null;
+          email: string;
+          account_type: string;
           created_at: string;
         };
         Insert: {
           id: string;
-          email?: string | null;
-          account_type?: string | null;
+          f_name?: string | null;
+          l_name?: string | null;
+          email: string;
+          account_type: string;
           created_at?: string;
         };
         Update: {
           id?: string;
-          email?: string | null;
-          account_type?: string | null;
+          f_name?: string | null;
+          l_name?: string | null;
+          email?: string;
+          account_type?: string;
           created_at?: string;
         };
         Relationships: [];

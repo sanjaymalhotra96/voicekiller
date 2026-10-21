@@ -1,5 +1,5 @@
 // Route: /acting-instructions/:id
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, View } from 'react-native';
@@ -11,6 +11,7 @@ import {
   ScreenHeader,
   Tag,
 } from '@/components';
+import { isAutomaticInstruction } from '@/domain';
 import { categoryTones } from '@/features/instructions/categories';
 import { DetailSection } from '@/features/instructions/DetailSection';
 import { useActingInstructions } from '@/features/instructions/hooks';
@@ -24,7 +25,6 @@ export default function InstructionDetailScreen() {
   const colors = useColors();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useTranslation();
-  const router = useRouter();
   const library = useActingInstructions();
   const { selectLibrary } = useInstructionSelection();
   const playback = usePlayback();
@@ -48,16 +48,19 @@ export default function InstructionDetailScreen() {
 
   const active = playback.activeId === item.id;
   const playing = active && playback.playing;
+  const automatic = isAutomaticInstruction(item);
 
   return (
     <View className="gap-6 pb-6 pt-2">
       <ScreenHeader
         title={item.name}
         titleAccessory={
-          <Tag
-            label={t(`instructions.categories.${item.category}`)}
-            tone={categoryTones[item.category]}
-          />
+          item.category ? (
+            <Tag
+              label={t(`instructions.categories.${item.category}`)}
+              tone={categoryTones[item.category]}
+            />
+          ) : null
         }
       />
 
@@ -73,7 +76,7 @@ export default function InstructionDetailScreen() {
 
       <DetailSection
         title={t('instructions.detail.instructions')}
-        icon="clipboard"
+        icon={automatic ? 'sparkles' : 'clipboard'}
         tone="pink"
       >
         <AppText variant="body" className="text-ink">
@@ -81,38 +84,38 @@ export default function InstructionDetailScreen() {
         </AppText>
       </DetailSection>
 
-      <DetailSection
-        title={t('instructions.detail.sample')}
-        icon="volume"
-        tone="cyan"
-      >
-        <View className="flex-row items-center gap-4">
-          <GradientPlayButton
-            active={active}
-            playing={playing}
-            player={playback.player}
-            disabled={!item.sampleAudioUrl}
-            onPress={() =>
-              playback.toggle({ id: item.id, audioUrl: item.sampleAudioUrl })
-            }
-            accessibilityLabel={t(playing ? 'instructions.pause' : 'instructions.play', {
-              name: item.name,
-            })}
-          />
-          <AppText variant="body" className="flex-1 text-ink">
-            {item.sampleAudioUrl
-              ? t('instructions.detail.playSample')
-              : t('instructions.detail.noSample')}
-          </AppText>
-        </View>
-      </DetailSection>
+      {!automatic ? (
+        <DetailSection
+          title={t('instructions.detail.sample')}
+          icon="volume"
+          tone="cyan"
+        >
+          <View className="flex-row items-center gap-4">
+            <GradientPlayButton
+              active={active}
+              playing={playing}
+              loading={active && playback.loading}
+              player={playback.player}
+              disabled={!item.sampleAudioUrl}
+              onPress={() =>
+                playback.toggle({ id: item.id, audioUrl: item.sampleAudioUrl })
+              }
+              accessibilityLabel={t(playing ? 'instructions.pause' : 'instructions.play', {
+                name: item.name,
+              })}
+            />
+            <AppText variant="body" className="flex-1 text-ink">
+              {item.sampleAudioUrl
+                ? t('instructions.detail.playSample')
+                : t('instructions.detail.noSample')}
+            </AppText>
+          </View>
+        </DetailSection>
+      ) : null}
 
       <Button
         label={t('instructions.detail.use')}
-        onPress={() => {
-          selectLibrary(item);
-          router.back();
-        }}
+        onPress={() => selectLibrary(item)}
       />
     </View>
   );

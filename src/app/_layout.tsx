@@ -10,7 +10,12 @@ import { StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { fontAssets } from '@/assets';
-import { ErrorBoundary, OfflineSheet } from '@/components';
+import {
+  ErrorBoundary,
+  OfflineSheet,
+  safeAreaLayout,
+  safeAreaPresets,
+} from '@/components';
 import { entryGroups } from '@/domain';
 import { AuthProvider, useSession } from '@/features/auth/AuthProvider';
 import {
@@ -30,6 +35,13 @@ import {
 SplashScreen.preventAutoHideAsync();
 // Fade into the first screen instead of cutting to it.
 SplashScreen.setOptions({ fade: true, duration: 300 });
+
+const rootScreenLayout = safeAreaLayout({
+  '(onboarding)': null,
+  '(auth)': null,
+  '(app)': null,
+  'reset-password': safeAreaPresets.form,
+});
 
 // Signed in -> (app); signed out -> (onboarding) at launch, then
 // (auth). Supabase session changes (sign in, OTP verified, sign out) and
@@ -59,7 +71,10 @@ function SessionStack() {
 
   const groups = entryGroups(!!session, onboarded);
   return (
-    <Stack screenOptions={stackScreenOptions(colors)}>
+    <Stack
+      screenOptions={stackScreenOptions(colors)}
+      screenLayout={rootScreenLayout}
+    >
       <Stack.Protected guard={groups.onboarding}>
         <Stack.Screen name="(onboarding)" />
       </Stack.Protected>
@@ -69,6 +84,8 @@ function SessionStack() {
       <Stack.Protected guard={groups.app}>
         <Stack.Screen name="(app)" />
       </Stack.Protected>
+      {/* Email links must work before onboarding and while signed in. */}
+      <Stack.Screen name="reset-password" />
     </Stack>
   );
 }
