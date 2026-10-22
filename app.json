@@ -28,6 +28,9 @@
     "android": {
       "package": "com.voicekiller",
       "versionCode": 6,
+      "blockedPermissions": [
+        "android.permission.CAMERA"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/app/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -48,7 +51,7 @@
         "expo-image-picker",
         {
           "photosPermission": "Voice Killer uses your photos to set your profile picture and select videos for audio tools.",
-          "cameraPermission": false,
+          "cameraPermission": "Voice Killer does not access your camera. Profile photos and videos are selected from your photo library.",
           "microphonePermission": "Voice Killer uses the microphone to record a sample of your voice for cloning."
         }
       ],
